@@ -1,5 +1,6 @@
 import { Container, Typography, Box, Grid } from "@mui/material";
 import { motion } from "framer-motion";
+import SectionImage from "./SectionImages";
 
 const blockchains = [
   {
@@ -53,6 +54,10 @@ const blockchains = [
 export default function Blockchains() {
   return (
     <Box className="py-24 relative overflow-hidden">
+       <SectionImage
+                src="/assets/sections/blockchain-removebg-preview.png"
+                alt="Blockchains Banner"
+              />
       <Container maxWidth="xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -116,7 +121,7 @@ export default function Blockchains() {
               xs: "80vw", // 1+ visible on mobile
               sm: "47.5vw", // 2 visible on small screens
               md: "32.5vw", // 3 visible on medium screens
-              lg: "17.5vw" // 5 visible on large screens
+              lg: "20vw" // 5 visible on large screens
             },
             padding: 2,
             flexShrink: 0
@@ -162,7 +167,7 @@ export default function Blockchains() {
               xs: "80vw",
               sm: "47.5vw",
               md: "32.5vw",
-              lg: "17.5vw"
+              lg: "20vw"
             },
             padding: 2,
             flexShrink: 0
