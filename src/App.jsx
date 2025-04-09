@@ -17,6 +17,7 @@ import CommoditiesTokenization from "./components/CommoditiesTokenization";
 import CarbonCreditsTokenization from "./components/CarbonCreditsTokenization";
 import PrivateEquityTokenization from "./components/PrivateEquityTokenization";
 import DiverseAssetTokenization from "./components/DiverseAssetTokenization";
+import SplashScreen from "./components/SplashScreen";
 import ScrollToTop from "./components/ScrollToTop";
 import SplashScreen from "./components/SplashScreen";
 
