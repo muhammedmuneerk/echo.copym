@@ -21,6 +21,11 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navigationItems = [
   {
+    label: "Go Green",
+    to: "/green-tokenization",
+  },
+ 
+  {
     label: "Tokenization",
     items: [
       { label: "Asset Tokenization Hub", to: "/tokenization" },
@@ -50,6 +55,7 @@ const navigationItems = [
   // {
   //   label: "Custom Tokenization Engines",
   // },
+ 
 ];
 
 const menuVariants = {

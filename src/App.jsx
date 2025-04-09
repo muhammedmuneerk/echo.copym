@@ -19,7 +19,8 @@ import PrivateEquityTokenization from "./components/PrivateEquityTokenization";
 import DiverseAssetTokenization from "./components/DiverseAssetTokenization";
 import SplashScreen from "./components/SplashScreen";
 import ScrollToTop from "./components/ScrollToTop";
-import SplashScreen from "./components/SplashScreen";
+import GreenTokenization from "./pages/GreenTokenization";
+
 
 function HomePage() {
   return (
@@ -57,6 +58,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/tokenization" element={<TokenizationHub />} />
+          <Route path="/green-tokenization" element={<GreenTokenization />} />
           <Route path="/tokenization/gold/" element={<GoldTokenization />} />
           <Route path="/tokenization/real-estate/" element={<RealEstateTokenization />} />
           <Route path="/tokenization/art" element={<ArtTokenization />} />
