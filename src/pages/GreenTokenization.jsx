@@ -1,5 +1,5 @@
 import React from "react";
-import ESGSection from "./ESGSection";
+import ESGSection from "./ESGsection";
 import ESGFocusSection from "./ESGfocussection";
 
 const GreenTokenization = () => {
