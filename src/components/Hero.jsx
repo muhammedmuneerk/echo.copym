@@ -31,7 +31,7 @@ export default function Hero() {
             >
               The Complete Ecosystem for{" "}
               <Box component="span" className="block">
-                <Box component="span" className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-[#00ff80] to-[#10e060]">
+                <Box component="span" className="bg-[linear-gradient(180deg,_rgba(19,255,0,1)_6%,_rgba(0,0,0,1)_14%,_rgba(18,240,0,1)_62%,_rgba(0,0,0,1)_100%)] bg-clip-text text-transparent">
                   Real World Asset
                 </Box>{" "}
                 Tokenization
