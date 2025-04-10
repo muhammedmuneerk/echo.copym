@@ -2,6 +2,7 @@ import { Container, Typography, Box, Grid, useMediaQuery, useTheme } from "@mui/
 import { motion } from "framer-motion";
 import SectionImage from "./SectionImages";
 
+
 const blockchains = [
   {
     name: "Solana",
@@ -44,13 +45,7 @@ export default function Blockchains() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Box className="py-24 relative overflow-hidden" sx={{ background: "#0a0a0a", position: "relative" }}>
-      <Box sx={{ position: "relative", width: "100%", mb: 6 }}>
-  <SectionImage
-    src="/assets/sections/blockchain-removebg-preview.png"
-    alt="Blockchains Banner"
-  />
-</Box>
+    <Box className="py-24 relative overflow-hidden" >  
 
       <Container maxWidth="xl">
         <motion.div
