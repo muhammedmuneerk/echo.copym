@@ -271,7 +271,7 @@ export default function Blockchains() {
         className="absolute inset-0 pointer-events-none"
         sx={{
           background:
-            "radial-gradient(circle at 50% 0%, rgba(0, 255, 133, 0.1) 0%, rgba(10, 11, 13, 0) 50%)",
+            "linear-gradient(183deg,_rgba(19,225,0,1)_0%,_rgba(0,0,0,1)_0%,_rgba(6,75,0,1)_9%,_rgba(18,240,0,1)_62%,_rgba(0,0,0,1)_100%)",
         }}
       />
     </Box>
