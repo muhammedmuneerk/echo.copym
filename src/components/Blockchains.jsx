@@ -116,7 +116,7 @@ export default function Blockchains() {
           </Grid>
 
           {/* Banner image section - only visible on desktop */}
-          <Grid item xs={12} md={6} sx={{ display: { xs: 'none', md: 'block' } }}>
+           <Grid item xs={12} md={6} sx={{ display: { xs: 'none', md: 'block' }, opacity: "0" }}> {/* didn't remove the image, jsut decreased the opacity */}
             <Box sx={{ position: "relative", width: "100%" }}>
               <SectionImage
                 src="/assets/sections/blockchain-removebg-preview.png"
@@ -125,6 +125,16 @@ export default function Blockchains() {
             </Box>
           </Grid>
         </Grid>
+
+        {/* Banner image - only visible on mobile, positioned at top */}
+        {isMobile && (
+          <Box sx={{ position: "relative", width: "100%", mb: 4 }}>
+            {/* <SectionImage
+              src="/assets/sections/blockchain-removebg-preview.png"
+              alt="Blockchains Banner"
+            /> */}
+          </Box>
+        )}
 
         {isMobile ? (
           // Mobile view remains unchanged
