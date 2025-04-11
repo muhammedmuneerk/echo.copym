@@ -1,6 +1,92 @@
 import { Container, Typography, Box, Grid, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import { ArrowForward } from "@mui/icons-material";
+import { keyframes } from "@emotion/react";
+import { styled } from "@mui/material/styles";
+
+// Animation keyframes for the border effect
+const borderAnimationRight = keyframes`
+  0% { width: 0; height: 3px; top: 0; right: 100%; opacity: 1; }
+  25% { width: 100%; height: 3px; top: 0; right: 0; opacity: 0.7; }
+  100% { width: 100%; height: 3px; top: 0; right: 0; opacity: 0; }
+`;
+
+const borderAnimationDown = keyframes`
+  0% { width: 3px; height: 0; top: 0; right: 0; opacity: 1; }
+  25% { width: 3px; height: 100%; top: 0; right: 0; opacity: 0.7; }
+  100% { width: 3px; height: 100%; top: 0; right: 0; opacity: 0; }
+`;
+
+const borderAnimationLeft = keyframes`
+  0% { width: 0; height: 3px; bottom: 0; right: 0; opacity: 1; }
+  25% { width: 100%; height: 3px; bottom: 0; right: 0; opacity: 0.7; }
+  100% { width: 100%; height: 3px; bottom: 0; right: 0; opacity: 0; }
+`;
+
+const borderAnimationUp = keyframes`
+  0% { width: 3px; height: 0; bottom: 0; left: 0; opacity: 1; }
+  25% { width: 3px; height: 100%; bottom: 0; left: 0; opacity: 0.7; }
+  100% { width: 3px; height: 100%; bottom: 0; left: 0; opacity: 0; }
+`;
+
+// Styled component for the animated card
+const AnimatedCard = styled(Box)(({ theme }) => ({
+  position: "relative",
+  background: "rgba(18, 19, 26, 0.5)",
+  backdropFilter: "blur(10px)",
+  border: "1px solid rgba(255, 255, 255, 0.1)",
+  borderRadius: "1rem",
+  padding: "1.5rem",
+  height: "100%",
+  transition: "transform 0.2s",
+  overflow: "hidden",
+  "&:hover": {
+    transform: "translateY(-4px)",
+    "& .border-right": {
+      animation: `${borderAnimationRight} 2.5s linear infinite`,
+    },
+    "& .border-down": {
+      animation: `${borderAnimationDown} 2.5s linear infinite`,
+      animationDelay: "1s",
+    },
+    "& .border-left": {
+      animation: `${borderAnimationLeft} 2.5s linear infinite`,
+      animationDelay: "1.5s",
+    },
+    "& .border-up": {
+      animation: `${borderAnimationUp} 2.5s linear infinite`,
+      animationDelay: "2s",
+    },
+  },
+  "& .border-right, & .border-down, & .border-left, & .border-up": {
+    position: "absolute",
+    animation: "none", // No animation by default
+  },
+  "& .border-right": {
+    top: 0,
+    right: "100%",
+    height: 3,
+    background: "linear-gradient(to right, #000, #00FF85, #000)",
+  },
+  "& .border-down": {
+    top: 0,
+    right: 0,
+    width: 3,
+    background: "linear-gradient(to bottom, #000, #00FF85, #000)",
+  },
+  "& .border-left": {
+    bottom: 0,
+    right: 0,
+    height: 3,
+    background: "linear-gradient(to left, #000, #00FF85, #000)",
+  },
+  "& .border-up": {
+    bottom: 0,
+    left: 0,
+    width: 3,
+    background: "linear-gradient(to top, #000, #00FF85, #000)",
+  },
+}));
 
 const features = [
   {
@@ -11,7 +97,7 @@ const features = [
         <img
           src="/assets/icons/cross-chain-infrastructure.png"
           alt="Cross Chain"
-          className="w-8 h-8 object-contain filter grayscale invert"
+          className="w-8 h-8 object-contain filter grayscale  invert"
           style={{ filter: "brightness(0) invert(1) sepia(1) hue-rotate(180deg)" }}
         />)
   },
@@ -87,107 +173,13 @@ export default function Features() {
                 viewport={{ once: true }}
                 className="h-full"
               >
-                <Box
-                  className="bg-background-paper rounded-lg p-6 h-full relative"
-                  sx={{
-                    background: "rgba(18, 19, 26, 0.5)",
-                    backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                    transition: "transform 0.2s",
-                    "&:hover": {
-                      transform: "translateY(-4px)",
-                    },
-                    "&:hover .top-border": {
-                      animation: "flowRight 2s linear infinite",
-                    },
-                    "&:hover .right-border": {
-                      animation: "flowDown 2s linear infinite",
-                      animationDelay: "0.5s",
-                    },
-                    "&:hover .bottom-border": {
-                      animation: "flowLeft 2s linear infinite",
-                      animationDelay: "1s",
-                    },
-                    "&:hover .left-border": {
-                      animation: "flowUp 2s linear infinite",
-                      animationDelay: "1.5s",
-                    },
-                    "@keyframes flowRight": {
-                      "0%": {
-                        left: "0%",
-                        width: "0%",
-                        backgroundColor: "#000000",
-                      },
-                      "50%": {
-                        left: "0%",
-                        width: "100%",
-                        backgroundColor: "rgba(0, 255, 133, 0.8)",
-                      },
-                      "100%": {
-                        left: "100%",
-                        width: "0%",
-                        backgroundColor: "#000000",
-                      }
-                    },
-                    "@keyframes flowDown": {
-                      "0%": {
-                        top: "0%",
-                        height: "0%",
-                        backgroundColor: "#000000",
-                      },
-                      "50%": {
-                        top: "0%",
-                        height: "100%",
-                        backgroundColor: "rgba(0, 255, 133, 0.8)",
-                      },
-                      "100%": {
-                        top: "100%",
-                        height: "0%",
-                        backgroundColor: "#000000",
-                      }
-                    },
-                    "@keyframes flowLeft": {
-                      "0%": {
-                        right: "0%",
-                        width: "0%",
-                        backgroundColor: "#000000",
-                      },
-                      "50%": {
-                        right: "0%",
-                        width: "100%",
-                        backgroundColor: "rgba(0, 255, 133, 0.8)",
-                      },
-                      "100%": {
-                        right: "100%",
-                        width: "0%",
-                        backgroundColor: "#000000",
-                      }
-                    },
-                    "@keyframes flowUp": {
-                      "0%": {
-                        bottom: "0%",
-                        height: "0%",
-                        backgroundColor: "#000000",
-                      },
-                      "50%": {
-                        bottom: "0%",
-                        height: "100%",
-                        backgroundColor: "rgba(0, 255, 133, 0.8)",
-                      },
-                      "100%": {
-                        bottom: "100%",
-                        height: "0%",
-                        backgroundColor: "#000000",
-                      }
-                    }
-                  }}
-                >
-                  {/* Animated borders */}
-                  <div className="top-border absolute top-0 left-0 h-1 z-10" />
-                  <div className="right-border absolute top-0 right-0 w-1 z-10" />
-                  <div className="bottom-border absolute bottom-0 right-0 h-1 z-10" />
-                  <div className="left-border absolute bottom-0 left-0 w-1 z-10" />
-
+                <AnimatedCard>
+                  {/* Border animation elements */}
+                  <div className="border-right"></div>
+                  <div className="border-down"></div>
+                  <div className="border-left"></div>
+                  <div className="border-up"></div>
+                  
                   <Box
                     className="w-12 h-12 rounded-lg mb-4 flex items-center justify-center text-2xl"
                     sx={{
@@ -211,7 +203,7 @@ export default function Features() {
                   >
                     Learn more
                   </Button>
-                </Box>
+                </AnimatedCard>
               </motion.div>
             </Grid>
           ))}
