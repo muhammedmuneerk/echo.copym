@@ -4,14 +4,14 @@ import { motion } from "framer-motion";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import BlockchainNetworkVisualization from "./BlockchainNetworkVisualization";
 
-
 export default function Hero() {
   return (
     <Box className="min-h-screen relative overflow-hidden ">
       {/* Three.js visualization */}
       {/* <BlockchainNetworkVisualization /> */}
+
       {/* Overlay gradient for better text readability */}
-      {/* <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#050f05]/70 z-10"></div> */}
+      <div className="absolute inset-0 ">
 
       <Container maxWidth="xl" className="relative z-20">
         <motion.div
@@ -99,10 +99,12 @@ export default function Hero() {
       <Box
         className="absolute inset-0 pointer-events-none"
         sx={{
+          opacity:"20",
           background:
-            "radial-gradient(circle at 50% 0%, rgba(0, 255, 133, 0.1) 0%, rgba(10, 11, 13, 0) 50%)",
+            "radial-gradient(circle at 50% 2%, rgba(0, 255, 133, 0.1) 0%, rgba(10, 11, 13, 0) 50%)",
         }}
       />
+      </div>
     </Box>
   );
 }
