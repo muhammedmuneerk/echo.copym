@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import BlockchainNetworkVisualization from './BlockchainNetworkVisualization';
 
+
 export default function Hero() {
   return (
     <Box className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#050f05] to-[#0a1f0a]">
       {/* Three.js visualization */}
       {/* <BlockchainNetworkVisualization /> */}
-      
       {/* Overlay gradient for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#050f05]/70 z-10"></div>
       

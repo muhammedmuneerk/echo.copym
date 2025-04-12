@@ -128,12 +128,12 @@ export default function Navbar() {
 
   return (
     <AppBar 
-      position="fixed"
+      position="absolute"
       color="transparent"
       elevation={0}
       sx={{
-        backdropFilter: scrolled ? "blur(10px)" : "none",
-        backgroundColor: scrolled ? "rgba(10, 11, 13, 0.8)" : "transparent",
+        backdropFilter: scrolled ? "blur(1px)" : "none",
+        backgroundColor: scrolled ? "rgba(16, 16, 16, 0.8)" : "transparent",
         borderBottom: scrolled ? "1px solid rgba(255, 255, 255, 0.1)" : "none",
         transition: "all 0.3s ease-in-out",
       }}
