@@ -218,8 +218,8 @@ export default function Metrics() {
   };
   
   return (
-    <motion.div 
-      className="py-24 relative bg-background/50"
+    <motion.div
+      className="py-24 relative "
       onViewportEnter={onViewportEnter}
       viewport={{ once: false, amount: 0.2 }} // Trigger when 20% of component is in viewport, and every time it enters
     >
@@ -244,11 +244,13 @@ export default function Metrics() {
           >
             <Typography
               variant="h2"
-              className="font-orbitron text-4xl md:text-5xl mb-4 text-center"
+              className="font-orbitron text-4xl md:text-5xl mb-4 text-center bg-[linear-gradient(183deg,_rgba(19,225,0,1)_0%,_rgba(0,0,0,1)_0%,_rgba(6,75,0,1)_9%,_rgba(18,240,0,1)_62%,_rgba(0,0,0,1)_100%)] bg-clip-text text-transparent"
             >
-              Tokenization <span className="text-primary">at Scale</span>
+              Tokenization{" "}
+              <span className="bg-[linear-gradient(180deg,_rgba(19,255,0,1)_6%,_rgba(0,0,0,1)_14%,_rgba(18,240,0,1)_62%,_rgba(0,0,0,1)_100%)] bg-clip-text text-transparent">
+                at Scale
+              </span>
             </Typography>
-
           </motion.div>
           <Typography
             variant="body1"
@@ -334,6 +336,14 @@ export default function Metrics() {
           ))}
         </Grid>
       </Container>
+      {/* Background Glow Effect */}
+      <Box
+        className="absolute inset-0 pointer-events-none"
+        sx={{
+          background:
+            "linear-gradient(183deg,_rgba(19,225,0,1)_0%,_rgba(0,0,0,1)_0%,_rgba(6,75,0,1)_9%,_rgba(18,240,0,1)_62%,_rgba(0,0,0,1)_100%)",
+        }}
+      />
     </motion.div>
   );
 }

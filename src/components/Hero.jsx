@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 import { Container, Typography, Button, Box } from "@mui/material";
 import { motion } from "framer-motion";
 import { KeyboardArrowDown } from "@mui/icons-material";
-import BlockchainNetworkVisualization from './BlockchainNetworkVisualization';
+import BlockchainNetworkVisualization from "./BlockchainNetworkVisualization";
 
 
 export default function Hero() {
   return (
-    <Box className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#050f05] to-[#0a1f0a]">
+    <Box className="min-h-screen relative overflow-hidden ">
       {/* Three.js visualization */}
       {/* <BlockchainNetworkVisualization /> */}
       {/* Overlay gradient for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#050f05]/70 z-10"></div>
-      
+      {/* <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#050f05]/70 z-10"></div> */}
+
       <Container maxWidth="xl" className="relative z-20">
         <motion.div
           className="flex flex-col items-center justify-center min-h-screen text-center"
@@ -27,11 +27,14 @@ export default function Hero() {
           >
             <Typography
               variant="h1"
-              className="font-orbitron text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white"
+              className="font-orbitron text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-[linear-gradient(183deg,_rgba(19,225,0,1)_0%,_rgba(0,0,0,1)_0%,_rgba(6,75,0,1)_9%,_rgba(18,240,0,1)_62%,_rgba(0,0,0,1)_100%)] bg-clip-text text-transparent"
             >
               The Complete Ecosystem for{" "}
               <Box component="span" className="block">
-                <Box component="span" className="bg-[linear-gradient(180deg,_rgba(19,255,0,1)_6%,_rgba(0,0,0,1)_14%,_rgba(18,240,0,1)_62%,_rgba(0,0,0,1)_100%)] bg-clip-text text-transparent">
+                <Box
+                  component="span"
+                  className="bg-[linear-gradient(180deg,_rgba(19,255,0,1)_6%,_rgba(0,0,0,1)_14%,_rgba(18,240,0,1)_62%,_rgba(0,0,0,1)_100%)] bg-clip-text text-transparent"
+                >
                   Real World Asset
                 </Box>{" "}
                 Tokenization
@@ -49,9 +52,9 @@ export default function Hero() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                variant="contained"
+                variant="text"
                 size="large"
-                className="text-background font-semibold px-8 py-3 bg-gradient-to-r from-[#00ff80] to-[#10e060] hover:shadow-[0_0_15px_rgba(16,224,96,0.5)]"
+                className="bg-[linear-gradient(183deg,_rgba(19,225,0,1)_0%,_rgba(0,0,0,1)_0%,_rgba(6,75,0,1)_9%,_rgba(18,240,0,1)_62%,_rgba(0,0,0,1)_100%)] text-black font-semibold px-8 py-3 rounded-md shadow-md hover:shadow-[0_0_15px_rgba(16,224,96,0.5)]"
               >
                 Explore Asset Tokenization
               </Button>
@@ -80,18 +83,26 @@ export default function Hero() {
           <Typography
             variant="button"
             className="text-white flex flex-col items-center cursor-pointer"
-            onClick={() => window.scrollTo({
-              top: window.innerHeight,
-              behavior: "smooth",
-            })
-          }
+            onClick={() =>
+              window.scrollTo({
+                top: window.innerHeight,
+                behavior: "smooth",
+              })
+            }
           >
             Discover More
             <KeyboardArrowDown className="mt-2" />
           </Typography>
         </motion.div>
       </Container>
+      {/* Enhanced gradient highlight with pulse animation */}
+      <Box
+        className="absolute inset-0 pointer-events-none"
+        sx={{
+          background:
+            "radial-gradient(circle at 50% 0%, rgba(0, 255, 133, 0.1) 0%, rgba(10, 11, 13, 0) 50%)",
+        }}
+      />
     </Box>
-    
   );
 }
