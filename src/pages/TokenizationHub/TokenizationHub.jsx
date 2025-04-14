@@ -6,9 +6,8 @@ import TokenizationJourney from "./TokenizationJourney";
 import { 
   GlassMorphismCard, 
   MorphingButton, 
-  GradientText, 
-  HorizontalScrollContainer
-  // CustomCursor removed from import
+  GradientText
+  // HorizontalScrollContainer removed from import
 } from "./UIComponents";
 import "./TokenizationHub.css";
 
@@ -604,8 +603,6 @@ export default function TokenizationHub() {
     
   return (
     <div className="tokenization-hub">
-      {/* Custom cursor component removed */}
-      
       {/* Background pattern */}
       <BackgroundPattern />
       
@@ -720,89 +717,88 @@ export default function TokenizationHub() {
             </p>
           </motion.div>
           
-          <div className="horizontal-scroll-wrapper">
-            <HorizontalScrollContainer>
-              {assetCategories.map((category, index) => (
-                <motion.div
-                  key={category.title}
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  className="asset-card-container"
-                >
-                  <GlassMorphismCard className="h-full" color={`rgba(0, 255, 133, ${index % 2 === 0 ? '0.1' : '0.05'})`}>
-                    <div className="asset-card-content">
-                      <motion.div 
-                        className="asset-icon"
-                        animate={{ 
-                          rotate: 360,
-                          scale: [1, 1.1, 1]
-                        }}
-                        transition={{ 
-                          rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                          scale: { duration: 3, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }
-                        }}
-                      >
-                        {category.icon}
-                      </motion.div>
+          {/* Asset Grid - NEW STRUCTURE */}
+          <div className="asset-grid">
+            {assetCategories.map((category, index) => (
+              <motion.div
+                key={category.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                className="asset-card-grid-item"
+              >
+                <GlassMorphismCard className="h-full" color={`rgba(0, 255, 133, ${index % 2 === 0 ? '0.1' : '0.05'})`}>
+                  <div className="asset-card-content">
+                    <motion.div 
+                      className="asset-icon"
+                      animate={{ 
+                        rotate: 360,
+                        scale: [1, 1.1, 1]
+                      }}
+                      transition={{ 
+                        rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                        scale: { duration: 3, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }
+                      }}
+                    >
+                      {category.icon}
+                    </motion.div>
+                    
+                    <div className="asset-details">
+                      <h3 className="asset-title">
+                        {category.title}
+                      </h3>
                       
-                      <div className="asset-details">
-                        <h3 className="asset-title">
-                          {category.title}
-                        </h3>
-                        
-                        <p className="asset-description">
-                          {category.description}
-                        </p>
-                        
-                        <div className="market-size">
-                          <h4 className="market-value">
-                            ${category.marketSize}
-                          </h4>
-                          <span className="market-label">
-                            Market Size
-                          </span>
-                        </div>
-                        
-                        <h5 className="benefits-title">
-                          Key Benefits:
-                        </h5>
-                        
-                        <ul className="benefits-list">
-                          {category.keyBenefits.map((benefit, i) => (
-                            <motion.li 
-                              key={i}
-                              initial={{ opacity: 0, x: -20 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              transition={{ delay: 0.2 + (i * 0.1) }}
-                              viewport={{ once: true }}
-                              className="benefit-item"
-                            >
-                              <span className="benefit-icon" style={{ color: category.color }}>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                </svg>
-                              </span>
-                              {benefit}
-                            </motion.li>
-                          ))}
-                        </ul>
-                        
-                        <div className="asset-actions">
-                          <MorphingButton>
-                            View Examples
-                          </MorphingButton>
-                          <MorphingButton>
-                            Learn More
-                          </MorphingButton>
-                        </div>
+                      <p className="asset-description">
+                        {category.description}
+                      </p>
+                      
+                      <div className="market-size">
+                        <h4 className="market-value">
+                          ${category.marketSize}
+                        </h4>
+                        <span className="market-label">
+                          Market Size
+                        </span>
+                      </div>
+                      
+                      <h5 className="benefits-title">
+                        Key Benefits:
+                      </h5>
+                      
+                      <ul className="benefits-list">
+                        {category.keyBenefits.map((benefit, i) => (
+                          <motion.li 
+                            key={i}
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.2 + (i * 0.1) }}
+                            viewport={{ once: true }}
+                            className="benefit-item"
+                          >
+                            <span className="benefit-icon" style={{ color: category.color }}>
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                              </svg>
+                            </span>
+                            {benefit}
+                          </motion.li>
+                        ))}
+                      </ul>
+                      
+                      <div className="asset-actions">
+                        <MorphingButton>
+                          View Examples
+                        </MorphingButton>
+                        <MorphingButton>
+                          Learn More
+                        </MorphingButton>
                       </div>
                     </div>
-                  </GlassMorphismCard>
-                </motion.div>
-              ))}
-            </HorizontalScrollContainer>
+                  </div>
+                </GlassMorphismCard>
+              </motion.div>
+            ))}
           </div>
         </section>
         
