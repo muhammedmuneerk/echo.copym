@@ -412,7 +412,12 @@ body {
   }
   
   .feature-content {
+    margin: 0 auto;
+    text-align: center;
+    align-items: center;
+    display: flex;
     flex-direction: column;
+    justify-content: center;
   }
 }
 
