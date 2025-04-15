@@ -1,40 +1,10 @@
-import { Container, Typography, Box, Button } from "@mui/material";
+import { Container, Typography, Box } from "@mui/material";
 import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
     <Box className="py-24 relative">
       <Container maxWidth="xl">
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-24"
-        >
-          <Typography
-            variant="h2"
-            className="font-orbitron text-4xl md:text-5xl mb-4 bg-[linear-gradient(183deg,_rgba(19,225,0,1)_0%,_rgba(0,0,0,1)_0%,_rgba(6,75,0,1)_9%,_rgba(18,240,0,1)_62%,_rgba(0,0,0,1)_100%)] bg-clip-text text-transparent"
-          >
-            Ready to Transform Your Assets?
-          </Typography>
-          <Typography
-            variant="body1"
-            className="text-text-secondary mb-8 max-w-2xl mx-auto"
-          >
-            Join thousands of individuals and organizations already unlocking
-            the value of their assets on the Copym platform.
-          </Typography>
-          <Button
-            variant="text"
-            size="large"
-            className="bg-[linear-gradient(183deg,_rgba(19,225,0,1)_0%,_rgba(0,0,0,1)_0%,_rgba(6,75,0,1)_9%,_rgba(18,240,0,1)_62%,_rgba(0,0,0,1)_100%)] text-black font-semibold px-8 py-3 rounded-md shadow-md hover:shadow-[0_0_15px_rgba(16,224,96,0.5)]"
-          >
-            Explore Asset Tokenization
-          </Button>
-        </motion.div>
-
         {/* Footer Content */}
         <Box
           className="pt-12 border-t border-white/10"
@@ -132,7 +102,7 @@ export default function Footer() {
         className="absolute inset-0 pointer-events-none"
         sx={{
           background:
-            "radial-gradient(circle at 50% 0%, rgba(0, 255, 133, 0.1) 0%, rgba(10, 11, 13, 0) 50%)",
+            "radial-gradient(circle at 50% 75%, rgba(0, 255, 133, 0.1) 0%, rgba(10, 11, 13, 0) 50%)",
         }}
       />
     </Box>

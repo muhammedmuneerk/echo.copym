@@ -8,34 +8,35 @@ import Blockchains from "./components/Blockchains";
 import GlobalMarkets from "./components/GlobalMarkets";
 import Metrics from "./components/Metrics";
 import Footer from "./components/Footer";
-import Marketplace from "./components/Marketplace";
-import TokenizationHub from "./components/TokenizationHub";
-import GoldTokenization from "./components/GoldTokenization";
-import RealEstateTokenization from "./components/RealEstateTokenization";
-import ArtTokenization from "./components/ArtTokenization";
-import CommoditiesTokenization from "./components/CommoditiesTokenization";
-import CarbonCreditsTokenization from "./components/CarbonCreditsTokenization";
-import PrivateEquityTokenization from "./components/PrivateEquityTokenization";
-import DiverseAssetTokenization from "./components/DiverseAssetTokenization";
+import CTA from "./components/CTA";
+import Marketplace from "./pages/Marketplace/Marketplace";
+import TokenizationHub from "./pages/TokenizationHub/TokenizationHub";
+import GoldTokenization from "./pages/GoldTokenization/GoldTokenization";
+import RealEstateTokenization from "./pages/RealEstateTokenization/RealEstateTokenization";
+import ArtTokenization from "./pages/ArtTokenization/ArtTokenization";
+import CommoditiesTokenization from "./pages/CommoditiesTokenization/CommoditiesTokenization";
+import CarbonCreditsTokenization from "./pages/CarbonCreditsTokenization/CarbonCreditsTokenization";
+import PrivateEquityTokenization from "./pages/PrivateEquityTokenization/PrivateEquityTokenization";
+import DiverseAssetTokenization from "./pages/DiverseAssetTokenization/DiverseAssetTokenization";
+import GreenTokenization from "./pages/GreenTokenization/GreenTokenization";
 import SplashScreen from "./components/SplashScreen";
 import ScrollToTop from "./components/ScrollToTop";
-import GreenTokenization from "./pages/GreenTokenization";
 import SpinningBlockchain from "./components/SpinningBlockchain";
 import GreenTokenizationPopup from "./components/GreenTokenizationPopup";
+
 function HomePage() {
   return (
     <>
       <Hero />
       <GreenTokenizationPopup />
-    <div style={{ position: 'relative' }}>
-       <SpinningBlockchain />
-      <Blockchains />
-      <Features />
-      <GlobalMarkets />
-      <Metrics />
-  
-</div>
-    
+      <div style={{ position: 'relative' }}>
+        <SpinningBlockchain />
+        <Blockchains />
+        <Features />
+        <GlobalMarkets />
+        <Metrics />
+        <CTA />
+      </div>
     </>
   );
 }
