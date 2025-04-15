@@ -244,16 +244,60 @@ export default function Metrics() {
           >
             <Typography
               variant="h2"
-              className="font-orbitron text-4xl md:text-5xl mb-4 text-center"
+              className="font-orbitron text-3xl sm:text-4xl md:text-5xl mb-4 text-center"
             >
-              <Box component="div" className="flex flex-wrap justify-center">
-                {Array.from("Tokenization at Scale").map((char, idx) => (
-                  <Box key={idx} component="span" className="gradient-letter">
-                    {char === " " ? "\u00A0" : char}
+              <Box
+                component="div"
+                className="flex flex-col items-center justify-center leading-snug max-w-xs sm:max-w-xl lg:max-w-4xl mx-auto"
+              >
+                {/* Small & Medium Screens (3 lines) */}
+                <Box className="block lg:hidden">
+                  <Box component="div" className="flex flex-wrap justify-center">
+                    {Array.from("Tokenization").map((char, idx) => (
+                      <Box key={`sm-line1-${idx}`} component="span" className="gradient-letter">
+                        {char === " " ? "\u00A0" : char}
+                      </Box>
+                    ))}
                   </Box>
-                ))}
+
+                  <Box component="div" className="flex flex-wrap justify-center">
+                    {Array.from("at").map((char, idx) => (
+                      <Box key={`sm-line2-${idx}`} component="span" className="gradient-letter">
+                        {char === " " ? "\u00A0" : char}
+                      </Box>
+                    ))}
+                  </Box>
+
+                  <Box component="div" className="flex flex-wrap justify-center">
+                    {Array.from("Scale").map((char, idx) => (
+                      <Box key={`sm-line3-${idx}`} component="span" className="gradient-letter">
+                        {char}
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+
+                {/* Large Screens (2 lines) */}
+                <Box className="hidden lg:block">
+                  <Box component="div" className="flex flex-wrap justify-center">
+                    {Array.from("Tokenization at").map((char, idx) => (
+                      <Box key={`lg-line1-${idx}`} component="span" className="gradient-letter">
+                        {char === " " ? "\u00A0" : char}
+                      </Box>
+                    ))}
+                  </Box>
+
+                  <Box component="div" className="flex flex-wrap justify-center">
+                    {Array.from("Scale").map((char, idx) => (
+                      <Box key={`lg-line2-${idx}`} component="span" className="gradient-letter">
+                        {char}
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
               </Box>
             </Typography>
+
           </motion.div>
           <Typography
             variant="body1"

@@ -27,14 +27,14 @@ export default function Hero() {
             >
               <Typography
                 variant="h1"
-                className="font-orbitron mt-20 text-2xl sm:text-3xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-snug text-center"
+                className="font-orbitron mt-20 text-3xl sm:text-3xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-snug text-center"
                 sx={{ wordBreak: "break-word" }}
               >
-                {/* Line 1: Always visible */}
-                <Box component="div" className="block">
+                {/* Large Screens: First line whole */}
+                <Box component="div" className="hidden sm:block">
                   {Array.from("The Complete Ecosystem").map((char, idx) => (
                     <Box
-                      key={`line1-char-${idx}`}
+                      key={`line1-lg-${idx}`}
                       component="span"
                       className="ultra-smooth-gradient-text"
                     >
@@ -43,7 +43,31 @@ export default function Hero() {
                   ))}
                 </Box>
 
-                {/* Line 2 (split further on small screens) */}
+                {/* Small Screens: First line split */}
+                <Box component="div" className="block sm:hidden">
+                  {Array.from("The Complete").map((char, idx) => (
+                    <Box
+                      key={`line1-sm-1-${idx}`}
+                      component="span"
+                      className="ultra-smooth-gradient-text"
+                    >
+                      {char === " " ? "\u00A0" : char}
+                    </Box>
+                  ))}
+                </Box>
+                <Box component="div" className="block sm:hidden">
+                  {Array.from("Ecosystem").map((char, idx) => (
+                    <Box
+                      key={`line1-sm-2-${idx}`}
+                      component="span"
+                      className="ultra-smooth-gradient-text"
+                    >
+                      {char === " " ? "\u00A0" : char}
+                    </Box>
+                  ))}
+                </Box>
+
+                {/* Line 2 (unchanged) for medium+ screens */}
                 <Box component="div" className="block mt-1 hidden sm:block">
                   {Array.from("for Real World Asset Tokenization").map((char, idx) => (
                     <Box
@@ -56,11 +80,11 @@ export default function Hero() {
                   ))}
                 </Box>
 
-                {/* Small screen: Split into 2 lines for better fit */}
+                {/* Line 2 split for small screens */}
                 <Box component="div" className="block mt-1 sm:hidden">
                   {Array.from("for Real World").map((char, idx) => (
                     <Box
-                      key={`line2-small-char-${idx}`}
+                      key={`line2-sm-1-${idx}`}
                       component="span"
                       className="ultra-smooth-gradient-text"
                     >
@@ -71,7 +95,7 @@ export default function Hero() {
                 <Box component="div" className="block mt-1 sm:hidden">
                   {Array.from("Asset Tokenization").map((char, idx) => (
                     <Box
-                      key={`line3-small-char-${idx}`}
+                      key={`line2-sm-2-${idx}`}
                       component="span"
                       className="ultra-smooth-gradient-text"
                     >
@@ -80,6 +104,7 @@ export default function Hero() {
                   ))}
                 </Box>
               </Typography>
+
 
 
               <Typography
@@ -161,7 +186,7 @@ export default function Hero() {
     -webkit-text-fill-color: transparent;
     background-image: linear-gradient(
       90deg,
-rgb(95, 191, 137)  0%,
+rgb(95, 155, 121)  0%,
 rgba(0, 255, 132, 0.6) 100%
     );
   }
