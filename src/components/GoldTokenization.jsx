@@ -10,7 +10,6 @@ import {
   AccountBalance,
   ArrowRightAlt,
 } from "@mui/icons-material";
-import GoldSwirl from "./GoldSwirl";
 import BlockChain from "./BlockChainNetwork";
 
 const GoldTokenization = () => {
