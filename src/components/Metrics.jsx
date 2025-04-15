@@ -18,7 +18,7 @@ const AnimatedCounter = ({ value, duration = 2, delay = 0, suffix = '', isInView
   const animationRef = useRef(null);
   const valueNum = parseFloat(value.replace(/[^0-9.]/g, ''));
   const valueSuffix = value.replace(/[0-9.]/g, '');
-  
+
   // Reset the counter when isInView changes
   useEffect(() => {
     if (!isInView) {
@@ -29,10 +29,10 @@ const AnimatedCounter = ({ value, duration = 2, delay = 0, suffix = '', isInView
       }
       return;
     }
-    
+
     const startTime = Date.now();
     const endTime = startTime + duration * 1000;
-    
+
     const timer = setTimeout(() => {
       const updateCounter = () => {
         const now = Date.now();
@@ -40,19 +40,19 @@ const AnimatedCounter = ({ value, duration = 2, delay = 0, suffix = '', isInView
           setCount(valueNum);
           return;
         }
-        
+
         const elapsedTime = now - startTime;
         const progress = elapsedTime / (duration * 1000);
         const currentValue = valueNum * progress;
         setCount(currentValue);
-        
+
         animationRef.current = requestAnimationFrame(updateCounter);
       };
-      
+
       // Start the animation
       animationRef.current = requestAnimationFrame(updateCounter);
     }, delay * 1000);
-    
+
     return () => {
       clearTimeout(timer);
       if (animationRef.current) {
@@ -60,13 +60,13 @@ const AnimatedCounter = ({ value, duration = 2, delay = 0, suffix = '', isInView
       }
     };
   }, [valueNum, duration, delay, isInView]);
-  
+
   // Format the counter value based on the original value's format
   const displayValue = count.toLocaleString('en-US', {
     maximumFractionDigits: 1,
     minimumFractionDigits: valueSuffix === 'B' ? 1 : 0,
   }) + valueSuffix;
-  
+
   return <span ref={countRef}>{displayValue}</span>;
 };
 
@@ -141,11 +141,11 @@ const CustomTooltip = ({ active, payload, label }) => {
             users: 'K',
             transactions: 'M'
           };
-          
+
           return (
             <p key={index} className="text-sm flex items-center my-1">
-              <span 
-                className="inline-block w-3 h-3 rounded-full mr-2" 
+              <span
+                className="inline-block w-3 h-3 rounded-full mr-2"
                 style={{ backgroundColor: colors[entry.dataKey] }}
               ></span>
               <span className="font-medium mr-2">{labels[entry.dataKey]}:</span>
@@ -163,16 +163,16 @@ export default function Metrics() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isMedium = useMediaQuery(theme.breakpoints.down('md'));
-  
+
   const [activeIndex, setActiveIndex] = useState(null);
   const [chartAnimated, setChartAnimated] = useState(false);
   const [chartType, setChartType] = useState('line');
   const [highlightedMetric, setHighlightedMetric] = useState(null);
   const [visibleMonths, setVisibleMonths] = useState(monthlyData);
   const [isComponentInView, setIsComponentInView] = useState(false);
-  
+
   const controls = useAnimation();
-  
+
   // Restart animations when component comes into view
   const onViewportEnter = () => {
     setIsComponentInView(false);
@@ -183,7 +183,7 @@ export default function Metrics() {
       controls.start({ opacity: 1, y: 0 });
     }, 50);
   };
-  
+
   // Control chart animation
   useEffect(() => {
     if (isComponentInView) {
@@ -208,15 +208,15 @@ export default function Metrics() {
   };
 
   const chartHeight = isMobile ? 250 : isMedium ? 350 : 450;
-  
+
   const handleMetricHover = (index) => {
     setHighlightedMetric(index);
   };
-  
+
   const handleMetricLeave = () => {
     setHighlightedMetric(null);
   };
-  
+
   return (
     <motion.div
       className="py-24 relative "
@@ -232,7 +232,7 @@ export default function Metrics() {
         >
           <Typography
             variant="overline"
-            className="text-primary font-medium tracking-wider block text-center mb-2"
+            className=" gradient-letter text-primary font-medium tracking-wider block text-center mb-2"
           >
             PLATFORM METRICS
           </Typography>
@@ -244,12 +244,15 @@ export default function Metrics() {
           >
             <Typography
               variant="h2"
-              className="font-orbitron text-4xl md:text-5xl mb-4 text-center bg-[linear-gradient(183deg,_rgba(0,255,0,1)_0%,_rgba(0,198,0,1)_0%,_rgba(0,158,0,1)_100%,_rgba(0,0,0,1)_100%)] bg-clip-text text-transparent"
+              className="font-orbitron text-4xl md:text-5xl mb-4 text-center"
             >
-              Tokenization{" "}
-              <span className="bg-[linear-gradient(183deg,_rgba(0,255,0,1)_0%,_rgba(0,198,0,1)_0%,_rgba(0,158,0,1)_100%,_rgba(0,0,0,1)_100%)] bg-clip-text text-transparent">
-                at Scale
-              </span>
+              <Box component="div" className="flex flex-wrap justify-center">
+                {Array.from("Tokenization at Scale").map((char, idx) => (
+                  <Box key={idx} component="span" className="gradient-letter">
+                    {char === " " ? "\u00A0" : char}
+                  </Box>
+                ))}
+              </Box>
             </Typography>
           </motion.div>
           <Typography
@@ -341,7 +344,7 @@ export default function Metrics() {
         className="absolute inset-0 pointer-events-none"
         sx={{
           background:
-           "radial-gradient(circle at 50% 25%, rgba(0, 255, 133, 0.1) 0%, rgba(10, 11, 13, 0) 50%)",
+            "radial-gradient(circle at 50% 25%, rgba(0, 255, 133, 0.1) 0%, rgba(10, 11, 13, 0) 50%)",
         }}
       />
     </motion.div>

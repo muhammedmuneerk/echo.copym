@@ -168,14 +168,23 @@ export default function Features() {
         >
           <Typography
             variant="overline"
-            className="text-primary font-medium tracking-wider block mb-2"
+            className="gradient-letter"
           >
             ALL-IN-ONE PLATFORM
           </Typography>
-          <Typography variant="h2" className="font-orbitron text-4xl md:text-5xl mb-4 pb-1 bg-[linear-gradient(183deg,_rgba(0,255,0,1)_0%,_rgba(0,198,0,1)_0%,_rgba(0,158,0,1)_100%,_rgba(0,0,0,1)_100%)] bg-clip-text text-transparent">
-            Everything You Need In{" "}
-            <span className="bg-[linear-gradient(183deg,_rgba(0,255,0,1)_0%,_rgba(0,198,0,1)_0%,_rgba(0,158,0,1)_100%,_rgba(0,0,0,1)_100%)] bg-clip-text text-transparent">One Place</span>
-          </Typography>
+          <Typography
+  variant="h2"
+  className="font-orbitron text-4xl md:text-5xl mb-4 pb-1 text-center"
+>
+  <Box component="div" className="flex flex-wrap justify-center">
+    {Array.from("Everything You Need In One Place").map((char, idx) => (
+      <Box key={`need-${idx}`} component="span" className="gradient-letter">
+        {char === " " ? "\u00A0" : char}
+      </Box>
+    ))}
+  </Box>
+</Typography>
+
           <Typography
             variant="body1"
             className="text-text-secondary max-w-2xl mx-auto"

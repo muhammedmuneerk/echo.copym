@@ -172,19 +172,23 @@ export default function GlobalMarkets() {
         >
           <Typography
             variant="overline"
-            className="text-primary font-medium tracking-wider block mb-2"
+            className="gradient-letter"
           >
             GLOBAL REACH
           </Typography>
           <Typography
-            variant="h2"
-            className="font-orbitron text-4xl md:text-5xl mb-4 pb-1 bg-[linear-gradient(183deg,_rgba(0,255,0,1)_0%,_rgba(0,198,0,1)_0%,_rgba(0,158,0,1)_100%,_rgba(0,0,0,1)_100%)] bg-clip-text text-transparent"
-          >
-            Connecting{" "}
-            <span className="bg-[linear-gradient(183deg,_rgba(0,255,0,1)_0%,_rgba(0,198,0,1)_0%,_rgba(0,158,0,1)_100%,_rgba(0,0,0,1)_100%)] bg-clip-text text-transparent">
-              Global Markets
-            </span>
-          </Typography>
+  variant="h2"
+  className="font-orbitron text-4xl md:text-5xl mb-4 pb-1 text-center"
+>
+  <Box component="div" className="flex flex-wrap justify-center">
+    {Array.from("Connecting Global Markets").map((char, idx) => (
+      <Box key={`connecting-${idx}`} component="span" className="gradient-letter">
+        {char === " " ? "\u00A0" : char}
+      </Box>
+    ))}
+  </Box>
+</Typography>
+
           <Typography
             variant="body1"
             className="text-text-secondary max-w-2xl mx-auto"
