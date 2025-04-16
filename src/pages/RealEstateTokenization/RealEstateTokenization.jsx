@@ -40,128 +40,6 @@ const Card = ({ children, className, as3D = false }) => {
   );
 };
 
-// Custom particle background component with enhanced visibility
-const ParticleBackground = () => {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Base grid pattern - increased opacity and stroke width */}
-      <div className="h-full w-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik0gNDAgMCBMIDAgMCAwIDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiMxMGI5ODEiIHN0cm9rZS13aWR0aD0iMC40Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIiBvcGFjaXR5PSIwLjA2Ii8+PC9zdmc+')]"></div>
-      
-      {/* Diagonal grid overlay - increased opacity */}
-      <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImRpYWdvbmFsLWdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTTYwIDAgTDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzEwYjk4MSIgc3Ryb2tlLXdpZHRoPSIwLjciLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZGlhZ29uYWwtZ3JpZCkiLz48L3N2Zz4=')]"></div>
-      
-      {/* Moving gradient overlay - increased color intensity */}
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-br from-emerald-900/10 via-transparent to-blue-900/10 mix-blend-screen"
-        animate={{ 
-          background: [
-            "linear-gradient(135deg, rgba(16,185,129,0.07) 0%, transparent 25%, rgba(6,78,59,0.07) 50%, transparent 75%, rgba(16,185,129,0.07) 100%)",
-            "linear-gradient(135deg, rgba(6,78,59,0.07) 0%, transparent 25%, rgba(16,185,129,0.07) 50%, transparent 75%, rgba(6,78,59,0.07) 100%)",
-            "linear-gradient(135deg, rgba(16,185,129,0.07) 0%, transparent 25%, rgba(6,78,59,0.07) 50%, transparent 75%, rgba(16,185,129,0.07) 100%)"
-          ]
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      />
-      
-      {/* Advanced particles - increased opacity and size */}
-      {Array.from({ length: 50 }).map((_, i) => (
-        <motion.div
-          key={`particle-${i}`}
-          className={`absolute rounded-full ${i % 5 === 0 ? 'bg-emerald-400' : i % 3 === 0 ? 'bg-emerald-500' : 'bg-emerald-600'}`}
-          initial={{
-            opacity: Math.random() * 0.4 + 0.1,
-            x: `${Math.random() * 100}%`,
-            y: `${Math.random() * 100}%`,
-            scale: Math.random() * 0.6 + 0.2,
-          }}
-          animate={{
-            y: [`${Math.random() * 100}%`, `${Math.random() * 100}%`],
-            x: [`${Math.random() * 100}%`, `${Math.random() * 100}%`],
-            opacity: [Math.random() * 0.3, Math.random() * 0.5, Math.random() * 0.3],
-          }}
-          transition={{
-            duration: Math.random() * 30 + 15,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          style={{
-            width: Math.random() * 5 + 1.5,
-            height: Math.random() * 5 + 1.5,
-            filter: `blur(${Math.random() < 0.3 ? '1px' : '0px'})`,
-          }}
-        />
-      ))}
-      
-      {/* Larger glowing orbs - increased opacity */}
-      {Array.from({ length: 8 }).map((_, i) => (
-        <motion.div
-          key={`orb-${i}`}
-          className="absolute rounded-full bg-emerald-500/15"
-          initial={{
-            opacity: Math.random() * 0.15 + 0.1,
-            x: `${Math.random() * 100}%`,
-            y: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [Math.random() * 0.15, Math.random() * 0.25, Math.random() * 0.15],
-          }}
-          transition={{
-            duration: Math.random() * 10 + 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          style={{
-            width: Math.random() * 100 + 60,
-            height: Math.random() * 100 + 60,
-            filter: 'blur(35px)',
-          }}
-        />
-      ))}
-      
-      {/* Constellation line effects - increased opacity and stroke width */}
-      <svg className="absolute inset-0 w-full h-full opacity-[0.12]">
-        <motion.g
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 2 }}
-        >
-          {Array.from({ length: 10 }).map((_, i) => {
-            const x1 = Math.random() * 100;
-            const y1 = Math.random() * 100;
-            const x2 = x1 + (Math.random() * 20 - 10);
-            const y2 = y1 + (Math.random() * 20 - 10);
-            
-            return (
-              <motion.line
-                key={`line-${i}`}
-                x1={`${x1}%`}
-                y1={`${y1}%`}
-                x2={`${x2}%`}
-                y2={`${y2}%`}
-                stroke="#10b981"
-                strokeWidth="0.4"
-                strokeLinecap="round"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ 
-                  pathLength: [0, 1, 1, 0],
-                  opacity: [0, 0.4, 0.4, 0]
-                }}
-                transition={{
-                  duration: Math.random() * 10 + 10,
-                  repeat: Infinity,
-                  ease: "linear",
-                  times: [0, 0.3, 0.7, 1]
-                }}
-              />
-            );
-          })}
-        </motion.g>
-      </svg>
-    </div>
-  );
-};
-
 // Main component
 const RealEstateTokenization = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -256,11 +134,8 @@ const RealEstateTokenization = () => {
 
   return (
     <div className="bg-gradient-to-b from-[#050505] to-[#0a0a0a] text-white min-h-screen relative overflow-hidden font-sans">
-      {/* Enhanced Layered Background Elements */}
+      {/* Enhanced Layered Background Elements - Removed extra layers */}
       <div className="fixed inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik0gNDAgMCBMIDAgMCAwIDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiMxMGI5ODEiIHN0cm9rZS13aWR0aD0iMC40Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIiBvcGFjaXR5PSIwLjA2Ii8+PC9zdmc+')]"></div>
-      
-      {/* Hexagonal pattern overlay - increased opacity and stroke width */}
-      <div className="fixed inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4NCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDg0IDQ4Ij48ZGVmcz48cGF0dGVybiBpZD0iaGV4IiB3aWR0aD0iODQiIGhlaWdodD0iNDgiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InNjYWxlKDAuMTYpIj48cGF0aCBkPSJNNDIgMTIgNzMuODIzIDMxIDczLjgyMyA2OSA0MiA4OCAxMC4xNzcgNjkgMTAuMTc3IDMxeiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTBiOTgxIiBzdHJva2Utd2lkdGg9IjEuMiIgLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjaGV4KSIgb3BhY2l0eT0iMC4wNiIgLz48L3N2Zz4=')] opacity-40"></div>
       
       {/* Diagonal grid overlay - increased opacity */}
       <div className="fixed inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImRpYWdvbmFsLWdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTTYwIDAgTDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzEwYjk4MSIgc3Ryb2tlLXdpZHRoPSIwLjciLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZGlhZ29uYWwtZ3JpZCkiLz48L3N2Zz4=')]"></div>
@@ -282,21 +157,13 @@ const RealEstateTokenization = () => {
         }}
       />
       
-      {/* Sophisticated noise texture overlay - slightly increased opacity */}
-      <div className="fixed inset-0 opacity-[0.03] mix-blend-soft-light bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuMDEiIG51bU9jdGF2ZXM9IjUiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48ZmVDb2xvck1hdHJpeCB0eXBlPSJzYXR1cmF0ZSIgdmFsdWVzPSIwIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMSIvPjwvc3ZnPg==')]"></div>
-      
-      {/* Circuit board pattern overlay - increased opacity and stroke width */}
-      <div className="fixed inset-0 opacity-[0.06] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJjaXJjdWl0IiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTTEwIDEwIEw1MCAxMCBMNTAgNTAgTDkwIDUwIEw5MCA5MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTBiOTgxIiBzdHJva2Utd2lkdGg9IjAuNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTkwIDEwIEw1MCAxMCBMNTAgNTAgTDEwIDUwIEwxMCA5MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTBiOTgxIiBzdHJva2Utd2lkdGg9IjAuNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMi4yIiBmaWxsPSIjMTBiOTgxIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSIxMCIgcj0iMi4yIiBmaWxsPSIjMTBiOTgxIi8+PGNpcmNsZSBjeD0iOTAiIGN5PSIxMCIgcj0iMi4yIiBmaWxsPSIjMTBiOTgxIi8+PGNpcmNsZSBjeD0iMTAiIGN5PSI1MCIgcj0iMi4yIiBmaWxsPSIjMTBiOTgxIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iMi4yIiBmaWxsPSIjMTBiOTgxIi8+PGNpcmNsZSBjeD0iOTAiIGN5PSI1MCIgcj0iMi4yIiBmaWxsPSIjMTBiOTgxIi8+PGNpcmNsZSBjeD0iMTAiIGN5PSI5MCIgcj0iMi4yIiBmaWxsPSIjMTBiOTgxIi8+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iMi4yIiBmaWxsPSIjMTBiOTgxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2NpcmN1aXQpIi8+PC9zdmc+')]"></div>
-      
       {/* Vignette shadow overlay - reduced opacity for better visibility */}
       <div className="fixed inset-0 pointer-events-none bg-radial-gradient opacity-45 z-[1]" 
         style={{ background: "radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.3) 70%, rgba(0, 0, 0, 0.7) 100%)" }}>
       </div>
 
-      {/* Hero Section */}
+      {/* Hero Section - Removed ParticleBackground */}
       <section className="relative container mx-auto px-6 py-24">
-        <ParticleBackground />
-        
         <motion.div 
           className="max-w-4xl mt-20 relative z-10"
           initial={{ opacity: 0, y: 50 }}
@@ -393,7 +260,7 @@ const RealEstateTokenization = () => {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Feature Cards */}
+              {/* Feature Cards - Fixed hover animation for all cards */}
               {[
                 {
                   icon: <Building className="h-6 w-6 text-emerald-400" />,
@@ -418,7 +285,7 @@ const RealEstateTokenization = () => {
               ].map((feature, index) => (
                 <Card 
                   key={index} 
-                  className="group hover:border-emerald-900 transition-all duration-500"
+                  className="group hover:border-emerald-900 transition-all duration-500 overflow-hidden"
                 >
                   <div className="p-6">
                     <div className="mb-4">
@@ -429,7 +296,8 @@ const RealEstateTokenization = () => {
                       <p className="text-gray-400">{feature.desc}</p>
                     </div>
                   </div>
-                  <div className="h-1 w-0 bg-gradient-to-r from-emerald-600 to-emerald-400 group-hover:w-full transition-all duration-700" />
+                  {/* Fixed positioning of the hover animation border */}
+                  <div className="h-1 w-0 bg-gradient-to-r from-emerald-600 to-emerald-400 group-hover:w-full transition-all duration-700 absolute bottom-0 left-0" />
                 </Card>
               ))}
             </div>
