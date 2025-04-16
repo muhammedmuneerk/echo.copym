@@ -11,7 +11,7 @@ import {
   ArrowRightAlt,
 } from "@mui/icons-material";
 import GoldSwirl from "../../components/GoldSwirl";
-import BlockChain from "../../components/BlockChainNetwork";
+
 
 const GoldTokenization = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -52,15 +52,7 @@ const GoldTokenization = () => {
       {/* Header Section */}
 
       <div className="relative">
-        {/* Hidden GoldSwirl in this section */}
-        <div className="fixed inset-0 z-0 flex pointer-events-none w-full h-full ">
-          <BlockChain
-            nodeColor="#d4af37"
-            nodeEmissive="#b8860b"
-            connectionColor="gold"
-          />
 
-        </div>
 
         <div className="container mx-auto py-20 px-4 md:px-12 pt-20">
           <div className="flex flex-col md:flex-row justify-between items-start gap-10">
