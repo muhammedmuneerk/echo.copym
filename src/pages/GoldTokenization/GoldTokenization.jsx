@@ -48,31 +48,47 @@ const GoldTokenization = () => {
   };
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen pt-20">
-      {/* Header Section */}
+    <div className="relative min-h-screen bg-black text-[#FFFDD0] overflow-hidden">
+      {/* Background effects with Glass-like Effect */}
+      <div className="absolute inset-0 bg-black text-[#FFFDD0] overflow-hidden opacity-90">
+        <div className="absolute inset-0 bg-[linear-gradient(35deg,#B8860B_15%,transparent_15%,transparent_85%,#B8860B_85%)] opacity-40 blur-lg animate-pulse" />
+        <div className="absolute inset-0 bg-[linear-gradient(35deg,#DAA520_30%,transparent_30%,transparent_70%,#DAA520_70%)] opacity-40 blur-lg animate-pulse" />
+        <div className="absolute inset-0 bg-black opacity-20" />
+      </div>
 
-      <div className="relative">
-
-
+      <div className="relative px-4 pt-16 pb-24 space-y-24">
+        {/* Header Section */}
         <div className="container mx-auto py-20 px-4 md:px-12 pt-20">
           <div className="flex flex-col md:flex-row justify-between items-start gap-10">
             {/* Left - Text */}
             <div className="max-w-3xl p-6 md:p-10">
-              <h1 className="font-orbitron text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-white via-yellow-500 to-yellow-600 text-transparent bg-clip-text">
-                Gold Tokenization
+              <h1 className="font-orbitron text-4xl md:text-5xl font-bold mb-2">
+                {["Gold", "Tokenization"].map((word, wordIndex) => (
+                  <span key={`word-${wordIndex}`} className="flex flex-wrap">
+                    {word.split("").map((char, i) => (
+                      <span
+                        key={`char-${i}`}
+                        className="gradient-letter bg-gradient-to-r from-[#FFD700] via-[#DAA520] to-[#B8860B] text-transparent bg-clip-text"
+                      >
+                        {char}
+                      </span>
+                    ))}
+                    <span className="w-2" />
+                  </span>
+                ))}
               </h1>
-              <h2 className="text-xl md:text-2xl mb-4 ">
+              <h2 className="text-xl md:text-2xl mb-4 text-[#FFFDD0]">
                 Democratizing Gold Investment Through Blockchain
               </h2>
-              <p className="text-gray-300 text-lg mb-8">
+              <p className="text-[#E6E6FA] text-lg mb-8">
                 Transform your approach to gold investing with fractional ownership,
                 enhanced liquidity, and transparent trading
               </p>
               <div className="flex flex-wrap gap-4">
-                <button className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-md font-medium transition ">
+                <button className="bg-[#B8860B] hover:bg-[#DAA520] text-white px-6 py-3 rounded-md font-medium transition border border-[#FFD700]/20">
                   Start Investing in Gold
                 </button>
-                <button className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-md font-medium transition">
+                <button className="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white px-6 py-3 rounded-md font-medium transition border border-[#FFD700]/20">
                   Learn More
                 </button>
               </div>
@@ -80,83 +96,92 @@ const GoldTokenization = () => {
           </div>
         </div>
 
-
-
-
-
-
         {/* Revolutionize Gold Investment Section */}
         <div className="py-16">
           <div className="container mx-auto px-4 md:px-12">
             <div className="flex flex-col lg:flex-row">
               <div className="lg:w-1/2 mb-10 lg:mb-0">
-                <h2 className="font-orbitron text-3xl md:text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-yellow-400 to-yellow-600">
-                  Revolutionize Gold Investment
+                <h2 className="font-orbitron text-3xl md:text-4xl font-bold mb-4">
+                  {["Revolutionize", "Gold", "Investment"].map((word, wordIndex) => (
+                    <span key={`word-${wordIndex}`} className="flex flex-wrap">
+                      {word.split("").map((char, i) => (
+                        <span
+                          key={`char-${i}`}
+                          className="gradient-letter bg-gradient-to-r from-[#FFD700] via-[#DAA520] to-[#B8860B] text-transparent bg-clip-text"
+                        >
+                          {char}
+                        </span>
+                      ))}
+                      <span className="w-2" />
+                    </span>
+                  ))}
                 </h2>
-                <p className="text-gray-400 mb-6">
+                <p className="text-[#E6E6FA] mb-6">
                   Unlock the potential of gold through blockchain-powered fractional ownership
                 </p>
 
                 <div className="flex flex-col gap-6">
                   {/* Feature Card 1 */}
-                  <div className="bg-white/10 backdrop-blur-md border border-yellow-400/20 p-6 rounded-2xl transition-all hover:bg-white/20">
-                    <div className="text-yellow-500 mb-4">
+                  <div className="bg-[#1a1a1a]/30 backdrop-blur-md border border-[#FFD700]/20 p-6 rounded-2xl transition-all hover:bg-[#1a1a1a]/40">
+                    <div className="text-[#FFD700] mb-4">
                       <AccountBalance fontSize="large" />
                     </div>
-                    <h3 className="text-xl font-bold mb-2">Fractional Gold Ownership</h3>
-                    <p className="text-gray-300">
+                    <h3 className="text-xl font-bold mb-2 text-[#FFFDD0]">Fractional Gold Ownership</h3>
+                    <p className="text-[#E6E6FA]">
                       Invest in premium gold assets with lower entry barriers
                     </p>
                   </div>
 
                   {/* Feature Card 2 */}
-                  <div className="bg-white/10 backdrop-blur-md border border-yellow-400/20 p-6 rounded-2xl transition-all hover:bg-white/20">
-                    <div className="text-yellow-500 mb-4">
+                  <div className="bg-[#1a1a1a]/30 backdrop-blur-md border border-[#FFD700]/20 p-6 rounded-2xl transition-all hover:bg-[#1a1a1a]/40">
+                    <div className="text-[#FFD700] mb-4">
                       <Security fontSize="large" />
                     </div>
-                    <h3 className="text-xl font-bold mb-2">Secure Storage</h3>
-                    <p className="text-gray-300">
+                    <h3 className="text-xl font-bold mb-2 text-[#FFFDD0]">Secure Storage</h3>
+                    <p className="text-[#E6E6FA]">
                       Professionally vaulted and insured gold assets
                     </p>
                   </div>
-                  <div className="bg-gray-800 p-6 rounded-lg  transition-all hover:bg-gray-700">
-                  <div className="text-gray-500 mb-4">
-                    <Language fontSize="large" />
+
+                  {/* Feature Card 3 */}
+                  <div className="bg-[#1a1a1a]/30 backdrop-blur-md border border-[#FFD700]/20 p-6 rounded-2xl transition-all hover:bg-[#1a1a1a]/40">
+                    <div className="text-[#FFD700] mb-4">
+                      <Language fontSize="large" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 text-[#FFFDD0]">
+                      Global Accessibility
+                    </h3>
+                    <p className="text-[#E6E6FA]">
+                      Trade gold tokens from anywhere in the world
+                    </p>
                   </div>
-                  <h3 className="text-xl font-bold mb-2">
-                    Global Accessibility
-                  </h3>
-                  <p className="text-gray-400">
-                    Trade gold tokens from anywhere in the world
-                  </p>
-                </div>
                 </div>
               </div>
 
               {/* Gold Vault Card */}
               <div className="lg:w-1/2 lg:pl-10">
-                <div className="bg-gray-800 rounded-lg overflow-hidden">
+                <div className="bg-[#1a1a1a]/30 backdrop-blur-md border border-[#FFD700]/20 rounded-2xl overflow-hidden">
                   <div className="relative">
-                    <div className="bg-gradient-to-r from-yellow-600 to-yellow-700 p-6">
+                    <div className="bg-gradient-to-r from-[#B8860B] to-[#DAA520] p-6">
                       <div className="flex justify-between items-center">
                         <div>
-                          <h3 className="text-2xl font-bold">Royal Gold Vault</h3>
-                          <p className="text-gray-300">
+                          <h3 className="text-2xl font-bold text-[#FFFDD0]">Royal Gold Vault</h3>
+                          <p className="text-[#E6E6FA]">
                             Swiss Secure Vault • 99.99% Pure Gold
                           </p>
                         </div>
                         <div className="flex">
-                          <button className="bg-gray-800 bg-opacity-30 p-2 rounded-full mr-2">
-                            <KeyboardArrowLeft />
+                          <button className="bg-[#1a1a1a]/30 p-2 rounded-full mr-2 hover:bg-[#1a1a1a]/50">
+                            <KeyboardArrowLeft className="text-[#FFFDD0]" />
                           </button>
-                          <button className="bg-gray-800 bg-opacity-30 p-2 rounded-full">
-                            <KeyboardArrowRight />
+                          <button className="bg-[#1a1a1a]/30 p-2 rounded-full hover:bg-[#1a1a1a]/50">
+                            <KeyboardArrowRight className="text-[#FFFDD0]" />
                           </button>
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-6">
+                    <div className="p-6 bg-[#1a1a1a]/30 backdrop-blur-md">
                       <div className="grid grid-cols-3 gap-4 mb-8">
                         <div>
                           <p className="text-gray-400 text-sm">Total Value</p>
