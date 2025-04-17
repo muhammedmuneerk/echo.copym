@@ -249,7 +249,7 @@ const CommoditiesTokenization = () => {
           </div>
           
           {/* Scrolling indicator */}
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
             <span className="text-gray-500 text-sm mb-2">Scroll to explore</span>
             <div className="w-6 h-10 border border-gray-700 rounded-full flex items-center justify-center p-1">
               <div className="w-1 h-1 bg-emerald-500 rounded-full animate-scroll-indicator"></div>
