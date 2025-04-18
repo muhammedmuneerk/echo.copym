@@ -161,7 +161,10 @@ const GoldenCoin = () => {
 // Feature card component
 const FeatureCard = ({ icon, title, description }) => {
   return (
-    <div className="group bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800 p-6 rounded-lg transition-all duration-300 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5">
+    <div className="group relative bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800 p-6 rounded-lg transition-all duration-300 ease-in-out hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 overflow-hidden">
+      {/* Border glow overlay */}
+      <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 border border-emerald-500/30 rounded-lg"></div>
+      
       <div className="text-emerald-500 mb-6 group-hover:scale-110 transition-transform duration-300">
         {icon}
       </div>
@@ -179,30 +182,10 @@ const FeatureCard = ({ icon, title, description }) => {
 const CommoditiesTokenization = () => {
   const [detailsOpen, setDetailsOpen] = useState(false); // Set to false to start closed
   const [activeTab, setActiveTab] = useState("preciousMetals");
-  const [scrollPosition, setScrollPosition] = useState(0);
   const heroRef = useRef(null);
-
-  // Parallax scrolling effect
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-    
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const toggleDetails = () => {
     setDetailsOpen(prevState => !prevState);
-  };
-  
-  // Custom styles with parallax effect
-  const heroParallaxStyle = {
-    transform: `translateY(${scrollPosition * 0.2}px)`,
-  };
-  
-  const backgroundParallaxStyle = {
-    transform: `translateY(${-scrollPosition * 0.05}px)`,
   };
 
   return (
@@ -224,20 +207,14 @@ const CommoditiesTokenization = () => {
           ref={heroRef}
           className="px-8 py-24 md:px-16 lg:px-24 min-h-[90vh] flex flex-col justify-center relative"
         >
-          {/* Background elements with parallax */}
-          <div 
-            className="absolute inset-0 z-0 opacity-20" 
-            style={backgroundParallaxStyle}
-          >
+          {/* Background elements without parallax */}
+          <div className="absolute inset-0 z-0 opacity-20">
             <div className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-emerald-500/10 filter blur-3xl"></div>
             <div className="absolute bottom-1/4 left-1/3 w-96 h-96 rounded-full bg-emerald-700/10 filter blur-3xl"></div>
           </div>
           
-          {/* Hero content with subtle parallax */}
-          <div 
-            className="relative z-10 max-w-3xl transition-all duration-1000"
-            style={heroParallaxStyle}
-          >
+          {/* Hero content without parallax */}
+          <div className="relative z-10 max-w-3xl transition-all duration-1000">
             <div className="mb-2 inline-block">
               <div className="flex items-center mb-1">
                 <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-pulse"></span>
@@ -272,7 +249,7 @@ const CommoditiesTokenization = () => {
           </div>
           
           {/* Scrolling indicator */}
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
             <span className="text-gray-500 text-sm mb-2">Scroll to explore</span>
             <div className="w-6 h-10 border border-gray-700 rounded-full flex items-center justify-center p-1">
               <div className="w-1 h-1 bg-emerald-500 rounded-full animate-scroll-indicator"></div>
@@ -410,23 +387,29 @@ const CommoditiesTokenization = () => {
                 {/* Token Distribution */}
                 <TokenDistribution percentageSold={68} />
 
-                {/* Investment Details */}
+                {/* Investment Details - Redesigned */}
                 <div className="border-t border-gray-700/50 pt-4">
+                  {/* Toggle Button */}
                   <button
-                    className="flex justify-between items-center cursor-pointer py-3 px-4 w-full text-left hover:bg-gray-800/30 rounded transition-colors duration-200 bg-gray-800/20"
+                    className="flex justify-between items-center cursor-pointer py-3 px-4 w-full text-left hover:bg-gray-800/30 rounded transition-all duration-300 ease-in-out bg-gray-800/20"
                     onClick={() => setDetailsOpen(!detailsOpen)}
+                    aria-expanded={detailsOpen}
                   >
                     <div className="flex items-center">
                       <h4 className="font-semibold">Investment Details</h4>
                       <span className="ml-2 text-xs text-emerald-500">{detailsOpen ? 'Hide' : 'Show'}</span>
                     </div>
-                    <span className="text-white bg-emerald-600 hover:bg-emerald-500 rounded-full w-7 h-7 flex items-center justify-center">
-                      {detailsOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                    <span className={`text-white bg-emerald-600 hover:bg-emerald-500 rounded-full w-7 h-7 flex items-center justify-center transition-transform duration-300 ${detailsOpen ? 'rotate-180' : 'rotate-0'}`}>
+                      <ChevronDown className="w-4 h-4" />
                     </span>
                   </button>
 
-                  {/* Simple conditional rendering */}
-                  {detailsOpen && (
+                  {/* Details Content with height animation */}
+                  <div 
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      detailsOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
                     <div className="py-4 px-4">
                       <div className="mb-4">
                         <p className="text-gray-400 text-sm">Expected Returns</p>
@@ -450,7 +433,7 @@ const CommoditiesTokenization = () => {
                         </ul>
                       </div>
                     </div>
-                  )}
+                  </div>
 
                   <CustomButton 
                     variant="primary" 
