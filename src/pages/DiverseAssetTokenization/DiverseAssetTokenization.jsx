@@ -373,7 +373,7 @@ const DiverseAssetTokenization = () => {
           }}
         />
         
-        <div className="container mx-auto px-5 xs:px-6 md:px-8 py-8 md:py-12 mt-4 xs:mt-8 md:mt-16 relative z-10 max-w-[1200px] w-full">
+        <div className="container mx-auto px-2 sm:px-3 lg:px-4 py-8 md:py-12 mt-4 xs:mt-8 md:mt-16 relative z-10 max-w-7xl w-full">
           <motion.div 
             className="flex flex-col md:flex-row items-center gap-3 md:gap-6 mb-4 md:mb-8"
             initial={{ opacity: 0, y: 20 }}
@@ -435,7 +435,7 @@ const DiverseAssetTokenization = () => {
       </div>
 
       {/* Main Content with Staggered Animations */}
-      <div className="container mx-auto px-5 xs:px-6 md:px-8 py-6 xs:py-8 md:py-16 relative z-10 max-w-[1200px] w-full">
+      <div className="container mx-auto px-2 sm:px-3 lg:px-4 py-6 xs:py-8 md:py-16 relative z-10 max-w-7xl w-full">
         {/* Hero Section */}
         <SectionHeader accent>Unlimited Tokenization Possibilities</SectionHeader>
 
@@ -522,7 +522,7 @@ const DiverseAssetTokenization = () => {
             }}
           />
         
-        <div className="container mx-auto px-5 xs:px-6 md:px-8 text-center relative z-10 max-w-[1200px] w-full">
+        <div className="container mx-auto px-2 sm:px-3 lg:px-4 text-center relative z-10 max-w-7xl w-full">
           <div className="backdrop-blur-xl bg-[#061B12]/50 rounded-lg xs:rounded-xl md:rounded-2xl p-4 xs:p-6 md:p-12 border border-green-500/20 shadow-2xl relative overflow-hidden"
               style={{
                 boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 15px 30px -5px rgba(16, 185, 129, 0.2)'
