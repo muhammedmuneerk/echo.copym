@@ -219,10 +219,10 @@ const GreenTokenization = () => {
           </div>
 
           {/* Blockchain Role */}
-          <div className="max-w-6xl mx-auto bg-[#001a12]/30 backdrop-blur-x4 border border-[#00A86B]/20 p-8 rounded-2xl shadow-xl">
-            <div className="flex items-center justify-center gap-3 mb-6">
+          <div className="max-w-6xl mx-auto bg-[#001a12]/30 backdrop-blur-x4 border border-[#00A86B]/20 p-4 sm:p-8 rounded-2xl shadow-xl">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6 text-center sm:text-left">
               <Lock className="w-8 h-8 text-[#00A86B]" />
-              <h2 className="text-2xl md:text-4xl font-orbitron font-bold flex flex-wrap gap-1">
+              <h2 className="text-xl sm:text-2xl md:text-4xl font-orbitron font-bold flex flex-wrap justify-center sm:justify-start gap-1">
                 {"The Role of Blockchain".split(" ").map((word, wordIndex) => (
                   <span key={`blockchain-word-${wordIndex}`} className="flex">
                     {word.split("").map((char, i) => (
@@ -235,30 +235,70 @@ const GreenTokenization = () => {
                 ))}
               </h2>
             </div>
-            <ul className="text-base font-futuristic text-left space-y-2 max-w-3xl mx-auto leading-normal">
-              <li className="flex items-center gap-2"><Recycle className="w-5 h-5 text-[#00A86B]" /><strong className="text-[#00A86B]">Traceability:</strong> Every asset's lifecycle is visible, preventing greenwashing.</li>
-              <li className="flex items-center gap-2"><Coins className="w-5 h-5 text-[#00A86B]" /><strong className="text-[#00A86B]">Liquidity:</strong> Tokenized assets are tradable 24/7 with global reach.</li>
-              <li className="flex items-center gap-2"><Shield className="w-5 h-5 text-[#00A86B]" /><strong className="text-[#00A86B]">Security:</strong> Smart contracts ensure direct, tamper-proof ownership and compliance.</li>
-              <li className="flex items-center gap-2"><Users className="w-5 h-5 text-[#00A86B]" /><strong className="text-[#00A86B]">Accessibility:</strong> Lower entry points via fractionalization expand participation in ESG investing.</li>
+            <ul className="text-sm sm:text-base font-futuristic text-left space-y-4 max-w-3xl mx-auto leading-normal">
+              <li className="flex items-start sm:items-center gap-2">
+                <Recycle className="w-5 h-5 text-[#00A86B] mt-0.5 sm:mt-0 flex-shrink-0" />
+                <div>
+                  <strong className="text-[#00A86B] block sm:inline">Traceability:</strong>
+                  <span className="block sm:inline sm:ml-1">Every asset's lifecycle is visible, preventing greenwashing.</span>
+                </div>
+              </li>
+              <li className="flex items-start sm:items-center gap-2">
+                <Coins className="w-5 h-5 text-[#00A86B] mt-0.5 sm:mt-0 flex-shrink-0" />
+                <div>
+                  <strong className="text-[#00A86B] block sm:inline">Liquidity:</strong>
+                  <span className="block sm:inline sm:ml-1">Tokenized assets are tradable 24/7 with global reach.</span>
+                </div>
+              </li>
+              <li className="flex items-start sm:items-center gap-2">
+                <Shield className="w-5 h-5 text-[#00A86B] mt-0.5 sm:mt-0 flex-shrink-0" />
+                <div>
+                  <strong className="text-[#00A86B] block sm:inline">Security:</strong>
+                  <span className="block sm:inline sm:ml-1">Smart contracts ensure direct, tamper-proof ownership and compliance.</span>
+                </div>
+              </li>
+              <li className="flex items-start sm:items-center gap-2">
+                <Users className="w-5 h-5 text-[#00A86B] mt-0.5 sm:mt-0 flex-shrink-0" />
+                <div>
+                  <strong className="text-[#00A86B] block sm:inline">Accessibility:</strong>
+                  <span className="block sm:inline sm:ml-1">Lower entry points via fractionalization expand participation in ESG investing.</span>
+                </div>
+              </li>
             </ul>
           </div>
 
           {/* Comparison */}
-          <div className="max-w-6xl mx-auto text-center bg-[#001a12]/30 backdrop-blur-x4 border border-[#00A86B]/20 p-8 rounded-2xl shadow-xl">
-            <h2 className="text-2xl md:text-4xl font-orbitron font-bold mb-6 flex flex-wrap justify-center gap-1">
-              {"Comparative Snapshot: Metals vs. Other ESG Assets".split(" ").map((word, wordIndex) => (
-                <span key={`compare-word-${wordIndex}`} className="flex">
-                  {word.split("").map((char, i) => (
-                    <span key={`compare-letter-${wordIndex}-${i}`} className="gradient-letter">
-                      {char}
-                    </span>
-                  ))}
-                  <span className="w-1" />
-                </span>
-              ))}
+          <div className="max-w-6xl mx-auto text-center bg-[#001a12]/30 backdrop-blur-x4 border border-[#00A86B]/20 p-4 sm:p-8 rounded-2xl shadow-xl">
+            <h2 className="text-xl sm:text-2xl md:text-4xl font-orbitron font-bold mb-6">
+              <div className="flex flex-wrap justify-center gap-1 px-2">
+                {"Comparative Snapshot:".split(" ").map((word, wordIndex) => (
+                  <span key={`compare-word-1-${wordIndex}`} className="flex">
+                    {word.split("").map((char, i) => (
+                      <span key={`compare-letter-1-${wordIndex}-${i}`} className="gradient-letter">
+                        {char}
+                      </span>
+                    ))}
+                    <span className="w-1" />
+                  </span>
+                ))}
+              </div>
+              <div className="flex flex-wrap justify-center gap-1 px-2 mt-2">
+                {"Metals vs. Other ESG Assets".split(" ").map((word, wordIndex) => (
+                  <span key={`compare-word-2-${wordIndex}`} className="flex">
+                    {word.split("").map((char, i) => (
+                      <span key={`compare-letter-2-${wordIndex}-${i}`} className="gradient-letter">
+                        {char}
+                      </span>
+                    ))}
+                    <span className="w-1" />
+                  </span>
+                ))}
+              </div>
             </h2>
-            <ComparativeSnapshot />
-            <p className="text-base font-futuristic text-left mt-4 leading-normal max-w-2xl mx-auto">
+            <div className="overflow-x-auto">
+              <ComparativeSnapshot />
+            </div>
+            <p className="text-sm sm:text-base font-futuristic text-left mt-4 leading-normal max-w-2xl mx-auto px-2">
               This clear focus ensures <span className="text-[#00A86B] font-semibold">metals</span> lead our impact, with complementary assets scaling the platform's ESG reach.
             </p>
           </div>

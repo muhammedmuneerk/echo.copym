@@ -51,8 +51,9 @@ const GoldTokenization = () => {
     <div className="relative min-h-screen bg-black text-[#FFFDD0] overflow-hidden">
       {/* Background effects with Glass-like Effect */}
       <div className="absolute inset-0 bg-black text-[#FFFDD0] overflow-hidden opacity-90">
-        <div className="absolute inset-0 bg-[linear-gradient(35deg,#B8860B_15%,transparent_15%,transparent_85%,#B8860B_85%)] opacity-40 blur-lg animate-pulse" />
-        <div className="absolute inset-0 bg-[linear-gradient(35deg,#DAA520_30%,transparent_30%,transparent_70%,#DAA520_70%)] opacity-40 blur-lg animate-pulse" />
+        <div className="absolute inset-0 bg-[linear-gradient(35deg,#006f3c_15%,transparent_15%,transparent_85%,#006f3c_85%)] opacity-40 blur-lg animate-pulse" />
+        <div className="absolute inset-0 bg-[linear-gradient(35deg,#004b2f_30%,transparent_30%,transparent_70%,#004b2f_70%)] opacity-40 blur-lg animate-pulse" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#001a12_0%,transparent_70%)] opacity-60" />
         <div className="absolute inset-0 bg-black opacity-20" />
       </div>
 
@@ -85,10 +86,10 @@ const GoldTokenization = () => {
                 enhanced liquidity, and transparent trading
               </p>
               <div className="flex flex-wrap gap-4">
-                <button className="bg-[#B8860B] hover:bg-[#DAA520] text-white px-6 py-3 rounded-md font-medium transition border border-[#FFD700]/20">
+                <button className="bg-[#B8860B]/10 backdrop-blur-lg text-[#FFD700] px-8 py-3 rounded-full font-medium transition-all border border-[#FFD700]/50 shadow-[0_0_15px_rgba(218,165,32,0.2)] hover:shadow-[0_0_25px_rgba(218,165,32,0.4)] hover:bg-[#B8860B]/20 hover:scale-105">
                   Start Investing in Gold
                 </button>
-                <button className="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white px-6 py-3 rounded-md font-medium transition border border-[#FFD700]/20">
+                <button className="bg-[#001a12]/10 backdrop-blur-lg text-[#FFFDD0] px-8 py-3 rounded-full font-medium transition-all border border-[#FFD700]/30 shadow-[0_0_15px_rgba(218,165,32,0.1)] hover:shadow-[0_0_25px_rgba(218,165,32,0.2)] hover:bg-[#001a12]/20 hover:scale-105">
                   Learn More
                 </button>
               </div>
@@ -122,7 +123,7 @@ const GoldTokenization = () => {
 
                 <div className="flex flex-col gap-6">
                   {/* Feature Card 1 */}
-                  <div className="bg-[#1a1a1a]/30 backdrop-blur-md border border-[#FFD700]/20 p-6 rounded-2xl transition-all hover:bg-[#1a1a1a]/40">
+                  <div className="bg-[#001a12]/30 backdrop-blur-md border border-[#FFD700]/20 p-6 rounded-2xl transition-all hover:bg-[#001a12]/40">
                     <div className="text-[#FFD700] mb-4">
                       <AccountBalance fontSize="large" />
                     </div>
@@ -133,7 +134,7 @@ const GoldTokenization = () => {
                   </div>
 
                   {/* Feature Card 2 */}
-                  <div className="bg-[#1a1a1a]/30 backdrop-blur-md border border-[#FFD700]/20 p-6 rounded-2xl transition-all hover:bg-[#1a1a1a]/40">
+                  <div className="bg-[#001a12]/30 backdrop-blur-md border border-[#FFD700]/20 p-6 rounded-2xl transition-all hover:bg-[#001a12]/40">
                     <div className="text-[#FFD700] mb-4">
                       <Security fontSize="large" />
                     </div>
@@ -144,7 +145,7 @@ const GoldTokenization = () => {
                   </div>
 
                   {/* Feature Card 3 */}
-                  <div className="bg-[#1a1a1a]/30 backdrop-blur-md border border-[#FFD700]/20 p-6 rounded-2xl transition-all hover:bg-[#1a1a1a]/40">
+                  <div className="bg-[#001a12]/30 backdrop-blur-md border border-[#FFD700]/20 p-6 rounded-2xl transition-all hover:bg-[#001a12]/40">
                     <div className="text-[#FFD700] mb-4">
                       <Language fontSize="large" />
                     </div>
@@ -160,7 +161,7 @@ const GoldTokenization = () => {
 
               {/* Gold Vault Card */}
               <div className="lg:w-1/2 lg:pl-10">
-                <div className="bg-[#1a1a1a]/30 backdrop-blur-md border border-[#FFD700]/20 rounded-2xl overflow-hidden">
+                <div className="bg-[#001a12]/30 backdrop-blur-md border border-[#FFD700]/20 rounded-2xl overflow-hidden">
                   <div className="relative">
                     <div className="bg-gradient-to-r from-[#B8860B] to-[#DAA520] p-6">
                       <div className="flex justify-between items-center">
@@ -171,17 +172,17 @@ const GoldTokenization = () => {
                           </p>
                         </div>
                         <div className="flex">
-                          <button className="bg-[#1a1a1a]/30 p-2 rounded-full mr-2 hover:bg-[#1a1a1a]/50">
-                            <KeyboardArrowLeft className="text-[#FFFDD0]" />
+                          <button className="bg-[#001a12]/10 backdrop-blur-lg p-2.5 rounded-full border border-[#FFD700]/30 transition-all hover:bg-[#001a12]/20 hover:scale-105 shadow-[0_0_15px_rgba(218,165,32,0.1)] hover:shadow-[0_0_25px_rgba(218,165,32,0.2)]">
+                            <KeyboardArrowLeft className="text-[#FFD700]" />
                           </button>
-                          <button className="bg-[#1a1a1a]/30 p-2 rounded-full hover:bg-[#1a1a1a]/50">
-                            <KeyboardArrowRight className="text-[#FFFDD0]" />
+                          <button className="bg-[#001a12]/10 backdrop-blur-lg p-2.5 rounded-full border border-[#FFD700]/30 transition-all hover:bg-[#001a12]/20 hover:scale-105 shadow-[0_0_15px_rgba(218,165,32,0.1)] hover:shadow-[0_0_25px_rgba(218,165,32,0.2)]">
+                            <KeyboardArrowRight className="text-[#FFD700]" />
                           </button>
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-6 bg-[#1a1a1a]/30 backdrop-blur-md">
+                    <div className="p-6 bg-[#001a12]/30 backdrop-blur-md">
                       <div className="grid grid-cols-3 gap-4 mb-8">
                         <div>
                           <p className="text-gray-400 text-sm">Total Value</p>
@@ -222,13 +223,12 @@ const GoldTokenization = () => {
                       </div>
 
                       <button
-                        className="flex justify-between items-center w-full bg-gray-700 hover:bg-gray-600 p-3 rounded-md mb-4"
+                        className="flex justify-between items-center w-full bg-[#001a12]/10 backdrop-blur-lg border border-[#FFD700]/30 hover:bg-[#001a12]/20 p-3 rounded-full transition-all shadow-[0_0_15px_rgba(218,165,32,0.1)] hover:shadow-[0_0_25px_rgba(218,165,32,0.2)]"
                         onClick={() => setIsDetailsOpen(!isDetailsOpen)}
                       >
-                        <span className="font-medium">Gold Asset Details</span>
+                        <span className="font-medium text-[#FFD700] ml-4">Gold Asset Details</span>
                         <ExpandMore
-                          className={`transform transition-transform ${isDetailsOpen ? "rotate-180" : ""
-                            }`}
+                          className={`transform transition-transform text-[#FFD700] ${isDetailsOpen ? "rotate-180" : ""}`}
                         />
                       </button>
 
@@ -295,9 +295,9 @@ const GoldTokenization = () => {
                         </div>
                       )}
 
-                      <button className="w-full bg-yellow-600 hover:bg-yellow-700 py-3 px-4 rounded-md font-medium flex items-center justify-center">
-                        Invest in Gold Tokens
-                        <ArrowForward className="ml-2" />
+                      <button className="w-full bg-[#B8860B]/10 backdrop-blur-lg py-3 px-6 rounded-full font-medium flex items-center justify-center transition-all border border-[#FFD700]/50 shadow-[0_0_15px_rgba(218,165,32,0.2)] hover:shadow-[0_0_25px_rgba(218,165,32,0.4)] hover:bg-[#B8860B]/20 hover:scale-105">
+                        <span className="text-[#FFD700]">Invest in Gold Tokens</span>
+                        <ArrowForward className="ml-2 text-[#FFD700]" />
                       </button>
                     </div>
                   </div>
@@ -308,29 +308,43 @@ const GoldTokenization = () => {
         </div>
 
         {/* Tokenizable Gold Assets Section */}
-        <div className="py-16 " >
+        <div className="py-16">
           <div className="container mx-auto px-4 md:px-12 text-center">
-            <h2 className="font-orbitron text-3xl md:text-4xl  mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-yellow-400 to-yellow-600 ">
-              Tokenizable <span className="text-yellow-500">Gold Assets</span>
+            <h2 className="font-orbitron text-xl sm:text-3xl md:text-4xl font-bold mb-6">
+              <div className="flex flex-wrap justify-center gap-1">
+                {"Tokenizable Gold Assets".split(" ").map((word, wordIndex) => (
+                  <span key={`assets-word-${wordIndex}`} className="flex">
+                    {word.split("").map((char, i) => (
+                      <span
+                        key={`assets-letter-${wordIndex}-${i}`}
+                        className="gradient-letter bg-gradient-to-r from-[#FFD700] via-[#DAA520] to-[#B8860B] text-transparent bg-clip-text"
+                      >
+                        {char}
+                      </span>
+                    ))}
+                    <span className="w-1" />
+                  </span>
+                ))}
+              </div>
             </h2>
-            <p className="text-gray-400 mb-10">
+            <p className="text-[#E6E6FA] mb-10 max-w-2xl mx-auto">
               Explore the diverse range of gold assets available for tokenization
             </p>
 
             <div className="flex flex-wrap justify-center gap-3">
-              <button className="bg-gray-800 hover:bg-gray-700 text-white px-5 py-3 rounded-full transition">
+              <button className="bg-[#001a12]/10 backdrop-blur-lg border border-[#FFD700]/30 hover:bg-[#001a12]/20 text-[#FFFDD0] px-6 py-2.5 rounded-full transition-all shadow-[0_0_15px_rgba(218,165,32,0.1)] hover:shadow-[0_0_25px_rgba(218,165,32,0.2)] hover:scale-105">
                 Bullion Bars
               </button>
-              <button className="bg-gray-800 hover:bg-gray-700 text-white px-5 py-3 rounded-full transition">
+              <button className="bg-[#001a12]/10 backdrop-blur-lg border border-[#FFD700]/30 hover:bg-[#001a12]/20 text-[#FFFDD0] px-6 py-2.5 rounded-full transition-all shadow-[0_0_15px_rgba(218,165,32,0.1)] hover:shadow-[0_0_25px_rgba(218,165,32,0.2)] hover:scale-105">
                 Numismatic Coins
               </button>
-              <button className="bg-gray-800 hover:bg-gray-700 text-white px-5 py-3 rounded-full transition">
+              <button className="bg-[#001a12]/10 backdrop-blur-lg border border-[#FFD700]/30 hover:bg-[#001a12]/20 text-[#FFFDD0] px-6 py-2.5 rounded-full transition-all shadow-[0_0_15px_rgba(218,165,32,0.1)] hover:shadow-[0_0_25px_rgba(218,165,32,0.2)] hover:scale-105">
                 Refined Gold
               </button>
-              <button className="bg-gray-800 hover:bg-gray-700 text-white px-5 py-3 rounded-full transition">
+              <button className="bg-[#001a12]/10 backdrop-blur-lg border border-[#FFD700]/30 hover:bg-[#001a12]/20 text-[#FFFDD0] px-6 py-2.5 rounded-full transition-all shadow-[0_0_15px_rgba(218,165,32,0.1)] hover:shadow-[0_0_25px_rgba(218,165,32,0.2)] hover:scale-105">
                 Gold Certificates
               </button>
-              <button className="bg-gray-800 hover:bg-gray-700 text-white px-5 py-3 rounded-full transition">
+              <button className="bg-[#001a12]/10 backdrop-blur-lg border border-[#FFD700]/30 hover:bg-[#001a12]/20 text-[#FFFDD0] px-6 py-2.5 rounded-full transition-all shadow-[0_0_15px_rgba(218,165,32,0.1)] hover:shadow-[0_0_25px_rgba(218,165,32,0.2)] hover:scale-105">
                 Mining Shares
               </button>
             </div>
@@ -339,62 +353,75 @@ const GoldTokenization = () => {
 
         {/* Benefits Section */}
         <div className="py-16">
-          <div className="container mx-auto px-4 md:px-12 text-center ">
-            <h2 className=" font-orbitron text-3xl md:text-4xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-yellow-400 to-yellow-600">
-              Benefits of{" "}
-              <span className="text-yellow-500">Gold Tokenization</span>
+          <div className="container mx-auto px-4 md:px-12 text-center">
+            <h2 className="font-orbitron text-xl sm:text-3xl md:text-4xl font-bold mb-6">
+              <div className="flex flex-wrap justify-center gap-1">
+                {"Benefits of Gold Tokenization".split(" ").map((word, wordIndex) => (
+                  <span key={`benefits-word-${wordIndex}`} className="flex">
+                    {word.split("").map((char, i) => (
+                      <span
+                        key={`benefits-letter-${wordIndex}-${i}`}
+                        className="gradient-letter bg-gradient-to-r from-[#FFD700] via-[#DAA520] to-[#B8860B] text-transparent bg-clip-text"
+                      >
+                        {char}
+                      </span>
+                    ))}
+                    <span className="w-1" />
+                  </span>
+                ))}
+              </div>
             </h2>
-            <p className="text-gray-400 mb-10">
+            <p className="text-[#E6E6FA] mb-10 max-w-2xl mx-auto">
               Discover the advantages of investing in tokenized gold assets
             </p>
 
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {/* For Investors */}
-              <div className="bg-gray-800 p-8 rounded-lg text-left">
-                <h3 className="text-2xl font-bold text-yellow-500 mb-6">
+              <div className="bg-[#001a12]/30 backdrop-blur-md border border-[#FFD700]/20 p-8 rounded-2xl text-left transition-all hover:bg-[#001a12]/40">
+                <h3 className="text-2xl font-bold text-[#FFD700] mb-6">
                   For Investors
                 </h3>
                 <ul className="space-y-4">
                   <li className="flex items-start">
-                    <Check className="text-yellow-500 mr-2 mt-1" />
-                    <span>Low minimum investment</span>
+                    <Check className="text-[#FFD700] mr-2 mt-1" />
+                    <span className="text-[#E6E6FA]">Low minimum investment</span>
                   </li>
                   <li className="flex items-start">
-                    <Check className="text-yellow-500 mr-2 mt-1" />
-                    <span>High liquidity</span>
+                    <Check className="text-[#FFD700] mr-2 mt-1" />
+                    <span className="text-[#E6E6FA]">High liquidity</span>
                   </li>
                   <li className="flex items-start">
-                    <Check className="text-yellow-500 mr-2 mt-1" />
-                    <span>Transparent ownership</span>
+                    <Check className="text-[#FFD700] mr-2 mt-1" />
+                    <span className="text-[#E6E6FA]">Transparent ownership</span>
                   </li>
                   <li className="flex items-start">
-                    <Check className="text-yellow-500 mr-2 mt-1" />
-                    <span>Global market access</span>
+                    <Check className="text-[#FFD700] mr-2 mt-1" />
+                    <span className="text-[#E6E6FA]">Global market access</span>
                   </li>
                 </ul>
               </div>
 
               {/* For Gold Owners */}
-              <div className="bg-gray-800 p-8 rounded-lg text-left">
-                <h3 className="text-2xl font-bold text-yellow-500 mb-6">
+              <div className="bg-[#001a12]/30 backdrop-blur-md border border-[#FFD700]/20 p-8 rounded-2xl text-left transition-all hover:bg-[#001a12]/40">
+                <h3 className="text-2xl font-bold text-[#FFD700] mb-6">
                   For Gold Owners
                 </h3>
                 <ul className="space-y-4">
                   <li className="flex items-start">
-                    <Check className="text-yellow-500 mr-2 mt-1" />
-                    <span>Unlock asset value</span>
+                    <Check className="text-[#FFD700] mr-2 mt-1" />
+                    <span className="text-[#E6E6FA]">Unlock asset value</span>
                   </li>
                   <li className="flex items-start">
-                    <Check className="text-yellow-500 mr-2 mt-1" />
-                    <span>Attract global investors</span>
+                    <Check className="text-[#FFD700] mr-2 mt-1" />
+                    <span className="text-[#E6E6FA]">Attract global investors</span>
                   </li>
                   <li className="flex items-start">
-                    <Check className="text-yellow-500 mr-2 mt-1" />
-                    <span>Reduce storage costs</span>
+                    <Check className="text-[#FFD700] mr-2 mt-1" />
+                    <span className="text-[#E6E6FA]">Reduce storage costs</span>
                   </li>
                   <li className="flex items-start">
-                    <Check className="text-yellow-500 mr-2 mt-1" />
-                    <span>Enhanced asset liquidity</span>
+                    <Check className="text-[#FFD700] mr-2 mt-1" />
+                    <span className="text-[#E6E6FA]">Enhanced asset liquidity</span>
                   </li>
                 </ul>
               </div>
@@ -403,20 +430,49 @@ const GoldTokenization = () => {
         </div>
 
         {/* Final CTA Section */}
-        <div className="py-16 bg-opacity-50">
+        <div className="py-16">
           <div className="container mx-auto px-4 md:px-12 text-center">
-            <h2 className="font-orbitron text-3xl md:text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-yellow-400 to-yellow-600">
-              Ready to Invest in Tokenized Gold?
+            <h2 className="font-orbitron text-xl sm:text-3xl md:text-4xl font-bold mb-6">
+              <div className="flex flex-wrap justify-center gap-1">
+                {"Ready to Invest in".split(" ").map((word, wordIndex) => (
+                  <span key={`cta-word-1-${wordIndex}`} className="flex">
+                    {word.split("").map((char, i) => (
+                      <span
+                        key={`cta-letter-1-${wordIndex}-${i}`}
+                        className="gradient-letter bg-gradient-to-r from-[#FFD700] via-[#DAA520] to-[#B8860B] text-transparent bg-clip-text"
+                      >
+                        {char}
+                      </span>
+                    ))}
+                    <span className="w-1" />
+                  </span>
+                ))}
+              </div>
+              <div className="flex flex-wrap justify-center gap-1 mt-2">
+                {"Tokenized Gold?".split(" ").map((word, wordIndex) => (
+                  <span key={`cta-word-2-${wordIndex}`} className="flex">
+                    {word.split("").map((char, i) => (
+                      <span
+                        key={`cta-letter-2-${wordIndex}-${i}`}
+                        className="gradient-letter bg-gradient-to-r from-[#FFD700] via-[#DAA520] to-[#B8860B] text-transparent bg-clip-text"
+                      >
+                        {char}
+                      </span>
+                    ))}
+                    <span className="w-1" />
+                  </span>
+                ))}
+              </div>
             </h2>
-            <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-[#E6E6FA] mb-8 max-w-2xl mx-auto">
               Join the future of gold investment with our secure, transparent, and
               accessible platform
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <button className="bg-yellow-600 hover:bg-yellow-700 text-white px-8 py-3 rounded-md font-medium transition">
+              <button className="bg-[#B8860B]/10 backdrop-blur-lg text-[#FFD700] px-8 py-3 rounded-full font-medium transition-all border border-[#FFD700]/50 shadow-[0_0_15px_rgba(218,165,32,0.2)] hover:shadow-[0_0_25px_rgba(218,165,32,0.4)] hover:bg-[#B8860B]/20 hover:scale-105">
                 Start Investing
               </button>
-              <button className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-md font-medium transition">
+              <button className="bg-[#001a12]/10 backdrop-blur-lg text-[#FFFDD0] px-8 py-3 rounded-full font-medium transition-all border border-[#FFD700]/30 shadow-[0_0_15px_rgba(218,165,32,0.1)] hover:shadow-[0_0_25px_rgba(218,165,32,0.2)] hover:bg-[#001a12]/20 hover:scale-105">
                 Learn More
               </button>
             </div>
