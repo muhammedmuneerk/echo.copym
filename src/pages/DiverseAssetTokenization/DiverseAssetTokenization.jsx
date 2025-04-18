@@ -582,7 +582,7 @@ const DiverseAssetTokenization = () => {
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
         
         :root {
-          --cursor-size: 20px;
+          /* Cursor size variable removed */
         }
         
         .diverse-asset-tokenization {
@@ -590,7 +590,7 @@ const DiverseAssetTokenization = () => {
         }
         
         .diverse-asset-tokenization * {
-          cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' stroke='%2310B981' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='12' r='4' fill='%2310B981' fill-opacity='0.3'/%3E%3C/svg%3E") 12 12, auto;
+          /* Custom cursor removed */
         }
         
         .diverse-asset-tokenization .font-orbitron {
@@ -620,18 +620,7 @@ const DiverseAssetTokenization = () => {
           color: transparent;
         }
         
-        .diverse-asset-tokenization .custom-cursor {
-          position: fixed;
-          width: var(--cursor-size);
-          height: var(--cursor-size);
-          border-radius: 50%;
-          border: 1.5px solid rgba(16, 185, 129, 0.5);
-          pointer-events: none;
-          transform: translate(-50%, -50%);
-          mix-blend-mode: difference;
-          z-index: 9999;
-          transition: all 0.1s ease;
-        }
+        /* Custom cursor removed */
         
         /* Glassmorphism styles */
         .diverse-asset-tokenization .glass-card {
