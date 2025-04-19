@@ -148,7 +148,7 @@ const PrivateEquityTokenization = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-[#DDFFDD]">Global Accessibility</h3>
                 <p className="text-[#CCCCCC]">
-                  Democratize access to premium investment opportunities
+                Democratize access to premium investment opportunities
                 </p>
               </div>
             </div>
@@ -183,7 +183,7 @@ const PrivateEquityTokenization = () => {
 
             <div className="flex flex-wrap justify-center gap-3">
               <button className="bg-[#001a12]/10 backdrop-blur-lg border border-[#00A86B]/30 hover:bg-[#001a12]/20 text-[#DDFFDD] px-6 py-2.5 rounded-full transition-all shadow-[0_0_15px_rgba(0,168,107,0.1)] hover:shadow-[0_0_25px_rgba(0,168,107,0.2)] hover:scale-105">
-                Venture Capital Funds
+                  Venture Capital Funds
               </button>
               <button className="bg-[#001a12]/10 backdrop-blur-lg border border-[#00A86B]/30 hover:bg-[#001a12]/20 text-[#DDFFDD] px-6 py-2.5 rounded-full transition-all shadow-[0_0_15px_rgba(0,168,107,0.1)] hover:shadow-[0_0_25px_rgba(0,168,107,0.2)] hover:scale-105">
                 Private Business Equity
