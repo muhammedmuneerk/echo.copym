@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowForward } from "@mui/icons-material";
 import { keyframes } from "@emotion/react";
 import { styled } from "@mui/material/styles";
-import { useTheme, useMediaQuery } from "@mui/material";
+import { useEffect, useState } from "react";
 
 // Animation keyframes for the border effect
 const borderAnimationRight = keyframes`
@@ -30,11 +30,17 @@ const borderAnimationUp = keyframes`
   100% { width: 3px; height: 100%; bottom: 0; left: 0; opacity: 0; }
 `;
 
-// Styling for pulsing effect in the center
+// Central element pulsating animation
 const pulseAnimation = keyframes`
   0% { transform: scale(1); opacity: 0.8; }
   50% { transform: scale(1.05); opacity: 1; }
   100% { transform: scale(1); opacity: 0.8; }
+`;
+
+// Subtle orbital rotation animation
+const orbitalRotation = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 `;
 
 // Styled component for the animated card
@@ -46,6 +52,8 @@ const AnimatedCard = styled(Box)(({ theme }) => ({
   borderRadius: "1rem",
   padding: "1.5rem",
   height: "100%",
+  width: "100%",
+  maxWidth: "350px",
   transition: "transform 0.2s",
   overflow: "hidden",
   "&:hover": {
@@ -99,46 +107,136 @@ const AnimatedCard = styled(Box)(({ theme }) => ({
   },
 }));
 
-// Styled component for center hub
-const CenterHub = styled(Box)(({ theme }) => ({
+// Central hub element
+const CentralHub = styled(Box)(({ theme }) => ({
   position: "relative",
-  background: "rgba(0, 255, 133, 0.1)",
-  backdropFilter: "blur(15px)",
-  border: "1px solid rgba(0, 255, 133, 0.2)",
+  width: "200px",
+  height: "200px",
   borderRadius: "50%",
-  padding: "2rem",
-  width: "100%",
-  height: "100%",
+  background: "rgba(18, 19, 26, 0.7)",
+  backdropFilter: "blur(10px)",
+  border: "2px solid rgba(255, 255, 255, 0.15)",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "center",
   alignItems: "center",
-  textAlign: "center",
+  justifyContent: "center",
+  padding: "1.5rem",
+  boxShadow: "0 0 40px rgba(0, 255, 133, 0.25)",
+  zIndex: 10,
   animation: `${pulseAnimation} 4s ease-in-out infinite`,
   "&::before": {
     content: '""',
     position: "absolute",
-    inset: "-2px",
+    top: "-10px",
+    left: "-10px",
+    right: "-10px",
+    bottom: "-10px",
     borderRadius: "50%",
-    padding: "2px",
-    background: "linear-gradient(135deg, rgba(0, 255, 133, 0.5), transparent 50%)",
-    mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-    maskComposite: "xor",
-    WebkitMaskComposite: "exclude",
+    background: "radial-gradient(circle, rgba(0, 255, 133, 0.15) 0%, rgba(0, 0, 0, 0) 70%)",
+    zIndex: -1,
+  },
+  [theme.breakpoints.down("lg")]: {
+    margin: "0 auto 4rem auto",
   },
 }));
 
-// Features array - only 5 features
+// Connector line
+const ConnectorLine = styled(Box)(({ angle, theme }) => ({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  width: "calc(var(--orbital-radius) - 60px)",
+  height: "2px",
+  background: "linear-gradient(to right, rgba(0, 255, 133, 0.7), rgba(0, 255, 133, 0))",
+  transformOrigin: "left center",
+  transform: `rotate(${angle}deg)`,
+  opacity: 0.5,
+  zIndex: 1,
+  [theme.breakpoints.down("lg")]: {
+    display: "none",
+  },
+}));
+
+// Orbital container
+const OrbitalContainer = styled(Box)(({ theme }) => ({
+  position: "relative",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100%",
+  minHeight: "900px",
+  margin: "0 auto",
+  marginTop: "10rem",
+  "--orbital-radius": "380px",
+  [theme.breakpoints.down("xl")]: {
+    "--orbital-radius": "320px",
+    minHeight: "800px",
+  },
+  [theme.breakpoints.down("lg")]: {
+    display: "block",
+    minHeight: "auto",
+  },
+}));
+
+// UPDATED COMPONENT: Modified to handle exact clock positions
+const OrbitalPosition = styled(Box)(({ position, theme }) => {
+  // Define positions for each clock position
+  const positions = {
+    "12"  : { top: "-10%", left: "50%", transform: "translateX(-50%)" },
+    "2:30": { top: "25%", right: "10%", transform: "translate(0, -50%)" },
+    "5"   : { top: "70%", right: "10%", transform: "translate(0, -50%)" },
+    "7:30": { top: "70%", left: "10%", transform: "translate(0, -50%)" },
+    "10"  : { top: "25%", left: "10%", transform: "translate(0, -50%)" },
+  };
+
+  const pos = positions[position] || {};
+
+  return {
+    position: "absolute",
+    ...pos,
+    width: "300px",
+    zIndex: 5,
+    transition: "all 0.5s ease-in-out",
+    [theme.breakpoints.down("lg")]: {
+      position: "relative",
+      top: "auto",
+      left: "auto",
+      right: "auto",
+      transform: "none",
+      margin: "0 auto 2rem auto",
+      width: "100%",
+      maxWidth: "400px",
+    },
+  };
+});
+
+// Orbital path visualization
+const OrbitalPath = styled(Box)(({ theme }) => ({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  width: "calc(var(--orbital-radius) * 2)",
+  height: "calc(var(--orbital-radius) * 2)",
+  borderRadius: "50%",
+  border: "1px dashed rgba(0, 255, 133, 0.15)",
+  transform: "translate(-50%, -50%)",
+  zIndex: 1,
+  [theme.breakpoints.down("lg")]: {
+    display: "none",
+  },
+}));
+
+// Modified features array (removed "Developer Toolkit")
 const features = [
   {
     title: "Cross-Chain Infrastructure",
     description:
       "Seamlessly bridge assets across all major blockchains through our unified interface.",
-      icon: <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-globe text-gray-400">
-        <circle cx="12" cy="12" r="10"></circle>
-        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-        <path d="M2 12h20"></path>
-      </svg>
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-globe text-gray-400">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+      <path d="M2 12h20"></path>
+    </svg>
   },
   {
     title: "Comprehensive Compliance",
@@ -178,19 +276,34 @@ const features = [
   },
 ];
 
-export default function Features() {
-  const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+// UPDATED PART: Clock positions assigned to each feature
+const clockPositions = ["12", "2:30", "5", "7:30", "10"];
 
-  // Calculate positions for the circular layout (for desktop only)
-  // For 5 items, we'll place them in a pentagon shape
-  const circlePositions = [
-    { top: '5%', left: '50%', transform: 'translate(-50%, 0%)' },        // Top
-    { top: '30%', left: '85%', transform: 'translate(-50%, -50%)' },     // Top Right
-    { top: '80%', left: '75%', transform: 'translate(-50%, -50%)' },     // Bottom Right
-    { top: '80%', left: '25%', transform: 'translate(-50%, -50%)' },     // Bottom Left
-    { top: '30%', left: '15%', transform: 'translate(-50%, -50%)' },     // Top Left
-  ];
+// UPDATED PART: Calculate angles for connector lines based on clock positions
+const connectorAngles = {
+  "12": 270,
+  "2:30": 330,
+  "5": 30,
+  "7:30": 150,
+  "10": 210
+};
+
+export default function Features() {
+  const [isLargeScreen, setIsLargeScreen] = useState(true);
+
+  // Check screen size on mount and window resize
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsLargeScreen(window.innerWidth >= 1024); // lg breakpoint
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => {
+      window.removeEventListener('resize', checkScreenSize);
+    };
+  }, []);
 
   return (
     <Box className="py-24 relative overflow-hidden">
@@ -270,152 +383,82 @@ export default function Features() {
           </Typography>
         </motion.div>
 
-        {isDesktop ? (
-          // Desktop Layout - Circular
-          <Box sx={{ position: 'relative', height: '850px' }} className="mb-16">
-            {/* Center Hub Element */}
-            <Box sx={{ 
-              position: 'absolute', 
-              top: '50%', 
-              left: '50%', 
-              transform: 'translate(-50%, -50%)',
-              width: '220px',
-              height: '220px',
-              zIndex: 10
-            }}>
+        {/* Orbital Layout */}
+        <OrbitalContainer>
+          {/* Orbital Path Visualization */}
+          <OrbitalPath />
+
+          {/* Central Hub/Sun Element */}
+          <CentralHub>
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#00FF85" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2v2" />
+              <path d="M12 20v2" />
+              <path d="M2 12h2" />
+              <path d="M20 12h2" />
+              <path d="M6.34 6.34l1.42 1.42" />
+              <path d="M16.24 16.24l1.42 1.42" />
+              <path d="M6.34 17.66l1.42-1.42" />
+              <path d="M16.24 7.76l1.42-1.42" />
+            </svg>
+            <Typography variant="h6" className="text-white mt-2 text-center">
+              Unified Platform
+            </Typography>
+            <Typography variant="body2" className="text-gray-300 text-center text-sm mt-1">
+              All solutions, one ecosystem
+            </Typography>
+          </CentralHub>
+
+          {/* UPDATED PART: Connector Lines with named positions */}
+          {isLargeScreen && clockPositions.map((position) => (
+            <ConnectorLine key={`connector-${position}`} angle={connectorAngles[position]} />
+          ))}
+
+          {/* UPDATED PART: Feature Cards in Clock Positions */}
+          {features.map((feature, index) => (
+            <OrbitalPosition key={feature.title} position={clockPositions[index]}>
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
+                className="h-full"
               >
-                <CenterHub>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00FF85" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                  </svg>
-                  <Typography variant="h5" className="mt-3 mb-2" sx={{ color: '#00FF85' }}>
-                    Ecosystem Core
+                <AnimatedCard>
+                  {/* Border animation elements */}
+                  <div className="border-right"></div>
+                  <div className="border-down"></div>
+                  <div className="border-left"></div>
+                  <div className="border-up"></div>
+                  
+                  <Box
+                    className="w-12 h-12 rounded-lg mb-4 flex items-center justify-center text-2xl"
+                    sx={{
+                      background: "rgba(255, 255, 255, 0.1)",
+                    }}
+                  >
+                    {feature.icon}
+                  </Box>
+                  <Typography variant="h5" className="mb-3">
+                    {feature.title}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                    The central hub connecting all features into a seamless integrated experience
+                  <Typography
+                    variant="body2"
+                    className="text-text-secondary mb-4"
+                  >
+                    {feature.description}
                   </Typography>
-                </CenterHub>
+                  <Button
+                    endIcon={<ArrowForward />}
+                    className="text-primary hover:bg-primary/5 px-0"
+                  >
+                    Learn more
+                  </Button>
+                </AnimatedCard>
               </motion.div>
-            </Box>
-
-            {/* Circular Feature Cards */}
-            {features.map((feature, index) => (
-              <Box 
-                key={feature.title}
-                sx={{ 
-                  position: 'absolute', 
-                  top: circlePositions[index].top, 
-                  left: circlePositions[index].left, 
-                  transform: circlePositions[index].transform,
-                  width: '280px',
-                  height: '250px',
-                  zIndex: 5,
-                }}
-              >
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="h-full"
-                >
-                  <AnimatedCard>
-                    {/* Border animation elements */}
-                    <div className="border-right"></div>
-                    <div className="border-down"></div>
-                    <div className="border-left"></div>
-                    <div className="border-up"></div>
-                    
-                    <Box
-                      className="w-12 h-12 rounded-lg mb-4 flex items-center justify-center text-2xl"
-                      sx={{
-                        background: "rgba(255, 255, 255, 0.1)",
-                      }}
-                    >
-                      {feature.icon}
-                    </Box>
-                    <Typography variant="h5" className="mb-3">
-                      {feature.title}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      className="text-text-secondary mb-4"
-                    >
-                      {feature.description}
-                    </Typography>
-                    <Button
-                      endIcon={<ArrowForward />}
-                      className="text-primary hover:bg-primary/5 px-0"
-                    >
-                      Learn more
-                    </Button>
-                  </AnimatedCard>
-                </motion.div>
-              </Box>
-            ))}
-
-            {/* Connection lines */}
-            <svg width="100%" height="100%" className="absolute top-0 left-0 z-1 pointer-events-none opacity-40">
-              <line x1="50%" y1="5%" x2="50%" y2="42%" stroke="#00FF85" strokeWidth="1" strokeDasharray="5,5" />
-              <line x1="85%" y1="30%" x2="58%" y2="50%" stroke="#00FF85" strokeWidth="1" strokeDasharray="5,5" />
-              <line x1="75%" y1="80%" x2="55%" y2="55%" stroke="#00FF85" strokeWidth="1" strokeDasharray="5,5" />
-              <line x1="25%" y1="80%" x2="45%" y2="55%" stroke="#00FF85" strokeWidth="1" strokeDasharray="5,5" />
-              <line x1="15%" y1="30%" x2="42%" y2="50%" stroke="#00FF85" strokeWidth="1" strokeDasharray="5,5" />
-            </svg>
-          </Box>
-        ) : (
-          // Mobile Layout - Original Grid
-          <Grid container spacing={4}>
-            {features.map((feature, index) => (
-              <Grid item xs={12} sm={6} key={feature.title}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="h-full"
-                >
-                  <AnimatedCard>
-                    {/* Border animation elements */}
-                    <div className="border-right"></div>
-                    <div className="border-down"></div>
-                    <div className="border-left"></div>
-                    <div className="border-up"></div>
-                    
-                    <Box
-                      className="w-12 h-12 rounded-lg mb-4 flex items-center justify-center text-2xl"
-                      sx={{
-                        background: "rgba(255, 255, 255, 0.1)",
-                      }}
-                    >
-                      {feature.icon}
-                    </Box>
-                    <Typography variant="h5" className="mb-3">
-                      {feature.title}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      className="text-text-secondary mb-4"
-                    >
-                      {feature.description}
-                    </Typography>
-                    <Button
-                      endIcon={<ArrowForward />}
-                      className="text-primary hover:bg-primary/5 px-0"
-                    >
-                      Learn more
-                    </Button>
-                  </AnimatedCard>
-                </motion.div>
-              </Grid>
-            ))}
-          </Grid>
-        )}
+            </OrbitalPosition>
+          ))}
+        </OrbitalContainer>
       </Container>
       
       {/* Background Glow Effect */}
