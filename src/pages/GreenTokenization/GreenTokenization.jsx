@@ -295,7 +295,7 @@ const GreenTokenization = () => {
             </div>
 
             {/* Blockchain Role */}
-            <div className="bg-black/90 backdrop-blur-md rounded-2xl p-8">
+            <div className=" rounded-2xl p-8">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6 text-center sm:text-left">
                 <Lock className="w-8 h-8 text-[#00A86B]" />
                 <h2 className="text-xl sm:text-2xl md:text-4xl font-orbitron font-bold flex flex-wrap justify-center sm:justify-start gap-1">
