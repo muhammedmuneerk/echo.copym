@@ -1,15 +1,8 @@
 import { Container, Typography, Box, Grid, useMediaQuery, useTheme } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { useGLTF, OrbitControls, Environment } from "@react-three/drei";
+import { useState, useEffect } from "react";
+import SectionImage from "./SectionImages";
 
-// Model component
-function EarthGlobeModel() {
-  const { scene } = useGLTF("/models/earth_globe_hologram_2mb_looping_animation.gltf");
-  
-  return <primitive object={scene} position={[0, 0, 0]} />;
-}
 
 const blockchains = [
   {
@@ -135,23 +128,20 @@ export default function Blockchains() {
           </motion.div>
         </Grid>
 
-        {/* 3D Model section - only visible on desktop */}
+        {/* Banner image section - only visible on desktop */}
         <Grid
           item
           xs={12}
           md={6}
-          sx={{ display: { xs: "none", md: "block" }, opacity: "10" }}
+          sx={{ display: { xs: "none", md: "block" }, opacity: "10", marginBottom:"-350px" }}
         >
-          <Box sx={{ position: "relative", width: "100%", height: "500px" }}>
-            <Suspense fallback={<Box>Loading 3D Model...</Box>}>
-              <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} />
-                <EarthGlobeModel />
-                <OrbitControls enableZoom={false} autoRotate />
-                <Environment preset="city" />
-              </Canvas>
-            </Suspense>
+          {" "}
+          {/* didn't remove the image, jsut decreased the opacity */}
+          <Box sx={{ position: "relative", width: "100%" }}>
+            <SectionImage
+              src="/assets/sections/hero-graphic.png"
+              alt="Blockchains Banner"
+            />
           </Box>
         </Grid>
       </Grid>
