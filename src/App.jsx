@@ -24,6 +24,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import SpinningBlockchain from "./components/SpinningBlockchain";
 import GreenTokenizationPopup from "./components/GreenTokenizationPopup";
 import GoldTokenizationPopup from "./components/GoldTokenizatinPopup";
+import BorderImages from "./components/BorderImages";
 
 function HomePage() {
   return (
@@ -38,6 +39,10 @@ function HomePage() {
         <GlobalMarkets />
         <Metrics />
         <CTA />
+        <BorderImages
+              src="/assets/sections/grid-bg-bottom.png"
+              alt="Blockchains Banner"
+            />
       </div>
     </>
   );
