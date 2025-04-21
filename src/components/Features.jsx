@@ -483,7 +483,7 @@ export default function Features() {
                   <div className="border-up"></div>
                   
                   <Box
-                    className="w-12 h-12 rounded-full mb-4 flex items-center justify-center text-2xl card-icon"
+                    className="w-12 h-12 rounded-2xl mb-4 flex items-center justify-center text-2xl card-icon"
                     sx={{
                       background: "rgba(255, 255, 255, 0.1)",
                     }}
