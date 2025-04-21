@@ -49,7 +49,7 @@ const AnimatedCard = styled(Box)(({ theme }) => ({
   background: "rgba(18, 19, 26, 0.5)",
   backdropFilter: "blur(10px)",
   border: "1px solid rgba(255, 255, 255, 0.1)",
-  borderRadius: "1rem",
+  borderRadius: "3rem",
   padding: "1.5rem",
   height: "100%",
   width: "100%",
@@ -483,7 +483,7 @@ export default function Features() {
                   <div className="border-up"></div>
                   
                   <Box
-                    className="w-12 h-12 rounded-lg mb-4 flex items-center justify-center text-2xl card-icon"
+                    className="w-12 h-12 rounded-full mb-4 flex items-center justify-center text-2xl card-icon"
                     sx={{
                       background: "rgba(255, 255, 255, 0.1)",
                     }}
