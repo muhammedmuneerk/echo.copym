@@ -36,7 +36,7 @@ export default function Hero() {
                     <Box
                       key={`line1-lg-${idx}`}
                       component="span"
-                      className="ultra-smooth-gradient-text"
+                      className="gradient-letter"
                     >
                       {char === " " ? "\u00A0" : char}
                     </Box>
@@ -49,7 +49,7 @@ export default function Hero() {
                     <Box
                       key={`line1-sm-1-${idx}`}
                       component="span"
-                      className="ultra-smooth-gradient-text"
+                      className="gradient-letter"
                     >
                       {char === " " ? "\u00A0" : char}
                     </Box>
@@ -60,7 +60,7 @@ export default function Hero() {
                     <Box
                       key={`line1-sm-2-${idx}`}
                       component="span"
-                      className="ultra-smooth-gradient-text"
+                      className="gradient-letter"
                     >
                       {char === " " ? "\u00A0" : char}
                     </Box>
@@ -73,7 +73,7 @@ export default function Hero() {
                     <Box
                       key={`line2-char-${idx}`}
                       component="span"
-                      className="ultra-smooth-gradient-text"
+                      className="gradient-letter"
                     >
                       {char === " " ? "\u00A0" : char}
                     </Box>
@@ -86,7 +86,7 @@ export default function Hero() {
                     <Box
                       key={`line2-sm-1-${idx}`}
                       component="span"
-                      className="ultra-smooth-gradient-text"
+                      className="gradient-letter"
                     >
                       {char === " " ? "\u00A0" : char}
                     </Box>
@@ -97,15 +97,13 @@ export default function Hero() {
                     <Box
                       key={`line2-sm-2-${idx}`}
                       component="span"
-                      className="ultra-smooth-gradient-text"
+                      className="gradient-letter"
                     >
                       {char === " " ? "\u00A0" : char}
                     </Box>
                   ))}
                 </Box>
               </Typography>
-
-
 
               <Typography
                 variant="body1"
@@ -134,8 +132,6 @@ export default function Hero() {
                   </div>
                 ))}
               </div>
-
-
             </motion.div>
           </motion.div>
 
@@ -175,24 +171,6 @@ export default function Hero() {
           }}
         />
       </div>
-
-      {/* Add custom style for ultra-smooth gradient transitions */}
-      <style jsx global>{`
-  .ultra-smooth-gradient-text {
-    display: inline-block;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(
-      90deg,
-rgb(95, 155, 121)  0%,
-rgba(0, 255, 132, 0.6) 100%
-    );
-  }
-`}</style>
-
-
     </Box>
   );
 }
