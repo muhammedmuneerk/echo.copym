@@ -653,7 +653,7 @@ export default function TokenizationHub() {
             </div>
             
             <h1 className="main-title">
-              {Array.from("Complete Asset").map((char, idx) => (
+              {Array.from("Complete Echo Asset").map((char, idx) => (
                 <span key={`title-1-${idx}`} className="gradient-letter">
                   {char === " " ? "\u00A0" : char}
                 </span>
