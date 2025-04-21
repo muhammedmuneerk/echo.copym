@@ -1,37 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@mui/material";
 import { ChevronLeft, ChevronRight, ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
-
-// Custom Button component with hover effects
-const CustomButton = ({ variant, children, className, onClick }) => {
-  const isPrimary = variant === "primary";
-  
-  return (
-    <button
-      onClick={onClick}
-      className={`relative overflow-hidden transition-all duration-300 ease-out ${
-        isPrimary 
-          ? "bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-500 hover:to-emerald-400" 
-          : "bg-transparent border border-gray-700 text-white hover:border-emerald-500"
-      } rounded-md px-6 py-3 font-medium group ${className}`}
-    >
-      {/* Glow effect for primary buttons */}
-      {isPrimary && (
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-300 bg-emerald-400 blur-xl"></div>
-      )}
-      
-      {/* Button content */}
-      <span className="relative z-10 flex items-center justify-center">
-        {children}
-      </span>
-      
-      {/* Bottom highlight */}
-      <div className={`absolute bottom-0 left-0 h-0.5 w-full transform scale-x-0 transition-transform duration-300 origin-left group-hover:scale-x-100 ${
-        isPrimary ? "bg-white" : "bg-emerald-500"
-      }`}></div>
-    </button>
-  );
-};
+import { motion } from "framer-motion"; // Added import for motion component
 
 // Custom Card component with glass-morphism effect
 const GlassCard = ({ children, className, hoverEffect = false }) => {
@@ -103,44 +73,6 @@ const AnimatedUnderline = ({ width = "w-24", color = "bg-emerald-500" }) => (
   </div>
 );
 
-// Background grid with particle effects
-const BackgroundGrid = () => {
-  return (
-    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-      {/* Grid lines */}
-      <div 
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, #10b98133 1px, transparent 1px),
-            linear-gradient(to bottom, #10b98133 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px'
-        }}
-      ></div>
-      
-      {/* Radial gradient overlay */}
-      <div className="absolute inset-0 bg-radial-gradient opacity-70"></div>
-      
-      {/* Animated particles */}
-      <div className="absolute inset-0">
-        {Array(20).fill(0).map((_, index) => (
-          <div
-            key={`particle-${index}`}
-            className="absolute w-1 h-1 rounded-full bg-emerald-500/30 blur-sm animate-float"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDuration: `${15 + Math.random() * 15}s`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
-          ></div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 // 3D rotating golden coin effect
 const GoldenCoin = () => {
   return (
@@ -190,16 +122,47 @@ const CommoditiesTokenization = () => {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white relative overflow-hidden">
-      {/* Background elements */}
-      <BackgroundGrid />
+      {/* REPLACED: Background elements with enhanced layered background */}
       
-      {/* Radial gradient overlay */}
-      <div 
-        className="fixed inset-0 z-0 opacity-70 pointer-events-none" 
-        style={{ 
-          background: "radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.1), transparent 70%)" 
+      {/* Grid Background - Decreased opacity from 0.2 to 0.15 and stroke width from 0.8 to 0.6 */}
+      <div className="fixed inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik0gNDAgMCBMIDAgMCAwIDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiMxMGI5ODEiIHN0cm9rZS13aWR0aD0iMC42Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIiBvcGFjaXR5PSIwLjE1Ii8+PC9zdmc+')]"></div>
+    
+      {/* Hexagonal pattern overlay - Decreased opacity from 0.25 to 0.1875 and stroke width from 2.4 to 1.8 */}
+      <div className="fixed inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4NCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDg0IDQ4Ij48ZGVmcz48cGF0dGVybiBpZD0iaGV4IiB3aWR0aD0iODQiIGhlaWdodD0iNDgiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InNjYWxlKDAuMTYpIj48cGF0aCBkPSJNNDIgMTIgNzMuODIzIDMxIDczLjgyMyA2OSA0MiA4OCAxMC4xNzcgNjkgMTAuMTc3IDMxeiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTBiOTgxIiBzdHJva2Utd2lkdGg9IjEuOCIgLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjaGV4KSIgb3BhY2l0eT0iMC4xODc1IiAvPjwvc3ZnPg==')] opacity-60"></div>
+
+      {/* Diagonal grid overlay - Balanced opacity consistent with other layers */}
+      <div className="fixed inset-0 opacity-[0.225] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImRpYWdvbmFsLWdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTTYwIDAgTDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzEwYjk4MSIgc3Ryb2tlLXdpZHRoPSIxLjIiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZGlhZ29uYWwtZ3JpZCkiIG9wYWNpdHk9IjEiLz48L3N2Zz4=')]"></div>
+
+      {/* Animated gradient overlay - Decreased color intensity from 0.2 to 0.15 */}
+      <motion.div 
+        className="fixed inset-0 bg-gradient-to-tr from-emerald-900/[0.1875] via-transparent to-blue-900/[0.1875]"
+        animate={{
+          background: [
+            "linear-gradient(135deg, rgba(6,78,59,0.15) 0%, rgba(0,0,0,0) 50%, rgba(12,74,110,0.15) 100%)",
+            "linear-gradient(135deg, rgba(12,74,110,0.15) 0%, rgba(0,0,0,0) 50%, rgba(6,78,59,0.15) 100%)",
+            "linear-gradient(135deg, rgba(6,78,59,0.15) 0%, rgba(0,0,0,0) 50%, rgba(12,74,110,0.15) 100%)"
+          ]
         }}
-      ></div>
+        transition={{ 
+          duration: 15, 
+          repeat: Infinity, 
+          ease: "linear" 
+        }}
+      />
+    
+      {/* Sophisticated noise texture overlay - Decreased opacity from 0.12 to 0.09 */}
+      <div className="fixed inset-0 opacity-[0.09] mix-blend-soft-light bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuMDEiIG51bU9jdGF2ZXM9IjUiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48ZmVDb2xvck1hdHJpeCB0eXBlPSJzYXR1cmF0ZSIgdmFsdWVzPSIwIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMSIvPjwvc3ZnPg==')]"></div>
+    
+      {/* Circuit board pattern overlay - Decreased opacity from 0.3 to 0.225 and stroke width from 1.8 to 1.35 */}
+      <div className="fixed inset-0 opacity-[0.225] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJjaXJjdWl0IiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTTEwIDEwIEw1MCAxMCBMNTAgNTAgTDkwIDUwIEw5MCA5MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTBiOTgxIiBzdHJva2Utd2lkdGg9IjEuMzUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik05MCAxMCBMNTAgMTAgTDUwIDUwIEwxMCA1MCBMMTAgOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzEwYjk4MSIgc3Ryb2tlLXdpZHRoPSIxLjM1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIyLjYyNSIgZmlsbD0iIzEwYjk4MSIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iMTAiIHI9IjIuNjI1IiBmaWxsPSIjMTBiOTgxIi8+PGNpcmNsZSBjeD0iOTAiIGN5PSIxMCIgcj0iMi42MjUiIGZpbGw9IiMxMGI5ODEiLz48Y2lyY2xlIGN4PSIxMCIgY3k9IjUwIiByPSIyLjYyNSIgZmlsbD0iIzEwYjk4MSIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjIuNjI1IiBmaWxsPSIjMTBiOTgxIi8+PGNpcmNsZSBjeD0iOTAiIGN5PSI1MCIgcj0iMi42MjUiIGZpbGw9IiMxMGI5ODEiLz48Y2lyY2xlIGN4PSIxMCIgY3k9IjkwIiByPSIyLjYyNSIgZmlsbD0iIzEwYjk4MSIvPjxjaXJjbGUgY3g9IjkwIiBjeT0iOTAiIHI9IjIuNjI1IiBmaWxsPSIjMTBiOTgxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2NpcmN1aXQpIi8+PC9zdmc+')]"></div>
+    
+      {/* Vignette shadow overlay - Decreased opacity from 0.3 to 0.225 */}
+      <div className="fixed inset-0 pointer-events-none bg-radial-gradient opacity-[0.225] z-[1]" 
+        style={{ background: "radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.15) 70%, rgba(0, 0, 0, 0.375) 100%)" }}>
+      </div>
+    
+      {/* Optional color tint - Decreased opacity from 0.05 to 0.0375 */}
+      <div className="fixed inset-0 bg-emerald-500/[0.0375] mix-blend-overlay"></div>
       
       <div className="relative z-10">
         {/* Hero Section */}
@@ -237,14 +200,14 @@ const CommoditiesTokenization = () => {
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <CustomButton variant="primary" className="group">
+              <button className="bg-[#00A86B]/10 backdrop-blur-lg text-[#00A86B] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105 group">
                 Start Tokenizing Commodities
                 <ArrowRight className="inline-block ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-              </CustomButton>
+              </button>
               
-              <CustomButton variant="secondary">
+              <button className="bg-[#001a12]/10 backdrop-blur-lg text-[#DDFFDD] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/30 shadow-[0_0_15px_rgba(0,168,107,0.1)] hover:shadow-[0_0_25px_rgba(0,168,107,0.2)] hover:bg-[#001a12]/20 hover:scale-105">
                 Explore Market Insights
-              </CustomButton>
+              </button>
             </div>
           </div>
           
@@ -435,13 +398,12 @@ const CommoditiesTokenization = () => {
                     </div>
                   </div>
 
-                  <CustomButton 
-                    variant="primary" 
-                    className="w-full mt-4 group"
+                  <button 
+                    className="bg-[#00A86B]/10 backdrop-blur-lg text-[#00A86B] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105 w-full mt-4 group"
                   >
                     View Investment Opportunity
                     <ArrowRight className="inline-block ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                  </CustomButton>
+                  </button>
                 </div>
               </div>
             </GlassCard>
@@ -618,10 +580,14 @@ const CommoditiesTokenization = () => {
 
         {/* Final CTA */}
         <section className="px-8 py-20 md:px-16 lg:px-24 text-center relative">
-          {/* Background glow */}
-          <div className="absolute inset-0 z-0">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-64 bg-emerald-900/20 filter blur-3xl"></div>
-          </div>
+          
+           {/* Advanced background glow */}
+                  <motion.div
+                    className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-emerald-500 filter blur-[100px] opacity-15"
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
+                    transition={{ duration: 8, repeat: Infinity }}
+                  />
+         
           
           <div className="relative z-10">
             <h2 className="font-['Orbitron'] text-3xl md:text-5xl font-bold mb-4 max-w-4xl mx-auto">
@@ -635,14 +601,14 @@ const CommoditiesTokenization = () => {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <CustomButton variant="primary" className="px-8 py-4 text-lg shadow-lg shadow-emerald-900/30 group">
+              <button className="bg-[#00A86B]/10 backdrop-blur-lg text-[#00A86B] px-8 py-4 rounded-full font-medium transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105 text-lg group">
                 Start Investing
                 <ArrowRight className="inline-block ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </CustomButton>
+              </button>
               
-              <CustomButton variant="secondary" className="px-8 py-4 text-lg">
+              <button className="bg-[#001a12]/10 backdrop-blur-lg text-[#DDFFDD] px-8 py-4 rounded-full font-medium transition-all border border-[#00A86B]/30 shadow-[0_0_15px_rgba(0,168,107,0.1)] hover:shadow-[0_0_25px_rgba(0,168,107,0.2)] hover:bg-[#001a12]/20 hover:scale-105 text-lg">
                 Learn More
-              </CustomButton>
+              </button>
             </div>
             
             {/* Additional trust indicators */}
