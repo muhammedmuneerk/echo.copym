@@ -159,9 +159,11 @@ const GreenTokenization = () => {
               </div>
 
               {/* Earth GLB Section - Right */}
-              <div className="relative w-full md:w-1/2 flex items-start justify-center md:justify-start md:-mt-20">
-                <div className="w-[450px] md:w-[600px] h-[450px] md:h-[600px] md:ml-0">
-                  <EarthGlb />
+              <div className="relative w-full md:w-1/2 flex items-center justify-center md:justify-end">
+                <div className="relative w-[400px] h-[400px] md:w-[500px] md:h-[500px] overflow-visible">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <EarthGlb />
+                  </div>
                 </div>
               </div>
             </div>

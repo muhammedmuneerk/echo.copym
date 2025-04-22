@@ -342,7 +342,7 @@ const GoldTokenization = () => {
         </div>
 
         {/* Tokenizable Gold Assets Section */}
-        <div className="py-16">
+        <div className="relative z-10 py-16">
           <div className="container mx-auto px-4 md:px-12 text-center">
             <h2 className="font-orbitron text-xl sm:text-3xl md:text-4xl font-bold mb-6">
               <div className="flex flex-wrap justify-center gap-1">
@@ -386,7 +386,7 @@ const GoldTokenization = () => {
         </div>
 
         {/* Benefits Section */}
-        <div className="py-16">
+        <div className="relative z-10 py-16">
           <div className="container mx-auto px-4 md:px-12 text-center">
             <h2 className="font-orbitron text-xl sm:text-3xl md:text-4xl font-bold mb-6">
               <div className="flex flex-wrap justify-center gap-1">
@@ -464,7 +464,7 @@ const GoldTokenization = () => {
         </div>
 
         {/* Final CTA Section */}
-        <div className="py-16">
+        <div className="relative z-10 py-16">
           <div className="container mx-auto px-4 md:px-12 text-center">
             <h2 className="font-orbitron text-xl sm:text-3xl md:text-4xl font-bold mb-6">
               <div className="flex flex-wrap justify-center gap-1">

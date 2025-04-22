@@ -22,7 +22,7 @@ function SpinningLogo() {
         emissiveIntensity={0.10}
         wireframe 
         transparent
-        opacity={0.65}
+        opacity={0.10}
       />
     </mesh>
   );
