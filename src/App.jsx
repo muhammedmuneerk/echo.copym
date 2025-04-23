@@ -33,7 +33,7 @@ function HomePage() {
       <GreenTokenizationPopup />
       <GoldTokenizationPopup/>
       <div style={{ position: 'relative' }}>
-        <SpinningBlockchain />
+        {/* <SpinningBlockchain /> */}
         <Blockchains />
         <Features />
         <GlobalMarkets />
