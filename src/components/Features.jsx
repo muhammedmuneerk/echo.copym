@@ -1,4 +1,4 @@
-import { Container, Typography, Box, Grid, Button } from "@mui/material";
+import { Container, Typography, Box, Grid, Button, } from "@mui/material";
 import { motion } from "framer-motion";
 import { ArrowForward } from "@mui/icons-material";
 import { keyframes } from "@emotion/react";
@@ -30,6 +30,19 @@ const borderAnimationUp = keyframes`
   100% { width: 3px; height: 100%; bottom: 0; left: 0; opacity: 0; }
 `;
 
+// Add shimmer effect for glass
+const shimmerAnimation = keyframes`
+  0% { background-position: -500px 0; }
+  100% { background-position: 500px 0; }
+`;
+
+// Glass reflection effect
+const glassReflection = keyframes`
+  0% { opacity: 0.1; transform: translateY(100%) translateX(-100%); }
+  50% { opacity: 0.3; }
+  100% { opacity: 0.1; transform: translateY(-100%) translateX(100%); }
+`;
+
 // Central element pulsating animation
 const pulseAnimation = keyframes`
   0% { transform: scale(1); opacity: 0.8; }
@@ -43,21 +56,50 @@ const orbitalRotation = keyframes`
   100% { transform: rotate(360deg); }
 `;
 
-// Styled component for the animated card
+// ENHANCED: Styled component for the animated card with advanced glassmorphism
 const AnimatedCard = styled(Box)(({ theme }) => ({
   position: "relative",
-  background: "rgba(18, 19, 26, 0.5)",
-  backdropFilter: "blur(10px)",
-  border: "1px solid rgba(255, 255, 255, 0.1)",
+  background: "rgba(15, 16, 22, 0.4)",
+  backdropFilter: "blur(15px)",
+  border: "1px solid rgba(255, 255, 255, 0.07)",
   borderRadius: "2rem",
   padding: "1.5rem",
   height: "100%",
   width: "100%",
   maxWidth: "350px",
-  transition: "transform 0.2s",
+  transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
   overflow: "hidden",
+  boxShadow: "0 10px 30px -15px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.2)",
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: "150%",
+    background: "linear-gradient(130deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.07) 50%, rgba(255,255,255,0) 100%)",
+    transform: "rotate(-45deg) translateY(-50%)",
+    pointerEvents: "none",
+    zIndex: 1,
+  },
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%)",
+    backgroundSize: "1000px 100%",
+    animation: `${shimmerAnimation} 8s linear infinite`,
+    pointerEvents: "none",
+    zIndex: 1,
+  },
   "&:hover": {
-    transform: "translateY(-4px)",
+    transform: "translateY(-8px)",
+    boxShadow: "0 20px 40px -20px rgba(0, 0, 0, 0.7), 0 1px 5px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 133, 0.15)",
+    borderColor: "rgba(0, 255, 133, 0.2)",
+    background: "rgba(18, 19, 26, 0.6)",
     "& .border-right": {
       animation: `${borderAnimationRight} 2.5s linear infinite`,
     },
@@ -76,34 +118,62 @@ const AnimatedCard = styled(Box)(({ theme }) => ({
     "& svg": {
       stroke: "#00FF85", // Turn the icon green on card hover
     },
+    "& .glass-reflection": {
+      animation: `${glassReflection} 2.5s ease-in-out infinite`,
+    },
+    "& .card-content": {
+      transform: "translateZ(10px)",
+    },
   },
   "& .border-right, & .border-down, & .border-left, & .border-up": {
     position: "absolute",
     animation: "none", // No animation by default
+    zIndex: 2,
   },
   "& .border-right": {
     top: 0,
     right: "100%",
     height: 3,
-    background: "linear-gradient(to right, #000, #00FF85, #000)",
+    background: "linear-gradient(to right, rgba(0,0,0,0), #00FF85, rgba(0,0,0,0))",
+    boxShadow: "0 0 10px rgba(0, 255, 133, 0.5)",
   },
   "& .border-down": {
     top: 0,
     right: 0,
     width: 3,
-    background: "linear-gradient(to bottom, #000, #00FF85, #000)",
+    background: "linear-gradient(to bottom, rgba(0,0,0,0), #00FF85, rgba(0,0,0,0))",
+    boxShadow: "0 0 10px rgba(0, 255, 133, 0.5)",
   },
   "& .border-left": {
     bottom: 0,
     right: 0,
     height: 3,
-    background: "linear-gradient(to left, #000, #00FF85, #000)",
+    background: "linear-gradient(to left, rgba(0,0,0,0), #00FF85, rgba(0,0,0,0))",
+    boxShadow: "0 0 10px rgba(0, 255, 133, 0.5)",
   },
   "& .border-up": {
     bottom: 0,
     left: 0,
     width: 3,
-    background: "linear-gradient(to top, #000, #00FF85, #000)",
+    background: "linear-gradient(to top, rgba(0,0,0,0), #00FF85, rgba(0,0,0,0))",
+    boxShadow: "0 0 10px rgba(0, 255, 133, 0.5)",
+  },
+  "& .glass-reflection": {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "200%",
+    height: "200%",
+    background: "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%)",
+    transformOrigin: "0 0",
+    animation: "none",
+    pointerEvents: "none",
+    zIndex: 1,
+  },
+  "& .card-content": {
+    position: "relative",
+    zIndex: 5,
+    transition: "transform 0.3s ease-out",
   },
   [theme.breakpoints.between("md", "lg")]: {
     padding: "1.25rem",
@@ -475,36 +545,44 @@ export default function Features() {
                 viewport={{ once: true }}
                 className="h-full"
               >
-                <AnimatedCard>
+                <AnimatedCard style={{ perspective: "1000px" }}>
                   {/* Border animation elements */}
                   <div className="border-right"></div>
                   <div className="border-down"></div>
                   <div className="border-left"></div>
                   <div className="border-up"></div>
                   
-                  <Box
-                    className="w-12 h-12 rounded-2xl mb-4 flex items-center justify-center text-2xl card-icon"
-                    sx={{
-                      background: "rgba(255, 255, 255, 0.1)",
-                    }}
-                  >
-                    {feature.icon}
-                  </Box>
-                  <Typography variant="h5" className="mb-3">
-                    {feature.title}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    className="text-text-secondary mb-4"
-                  >
-                    {feature.description}
-                  </Typography>
-                  <Button
-                    endIcon={<ArrowForward />}
-                    className="text-primary hover:bg-primary/5 px-0"
-                  >
-                    Learn more
-                  </Button>
+                  {/* Glass reflection effect */}
+                  <div className="glass-reflection"></div>
+                  
+                  {/* Wrap content in a div for 3D effect */}
+                  <div className="card-content">
+                    <Box
+                      className="w-12 h-12 rounded-2xl mb-4 flex items-center justify-center text-2xl card-icon"
+                      sx={{
+                        background: "rgba(255, 255, 255, 0.05)",
+                        backdropFilter: "blur(5px)",
+                        boxShadow: "inset 0 0 0 1px rgba(255, 255, 255, 0.05)",
+                      }}
+                    >
+                      {feature.icon}
+                    </Box>
+                    <Typography variant="h5" className="mb-3">
+                      {feature.title}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      className="text-text-secondary mb-4"
+                    >
+                      {feature.description}
+                    </Typography>
+                    <Button
+                      endIcon={<ArrowForward />}
+                      className="text-primary hover:bg-primary/5 px-0"
+                    >
+                      Learn more
+                    </Button>
+                  </div>
                 </AnimatedCard>
               </motion.div>
             </OrbitalPosition>
