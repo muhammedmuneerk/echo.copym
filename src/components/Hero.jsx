@@ -27,7 +27,7 @@ export default function Hero() {
             >
               <Typography
                 variant="h1"
-                className="font-orbitron mt-20 text-3xl sm:text-3xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-snug text-center"
+                className=" mt-20 text-3xl sm:text-3xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-snug text-center"
                 sx={{ wordBreak: "break-word" }}
               >
                 {/* Large Screens: First line whole */}

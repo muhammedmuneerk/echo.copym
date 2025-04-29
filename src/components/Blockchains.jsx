@@ -96,7 +96,7 @@ export default function Blockchains() {
             >
               <Typography
                 variant="h2"
-                className="font-orbitron text-3xl sm:text-4xl md:text-5xl mb-4 pb-1 text-center"
+                className=" text-3xl sm:text-4xl md:text-5xl mb-4 pb-1 text-center"
               >
                 {/* First Line */}
                 <Box component="div" className="flex flex-wrap justify-center">
