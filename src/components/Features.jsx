@@ -4,6 +4,7 @@ import { ArrowForward } from "@mui/icons-material";
 import { keyframes } from "@emotion/react";
 import { styled } from "@mui/material/styles";
 import { useEffect, useState } from "react";
+import BackgroundGlowEffect from "../ui/BackgroundGlowEffect";
 
 // Animation keyframes for the border effect
 const borderAnimationRight = keyframes`
@@ -590,14 +591,9 @@ export default function Features() {
         </OrbitalContainer>
       </Container>
       
-      {/* Background Glow Effect */}
-      <Box
-        className="absolute inset-0 pointer-events-none"
-        sx={{
-          background:
-            "radial-gradient(circle at 50% 50%, rgba(0, 255, 133, 0.1) 0%, rgba(10, 11, 13, 0) 50%)",
-        }}
-      />
+     {/* Enhanced background gradient highlight with Glow Effect */}
+     {/* <BackgroundGlowEffect/> */}
+
     </Box>
   );
 }

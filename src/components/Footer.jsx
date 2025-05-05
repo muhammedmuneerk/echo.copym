@@ -1,5 +1,6 @@
 import { Container, Typography, Box } from "@mui/material";
 import { motion } from "framer-motion";
+import BackgroundGlowEffect from "../ui/BackgroundGlowEffect";
 
 export default function Footer() {
   return (
@@ -97,14 +98,8 @@ export default function Footer() {
         </Box>
       </Container>
 
-      {/* Background Glow Effect */}
-      <Box
-        className="absolute inset-0 pointer-events-none"
-        sx={{
-          background:
-            "radial-gradient(circle at 50% 75%, rgba(0, 255, 133, 0.1) 0%, rgba(10, 11, 13, 0) 50%)",
-        }}
-      />
+      {/* Enhanced background gradient highlight with Glow Effect */}
+     {/* <BackgroundGlowEffect/> */}
     </Box>
   );
 }

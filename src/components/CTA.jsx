@@ -1,15 +1,18 @@
-import { Typography, Button } from "@mui/material";
+import { Typography, Button, Container } from "@mui/material";
 import { motion } from "framer-motion";
 import { Box } from "@mui/system";
+import BorderImages from "./BorderImages";
+import BackgroundGlowEffect from "../ui/BackgroundGlowEffect";
 
 export default function CTA() {
   return (
+    <Container maxWidth="xl" >
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="text-center mb-24 relative z-10"
+      className="text-center pt-14 mt-24 mb-10 relative z-10"
     >
    <Typography
   variant="h2"
@@ -94,8 +97,17 @@ export default function CTA() {
           </Button>
         </div>
       </div>
-
+      <BorderImages
+          src="/assets/sections/grid-bg-bottom.png"
+          alt="Blockchains Banner"
+        />
 
     </motion.div>
+
+      {/* Enhanced background gradient highlight with Glow Effect */}
+     {/* <BackgroundGlowEffect/> */}
+
+    </Container>
+
   );
 }

@@ -3,6 +3,7 @@ import { Container, Typography, Button, Box } from "@mui/material";
 import { motion } from "framer-motion";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import BlockchainNetworkVisualization from "./BlockchainNetworkVisualization";
+import BackgroundGlowEffect from "../ui/BackgroundGlowEffect";
 
 export default function Hero() {
   return (
@@ -161,16 +162,12 @@ export default function Hero() {
             </Typography>
           </motion.div>
         </Container>
-        {/* Enhanced gradient highlight with pulse animation */}
-        <Box
-          className="absolute inset-0 pointer-events-none"
-          sx={{
-            opacity: "20",
-            background:
-              "radial-gradient(circle at 50% 2%, rgba(0, 255, 133, 0.1) 0%, rgba(10, 11, 13, 0) 50%)",
-          }}
-        />
+        
+       {/* Enhanced background gradient highlight with Glow Effect */}
+     {/* <BackgroundGlowEffect/> */}
+
       </div>
     </Box>
   );
 }
+// meta-llama/llama-3.3-70b-instruct:free
