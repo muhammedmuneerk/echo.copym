@@ -5,12 +5,14 @@ import {
   Grid,
   useMediaQuery,
   useTheme,
+  Slider,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { keyframes } from "@emotion/react";
 import { styled } from "@mui/material/styles";
 import BackgroundGlowEffect from "../ui/BackgroundGlowEffect";
+import Sliders from "./Sliders";
 
 // Animation keyframes for the border effect
 const borderAnimationRight = keyframes`
@@ -63,7 +65,8 @@ const AnimatedCard = styled(Box)(({ theme }) => ({
   maxWidth: "350px",
   transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
   overflow: "hidden",
-  boxShadow: "0 10px 30px -15px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.2)",
+  boxShadow:
+    "0 10px 30px -15px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.2)",
   "&::before": {
     content: '""',
     position: "absolute",
@@ -71,7 +74,8 @@ const AnimatedCard = styled(Box)(({ theme }) => ({
     left: 0,
     right: 0,
     height: "150%",
-    background: "linear-gradient(130deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.07) 50%, rgba(255,255,255,0) 100%)",
+    background:
+      "linear-gradient(130deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.07) 50%, rgba(255,255,255,0) 100%)",
     transform: "rotate(-45deg) translateY(-50%)",
     pointerEvents: "none",
     zIndex: 1,
@@ -83,7 +87,8 @@ const AnimatedCard = styled(Box)(({ theme }) => ({
     left: 0,
     right: 0,
     bottom: 0,
-    background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%)",
+    background:
+      "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%)",
     backgroundSize: "1000px 100%",
     animation: `${shimmerAnimation} 8s linear infinite`,
     pointerEvents: "none",
@@ -91,7 +96,8 @@ const AnimatedCard = styled(Box)(({ theme }) => ({
   },
   "&:hover": {
     transform: "translateY(-8px)",
-    boxShadow: "0 20px 40px -20px rgba(0, 0, 0, 0.7), 0 1px 5px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 133, 0.15)",
+    boxShadow:
+      "0 20px 40px -20px rgba(0, 0, 0, 0.7), 0 1px 5px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 133, 0.15)",
     borderColor: "rgba(0, 255, 133, 0.2)",
     background: "rgba(18, 19, 26, 0.6)",
     "& .border-right": {
@@ -128,28 +134,32 @@ const AnimatedCard = styled(Box)(({ theme }) => ({
     top: 0,
     right: "100%",
     height: 3,
-    background: "linear-gradient(to right, rgba(0,0,0,0), #00FF85, rgba(0,0,0,0))",
+    background:
+      "linear-gradient(to right, rgba(0,0,0,0), #00FF85, rgba(0,0,0,0))",
     boxShadow: "0 0 10px rgba(0, 255, 133, 0.5)",
   },
   "& .border-down": {
     top: 0,
     right: 0,
     width: 3,
-    background: "linear-gradient(to bottom, rgba(0,0,0,0), #00FF85, rgba(0,0,0,0))",
+    background:
+      "linear-gradient(to bottom, rgba(0,0,0,0), #00FF85, rgba(0,0,0,0))",
     boxShadow: "0 0 10px rgba(0, 255, 133, 0.5)",
   },
   "& .border-left": {
     bottom: 0,
     right: 0,
     height: 3,
-    background: "linear-gradient(to left, rgba(0,0,0,0), #00FF85, rgba(0,0,0,0))",
+    background:
+      "linear-gradient(to left, rgba(0,0,0,0), #00FF85, rgba(0,0,0,0))",
     boxShadow: "0 0 10px rgba(0, 255, 133, 0.5)",
   },
   "& .border-up": {
     bottom: 0,
     left: 0,
     width: 3,
-    background: "linear-gradient(to top, rgba(0,0,0,0), #00FF85, rgba(0,0,0,0))",
+    background:
+      "linear-gradient(to top, rgba(0,0,0,0), #00FF85, rgba(0,0,0,0))",
     boxShadow: "0 0 10px rgba(0, 255, 133, 0.5)",
   },
   "& .glass-reflection": {
@@ -158,7 +168,8 @@ const AnimatedCard = styled(Box)(({ theme }) => ({
     left: 0,
     width: "200%",
     height: "200%",
-    background: "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%)",
+    background:
+      "linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%)",
     transformOrigin: "0 0",
     animation: "none",
     pointerEvents: "none",
@@ -343,10 +354,7 @@ export default function GlobalMarkets() {
           viewport={{ once: false }}
           className="text-center mb-16"
         >
-          <Typography
-            variant="overline"
-            className="gradient-letter"
-          >
+          <Typography variant="overline" className="gradient-letter">
             GLOBAL REACH
           </Typography>
           <Typography
@@ -355,7 +363,11 @@ export default function GlobalMarkets() {
           >
             <Box component="div" className="flex flex-wrap justify-center">
               {Array.from("Connecting Global Markets").map((char, idx) => (
-                <Box key={`connecting-${idx}`} component="span" className="gradient-letter">
+                <Box
+                  key={`connecting-${idx}`}
+                  component="span"
+                  className="gradient-letter"
+                >
                   {char === " " ? "\u00A0" : char}
                 </Box>
               ))}
@@ -373,90 +385,101 @@ export default function GlobalMarkets() {
 
         {/* Regional Cards */}
         <Grid container spacing={4}>
-          {regions.map((region, index) => (
-            <Grid item xs={12} sm={6} md={3} key={region.name}>
-              <motion.div
-                custom={index}
-                initial="hidden"
-                animate={cardVisible ? "visible" : "hidden"}
-                variants={cardVariants}
-                className="h-full"
-              >
-                <AnimatedCard>
-                  {/* Border animation elements */}
-                  <div className="border-right"></div>
-                  <div className="border-down"></div>
-                  <div className="border-left"></div>
-                  <div className="border-up"></div>
+  {/* LEFT: Regional Cards (6 columns) */}
+  <Grid item xs={12} md={6}>
+    <Grid container spacing={2}>
+      {regions.map((region, index) => (
+        <Grid item xs={12} sm={6} key={region.name}>
+          <motion.div
+            custom={index}
+            initial="hidden"
+            animate={cardVisible ? "visible" : "hidden"}
+            variants={cardVariants}
+            className="h-full"
+          >
+            <AnimatedCard className="p-3 rounded-lg shadow h-[250px] overflow-hidden">
+              {/* Border animation elements */}
+              <div className="border-right"></div>
+              <div className="border-down"></div>
+              <div className="border-left"></div>
+              <div className="border-up"></div>
+              <div className="glass-reflection"></div>
 
-                  <div className="glass-reflection"></div>
+              {/* Card Content */}
+              <div className="card-content">
+                <Typography variant="subtitle2" className="mb-2 font-semibold">
+                  {region.name}
+                </Typography>
 
-                  {/* Wrap content in a div for 3D effect */}
-                <div className="card-content">
-                  
-                  <Typography variant="h6" className="mb-4">
-                    {region.name}
+                <Box className="mb-3">
+                  <Typography
+                    variant="caption"
+                    className="text-gray-500 block"
+                  >
+                    Tokenized Value:
                   </Typography>
-                  <Box className="mb-4">
+                  <Typography variant="body2" className="text-blue-600 text-sm">
+                    <AnimatedCounter
+                      value={region.tokenizedValue}
+                      duration={2.5}
+                      delay={index * 0.2}
+                      key={`value-${region.name}-${animationTrigger}`}
+                    />
+                  </Typography>
+                </Box>
+
+                <Box className="mb-3">
+                  <Typography
+                    variant="caption"
+                    className="text-gray-500 block"
+                  >
+                    YoY Growth:
+                  </Typography>
+                  <Typography variant="body2" className="text-blue-600 text-sm">
+                    <AnimatedCounter
+                      value={region.growth}
+                      duration={2.5}
+                      delay={index * 0.2 + 0.5}
+                      key={`growth-${region.name}-${animationTrigger}`}
+                    />
+                  </Typography>
+                </Box>
+
+                <Box>
+                  <Typography
+                    variant="caption"
+                    className="text-gray-500 block mb-1"
+                  >
+                    Top Asset Classes:
+                  </Typography>
+                  {region.topAssets.map((asset, i) => (
                     <Typography
-                      variant="overline"
-                      className="text-text-secondary block"
+                      key={i}
+                      variant="body2"
+                      className="text-xs text-gray-700"
                     >
-                      Tokenized Value:
+                      {asset}
                     </Typography>
-                    <Typography variant="h5" className="text-primary">
-                      <AnimatedCounter
-                        value={region.tokenizedValue}
-                        duration={2.5}
-                        delay={index * 0.2}
-                        key={`value-${region.name}-${animationTrigger}`}
-                      />
-                    </Typography>
-                  </Box>
-                  <Box className="mb-4">
-                    <Typography
-                      variant="overline"
-                      className="text-text-secondary block"
-                    >
-                      YoY Growth:
-                    </Typography>
-                    <Typography variant="h5" className="text-primary">
-                      <AnimatedCounter
-                        value={region.growth}
-                        duration={2.5}
-                        delay={index * 0.2 + 0.5}
-                        key={`growth-${region.name}-${animationTrigger}`}
-                      />
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography
-                      variant="overline"
-                      className="text-text-secondary block mb-2"
-                    >
-                      Top Asset Classes:
-                    </Typography>
-                    {region.topAssets.map((asset, i) => (
-                      <Typography
-                        key={i}
-                        variant="body2"
-                        className="text-text-secondary"
-                      >
-                        {asset}
-                      </Typography>
-                    ))}
-                  </Box>
-                </div>
-                </AnimatedCard>
-              </motion.div>
-            </Grid>
-          ))}
+                  ))}
+                </Box>
+              </div>
+            </AnimatedCard>
+          </motion.div>
         </Grid>
+      ))}
+    </Grid>
+  </Grid>
+
+  {/* RIGHT: Slider (4 columns) */}
+  <Grid item xs={12} md={6}>
+    <Sliders />
+  </Grid>
+</Grid>
+
       </Container>
 
       {/* Enhanced background gradient highlight with Glow Effect */}
-     {/* <BackgroundGlowEffect/> */}
-
+      {/* <BackgroundGlowEffect/> */}
     </Box>
   );
 }

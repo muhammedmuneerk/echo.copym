@@ -27,6 +27,7 @@ import GreenTokenizationPopup from "./components/GreenTokenizationPopup";
 import GoldTokenizationPopup from "./components/GoldTokenizatinPopup";
 import BorderImages from "./components/BorderImages";
 
+
 // ScrollObserver wrapper component to handle animations on scroll
 const ScrollAnimationWrapper = ({ children }) => {
   const containerRef = useRef(null);
@@ -279,6 +280,8 @@ function HomePage() {
       <section className="hero-section">
         <Hero />
       </section>
+
+     
       
       <GreenTokenizationPopup />
       <GoldTokenizationPopup/>
