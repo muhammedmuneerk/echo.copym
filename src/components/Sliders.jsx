@@ -8,7 +8,7 @@ const cardData = [
   {
     image: '/assets/images/img1.png',
     description: 'This is card 1',
-    buttonText: 'Learn More',
+    buttonText: 'View Details',
   },
   {
     image: '/assets/images/img2.png',
@@ -17,18 +17,33 @@ const cardData = [
   },
   {
     image: '/assets/images/img3.png',
-    description: 'This is card 3',
+    description: 'View Details',
     buttonText: 'Explore',
   },
   {
     image: '/assets/images/img4.png',
     description: 'This is card 4',
-    buttonText: 'Read More',
+    buttonText: 'View Details',
   },
   {
     image: '/assets/images/img5.png',
     description: 'This is card 5',
-    buttonText: 'Get Started',
+    buttonText: 'View Details',
+  },
+  {
+    image: '/assets/images/img6.png',
+    description: 'This is card 6',
+    buttonText: 'View Details',
+  },
+  {
+    image: '/assets/images/img7.png',
+    description: 'This is card 7',
+    buttonText: 'View Details',
+  },
+  {
+    image: '/assets/images/img8.png',
+    description: 'This is card 8',
+    buttonText: 'View Details',
   },
 ];
 
