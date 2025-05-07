@@ -5,12 +5,16 @@ import {
   Grid,
   useMediaQuery,
   useTheme,
+  Slider,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { keyframes } from "@emotion/react";
+import { styled } from "@mui/material/styles";
+import BackgroundGlowEffect from "../ui/BackgroundGlowEffect";
+import Sliders from "./Sliders";
 import AnimatedCard from "../ui/AnimatedCard";
 import AnimatedCounter from "../ui/AnimatedCounter";
-import GradientLetters from "./GradientLetters";
 
 // Region data
 const regions = [
@@ -110,10 +114,15 @@ export default function GlobalMarkets() {
             className="text-4xl md:text-5xl mb-4 pb-1 text-center"
           >
             <Box component="div" className="flex flex-wrap justify-center">
-              <GradientLetters
-                text="Connecting Global Markets"
-                keyPrefix="connecting"
-              />
+              {Array.from("Connecting Global Markets").map((char, idx) => (
+                <Box
+                  key={`connecting-${idx}`}
+                  component="span"
+                  className="gradient-letter"
+                >
+                  {char === " " ? "\u00A0" : char}
+                </Box>
+              ))}
             </Box>
           </Typography>
 
@@ -128,76 +137,88 @@ export default function GlobalMarkets() {
 
         {/* Regional Cards */}
         <Grid container spacing={4}>
-          {regions.map((region, index) => (
-            <Grid item xs={12} sm={6} md={3} key={region.name}>
-              <motion.div
-                custom={index}
-                initial="hidden"
-                animate={cardVisible ? "visible" : "hidden"}
-                variants={cardVariants}
-                className="h-full"
-              >
-                <AnimatedCard>
-                  <Typography variant="h6" className="mb-4">
-                    {region.name}
-                  </Typography>
-                  <Box className="mb-4">
-                    <Typography
-                      variant="overline"
-                      className="text-text-secondary block"
-                    >
-                      Tokenized Value:
-                    </Typography>
-                    <Typography variant="h5" className="text-primary">
-                      <AnimatedCounter
-                        value={region.tokenizedValue}
-                        duration={2.5}
-                        delay={index * 0.2}
-                        key={`value-${region.name}-${animationTrigger}`}
-                      />
-                    </Typography>
-                  </Box>
-                  <Box className="mb-4">
-                    <Typography
-                      variant="overline"
-                      className="text-text-secondary block"
-                    >
-                      YoY Growth:
-                    </Typography>
-                    <Typography variant="h5" className="text-primary">
-                      <AnimatedCounter
-                        value={region.growth}
-                        duration={2.5}
-                        delay={index * 0.2 + 0.5}
-                        key={`growth-${region.name}-${animationTrigger}`}
-                      />
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography
-                      variant="overline"
-                      className="text-text-secondary block mb-2"
-                    >
-                      Top Asset Classes:
-                    </Typography>
-                    {region.topAssets.map((asset, i) => (
-                      <Typography
-                        key={i}
-                        variant="body2"
-                        className="text-text-secondary"
-                      >
-                        {asset}
+          {/* LEFT: Regional Cards (6 columns) */}
+          <Grid item xs={12} md={6}>
+            <Grid container spacing={2}>
+              {regions.map((region, index) => (
+                <Grid item xs={12} sm={6} key={region.name}>
+                  <motion.div
+                    custom={index}
+                    initial="hidden"
+                    animate={cardVisible ? "visible" : "hidden"}
+                    variants={cardVariants}
+                    className="h-full"
+                  >
+                    <AnimatedCard>
+                      <Typography variant="h6" className="mb-4">
+                        {region.name}
                       </Typography>
-                    ))}
-                  </Box>
-                </AnimatedCard>
-              </motion.div>
+
+                      <Box className="mb-4">
+                        <Typography
+                          variant="overline"
+                          className="text-text-secondary block"
+                        >
+                          Tokenized Value:
+                        </Typography>
+                        <Typography variant="h5" className="text-primary">
+                          <AnimatedCounter
+                            value={region.tokenizedValue}
+                            duration={2.5}
+                            delay={index * 0.2}
+                            key={`value-${region.name}-${animationTrigger}`}
+                          />
+                        </Typography>
+                      </Box>
+
+                      <Box className="mb-4">
+                        <Typography
+                          variant="overline"
+                          className="text-text-secondary block"
+                        >
+                          YoY Growth:
+                        </Typography>
+                        <Typography variant="h5" className="text-primary">
+                          <AnimatedCounter
+                            value={region.growth}
+                            duration={2.5}
+                            delay={index * 0.2 + 0.5}
+                            key={`growth-${region.name}-${animationTrigger}`}
+                          />
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Typography
+                          variant="overline"
+                          className="text-text-secondary block mb-2"
+                        >
+                          Top Asset Classes:
+                        </Typography>
+                        {region.topAssets.map((asset, i) => (
+                          <Typography
+                            key={i}
+                            variant="body2"
+                            className="text-text-secondary"
+                          >
+                            {asset}
+                          </Typography>
+                        ))}
+                      </Box>
+                    </AnimatedCard>
+                  </motion.div>
+                </Grid>
+              ))}
             </Grid>
-          ))}
+          </Grid>
+
+          {/* RIGHT: Slider (4 columns) */}
+          <Grid item xs={12} md={6}>
+            <Sliders />
+          </Grid>
         </Grid>
       </Container>
 
-      {/* The BackgroundGlowEffect component was commented out in the original code */}
+      {/* Enhanced background gradient highlight with Glow Effect */}
       {/* <BackgroundGlowEffect/> */}
     </Box>
   );
