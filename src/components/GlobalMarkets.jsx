@@ -385,97 +385,105 @@ export default function GlobalMarkets() {
 
         {/* Regional Cards */}
         <Grid container spacing={4}>
-  {/* LEFT: Regional Cards (6 columns) */}
-  <Grid item xs={12} md={6}>
-    <Grid container spacing={2}>
-      {regions.map((region, index) => (
-        <Grid item xs={12} sm={6} key={region.name}>
-          <motion.div
-            custom={index}
-            initial="hidden"
-            animate={cardVisible ? "visible" : "hidden"}
-            variants={cardVariants}
-            className="h-full"
-          >
-            <AnimatedCard className="p-3 rounded-lg shadow h-[250px] overflow-hidden">
-              {/* Border animation elements */}
-              <div className="border-right"></div>
-              <div className="border-down"></div>
-              <div className="border-left"></div>
-              <div className="border-up"></div>
-              <div className="glass-reflection"></div>
-
-              {/* Card Content */}
-              <div className="card-content">
-                <Typography variant="subtitle2" className="mb-2 font-semibold">
-                  {region.name}
-                </Typography>
-
-                <Box className="mb-3">
-                  <Typography
-                    variant="caption"
-                    className="text-gray-500 block"
+          {/* LEFT: Regional Cards (6 columns) */}
+          <Grid item xs={12} md={6}>
+            <Grid container spacing={2}>
+              {regions.map((region, index) => (
+                <Grid item xs={12} sm={6} key={region.name}>
+                  <motion.div
+                    custom={index}
+                    initial="hidden"
+                    animate={cardVisible ? "visible" : "hidden"}
+                    variants={cardVariants}
+                    className="h-full"
                   >
-                    Tokenized Value:
-                  </Typography>
-                  <Typography variant="body2" className="text-blue-600 text-sm">
-                    <AnimatedCounter
-                      value={region.tokenizedValue}
-                      duration={2.5}
-                      delay={index * 0.2}
-                      key={`value-${region.name}-${animationTrigger}`}
-                    />
-                  </Typography>
-                </Box>
+                    <AnimatedCard className="p-3 rounded-lg shadow h-[250px] overflow-hidden">
+                      {/* Border animation elements */}
+                      <div className="border-right"></div>
+                      <div className="border-down"></div>
+                      <div className="border-left"></div>
+                      <div className="border-up"></div>
+                      <div className="glass-reflection"></div>
 
-                <Box className="mb-3">
-                  <Typography
-                    variant="caption"
-                    className="text-gray-500 block"
-                  >
-                    YoY Growth:
-                  </Typography>
-                  <Typography variant="body2" className="text-blue-600 text-sm">
-                    <AnimatedCounter
-                      value={region.growth}
-                      duration={2.5}
-                      delay={index * 0.2 + 0.5}
-                      key={`growth-${region.name}-${animationTrigger}`}
-                    />
-                  </Typography>
-                </Box>
+                      {/* Card Content */}
+                      <div className="card-content">
+                        <Typography
+                          variant="subtitle2"
+                          className="mb-2 font-semibold"
+                        >
+                          {region.name}
+                        </Typography>
 
-                <Box>
-                  <Typography
-                    variant="caption"
-                    className="text-gray-500 block mb-1"
-                  >
-                    Top Asset Classes:
-                  </Typography>
-                  {region.topAssets.map((asset, i) => (
-                    <Typography
-                      key={i}
-                      variant="body2"
-                      className="text-xs text-gray-700"
-                    >
-                      {asset}
-                    </Typography>
-                  ))}
-                </Box>
-              </div>
-            </AnimatedCard>
-          </motion.div>
+                        <Box className="mb-3">
+                          <Typography
+                            variant="caption"
+                            className="text-gray-500 block"
+                          >
+                            Tokenized Value:
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            className="text-blue-600 text-sm"
+                          >
+                            <AnimatedCounter
+                              value={region.tokenizedValue}
+                              duration={2.5}
+                              delay={index * 0.2}
+                              key={`value-${region.name}-${animationTrigger}`}
+                            />
+                          </Typography>
+                        </Box>
+
+                        <Box className="mb-3">
+                          <Typography
+                            variant="caption"
+                            className="text-gray-500 block"
+                          >
+                            YoY Growth:
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            className="text-blue-600 text-sm"
+                          >
+                            <AnimatedCounter
+                              value={region.growth}
+                              duration={2.5}
+                              delay={index * 0.2 + 0.5}
+                              key={`growth-${region.name}-${animationTrigger}`}
+                            />
+                          </Typography>
+                        </Box>
+
+                        <Box>
+                          <Typography
+                            variant="caption"
+                            className="text-gray-500 block mb-1"
+                          >
+                            Top Asset Classes:
+                          </Typography>
+                          {region.topAssets.map((asset, i) => (
+                            <Typography
+                              key={i}
+                              variant="body2"
+                              className="text-xs text-gray-700"
+                            >
+                              {asset}
+                            </Typography>
+                          ))}
+                        </Box>
+                      </div>
+                    </AnimatedCard>
+                  </motion.div>
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+
+          {/* RIGHT: Slider (4 columns) */}
+          <Grid item xs={12} md={6}>
+            <Sliders />
+          </Grid>
         </Grid>
-      ))}
-    </Grid>
-  </Grid>
-
-  {/* RIGHT: Slider (4 columns) */}
-  <Grid item xs={12} md={6}>
-    <Sliders />
-  </Grid>
-</Grid>
-
       </Container>
 
       {/* Enhanced background gradient highlight with Glow Effect */}
