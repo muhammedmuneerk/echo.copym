@@ -3,52 +3,66 @@ import Slider from 'react-slick';
 import { motion } from 'framer-motion';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { link } from 'd3';
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 const cardData = [
   {
     image: '/assets/images/img1.png',
     description: 'This is card 1',
     buttonText: 'View Details',
+    link: '/tokenization/gold/'
   },
   {
     image: '/assets/images/img2.png',
     description: 'This is card 2',
     buttonText: 'View Details',
+    link:'/green-tokenization'
   },
   {
     image: '/assets/images/img3.png',
     description: 'View Details',
     buttonText: 'Explore',
+    link:'/tokenization/real-estate/'
   },
   {
     image: '/assets/images/img4.png',
     description: 'This is card 4',
     buttonText: 'View Details',
+    link:'/tokenization/art'
   },
   {
     image: '/assets/images/img5.png',
     description: 'This is card 5',
     buttonText: 'View Details',
+    link:'/tokenization/Commodities'
   },
   {
     image: '/assets/images/img6.png',
     description: 'This is card 6',
     buttonText: 'View Details',
+    link:'/tokenization/carbon-credits'
   },
   {
     image: '/assets/images/img7.png',
     description: 'This is card 7',
     buttonText: 'View Details',
+    link:'/tokenization/private-equity'
   },
   {
     image: '/assets/images/img8.png',
     description: 'This is card 8',
     buttonText: 'View Details',
+    link:'/tokenization/other-assets'
   },
 ];
 
 const Sliders = () => {
   const sliderRef = useRef(null); // Ref to control slider programmatically
+  const navigate = useNavigate();
 
   const settings = {
     dots: true,
@@ -108,13 +122,14 @@ const Sliders = () => {
               <img
                 src={card.image}
                 alt="Card"
-                className="w-96 h-40 object-cover  transition duration-500 mt-1"
+                className="w-96 h-40 object-cover   mt-1"
               />
 
               {/* Card Content */}
               <div className="p-4">
                 <p className="text-white text-sm mb-3">{card.description}</p>
-                <button className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-2 text-sm font-semibold rounded-full shadow-lg hover:shadow-indigo-400 hover:scale-105 transition-all duration-300">
+                <button className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-2 text-sm font-semibold rounded-full shadow-lg hover:shadow-indigo-400 hover:scale-105 transition-all duration-300"
+                  onClick={() => navigate(card.link)}>
                   {card.buttonText}
                 </button>
               </div>
