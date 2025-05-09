@@ -228,29 +228,9 @@ const TokenizationSlider = () => {
   };
 
   return (
-    <AnimatedCardWrapper
-      sx={{
-        maxWidth: '100%',
-        height: '100%',
-        px: 4,
-        overflow: 'hidden',
-        borderRadius: '2rem',
-        background: 'rgba(15, 16, 22, 0.7)',
-      }}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      {/* Border animation elements for outer container */}
-      <div className="border-right"></div>
-      <div className="border-down"></div>
-      <div className="border-left"></div>
-      <div className="border-up"></div>
-      
-      {/* Glass reflection effect */}
-      <div className="glass-reflection"></div>
-      
+    <div className="max-w-full px-4 h-full overflow-hidden rounded-2xl">
       {/* Content wrapper */}
-      <div className="card-content relative z-10 max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
         <motion.div 
           className="text-center mt-5"
@@ -258,16 +238,21 @@ const TokenizationSlider = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600 mb-2">
-            Tokenization Ecosystem
-          </h2>
-          <p className="text-gray-300 max-w-2xl mx-auto text-lg">
+  <h2 className="text-4xl md:text-5xl font-bold text-gradient-dark mb-2">
+  Tokenization Ecosystem
+</h2>
+
+          <p className="text-white max-w-2xl mx-auto text-lg">
             Discover our premium tokenization solutions across diverse asset classes
           </p>
         </motion.div>
 
         {/* Main slider area */}
-        <div className="relative h-[550px] perspective-1000">
+        <div 
+          className="relative h-[550px] perspective-1000"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           {/* Cards container */}
           <div className="relative h-full flex items-center justify-center">
             {cardData.map((card, index) => (
@@ -292,7 +277,6 @@ const TokenizationSlider = () => {
                   }
                 }}
               >
-                {/* Replace the original card with our InnerCardWrapper */}
                 <InnerCardWrapper color={card.borderColor}>
                   {/* Glass reflection effect */}
                   <div className="glass-reflection"></div>
@@ -388,28 +372,9 @@ const TokenizationSlider = () => {
           </motion.button>
         </div>
         
-        {/* Indicators */}
-        <div className="flex justify-center items-center gap-1 mt-1">
-          {cardData.map((_, index) => (
-            <motion.button
-              key={index}
-              className="w-3 h-3 rounded-full bg-white/50"
-              animate={getIndicatorStyle(index)}
-              onClick={() => {
-                setDirection(index > currentIndex ? 1 : -1);
-                setCurrentIndex(index);
-              }}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-        
-        {/* Card counter */}
-        <div className="text-center mb-2 text-white/70 font-medium">
-          <span className="text-white">{currentIndex + 1}</span> / {cardData.length}
-        </div>
+
       </div>
-    </AnimatedCardWrapper>
+    </div>
   );
 };
 
