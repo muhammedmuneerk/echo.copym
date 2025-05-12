@@ -1,7 +1,5 @@
 import { useState, useMemo } from "react";
-<<<<<<< HEAD
 import { motion, AnimatePresence } from "framer-motion";
-=======
 import {
   Container,
   Typography,
@@ -18,7 +16,6 @@ import {
 } from "@mui/material";
 import GradientLetters from "../../components/GradientLetters";
 
->>>>>>> f2a2f93df58a6eebec815de8f961cf10cedaeef4
 
 const mockAssets = [
   {
@@ -196,7 +193,6 @@ export default function Marketplace() {
     <div className="w-full min-h-screen py-16 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header Section */}
-<<<<<<< HEAD
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -216,7 +212,6 @@ export default function Marketplace() {
             thresholds.
           </p>
         </motion.div>
-=======
         <Typography
           variant="h1"
           className="w-full text-4xl md:text-5xl lg:text-6xl font-bold mb-4 mt-20 text-center"
@@ -254,7 +249,6 @@ export default function Marketplace() {
           Each asset is fractionally divided, allowing for smaller investment
           thresholds.
         </Typography>
->>>>>>> f2a2f93df58a6eebec815de8f961cf10cedaeef4
 
         {/* Search and Filter Section */}
         <motion.div
