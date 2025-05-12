@@ -1,19 +1,5 @@
 import { useState, useMemo } from "react";
-import {
-  Container,
-  Typography,
-  Box,
-  TextField,
-  Select,
-  MenuItem,
-  Slider,
-  Grid,
-  LinearProgress,
-  Button,
-  FormControl,
-  InputLabel,
-} from "@mui/material";
-
+import { motion, AnimatePresence } from "framer-motion";
 
 const mockAssets = [
   {
@@ -25,7 +11,7 @@ const mockAssets = [
     price: 250000,
     availableTokens: 750,
     totalTokens: 1000,
-    image: "placeholder",
+    image: "/assets/images/office.jpg",
   },
   {
     id: 2,
@@ -36,7 +22,7 @@ const mockAssets = [
     price: 15000,
     availableTokens: 65,
     totalTokens: 100,
-    image: "placeholder",
+    image: "/assets/images/digital.jpg",
   },
   {
     id: 3,
@@ -47,7 +33,7 @@ const mockAssets = [
     price: 50000,
     availableTokens: 320,
     totalTokens: 500,
-    image: "placeholder",
+    image: "/assets/images/gold.jpg",
   },
   {
     id: 4,
@@ -58,7 +44,7 @@ const mockAssets = [
     price: 120000,
     availableTokens: 1800,
     totalTokens: 2000,
-    image: "placeholder",
+    image: "/assets/images/solar.jpg",
   },
   {
     id: 5,
@@ -69,7 +55,7 @@ const mockAssets = [
     price: 75000,
     availableTokens: 210,
     totalTokens: 300,
-    image: "placeholder",
+    image: "/assets/images/tech.jpg",
   },
   {
     id: 6,
@@ -80,7 +66,7 @@ const mockAssets = [
     price: 350000,
     availableTokens: 1200,
     totalTokens: 1500,
-    image: "placeholder",
+    image: "/assets/images/apartment.jpg",
   },
 ];
 
@@ -92,18 +78,14 @@ const categories = [
   "Infrastructure",
   "Startups",
 ];
-const sortOptions = [
-  "Latest",
-  "ROI",
-  "Price: Low to High",
-  "Price: High to Low",
-];
 
 export default function Marketplace() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All Categories");
-  const [priceRange, setPriceRange] = useState([0, 1000000]);
-  const [sortBy, setSortBy] = useState("Latest");
+  const [searchParams, setSearchParams] = useState({
+    query: "",
+    category: "All Categories",
+    priceRange: [0, 1000000],
+    sortBy: "Latest"
+  });
 
   // Format price for display
   const formatPrice = (value) => {
@@ -115,7 +97,7 @@ export default function Marketplace() {
     return mockAssets
       .filter((asset) => {
         // Search filter
-        const searchLower = searchQuery.toLowerCase();
+        const searchLower = searchParams.query.toLowerCase();
         const matchesSearch =
           asset.title.toLowerCase().includes(searchLower) ||
           asset.location.toLowerCase().includes(searchLower) ||
@@ -123,17 +105,18 @@ export default function Marketplace() {
 
         // Category filter
         const matchesCategory =
-          selectedCategory === "All Categories" ||
-          asset.category === selectedCategory;
+          searchParams.category === "All Categories" ||
+          asset.category === searchParams.category;
 
         // Price range filter
         const matchesPriceRange =
-          asset.price >= priceRange[0] && asset.price <= priceRange[1];
+          asset.price >= searchParams.priceRange[0] && 
+          asset.price <= searchParams.priceRange[1];
 
         return matchesSearch && matchesCategory && matchesPriceRange;
       })
       .sort((a, b) => {
-        switch (sortBy) {
+        switch (searchParams.sortBy) {
           case "Price: Low to High":
             return a.price - b.price;
           case "Price: High to Low":
@@ -150,208 +133,246 @@ export default function Marketplace() {
             return b.id - a.id; // Assuming higher IDs are more recent
         }
       });
-  }, [searchQuery, selectedCategory, priceRange, sortBy]);
+  }, [searchParams]);
 
-  // Handle price range change
-  const handlePriceRangeChange = (event, newValue) => {
-    setPriceRange(newValue);
+  // Handle search parameter updates
+  const updateSearchParams = (updates) => {
+    setSearchParams(prev => ({
+      ...prev,
+      ...updates
+    }));
+  };
+
+  // Card variant for Framer Motion
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      scale: 0.8,
+      x: -50,
+      rotate: -10
+    },
+    visible: (index) => ({ 
+      opacity: 1, 
+      scale: 1,
+      x: 0,
+      rotate: 0,
+      transition: {
+        delay: index * 0.1,
+        type: "spring",
+        stiffness: 300,
+        damping: 15
+      }
+    }),
+    hover: {
+      scale: 1.05,
+      rotate: 2,
+      transition: {
+        type: "spring",
+        stiffness: 300
+      }
+    }
   };
 
   return (
-    <Box className="min-h-screen py-16">
-      <Container maxWidth="xl">
+    <div className="w-full min-h-screen py-16 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+      <div className="container mx-auto px-4 max-w-7xl">
         {/* Header Section */}
-        <Typography
-          variant="h1"
-          className="text-4xl md:text-5xl font-bold text-center mb-4 mt-20"
-          sx={{ color: "#00ff85", fontFamily: "'Orbitron', sans-serif" }}
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ 
+            duration: 0.6,
+            type: "spring",
+            stiffness: 100
+          }}
+          className="text-center mb-12"
         >
-          Asset Tokenization Marketplace
-        </Typography>
-        <Typography
-          variant="body1"
-          className="text-text-secondary text-center max-w-3xl mx-auto mb-12"
-        >
-          Discover and invest in tokenized assets across various categories.
-          Each asset is fractionally divided, allowing for smaller investment
-          thresholds.
-        </Typography>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-green-400 tracking-tight">
+            Asset Tokenization Marketplace
+          </h1>
+          <p className="text-gray-300 max-w-3xl mx-auto text-lg">
+            Discover and invest in tokenized assets across various categories.
+            Each asset is fractionally divided, allowing for smaller investment
+            thresholds.
+          </p>
+        </motion.div>
 
         {/* Search and Filter Section */}
-        <Grid container spacing={3} className="mb-8">
-          <Grid item xs={12} md={4}>
-            <TextField
-              fullWidth
-              placeholder="Search by name, category, location..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  backgroundColor: "rgba(18, 19, 26, 0.5)",
-                  backdropFilter: "blur(10px)",
-                },
-              }}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ 
+            duration: 0.6, 
+            delay: 0.2,
+            type: "spring",
+            stiffness: 100
+          }}
+          className="mb-8"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+            {/* Search Input */}
+            <input
+              type="text"
+              placeholder="Search assets..."
+              className="w-full p-3 bg-gray-800 rounded-lg border border-gray-700 text-white col-span-2 focus:ring-2 focus:ring-green-500 transition duration-300"
+              value={searchParams.query}
+              onChange={(e) => updateSearchParams({ query: e.target.value })}
             />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <FormControl fullWidth>
-              <InputLabel>Category</InputLabel>
-              <Select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                sx={{
-                  backgroundColor: "rgba(18, 19, 26, 0.5)",
-                  backdropFilter: "blur(10px)",
-                }}
-              >
-                {categories.map((category) => (
-                  <MenuItem key={category} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <Box sx={{ px: 2 }}>
-              <Typography gutterBottom>
-                Price Range: {formatPrice(priceRange[0])} -{" "}
-                {formatPrice(priceRange[1])}
-              </Typography>
-              <Slider
-                value={priceRange}
-                onChange={handlePriceRangeChange}
-                min={0}
-                max={1000000}
-                step={10000}
-                valueLabelDisplay="auto"
-                valueLabelFormat={formatPrice}
-                sx={{
-                  "& .MuiSlider-thumb": {
-                    color: "#00ff85",
-                  },
-                  "& .MuiSlider-track": {
-                    color: "#00ff85",
-                  },
-                }}
+
+            {/* Category Dropdown */}
+            <select
+              className="w-full p-3 bg-gray-800 rounded-lg border border-gray-700 text-white focus:ring-2 focus:ring-green-500 transition duration-300"
+              value={searchParams.category}
+              onChange={(e) => updateSearchParams({ category: e.target.value })}
+            >
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+
+            {/* Price Range */}
+            <div className="flex items-center space-x-3">
+              <span className="text-sm text-gray-400 whitespace-nowrap">
+                ${searchParams.priceRange[1].toLocaleString()}
+              </span>
+              <input
+                type="range"
+                min="0"
+                max="1000000"
+                step="10000"
+                value={searchParams.priceRange[1]}
+                onChange={(e) => updateSearchParams({ 
+                  priceRange: [searchParams.priceRange[0], Number(e.target.value)] 
+                })}
+                className="w-full h-2 bg-gray-700 rounded-full appearance-none cursor-pointer"
               />
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={2}>
-            <FormControl fullWidth>
-              <InputLabel>Sort by</InputLabel>
-              <Select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                sx={{
-                  backgroundColor: "rgba(18, 19, 26, 0.5)",
-                  backdropFilter: "blur(10px)",
-                }}
-              >
-                {sortOptions.map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-        </Grid>
+            </div>
+
+            {/* Sort Dropdown */}
+            <select
+              className="w-full p-3 bg-gray-800 rounded-lg border border-gray-700 text-white focus:ring-2 focus:ring-green-500 transition duration-300"
+              value={searchParams.sortBy}
+              onChange={(e) => updateSearchParams({ sortBy: e.target.value })}
+            >
+              {["Latest", "ROI", "Price: Low to High", "Price: High to Low"].map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        </motion.div>
 
         {/* Results Count */}
-        <Typography className="mb-4 text-text-secondary">
+        <p className="mb-4 text-gray-400">
           Showing {filteredAssets.length} of {mockAssets.length} assets
-        </Typography>
+        </p>
 
         {/* Asset Grid */}
-        <Grid container spacing={4}>
-          {filteredAssets.map((asset) => (
-            <Grid item xs={12} sm={6} lg={4} key={asset.id}>
-              <Box
-                className="rounded-lg overflow-hidden"
-                sx={{
-                  backgroundColor: "rgba(18, 19, 26, 0.5)",
-                  backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                }}
+        <AnimatePresence>
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  delayChildren: 0.2,
+                  staggerChildren: 0.1
+                }
+              }
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 place-items-center"
+          >
+            {filteredAssets.map((asset, index) => (
+              <motion.div
+                key={asset.id}
+                custom={index}
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                whileHover="hover"
+                className="w-full max-w-[400px]"
               >
-                {/* Asset Image */}
-                <Box
-                  className="w-full aspect-video bg-gray-800 flex items-center justify-center"
-                  sx={{ backgroundColor: "rgba(18, 19, 26, 0.8)" }}
-                >
-                  <Typography>Asset Image Placeholder</Typography>
-                </Box>
-
-                {/* Asset Details */}
-                <Box className="p-4">
-                  <Box className="mb-2">
-                    <span
-                      className="inline-block px-2 py-1 rounded text-sm"
-                      style={{
-                        backgroundColor: "rgba(0, 255, 133, 0.1)",
-                        color: "#00ff85",
-                      }}
-                    >
-                      {asset.category}
-                    </span>
-                  </Box>
-                  <Typography variant="h6" className="mb-2">
-                    {asset.title}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    className="text-text-secondary mb-2"
-                  >
-                    Location: {asset.location}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    className="text-text-secondary mb-2"
-                  >
-                    Expected ROI: {asset.expectedRoi}
-                  </Typography>
-                  <Box className="mb-3">
-                    <Typography
-                      variant="body2"
-                      className="text-text-secondary mb-1"
-                    >
-                      Available: {asset.availableTokens}/{asset.totalTokens}{" "}
-                      tokens
-                    </Typography>
-                    <LinearProgress
-                      variant="determinate"
-                      value={(asset.availableTokens / asset.totalTokens) * 100}
-                      sx={{
-                        backgroundColor: "rgba(255, 255, 255, 0.1)",
-                        "& .MuiLinearProgress-bar": {
-                          backgroundColor: "#00ff85",
-                        },
-                      }}
+                <div className="bg-gray-800 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 transform transition-all w-full">
+                  {/* Asset Image */}
+                  <div className="w-full aspect-video overflow-hidden relative">
+                    <motion.img 
+                      src={asset.image} 
+                      alt={asset.title}
+                      className="w-full h-full object-cover"
+                      initial={{ scale: 1 }}
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.3 }}
                     />
-                  </Box>
-                  <Box className="flex items-center justify-between">
-                    <Typography variant="h6" sx={{ color: "#00ff85" }}>
-                      ${asset.price.toLocaleString()}
-                    </Typography>
-                    <Button
-                      variant="contained"
-                      sx={{
-                        backgroundColor: "#00ff85",
-                        "&:hover": {
-                          backgroundColor: "#00cc6a",
-                        },
-                      }}
-                    >
-                      Invest
-                    </Button>
-                  </Box>
-                </Box>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </Box>
+                  </div>
+
+                  {/* Asset Details */}
+                  <div className="p-6">
+                    <div className="mb-3">
+                      <motion.span 
+                        className="inline-block px-3 py-1 rounded-full text-sm bg-green-900 text-green-400"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        {asset.category}
+                      </motion.span>
+                    </div>
+                    <h2 className="text-xl font-bold mb-3 text-white">
+                      {asset.title}
+                    </h2>
+                    <p className="text-gray-400 mb-2">
+                      Location: {asset.location}
+                    </p>
+                    <p className="text-gray-400 mb-3">
+                      Expected ROI: {asset.expectedRoi}
+                    </p>
+                    
+                    {/* Token Availability */}
+                    <div className="mb-4">
+                      <p className="text-sm text-gray-400 mb-2">
+                        Available: {asset.availableTokens}/{asset.totalTokens} tokens
+                      </p>
+                      <div className="w-full bg-gray-700 rounded-full h-2.5">
+                        <motion.div 
+                          className="bg-green-500 h-2.5 rounded-full" 
+                          initial={{ width: 0 }}
+                          animate={{ 
+                            width: `${(asset.availableTokens / asset.totalTokens) * 100}%`
+                          }}
+                          transition={{ 
+                            duration: 0.5,
+                            type: "spring",
+                            stiffness: 50
+                          }}
+                        ></motion.div>
+                      </div>
+                    </div>
+
+                    {/* Price and Invest Button */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-bold text-green-400">
+                        ${asset.price.toLocaleString()}
+                      </span>
+                      <motion.button 
+                        className="px-5 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        Invest
+                      </motion.button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </div>
   );
 }
