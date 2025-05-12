@@ -190,7 +190,7 @@ export default function Marketplace() {
   };
 
   return (
-    <div className="w-full min-h-screen py-16 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+    <div className="w-full min-h-screen py-16 bg-gradient-to-br text-white">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header Section */}
         <motion.div
