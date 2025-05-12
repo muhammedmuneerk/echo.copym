@@ -15,6 +15,7 @@ import BackgroundGlowEffect from "../ui/BackgroundGlowEffect";
 import Sliders from "./Sliders";
 import AnimatedCard from "../ui/AnimatedCard";
 import AnimatedCounter from "../ui/AnimatedCounter";
+import GradientLetters from "./GradientLetters";
 
 // Region data
 const regions = [
@@ -48,10 +49,10 @@ export default function GlobalMarkets() {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
   const sectionRef = useRef(null);
-  const [cardVisible, setCardVisible] = useState(false);
+  const [cardVisible, setCardVisible] = useState(true); // Set initial value to true
   const [animationTrigger, setAnimationTrigger] = useState(0);
 
-  // Set up intersection observer to show/hide cards when section enters/exits viewport
+  // Set up intersection observer to trigger animations when section enters viewport
   useEffect(() => {
     if (!sectionRef.current) return;
 
@@ -59,15 +60,12 @@ export default function GlobalMarkets() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setCardVisible(true);
-            // Reset and trigger number animations when coming into view
+            // Keep cards visible and trigger animations when in view
             setAnimationTrigger((prev) => prev + 1);
-          } else {
-            setCardVisible(false);
           }
         });
       },
-      { threshold: 0.2 } // 0.2 means 20% visible
+      { threshold: 0.1 } // Lower threshold to 0.1 (10% visible)
     );
 
     observer.observe(sectionRef.current);
@@ -78,7 +76,7 @@ export default function GlobalMarkets() {
       }
     };
   }, []);
-
+  
   // Animation variants for cards
   const cardVariants = {
     hidden: (index) => ({
@@ -111,18 +109,24 @@ export default function GlobalMarkets() {
           </Typography>
           <Typography
             variant="h2"
-            className="text-4xl md:text-5xl mb-4 pb-1 text-center"
+            className="text-3xl sm:text-4xl md:text-5xl mb-4 pb-1 text-center"
           >
             <Box component="div" className="flex flex-wrap justify-center">
-              {Array.from("Connecting Global Markets").map((char, idx) => (
-                <Box
-                  key={`connecting-${idx}`}
-                  component="span"
-                  className="gradient-letter"
-                >
-                  {char === " " ? "\u00A0" : char}
-                </Box>
-              ))}
+              {/* Large Screens (1 lines) */}
+              <Box className="hidden lg:block">
+                <GradientLetters
+                  text="Connecting Global Markets"
+                  keyPrefix="lg-line1"
+                />
+              </Box>
+
+              {/* Small & Medium Screens (2 lines) */}
+              <Box className="block lg:hidden">
+                <GradientLetters
+                  text="Connecting Global Markets"
+                  keyPrefix="sm-line1"
+                />
+              </Box>
             </Box>
           </Typography>
 
@@ -139,13 +143,17 @@ export default function GlobalMarkets() {
         <Grid container spacing={4}>
           {/* LEFT: Regional Cards (6 columns) */}
           <Grid item xs={12} md={6}>
-            <Grid container spacing={2}>
+            <Grid
+              container
+              spacing={2}
+              className="justify-center md:justify-start"
+            >
               {regions.map((region, index) => (
-                <Grid item xs={12} sm={6} key={region.name}>
+                <Grid item xs={10} sm={6} key={region.name}>
                   <motion.div
                     custom={index}
                     initial="hidden"
-                    animate={cardVisible ? "visible" : "hidden"}
+                    animate="visible" // Always set to visible
                     variants={cardVariants}
                     className="h-full"
                   >

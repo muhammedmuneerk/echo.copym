@@ -10,7 +10,8 @@ import {
   // HorizontalScrollContainer removed from import
 } from "./UIComponents";
 import "./TokenizationHub.css";
-
+import { Typography, Box } from "@mui/material";
+import GradientLetters from "../../components/GradientLetters";
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
@@ -606,12 +607,6 @@ export default function TokenizationHub() {
       {/* Background pattern */}
       <BackgroundPattern />
       
-      {/* Background radial gradient */}
-      <div className="background-gradient" />
-      
-      {/* Background grain texture */}
-      <div className="background-grain" />
-      
       {/* Main content */}
       <div className="main-content">
         {/* Header Section */}
@@ -652,19 +647,45 @@ export default function TokenizationHub() {
               />
             </div>
             
-            <h1 className="main-title">
-              {Array.from("Complete Echo Asset").map((char, idx) => (
-                <span key={`title-1-${idx}`} className="gradient-letter">
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
-              <br />
-              {Array.from("Tokenization Hub").map((char, idx) => (
-                <span key={`title-2-${idx}`} className="gradient-letter">
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
-            </h1>
+            <Typography
+              variant="h1"
+              className="w-full text-4xl md:text-5xl lg:text-6xl font-bold mb-4 mt-1 text-center"
+            >
+              <Box
+                component="div"
+                className="flex flex-col items-center justify-center w-full"
+              >
+                {/* Large Screens (2 line) */}
+                <Box className="hidden lg:flex lg:justify-center w-full">
+                  <GradientLetters
+                    text="Complete Echo Asset"
+                    keyPrefix="lg-line1"
+                  />
+                </Box>
+                <Box className="hidden lg:flex lg:justify-center w-full">
+                  <GradientLetters
+                    text="Tokenization Hub"
+                    keyPrefix="lg-line2"
+                  />
+                </Box>
+
+                {/* Small and Medium screens: 2 lines */}
+                <Box className="flex flex-col items-center justify-center lg:hidden w-full">
+                  <Box component="div" className="flex justify-center w-full">
+                    <GradientLetters
+                      text="Complete Echo Asset"
+                      keyPrefix="sm-line1"
+                    />
+                  </Box>
+                  <Box component="div" className="flex justify-center w-full">
+                    <GradientLetters
+                      text="Tokenization Hub"
+                      keyPrefix="sm-line1"
+                    />
+                  </Box>
+                </Box>
+              </Box>
+            </Typography>
             
             <p className="main-description">
               Transform any real-world asset into digital tokens with CopyM's 
@@ -723,19 +744,29 @@ export default function TokenizationHub() {
             viewport={{ once: true, margin: "-100px" }}
             className="section-header"
           >
-            <h2 className="section-title">
-              {Array.from("Tokenize Any").map((char, idx) => (
-                <span key={`asset-title-1-${idx}`} className="gradient-letter">
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
-              {" "}
-              {Array.from("Asset Class").map((char, idx) => (
-                <span key={`asset-title-2-${idx}`} className="gradient-letter">
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
-            </h2>
+
+           <Typography
+                variant="h2"
+                className="text-3xl sm:text-4xl md:text-5xl mb-4 pb-1 text-center"
+              >
+                <Box component="div" className="flex flex-wrap justify-center">
+                  {/* Large Screens (1 lines) */}
+                  <Box className="hidden lg:block">
+                    <GradientLetters
+                      text="Tokenize Any Asset Classes"
+                      keyPrefix="lg-line1"
+                    />
+                  </Box>
+
+                  {/* Small & Medium Screens (2 lines) */}
+                  <Box className="block lg:hidden">
+                    <GradientLetters
+                      text="Tokenize Any Asset Classes"
+                      keyPrefix="sm-line1"
+                    />
+                  </Box>
+                </Box>
+              </Typography>
             
             <p className="section-description">
               Our unified platform supports the complete tokenization lifecycle
@@ -848,19 +879,28 @@ export default function TokenizationHub() {
             viewport={{ once: true, margin: "-100px" }}
             className="section-header"
           >
-            <h2 className="section-title">
-              {Array.from("How CopyM").map((char, idx) => (
-                <span key={`compare-title-1-${idx}`} className="gradient-letter">
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
-              {" "}
-              {Array.from("Compares").map((char, idx) => (
-                <span key={`compare-title-2-${idx}`} className="gradient-letter">
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
-            </h2>
+            
+            <Typography
+              variant="h2"
+              className="text-3xl sm:text-4xl md:text-5xl mb-4 pb-1 text-center"
+              >
+              <Box component="div" className="flex flex-wrap justify-center">
+                {/* Large Screens (1 lines) */}
+                <Box className="hidden lg:block">
+                  <GradientLetters
+                    text="How CopyM Compares"
+                    keyPrefix="lg-line1"
+                  />
+                </Box>
+                {/* Small & Medium Screens (2 lines) */}
+                <Box className="block lg:hidden">
+                  <GradientLetters
+                    text="How CopyM Compares"
+                    keyPrefix="sm-line1"
+                  />
+                </Box>
+              </Box>
+            </Typography>
             
             <p className="section-description">
               See why leading organizations choose CopyM for their tokenization needs
@@ -944,19 +984,33 @@ export default function TokenizationHub() {
               />
             </div>
             
-            <h2 className="section-title">
-              {Array.from("Ready to").map((char, idx) => (
-                <span key={`cta-title-1-${idx}`} className="gradient-letter">
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
-              {" "}
-              {Array.from("Tokenize Your Assets?").map((char, idx) => (
-                <span key={`cta-title-2-${idx}`} className="gradient-letter">
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
-            </h2>
+            <Typography
+              variant="h2"
+              className="text-3xl sm:text-4xl md:text-5xl mb-4 pb-1 text-center"
+              >
+              <Box component="div" className="flex flex-wrap justify-center">
+                {/* Large Screens (1 lines) */}
+                <Box className="hidden lg:block">
+                  <GradientLetters
+                    text="Ready to Tokenize Your Assets ?"
+                    keyPrefix="lg-line1"
+                  />
+                </Box>
+                {/* Small & Medium Screens (2 lines) */}
+                <Box className="block lg:hidden">
+                  <GradientLetters
+                    text="Ready to Tokenize"
+                    keyPrefix="sm-line1"
+                  />
+                </Box>
+                <Box className="block lg:hidden">
+                  <GradientLetters
+                    text="Your Assets ?"
+                    keyPrefix="sm-line1"
+                  />
+                </Box>
+              </Box>
+            </Typography>
             
             <p className="section-description">
               Join thousands of businesses and investors already transforming

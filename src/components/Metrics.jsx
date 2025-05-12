@@ -287,12 +287,9 @@ export default function Metrics() {
                 {/* Small & Medium Screens (2 lines) */}
                 <Box className="block lg:hidden">
                   <Box component="div" className="flex flex-wrap justify-center">
-                    <GradientLetters text="Tokenization at" keyPrefix="sm-line1" />
+                    <GradientLetters text="Tokenization at Scale" keyPrefix="sm-line1" />
                   </Box>
 
-                  <Box component="div" className="flex flex-wrap justify-center">
-                    <GradientLetters text="Scale" keyPrefix="sm-line3" />
-                  </Box>
                 </Box>
               </Box>
             </Typography>

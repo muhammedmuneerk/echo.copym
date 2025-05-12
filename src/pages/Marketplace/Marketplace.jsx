@@ -1,5 +1,24 @@
 import { useState, useMemo } from "react";
+<<<<<<< HEAD
 import { motion, AnimatePresence } from "framer-motion";
+=======
+import {
+  Container,
+  Typography,
+  Box,
+  TextField,
+  Select,
+  MenuItem,
+  Slider,
+  Grid,
+  LinearProgress,
+  Button,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
+import GradientLetters from "../../components/GradientLetters";
+
+>>>>>>> f2a2f93df58a6eebec815de8f961cf10cedaeef4
 
 const mockAssets = [
   {
@@ -177,6 +196,7 @@ export default function Marketplace() {
     <div className="w-full min-h-screen py-16 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header Section */}
+<<<<<<< HEAD
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -196,6 +216,45 @@ export default function Marketplace() {
             thresholds.
           </p>
         </motion.div>
+=======
+        <Typography
+          variant="h1"
+          className="w-full text-4xl md:text-5xl lg:text-6xl font-bold mb-4 mt-20 text-center"
+        >
+          <Box
+            component="div"
+            className="flex flex-col items-center justify-center w-full"
+          >
+            {/* Large Screens (1 line) */}
+            <Box className="hidden lg:flex lg:justify-center w-full">
+              <GradientLetters
+                text="Asset Tokenization Marketplace"
+                keyPrefix="lg-line1"
+              />
+            </Box>
+
+            {/* Small and Medium screens: 2 lines */}
+            <Box className="flex flex-col items-center justify-center lg:hidden w-full">
+              <Box component="div" className="flex justify-center w-full">
+                <GradientLetters text="Asset Tokenization" keyPrefix="sm-line1" />
+              </Box>
+
+              <Box component="div" className="flex justify-center w-full">
+                <GradientLetters text="Marketplace" keyPrefix="sm-line2" />
+              </Box>
+            </Box>
+          </Box>
+        </Typography>
+
+        <Typography
+          variant="body1"
+          className="text-text-secondary text-center max-w-3xl mx-auto mb-12"
+        >
+          Discover and invest in tokenized assets across various categories.
+          Each asset is fractionally divided, allowing for smaller investment
+          thresholds.
+        </Typography>
+>>>>>>> f2a2f93df58a6eebec815de8f961cf10cedaeef4
 
         {/* Search and Filter Section */}
         <motion.div
