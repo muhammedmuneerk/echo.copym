@@ -203,14 +203,8 @@ export default function Marketplace() {
           }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-green-400 tracking-tight">
-            Asset Tokenization Marketplace
-          </h1>
-          <p className="text-gray-300 max-w-3xl mx-auto text-lg">
-            Discover and invest in tokenized assets across various categories.
-            Each asset is fractionally divided, allowing for smaller investment
-            thresholds.
-          </p>
+       
+     
         </motion.div>
         <Typography
           variant="h1"
