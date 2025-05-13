@@ -620,8 +620,8 @@ export default function TokenizationHub() {
             <div className="icon-container">
               <motion.div
                 animate={{ 
-                  rotate: 360,
-                  scale: [1, 1.1, 1]
+                  // rotate: 360,
+                  // scale: [1, 1.1, 1]
                 }}
                 transition={{ 
                   rotate: { duration: 20, repeat: Infinity, ease: "linear" },
@@ -956,8 +956,8 @@ export default function TokenizationHub() {
             <div className="icon-container">
               <motion.div
                 animate={{ 
-                  rotate: 360,
-                  scale: [1, 1.1, 1]
+                  // rotate: 360,
+                  // scale: [1, 1.1, 1]
                 }}
                 transition={{ 
                   rotate: { duration: 20, repeat: Infinity, ease: "linear" },
