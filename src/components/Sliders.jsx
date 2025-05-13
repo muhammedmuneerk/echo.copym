@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { Box, Grid, Typography } from "@mui/material";
@@ -122,8 +122,12 @@ const TokenizationSlider = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [direction, setDirection] = useState(1); // 1 for right, -1 for left
+  const [dragStartX, setDragStartX] = useState(0);
+  const [swipeDirection, setSwipeDirection] = useState(null);
   const navigate = useNavigate();
   const autoplayRef = useRef(null);
+  const controls = useAnimation();
+  const sliderRef = useRef(null);
 
   // Handle autoplay
   useEffect(() => {
@@ -139,6 +143,19 @@ const TokenizationSlider = () => {
       }
     };
   }, [currentIndex, isPaused]);
+
+  // Visual indicator for swipe
+  useEffect(() => {
+    if (swipeDirection === 'left') {
+      controls.start({ x: -10, opacity: 0.8 }).then(() => {
+        controls.start({ x: 0, opacity: 1 });
+      });
+    } else if (swipeDirection === 'right') {
+      controls.start({ x: 10, opacity: 0.8 }).then(() => {
+        controls.start({ x: 0, opacity: 1 });
+      });
+    }
+  }, [swipeDirection, controls]);
 
   const nextSlide = () => {
     if (isAnimating) return;
@@ -164,6 +181,63 @@ const TokenizationSlider = () => {
     setTimeout(() => {
       setIsAnimating(false);
     }, 600);
+  };
+
+  // Handle swipe gestures
+  const handleDragStart = (e) => {
+    if (window.innerWidth > 640) return; // Only enable on small screens
+    
+    // Reset swipe direction
+    setSwipeDirection(null);
+    
+    // For touch events
+    if (e.touches && e.touches[0]) {
+      setDragStartX(e.touches[0].clientX);
+    } 
+    // For mouse events
+    else if (e.clientX) {
+      setDragStartX(e.clientX);
+    }
+    
+    // Pause autoplay during dragging
+    setIsPaused(true);
+  };
+
+  const handleDragEnd = (e) => {
+    if (window.innerWidth > 640) return; // Only enable on small screens
+    
+    let endX;
+    
+    // For touch events
+    if (e.changedTouches && e.changedTouches[0]) {
+      endX = e.changedTouches[0].clientX;
+    } 
+    // For mouse events
+    else if (e.clientX) {
+      endX = e.clientX;
+    } else {
+      // Resume autoplay if we can't determine drag end
+      setIsPaused(false);
+      return;
+    }
+    
+    const diffX = endX - dragStartX;
+    const threshold = 50; // Minimum swipe distance
+    
+    if (diffX > threshold) {
+      // Swiped right - go to previous slide
+      setSwipeDirection('right');
+      prevSlide();
+    } else if (diffX < -threshold) {
+      // Swiped left - go to next slide
+      setSwipeDirection('left');
+      nextSlide();
+    }
+    
+    // Resume autoplay after dragging
+    setTimeout(() => {
+      setIsPaused(false);
+    }, 1000);
   };
 
   // Calculate positions for each card
@@ -245,8 +319,7 @@ const TokenizationSlider = () => {
   };
 
   return (
-    // <Grid item xs={12}>
-    <div className="max-w-full px-4 h-full overflow-hidden rounded-2xl ">
+    <div className="max-w-full px-4 h-full overflow-hidden rounded-2xl">
       {/* Content wrapper */}
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
@@ -256,7 +329,6 @@ const TokenizationSlider = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-
            <Typography
               variant="h2"
               className="text-3xl sm:text-4xl md:text-5xl mb-4 text-center"
@@ -277,7 +349,6 @@ const TokenizationSlider = () => {
                   <Box component="div" className="flex flex-wrap justify-center">
                     <GradientLetters text="Tokenization Ecosystem" keyPrefix="sm-line1" />
                   </Box>
-
                 </Box>
               </Box>
             </Typography>
@@ -286,14 +357,33 @@ const TokenizationSlider = () => {
             Discover our premium tokenization solutions across diverse asset
             classes
           </p>
+          
+          {/* Mobile swipe instruction - only show on small screens */}
+          <p className="text-gray-400 text-sm mt-2 block sm:hidden">
+            Swipe left or right to navigate
+          </p>
         </motion.div>
 
         {/* Main slider area */}
-        <div
+        <motion.div
+          ref={sliderRef}
           className="relative h-[550px] perspective-1000"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={handleDragStart}
+          onTouchEnd={handleDragEnd}
+          onMouseDown={handleDragStart}
+          onMouseUp={handleDragEnd}
+          animate={controls}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
+          {/* Visual swipe feedback indicator */}
+          <motion.div 
+            className="absolute inset-0 pointer-events-none z-50 sm:hidden"
+            initial={{ opacity: 0 }}
+            animate={controls}
+          />
+
           {/* Cards container */}
           <div className="relative h-full flex items-center justify-center">
             {cardData.map((card, index) => (
@@ -406,9 +496,9 @@ const TokenizationSlider = () => {
             ))}
           </div>
 
-          {/* Navigation buttons */}
+          {/* Navigation buttons - hidden on small screens */}
           <motion.button
-            className="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 z-40 bg-white/10 backdrop-blur-md text-white p-4 rounded-full shadow-lg hover:bg-white/20 transition-all duration-300 border border-white/20"
+            className="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 z-40 bg-white/10 backdrop-blur-md text-white p-4 rounded-full shadow-lg hover:bg-white/20 transition-all duration-300 border border-white/20 hidden sm:block"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={prevSlide}
@@ -418,7 +508,7 @@ const TokenizationSlider = () => {
           </motion.button>
 
           <motion.button
-            className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 z-40 bg-white/10 backdrop-blur-md text-white p-4 rounded-full shadow-lg hover:bg-white/20 transition-all duration-300 border border-white/20"
+            className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 z-40 bg-white/10 backdrop-blur-md text-white p-4 rounded-full shadow-lg hover:bg-white/20 transition-all duration-300 border border-white/20 hidden sm:block"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={nextSlide}
@@ -426,10 +516,22 @@ const TokenizationSlider = () => {
           >
             <ChevronRight size={24} />
           </motion.button>
-        </div>
+          
+          {/* Pagination dots - enhanced for small screens */}
+          <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2 z-40">
+            {cardData.map((_, index) => (
+              <motion.button
+                key={`dot-${index}`}
+                className="w-3 h-3 rounded-full bg-white/30"
+                animate={getIndicatorStyle(index)}
+                onClick={() => setCurrentIndex(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </motion.div>
       </div>
     </div>
-    // </Grid>
   );
 };
 
