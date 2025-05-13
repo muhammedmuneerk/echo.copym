@@ -934,11 +934,6 @@ const GoldTokenization = () => {
   
   return (
     <div className="min-h-screen  text-white">
-      {/* Fixed progress bar */}
-      <motion.div 
-        className="fixed top-0 left-0 right-0 h-1 bg-yellow-500 origin-left z-50"
-        style={{ scaleX }}
-      />
       
       {/* Animated background particle effect */}
       <GoldParticleFlow />
