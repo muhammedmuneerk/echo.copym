@@ -33,7 +33,7 @@ import {
 } from "lucide-react";
 import HamburgerMenu from "./HamburgerMenu";
 
-// Navigation structure with added Home button at the beginning
+// Navigation structure with Home button, which will be conditionally displayed
 const navigationItems = [
   {
     label: "Home",
@@ -89,6 +89,9 @@ export default function Navbar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const hamburgerRef = useRef(null);
+  
+  // Check if current page is homepage
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -135,6 +138,11 @@ export default function Navbar() {
     document.body.style.overflow = "auto";
   };
 
+  // Filter navigation items to remove Home button on homepage
+  const filteredNavigationItems = navigationItems.filter(item => 
+    !(item.label === "Home" && isHomePage)
+  );
+
   return (
     <>
       <AppBar 
@@ -175,7 +183,7 @@ export default function Navbar() {
 
             {/* Desktop Navigation - On the right */}
             <Box className="hidden lg:flex items-center space-x-1 ml-auto">
-              {navigationItems.map((item, index) => (
+              {filteredNavigationItems.map((item, index) => (
                 <motion.div
                   key={item.label}
                   initial={{ opacity: 0, y: -20 }}
@@ -347,7 +355,7 @@ export default function Navbar() {
       <HamburgerMenu 
         isOpen={mobileMenuOpen}
         onClose={closeMobileMenu}
-        navigationItems={navigationItems}
+        navigationItems={filteredNavigationItems}
       />
     </>
   );
