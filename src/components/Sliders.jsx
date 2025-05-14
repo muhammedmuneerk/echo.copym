@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Box, Grid, Typography } from "@mui/material";
 import GradientLetters from "./GradientLetters";
 import {
@@ -386,136 +386,132 @@ const TokenizationSlider = () => {
 
           {/* Cards container */}
           <div className="relative h-full flex items-center justify-center">
-            {cardData.map((card, index) => (
-              <motion.div
-                key={card.id}
-                className="absolute w-full max-w-lg h-[480px] cursor-pointer"
-                style={{ transformStyle: "preserve-3d" }}
-                animate={getCardStyle(index)}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 30,
-                  mass: 1,
-                }}
-                onClick={() => {
-                  if (index === currentIndex) {
-                    navigate(card.link);
-                  } else {
-                    // If clicking a side card, make it the active card
-                    setDirection(index > currentIndex ? 1 : -1);
-                    setCurrentIndex(index);
-                  }
-                }}
-              >
-                <InnerCardWrapper color={card.borderColor}>
-                  {/* Glass reflection effect */}
-                  <div className="glass-reflection"></div>
-
-                  {/* Card content */}
-                  <div className="card-content">
-                    {/* Card header/image section */}
-                    <div className="relative h-60 overflow-hidden">
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-30 mix-blend-overlay`}
-                      ></div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 z-10"></div>
-
-                      <img
-                        src={card.image}
-                        alt={card.title}
-                        className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
-                      />
-
-                      {/* Label badge */}
-                      <div
-                        className={`absolute top-6 left-6 py-1.5 px-4 rounded-full bg-gradient-to-r ${card.color} text-white text-sm font-medium z-20 shadow-lg`}
-                      >
-                        {card.title}
-                      </div>
-
-                      {/* Card Title */}
-                      <h3 className="absolute bottom-6 left-6 text-2xl font-bold text-white drop-shadow-md z-20">
-                        {card.description}
-                      </h3>
-                    </div>
+            {cardData.map((card, index) => {
+              const diff = (index - currentIndex + cardData.length) % cardData.length;
+              // Determine if this is a side card (immediately to the left or right)
+              const isSideCard = diff === 1 || diff === cardData.length - 1;
+              
+              return (
+                <motion.div
+                  key={card.id}
+                  className="absolute w-full max-w-lg h-[480px] cursor-pointer"
+                  style={{ transformStyle: "preserve-3d" }}
+                  animate={getCardStyle(index)}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                    mass: 1,
+                  }}
+                  onClick={() => {
+                    if (index === currentIndex) {
+                      navigate(card.link);
+                    } else {
+                      // If clicking a side card, make it the active card
+                      setDirection(index > currentIndex ? 1 : -1);
+                      setCurrentIndex(index);
+                    }
+                  }}
+                  // Trigger slide on hover for side cards (desktop only)
+                  onMouseEnter={() => {
+                    // Only slide on hover for big screens
+                    if (window.innerWidth >= 640) {
+                      if (diff === 1) { // Right card
+                        nextSlide();
+                      } else if (diff === cardData.length - 1) { // Left card
+                        prevSlide();
+                      }
+                    }
+                  }}
+                >
+                  <InnerCardWrapper color={card.borderColor}>
+                    {/* Glass reflection effect */}
+                    <div className="glass-reflection"></div>
 
                     {/* Card content */}
-                    <div className="flex flex-col flex-grow p-6 space-y-6">
-                      <p className="text-gray-200 text-base flex-grow leading-relaxed">
-                        {card.detailText}
-                      </p>
+                    <div className="card-content">
+                      {/* Card header/image section */}
+                      <div className="relative h-60 overflow-hidden">
+                        <div
+                          className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-30 mix-blend-overlay`}
+                        ></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 z-10"></div>
 
-                      {/* Features list */}
-                      <ul className="space-y-2 text-sm text-gray-300">
-                        <li className="flex items-center space-x-2">
-                          <span
-                            className={`w-2 h-2 rounded-full bg-gradient-to-r ${card.color}`}
-                          ></span>
-                          <span>Fractional ownership</span>
-                        </li>
-                        <li className="flex items-center space-x-2">
-                          <span
-                            className={`w-2 h-2 rounded-full bg-gradient-to-r ${card.color}`}
-                          ></span>
-                          <span>Blockchain secured</span>
-                        </li>
-                        <li className="flex items-center space-x-2">
-                          <span
-                            className={`w-2 h-2 rounded-full bg-gradient-to-r ${card.color}`}
-                          ></span>
-                          <span>Instant liquidity</span>
-                        </li>
-                      </ul>
-
-                      {/* CTA Button */}
-                      <motion.button
-                        className={`w-full bg-gradient-to-r ${card.color} text-white py-3 px-6 rounded-xl font-medium text-base flex items-center justify-center gap-2 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105`}
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate(card.link);
-                        }}
-                      >
-                        {card.buttonText}
-                        <ExternalLink
-                          size={18}
-                          className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+                        <img
+                          src={card.image}
+                          alt={card.title}
+                          className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
                         />
-                      </motion.button>
+
+                        {/* Label badge */}
+                        <div
+                          className={`absolute top-6 left-6 py-1.5 px-4 rounded-full bg-gradient-to-r ${card.color} text-white text-sm font-medium z-20 shadow-lg`}
+                        >
+                          {card.title}
+                        </div>
+
+                        {/* Card Title */}
+                        <h3 className="absolute bottom-6 left-6 text-2xl font-bold text-white drop-shadow-md z-20">
+                          {card.description}
+                        </h3>
+                      </div>
+
+                      {/* Card content */}
+                      <div className="flex flex-col flex-grow p-6 space-y-6">
+                        <p className="text-gray-200 text-base flex-grow leading-relaxed">
+                          {card.detailText}
+                        </p>
+
+                        {/* Features list */}
+                        <ul className="space-y-2 text-sm text-gray-300">
+                          <li className="flex items-center space-x-2">
+                            <span
+                              className={`w-2 h-2 rounded-full bg-gradient-to-r ${card.color}`}
+                            ></span>
+                            <span>Fractional ownership</span>
+                          </li>
+                          <li className="flex items-center space-x-2">
+                            <span
+                              className={`w-2 h-2 rounded-full bg-gradient-to-r ${card.color}`}
+                            ></span>
+                            <span>Blockchain secured</span>
+                          </li>
+                          <li className="flex items-center space-x-2">
+                            <span
+                              className={`w-2 h-2 rounded-full bg-gradient-to-r ${card.color}`}
+                            ></span>
+                            <span>Instant liquidity</span>
+                          </li>
+                        </ul>
+
+                        {/* CTA Button */}
+                        <motion.button
+                          className={`w-full bg-gradient-to-r ${card.color} text-white py-3 px-6 rounded-xl font-medium text-base flex items-center justify-center gap-2 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105`}
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(card.link);
+                          }}
+                        >
+                          {card.buttonText}
+                          <ExternalLink
+                            size={18}
+                            className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+                          />
+                        </motion.button>
+                      </div>
+
+                      {/* Card background accent */}
+                      <div
+                        className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${card.color}`}
+                      ></div>
                     </div>
-
-                    {/* Card background accent */}
-                    <div
-                      className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${card.color}`}
-                    ></div>
-                  </div>
-                </InnerCardWrapper>
-              </motion.div>
-            ))}
+                  </InnerCardWrapper>
+                </motion.div>
+              );
+            })}
           </div>
-
-          {/* Navigation buttons - hidden on small screens */}
-          <motion.button
-            className="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 z-40 bg-white/10 backdrop-blur-md text-white p-4 rounded-full shadow-lg hover:bg-white/20 transition-all duration-300 border border-white/20 hidden sm:block"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={prevSlide}
-            aria-label="Previous slide"
-          >
-            <ChevronLeft size={24} />
-          </motion.button>
-
-          <motion.button
-            className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 z-40 bg-white/10 backdrop-blur-md text-white p-4 rounded-full shadow-lg hover:bg-white/20 transition-all duration-300 border border-white/20 hidden sm:block"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={nextSlide}
-            aria-label="Next slide"
-          >
-            <ChevronRight size={24} />
-          </motion.button>
           
           {/* Pagination dots - enhanced for small screens */}
           {/* <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2 z-40">
