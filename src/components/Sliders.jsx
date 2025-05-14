@@ -518,7 +518,7 @@ const TokenizationSlider = () => {
           </motion.button>
           
           {/* Pagination dots - enhanced for small screens */}
-          <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2 z-40">
+          {/* <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2 z-40">
             {cardData.map((_, index) => (
               <motion.button
                 key={`dot-${index}`}
@@ -528,7 +528,7 @@ const TokenizationSlider = () => {
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
-          </div>
+          </div> */}
         </motion.div>
       </div>
     </div>
