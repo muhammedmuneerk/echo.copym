@@ -721,7 +721,7 @@ export default function TokenizationHub() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 1 }}
-            className="scroll-indicator"
+            className="scroll-indicator lg:hidden"
           >
             <p>Scroll to explore</p>
             <motion.div

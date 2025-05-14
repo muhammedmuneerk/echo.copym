@@ -209,7 +209,7 @@ const CommoditiesTokenization = () => {
         </section>
 
         {/* Redefine Commodity Investment Section */}
-        <section className="px-8 py-16 md:px-16 lg:px-24 flex flex-col md:flex-row relative">
+        <section className="px-8 py-16 lg:mt-20 md:px-16 lg:px-24 flex flex-col md:flex-row relative">
           {/* Background blobs */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-900/20 rounded-full filter blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-900/10 rounded-full filter blur-3xl"></div>
