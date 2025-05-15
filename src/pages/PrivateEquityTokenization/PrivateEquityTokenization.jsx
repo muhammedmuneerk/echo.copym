@@ -7,6 +7,7 @@ import {Box, Typography,Grid, } from "@mui/material";
 import { Globe2, ChartBar, Shield, Building2, BarChart3 } from "lucide-react";
 import BackgroundTheme from "../../ui/GridBackgroundTheme";
 import GradientLetters from "../../components/GradientLetters";
+import BackgroundPattern from "../../ui/BackgroundPattern";
 
 const FadeSection = ({ children }) => (
   <motion.div
@@ -25,7 +26,7 @@ const PrivateEquityTokenization = () => {
 
   return (
     <div className="text-white min-h-screen relative overflow-hidden font-sans">
-      
+      <BackgroundPattern/>      
 
       {/* Content */}
       <div className="relative z-10 px-6 pt-24 pb-24 space-y-24">

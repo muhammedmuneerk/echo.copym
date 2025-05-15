@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container, Typography, Box, Grid } from "@mui/material";
 import GradientLetters from "../../components/GradientLetters";
+import BackgroundPattern from "../../ui/BackgroundPattern";
 
 // Custom SVG Icons - Keeping original icons
 const TokenizationIcon = () => (
@@ -267,6 +268,7 @@ const DiverseAssetTokenization = () => {
   
   return (
     <div className="text-white min-h-screen relative overflow-hidden font-sans">
+      <BackgroundPattern />
       {/* Header Section with Parallax */}
       <div ref={headerRef} className="relative overflow-hidden">
         <section className="relative container mx-auto px-6 py-24">

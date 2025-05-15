@@ -11,6 +11,7 @@ import {
 import { Box, Typography, Container, Grid } from "@mui/material";
 import { ArrowRight, ArrowLeft, Globe2, Users } from "lucide-react";
 import GradientLetters from "../../components/GradientLetters";
+import BackgroundPattern from "../../ui/BackgroundPattern";
 
 const FadeSection = ({ children }) => (
   <motion.div
@@ -60,6 +61,7 @@ const ArtTokenization = () => {
 
   return (
     <div className="text-white min-h-screen relative overflow-hidden font-sans">
+      <BackgroundPattern /> 
       {/* Content sections continue from here */}
       {/* Hero Section */}
       <section className="relative container mx-auto px-6 py-24">

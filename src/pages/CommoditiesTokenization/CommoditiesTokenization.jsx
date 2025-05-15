@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, ArrowRight, ChevronDown, ChevronUp } from "l
 import { motion } from "framer-motion"; // Added import for motion component
 import { Container, Typography, Box, Grid } from "@mui/material";
 import GradientLetters from "../../components/GradientLetters";
+import BackgroundPattern from "../../ui/BackgroundPattern";
 
 // Custom Card component with glass-morphism effect
 const GlassCard = ({ children, className, hoverEffect = false }) => {
@@ -124,6 +125,7 @@ const CommoditiesTokenization = () => {
 
   return (
     <div className="min-h-screen  text-white relative overflow-hidden">
+      <BackgroundPattern />
       <div className="relative z-10">
         {/* Hero Section */}
         <section
