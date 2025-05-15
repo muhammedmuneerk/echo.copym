@@ -246,7 +246,7 @@ const GreenTokenization = () => {
                 </div>
                 <div className="relative h-[300px] md:h-full min-h-[300px] rounded-xl overflow-hidden shadow-lg order-1 md:order-2">
                   <img 
-                    src="/images/sustainable-metals.jpg" 
+                    src="assets/images/sustainable-metals.jpeg" 
                     alt="Sustainable Metals Mining" 
                     className="absolute inset-0 w-full h-full object-cover rounded-xl"
                   />
@@ -257,9 +257,9 @@ const GreenTokenization = () => {
 
             {/* Portfolio */}
             <div className=" p-8 grid md:grid-cols-2 gap-6">
-              <img src="/images/esg-diversified.jpg" alt="Diversified ESG Portfolio" className="rounded-xl shadow-md" />
+              <img src="assets/images/Diversified-ESG-Portfolio.jpeg" alt="Diversified ESG Portfolio" className="rounded-xl shadow-md" />
               <div>
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-3 mb-4 lg:mt-14">
                   <LineChart className="w-8 h-8 text-[#00A86B]" />
 
                   <Typography
