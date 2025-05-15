@@ -5,7 +5,8 @@ export default {
     extend: {
       backgroundImage: {
         "custom-gradient":
-          "linear-gradient(90deg, rgb(12, 33, 75) 0%, rgba(47, 118, 51, 1) 50%, rgba(47, 118, 50, 1) 100%)",
+        "linear-gradient(90deg, rgb(12, 33, 75, 0.9) 0%, rgba(47, 118, 50, 0.9) 70%)",
+          // "linear-gradient(90deg, rgb(12, 33, 75) 0%, rgba(47, 118, 51, 1) 50%, rgba(47, 118, 50, 1) 100%)",
       },
       colors: {
         primary: {
