@@ -1,21 +1,11 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Container,
   Typography,
   Box,
-  TextField,
-  Select,
-  MenuItem,
-  Slider,
-  Grid,
-  LinearProgress,
-  Button,
-  FormControl,
-  InputLabel,
 } from "@mui/material";
 import GradientLetters from "../../components/GradientLetters";
-
+import { TrendingUp, MapPin, Coins  } from "lucide-react";
 
 const mockAssets = [
   {
@@ -159,38 +149,25 @@ export default function Marketplace() {
     }));
   };
 
-  // Card variant for Framer Motion
-  const cardVariants = {
+  // Card appear animation variant
+  const cardAnimationVariant = {
     hidden: { 
       opacity: 0, 
-      scale: 0.8,
-      x: -50,
-      rotate: -10
+      y: 50,
     },
     visible: (index) => ({ 
       opacity: 1, 
-      scale: 1,
-      x: 0,
-      rotate: 0,
+      y: 0,
       transition: {
         delay: index * 0.1,
-        type: "spring",
-        stiffness: 300,
-        damping: 15
+        duration: 0.6,
+        ease: "easeOut"
       }
-    }),
-    hover: {
-      scale: 1.05,
-      rotate: 2,
-      transition: {
-        type: "spring",
-        stiffness: 300
-      }
-    }
+    })
   };
 
   return (
-    <div className="w-full min-h-screen py-16 bg-gradient-to-br text-white">
+    <div className="w-full min-h-screen py-16 text-white">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header Section */}
         <motion.div
@@ -203,46 +180,44 @@ export default function Marketplace() {
           }}
           className="text-center mb-12"
         >
-       
-     
-        </motion.div>
-        <Typography
-          variant="h1"
-          className="w-full text-4xl md:text-5xl lg:text-6xl font-bold mb-4 mt-20 text-center"
-        >
-          <Box
-            component="div"
-            className="flex flex-col items-center justify-center w-full"
+          <Typography
+            variant="h1"
+            className="w-full text-4xl md:text-5xl lg:text-6xl font-bold mb-4 mt-20 text-center"
           >
-            {/* Large Screens (1 line) */}
-            <Box className="hidden lg:flex lg:justify-center w-full">
-              <GradientLetters
-                text="Asset Tokenization Marketplace"
-                keyPrefix="lg-line1"
-              />
-            </Box>
-
-            {/* Small and Medium screens: 2 lines */}
-            <Box className="flex flex-col items-center justify-center lg:hidden w-full">
-              <Box component="div" className="flex justify-center w-full">
-                <GradientLetters text="Asset Tokenization" keyPrefix="sm-line1" />
+            <Box
+              component="div"
+              className="flex flex-col items-center justify-center w-full"
+            >
+              {/* Large Screens (1 line) */}
+              <Box className="hidden lg:flex lg:justify-center w-full">
+                <GradientLetters
+                  text="Asset Tokenization Marketplace"
+                  keyPrefix="lg-line1"
+                />
               </Box>
 
-              <Box component="div" className="flex justify-center w-full">
-                <GradientLetters text="Marketplace" keyPrefix="sm-line2" />
+              {/* Small and Medium screens: 2 lines */}
+              <Box className="flex flex-col items-center justify-center lg:hidden w-full">
+                <Box component="div" className="flex justify-center w-full">
+                  <GradientLetters text="Asset Tokenization" keyPrefix="sm-line1" />
+                </Box>
+
+                <Box component="div" className="flex justify-center w-full">
+                  <GradientLetters text="Marketplace" keyPrefix="sm-line2" />
+                </Box>
               </Box>
             </Box>
-          </Box>
-        </Typography>
+          </Typography>
 
-        <Typography
-          variant="body1"
-          className="text-text-secondary text-center max-w-3xl mx-auto mb-12"
-        >
-          Discover and invest in tokenized assets across various categories.
-          Each asset is fractionally divided, allowing for smaller investment
-          thresholds.
-        </Typography>
+          <Typography
+            variant="body1"
+            className="text-gray-100/90 text-center max-w-3xl mx-auto mb-12"
+          >
+            Discover and invest in tokenized assets across various categories.
+            Each asset is fractionally divided, allowing for smaller investment
+            thresholds.
+          </Typography>
+        </motion.div>
 
         {/* Search and Filter Section */}
         <motion.div
@@ -254,66 +229,68 @@ export default function Marketplace() {
             type: "spring",
             stiffness: 100
           }}
-          className="mb-8"
+          className="mb-12"
         >
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            {/* Search Input */}
-            <input
-              type="text"
-              placeholder="Search assets..."
-              className="w-full p-3 bg-gray-800 rounded-lg border border-gray-700 text-white col-span-2 focus:ring-2 focus:ring-green-500 transition duration-300"
-              value={searchParams.query}
-              onChange={(e) => updateSearchParams({ query: e.target.value })}
-            />
-
-            {/* Category Dropdown */}
-            <select
-              className="w-full p-3 bg-gray-800 rounded-lg border border-gray-700 text-white focus:ring-2 focus:ring-green-500 transition duration-300"
-              value={searchParams.category}
-              onChange={(e) => updateSearchParams({ category: e.target.value })}
-            >
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-
-            {/* Price Range */}
-            <div className="flex items-center space-x-3">
-              <span className="text-sm text-gray-400 whitespace-nowrap">
-                ${searchParams.priceRange[1].toLocaleString()}
-              </span>
+          <div className="backdrop-blur-xl bg-white/10 p-6 rounded-2xl shadow-2xl border border-white/20">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+              {/* Search Input */}
               <input
-                type="range"
-                min="0"
-                max="1000000"
-                step="10000"
-                value={searchParams.priceRange[1]}
-                onChange={(e) => updateSearchParams({ 
-                  priceRange: [searchParams.priceRange[0], Number(e.target.value)] 
-                })}
-                className="w-full h-2 bg-gray-700 rounded-full appearance-none cursor-pointer"
+                type="text"
+                placeholder="Search assets..."
+                className="w-full p-3 bg-white/20 rounded-lg border border-white/30 text-white col-span-2 focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition duration-300 placeholder-white/60"
+                value={searchParams.query}
+                onChange={(e) => updateSearchParams({ query: e.target.value })}
               />
-            </div>
 
-            {/* Sort Dropdown */}
-            <select
-              className="w-full p-3 bg-gray-800 rounded-lg border border-gray-700 text-white focus:ring-2 focus:ring-green-500 transition duration-300"
-              value={searchParams.sortBy}
-              onChange={(e) => updateSearchParams({ sortBy: e.target.value })}
-            >
-              {["Latest", "ROI", "Price: Low to High", "Price: High to Low"].map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+              {/* Category Dropdown */}
+              <select
+                className="w-full p-3 bg-white/20 rounded-lg border border-white/30 text-white focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition duration-300"
+                value={searchParams.category}
+                onChange={(e) => updateSearchParams({ category: e.target.value })}
+              >
+                {categories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+
+              {/* Price Range */}
+              <div className="flex items-center space-x-3">
+                <span className="text-sm text-white/70 whitespace-nowrap">
+                  ${searchParams.priceRange[1].toLocaleString()}
+                </span>
+                <input
+                  type="range"
+                  min="0"
+                  max="1000000"
+                  step="10000"
+                  value={searchParams.priceRange[1]}
+                  onChange={(e) => updateSearchParams({ 
+                    priceRange: [searchParams.priceRange[0], Number(e.target.value)] 
+                  })}
+                  className="w-full h-2 bg-white/30 rounded-full appearance-none cursor-pointer accent-emerald-400"
+                />
+              </div>
+
+              {/* Sort Dropdown */}
+              <select
+                className="w-full p-3 bg-white/20 rounded-lg border border-white/30 text-white focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition duration-300"
+                value={searchParams.sortBy}
+                onChange={(e) => updateSearchParams({ sortBy: e.target.value })}
+              >
+                {["Latest", "ROI", "Price: Low to High", "Price: High to Low"].map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </motion.div>
 
         {/* Results Count */}
-        <p className="mb-4 text-gray-400">
+        <p className="mb-6 text-white/70 font-medium">
           Showing {filteredAssets.length} of {mockAssets.length} assets
         </p>
 
@@ -338,80 +315,92 @@ export default function Marketplace() {
               <motion.div
                 key={asset.id}
                 custom={index}
-                variants={cardVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
+                variants={cardAnimationVariant}
                 className="w-full max-w-[400px]"
               >
-                <div className="bg-gray-800 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 transform transition-all w-full">
-                  {/* Asset Image */}
+                {/* Glassmorphism Card */}
+                <div className="relative w-full overflow-hidden backdrop-blur-2xl bg-white/10 rounded-2xl border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]">
+                  {/* Subtle gradient overlay on card */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none"></div>
+                  
+                  {/* Asset Image with gradient overlay */}
                   <div className="w-full aspect-video overflow-hidden relative">
-                    <motion.img 
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <img 
                       src={asset.image} 
                       alt={asset.title}
                       className="w-full h-full object-cover"
-                      initial={{ scale: 1 }}
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.3 }}
                     />
+                    {/* Category badge positioned on the image */}
+                    <div className="absolute top-4 right-4 z-20">
+                      <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md bg-emerald-500/30 text-white border border-emerald-400/30">
+                        {asset.category}
+                      </span>
+                    </div>
                   </div>
 
                   {/* Asset Details */}
-                  <div className="p-6">
-                    <div className="mb-3">
-                      <motion.span 
-                        className="inline-block px-3 py-1 rounded-full text-sm bg-green-900 text-green-400"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                      >
-                        {asset.category}
-                      </motion.span>
-                    </div>
-                    <h2 className="text-xl font-bold mb-3 text-white">
+                  <div className="p-6 relative">
+                    {/* Title */}
+                    <h2 className="text-xl font-bold mb-4 text-white">
                       {asset.title}
                     </h2>
-                    <p className="text-gray-400 mb-2">
-                      Location: {asset.location}
-                    </p>
-                    <p className="text-gray-400 mb-3">
-                      Expected ROI: {asset.expectedRoi}
-                    </p>
                     
-                    {/* Token Availability */}
-                    <div className="mb-4">
-                      <p className="text-sm text-gray-400 mb-2">
-                        Available: {asset.availableTokens}/{asset.totalTokens} tokens
-                      </p>
-                      <div className="w-full bg-gray-700 rounded-full h-2.5">
+                    {/* Info Grid */}
+                    <div className="grid grid-cols-1 gap-y-3 mb-6">
+                      {/* Location */}
+                      <div className="flex items-center space-x-2">
+                        <MapPin size={16} className="text-emerald-300" />
+                        <p className="text-white/80">
+                          {asset.location}
+                        </p>
+                      </div>
+                      
+                      {/* ROI */}
+                      <div className="flex items-center space-x-2">
+                        <TrendingUp size={16} className="text-emerald-300" />
+                        <p className="text-white/80">
+                          Expected ROI: <span className="font-semibold text-emerald-300">{asset.expectedRoi}</span>
+                        </p>
+                      </div>
+                      
+                      {/* Token info */}
+                      <div className="flex items-center space-x-2">
+                        <Coins  size={16} className="text-emerald-300" />
+                        <p className="text-white/80">
+                          {asset.availableTokens}/{asset.totalTokens} tokens available
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Progress bar */}
+                    <div className="mb-6">
+                      <div className="w-full h-1.5 bg-white/20 rounded-full overflow-hidden">
                         <motion.div 
-                          className="bg-green-500 h-2.5 rounded-full" 
+                          className="h-full bg-gradient-to-r from-emerald-400 to-emerald-600" 
                           initial={{ width: 0 }}
                           animate={{ 
                             width: `${(asset.availableTokens / asset.totalTokens) * 100}%`
                           }}
                           transition={{ 
-                            duration: 0.5,
-                            type: "spring",
-                            stiffness: 50
+                            duration: 0.8,
+                            ease: "easeOut"
                           }}
                         ></motion.div>
                       </div>
                     </div>
 
-                    {/* Price and Invest Button */}
+                    {/* Price and Button */}
                     <div className="flex items-center justify-between">
-                      <span className="text-xl font-bold text-green-400">
-                        ${asset.price.toLocaleString()}
-                      </span>
-                      <motion.button 
-                        className="px-5 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
+                      <div>
+                        <p className="text-xs text-emerald-300/80 uppercase font-medium tracking-wider mb-1">Price</p>
+                        <p className="text-2xl font-bold text-white">
+                          ${asset.price.toLocaleString()}
+                        </p>
+                      </div>
+                      <button className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg font-medium transition duration-300 hover:shadow-lg hover:shadow-emerald-700/40 focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-transparent">
                         Invest
-                      </motion.button>
+                      </button>
                     </div>
                   </div>
                 </div>
