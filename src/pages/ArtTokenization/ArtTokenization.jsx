@@ -307,7 +307,7 @@ const ArtTokenization = () => {
                         </button>
 
                         {artworkDetails && (
-                          <div className="bg-[#001a12]/30 -mt-4 mb-4 p-4 rounded-b-md">
+                          <div className="bg-[#001a12]/30 mt-4 mb-4 p-4 rounded-b-md">
                             <div className="grid grid-cols-2 gap-4 mb-4">
                               <div>
                                 <p className="text-[#999999] text-sm">
@@ -359,7 +359,7 @@ const ArtTokenization = () => {
                           </div>
                         )}
 
-                        <button className="w-full bg-[#00A86B]/10 backdrop-blur-lg py-3 px-6 rounded-full font-medium flex items-center justify-center transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105">
+                        <button className="w-full bg-[#00A86B]/10 backdrop-blur-lg py-3 px-6 mt-4 rounded-full font-medium flex items-center justify-center transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105">
                           <span className="text-[#00A86B]">
                             View Investment Opportunity
                           </span>
