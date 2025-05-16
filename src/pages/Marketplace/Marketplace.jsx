@@ -1,11 +1,9 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Typography,
-  Box,
-} from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import GradientLetters from "../../components/GradientLetters";
-import { TrendingUp, MapPin, Coins  } from "lucide-react";
+import { TrendingUp, MapPin, Coins, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom"; // Import Link for navigation
 
 const mockAssets = [
   {
@@ -85,6 +83,17 @@ const categories = [
   "Startups",
 ];
 
+// Map asset categories to navigation paths
+const categoryToPath = {
+  "Real Estate": "/tokenization/real-estate",
+  "Art": "/tokenization/art",
+  "Commodities": "/tokenization/commodities",
+  "Infrastructure": "/tokenization/carbon-credits", // Closest match from navigation
+  "Startups": "/tokenization/private-equity", // Closest match from navigation
+  // Default fallback
+  "default": "/tokenization"
+};
+
 export default function Marketplace() {
   const [searchParams, setSearchParams] = useState({
     query: "",
@@ -147,6 +156,11 @@ export default function Marketplace() {
       ...prev,
       ...updates
     }));
+  };
+
+  // Get the appropriate path for an asset based on its category
+  const getAssetPath = (asset) => {
+    return categoryToPath[asset.category] || categoryToPath.default;
   };
 
   // Card appear animation variant
@@ -366,7 +380,7 @@ export default function Marketplace() {
                       
                       {/* Token info */}
                       <div className="flex items-center space-x-2">
-                        <Coins  size={16} className="text-emerald-300" />
+                        <Coins size={16} className="text-emerald-300" />
                         <p className="text-white/80">
                           {asset.availableTokens}/{asset.totalTokens} tokens available
                         </p>
@@ -390,8 +404,8 @@ export default function Marketplace() {
                       </div>
                     </div>
 
-                    {/* Price and Button */}
-                    <div className="flex items-center justify-between">
+                    {/* Price and Invest Button */}
+                    <div className="flex items-center justify-between mb-4">
                       <div>
                         <p className="text-xs text-emerald-300/80 uppercase font-medium tracking-wider mb-1">Price</p>
                         <p className="text-2xl font-bold text-white">
@@ -402,6 +416,15 @@ export default function Marketplace() {
                         Invest
                       </button>
                     </div>
+                    
+                    {/* Know More Button */}
+                    <Link 
+                      to={getAssetPath(asset)} 
+                      className="flex items-center justify-center w-full py-2.5 mt-2 bg-white/10 hover:bg-white/20 text-white rounded-lg font-medium transition duration-300 border border-white/20 hover:border-white/30 group"
+                    >
+                      <span>Know More</span>
+                      <ExternalLink size={14} className="ml-2 text-emerald-300 group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
                   </div>
                 </div>
               </motion.div>
