@@ -6,6 +6,77 @@ import { Container, Typography, Box, Grid } from "@mui/material";
 import GradientLetters from "../../components/GradientLetters";
 import BackgroundPattern from "../../ui/BackgroundPattern";
 
+// Floating Navigation component
+const FloatingNavigation = ({ sections, activeSection }) => {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  if (isMobile) return null; // Hide on mobile
+  
+  return (
+    <motion.div
+      initial={{ y: 50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 1, duration: 0.5 }}
+      className="floating-navigation"
+      style={{
+        position: "fixed",
+        bottom: "32px",
+        left: "50%",
+        transform: "translateX(-50%)",
+        display: "flex",
+        padding: "8px",
+        borderRadius: "16px",
+        backgroundColor: "rgba(18, 19, 26, 0.7)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+        border: "1px solid rgba(255, 255, 255, 0.08)",
+        zIndex: 100
+      }}
+    >
+      {sections.map((section, index) => (
+        <motion.a
+          key={section.id}
+          href={`#${section.id}`}
+          whileHover={{ scale: 1.1 }}
+          className="nav-item"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            padding: "8px 16px",
+            borderRadius: "8px",
+            margin: "0 4px",
+            backgroundColor: activeSection === index ? "rgba(0, 255, 133, 0.2)" : "transparent",
+            transition: "background-color 0.3s ease",
+            textDecoration: "none"
+          }}
+        >
+          <span style={{
+            fontSize: "0.75rem",
+            fontWeight: activeSection === index ? 600 : 400,
+            color: activeSection === index ? "#00ff85" : "rgba(255, 255, 255, 0.7)",
+            transition: "color 0.3s ease",
+            fontFamily: "'Orbitron', sans-serif",
+          }}>
+            {section.title}
+          </span>
+        </motion.a>
+      ))}
+    </motion.div>
+  );
+};
+
 // Custom Card component with glass-morphism effect
 const GlassCard = ({ children, className, hoverEffect = false }) => {
   return (
@@ -118,17 +189,64 @@ const CommoditiesTokenization = () => {
   const [detailsOpen, setDetailsOpen] = useState(false); // Set to false to start closed
   const [activeTab, setActiveTab] = useState("preciousMetals");
   const heroRef = useRef(null);
-
+  const [activeSection, setActiveSection] = useState(0);
+  
+  // Define sections for navigation
+  const sections = [
+    { id: "hero", title: "Intro" },
+    { id: "redefine", title: "Benefits" },
+    { id: "commodity-types", title: "Assets" },
+    { id: "tokenization-benefits", title: "Advantages" },
+    { id: "cta", title: "Get Started" }
+  ];
+  
   const toggleDetails = () => {
     setDetailsOpen(prevState => !prevState);
   };
+  
+  useEffect(() => {
+    // Initialize section observation
+    const sectionElements = sections.map(section => document.getElementById(section.id));
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const sectionIndex = sectionElements.findIndex(
+              element => element === entry.target
+            );
+            if (sectionIndex !== -1) {
+              setActiveSection(sectionIndex);
+            }
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    
+    // Observe all section elements
+    sectionElements.forEach(element => {
+      if (element) {
+        observer.observe(element);
+      }
+    });
+    
+    return () => {
+      sectionElements.forEach(element => {
+        if (element) {
+          observer.unobserve(element);
+        }
+      });
+    };
+  }, []);
 
   return (
-    <div className="min-h-screen  text-white relative overflow-hidden">
+    <div className="min-h-screen text-white relative overflow-hidden">
       <BackgroundPattern />
       <div className="relative z-10">
         {/* Hero Section */}
         <section
+          id="hero"
           ref={heroRef}
           className="px-8 py-24 md:px-16 lg:px-24 min-h-[90vh] flex flex-col justify-center relative"
         >
@@ -196,7 +314,7 @@ const CommoditiesTokenization = () => {
         </section>
 
         {/* Redefine Commodity Investment Section */}
-        <section className="px-8 py-16 lg:mt-20 md:px-16 lg:px-24 flex flex-col md:flex-row relative">
+        <section id="redefine" className="px-8 py-16 lg:mt-20 md:px-16 lg:px-24 flex flex-col md:flex-row relative">
           {/* Background blobs */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-900/20 rounded-full filter blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-900/10 rounded-full filter blur-3xl"></div>
@@ -440,7 +558,7 @@ const CommoditiesTokenization = () => {
         </section>
 
         {/* Tokenizable Commodity Types */}
-        <section className="px-8 py-16 md:px-16 lg:px-24 text-center relative">
+        <section id="commodity-types" className="px-8 py-16 md:px-16 lg:px-24 text-center relative">
           {/* Background effect */}
           <div className="absolute inset-0 z-0">
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-900/20 rounded-full filter blur-3xl"></div>
@@ -579,7 +697,7 @@ const CommoditiesTokenization = () => {
         </section>
 
         {/* Benefits */}
-        <section className="px-8 py-16 md:px-16 lg:px-24 text-center relative">
+        <section id="tokenization-benefits" className="px-8 py-16 md:px-16 lg:px-24 text-center relative">
           <div className="relative z-10">
             <Typography
               variant="h2"
@@ -696,7 +814,7 @@ const CommoditiesTokenization = () => {
         </section>
 
         {/* Final CTA */}
-        <section className="px-8 py-20 md:px-16 lg:px-24 text-center relative">
+        <section id="cta" className="px-8 py-20 md:px-16 lg:px-24 text-center relative">
           {/* Advanced background glow */}
           <motion.div
             className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-emerald-500 filter blur-[100px] opacity-15"
@@ -768,6 +886,7 @@ const CommoditiesTokenization = () => {
           </div>
         </section>
       </div>
+      <FloatingNavigation sections={sections} activeSection={activeSection} />
 
     </div>
   );
