@@ -9,6 +9,8 @@ import { Leaf, Globe2, Shield, Users } from "lucide-react";
 import { Box, Typography, Grid, Container } from "@mui/material";
 import GradientLetters from "../../components/GradientLetters";
 import BackgroundPattern from "../../ui/BackgroundPattern";
+import FloatingNavigation from '../../components/FloatingNavigation';
+import useSectionObserver from '../../hooks/useSectionObserver';
 
 const FadeSection = ({ children }) => (
   <motion.div
@@ -22,79 +24,9 @@ const FadeSection = ({ children }) => (
   </motion.div>
 );
 
-// Floating Navigation Component
-const FloatingNavigation = ({ sections, activeSection }) => {
-  const [isMobile, setIsMobile] = useState(false);
-  
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-  
-  if (isMobile) return null; // Hide on mobile
-  
-  return (
-    <motion.div
-      initial={{ y: 50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 1, duration: 0.5 }}
-      className="floating-navigation"
-      style={{
-        position: "fixed",
-        bottom: "32px",
-        left: "50%",
-        transform: "translateX(-50%)",
-        display: "flex",
-        padding: "8px",
-        borderRadius: "16px",
-        backgroundColor: "rgba(0, 26, 18, 0.7)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
-        border: "1px solid rgba(0, 168, 107, 0.2)",
-        zIndex: 100
-      }}
-    >
-      {sections.map((section, index) => (
-        <motion.a
-          key={section.id}
-          href={`#${section.id}`}
-          whileHover={{ scale: 1.1 }}
-          className="nav-item"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            padding: "8px 16px",
-            borderRadius: "8px",
-            margin: "0 4px",
-            backgroundColor: activeSection === index ? "rgba(0, 168, 107, 0.2)" : "transparent",
-            transition: "background-color 0.3s ease",
-            textDecoration: "none"
-          }}
-        >
-          <span style={{
-            fontSize: "0.75rem",
-            fontWeight: activeSection === index ? 600 : 400,
-            color: activeSection === index ? "#00A86B" : "rgba(255, 255, 255, 0.7)",
-            transition: "color 0.3s ease",
-            fontFamily: "'Orbitron', sans-serif",
-          }}>
-            {section.title}
-          </span>
-        </motion.a>
-      ))}
-    </motion.div>
-  );
-};
+
 
 const CarbonCreditsTokenization = () => {
-  const [activeSection, setActiveSection] = useState(0);
   
   // Define sections for navigation
   const sections = [
@@ -105,41 +37,7 @@ const CarbonCreditsTokenization = () => {
     { id: "cta", title: "Get Started" }
   ];
   
-  useEffect(() => {
-    // Initialize section observation
-    const sectionElements = sections.map(section => document.getElementById(section.id));
-    
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const sectionIndex = sectionElements.findIndex(
-              element => element === entry.target
-            );
-            if (sectionIndex !== -1) {
-              setActiveSection(sectionIndex);
-            }
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-    
-    // Observe all section elements
-    sectionElements.forEach(element => {
-      if (element) {
-        observer.observe(element);
-      }
-    });
-    
-    return () => {
-      sectionElements.forEach(element => {
-        if (element) {
-          observer.unobserve(element);
-        }
-      });
-    };
-  }, []);
+const activeSection = useSectionObserver(sections);
 
   return (
     <div className="text-white min-h-screen relative overflow-hidden font-sans">
