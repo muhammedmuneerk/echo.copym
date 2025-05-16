@@ -5,6 +5,8 @@ import PropertyCard from "./PropertyCard";
 import BackgroundTheme from "../../ui/GridBackgroundTheme";
 import GradientLetters from "../../components/GradientLetters";
 import { Container, Typography, Box, Grid } from "@mui/material";
+import FloatingNavigation from '../../components/FloatingNavigation';
+import useSectionObserver from '../../hooks/useSectionObserver';
 
 // Custom components to replace MUI
 
@@ -30,6 +32,17 @@ const RealEstateTokenization = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [currentProperty, setCurrentProperty] = useState(0);
   const [animateTokens, setAnimateTokens] = useState(true); // Set to true initially to skip animation
+
+    // Define sections for navigation
+  const sections = [
+    { id: "hero", title: "Intro" },
+    { id: "redefine", title: "Advantages" },
+    { id: "tokenization-process", title: "Process" },
+    { id: "tokenization-benefits", title: "Benefits" },
+    { id: "cta", title: "Get Started" }
+  ];
+
+  const activeSection = useSectionObserver(sections);
 
   // Properties data
   const properties = [
@@ -62,7 +75,7 @@ const RealEstateTokenization = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative container mx-auto px-6 py-24">
+      <section id="hero" className="relative container mx-auto px-6 py-24">
         <div className="max-w-4xl mt-20 relative z-10">
           <div className="h-px bg-gradient-to-r from-emerald-500 to-transparent absolute -top-4 left-0 w-[60%]" />
           <div className="h-px bg-gradient-to-r from-emerald-500 to-transparent absolute -top-8 left-0 w-[30%]" />
@@ -134,7 +147,7 @@ const RealEstateTokenization = () => {
       </section>
 
       {/* Revolutionize Section */}
-      <section className="container mx-auto px-6 py-20">
+      <section id="redefine" className="container mx-auto px-6 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
             <div className="relative mb-8">
@@ -228,7 +241,7 @@ const RealEstateTokenization = () => {
       </section>
 
       {/* Tokenization Process Section */}
-      <section className="container mx-auto px-6 py-20 relative">
+      <section id="tokenization-process" className="container mx-auto px-6 py-20 relative">
         <div className="text-center mb-16 relative">
           <div className="absolute left-1/2 transform -translate-x-1/2 -top-10 w-24 h-24 rounded-full bg-emerald-500 filter blur-[80px] opacity-30" />
 
@@ -325,7 +338,7 @@ const RealEstateTokenization = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="container mx-auto px-6 py-20">
+      <section id="tokenization-benefits" className="container mx-auto px-6 py-20">
         <div className="text-center mb-16">
 
         <Typography
@@ -403,7 +416,7 @@ const RealEstateTokenization = () => {
       </section>
 
       {/* Final CTA Section with enhanced background */}
-      <section className="container mx-auto px-6 py-20 text-center relative">
+      <section id="cta" className="container mx-auto px-6 py-20 text-center relative">
         {/* Advanced background glow - keeping animation as it's not a startup animation */}
         <motion.div
           className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-emerald-500 filter blur-[100px] opacity-15"
@@ -509,6 +522,7 @@ const RealEstateTokenization = () => {
           </div>
         </div>
       </section>
+      <FloatingNavigation sections={sections} activeSection={activeSection} />
     </div>
   );
 };
