@@ -148,7 +148,7 @@ export default function Navbar() {
       <AppBar 
         position="absolute"
         color="transparent"
-        elevation={scrolled ? 10 : 0}
+        elevation={scrolled ? 0 : 0} // No shadow/elevation when scrolled because of value 0 
         sx={{
           backdropFilter: scrolled ? "none" : "none",
           backgroundColor: scrolled ? "transparent" : "transparent",
