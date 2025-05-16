@@ -29,7 +29,8 @@ const FadeSection = ({ children }) => (
 );
 
 const ArtTokenization = () => {
-  const [artworkDetails, setArtworkDetails] = useState(true);
+  // Changed initial state from true to false to ensure details are closed on startup
+  const [artworkDetails, setArtworkDetails] = useState(false);
   
   // Define sections for navigation
   const sections = [
