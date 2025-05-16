@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import LockIcon from "@mui/icons-material/Lock";
@@ -21,18 +21,139 @@ const FadeSection = ({ children }) => (
   </motion.div>
 );
 
+// Floating Navigation Component
+const FloatingNavigation = ({ sections, activeSection }) => {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  if (isMobile) return null; // Hide on mobile
+  
+  return (
+    <motion.div
+      initial={{ y: 50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 1, duration: 0.5 }}
+      className="floating-navigation"
+      style={{
+        position: "fixed",
+        bottom: "32px",
+        left: "50%",
+        transform: "translateX(-50%)",
+        display: "flex",
+        padding: "8px",
+        borderRadius: "16px",
+        backgroundColor: "rgba(18, 19, 26, 0.7)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+        border: "1px solid rgba(255, 255, 255, 0.08)",
+        zIndex: 100
+      }}
+    >
+      {sections.map((section, index) => (
+        <motion.a
+          key={section.id}
+          href={`#${section.id}`}
+          whileHover={{ scale: 1.1 }}
+          className="nav-item"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            padding: "8px 16px",
+            borderRadius: "8px",
+            margin: "0 4px",
+            backgroundColor: activeSection === index ? "rgba(0, 255, 133, 0.2)" : "transparent",
+            transition: "background-color 0.3s ease",
+            textDecoration: "none"
+          }}
+        >
+          <span style={{
+            fontSize: "0.75rem",
+            fontWeight: activeSection === index ? 600 : 400,
+            color: activeSection === index ? "#00ff85" : "rgba(255, 255, 255, 0.7)",
+            transition: "color 0.3s ease",
+            fontFamily: "'Orbitron', sans-serif",
+          }}>
+            {section.title}
+          </span>
+        </motion.a>
+      ))}
+    </motion.div>
+  );
+};
+
 const PrivateEquityTokenization = () => {
   const [investmentDetails, setInvestmentDetails] = useState(false);
+  const [activeSection, setActiveSection] = useState(0);
+  
+  // Define sections for navigation
+  const sections = [
+    { id: "hero", title: "Overview" },
+    { id: "features", title: "Features" },
+    { id: "types", title: "Asset Types" },
+    { id: "investment", title: "Investment" },
+    { id: "benefits", title: "Benefits" },
+    { id: "cta", title: "Get Started" }
+  ];
+  
+  useEffect(() => {
+    // Initialize section observation
+    const sectionElements = sections.map(section => document.getElementById(section.id));
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const sectionIndex = sectionElements.findIndex(
+              element => element === entry.target
+            );
+            if (sectionIndex !== -1) {
+              setActiveSection(sectionIndex);
+            }
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    
+    // Observe all section elements
+    sectionElements.forEach(element => {
+      if (element) {
+        observer.observe(element);
+      }
+    });
+    
+    return () => {
+      sectionElements.forEach(element => {
+        if (element) {
+          observer.unobserve(element);
+        }
+      });
+    };
+  }, []);
 
   return (
     <div className="text-white min-h-screen relative overflow-hidden font-sans">
       <BackgroundPattern/>      
 
+      {/* Floating Navigation */}
+      <FloatingNavigation sections={sections} activeSection={activeSection} />
+
       {/* Content */}
       <div className="relative z-10 px-6 pt-24 pb-24 space-y-24">
         {/* Hero Section */}
         <FadeSection>
-          <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 text-left">
+          <div id="hero" className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 text-left">
             {/* Content Section - Left */}
             <div className="relative w-full md:w-1/2 z-10 md:-mt-20">
               <div className="font-orbitron font-bold text-3xl sm:text-4xl md:text-5xl mb-6 text-center md:text-left">
@@ -102,7 +223,7 @@ const PrivateEquityTokenization = () => {
 
         {/* Features Section */}
         <FadeSection>
-          <div className="container mx-auto">
+          <div id="features" className="container mx-auto">
             
           <Typography
                 variant="h2"
@@ -166,7 +287,7 @@ const PrivateEquityTokenization = () => {
 
         {/* Tokenizable Types */}
         <FadeSection>
-          <div className="py-16">
+          <div id="types" className="py-16">
             <div className="container mx-auto px-4 md:px-12 text-center">
 
             <Typography
@@ -225,7 +346,7 @@ const PrivateEquityTokenization = () => {
 
         {/* Featured Investment Card */}
         <FadeSection>
-          <div className="py-16">
+          <div id="investment" className="py-16">
             <div className="container mx-auto px-4 md:px-12">
               <div className="max-w-4xl mx-auto">
                 <div className="bg-[#001a12]/30 backdrop-blur-md border border-[#00A86B]/20 rounded-2xl overflow-hidden">
@@ -312,7 +433,7 @@ const PrivateEquityTokenization = () => {
 
         {/* Benefits Section */}
         <FadeSection>
-          <div className="container mx-auto">
+          <div id="benefits" className="container mx-auto">
 
           <Typography
                 variant="h2"
@@ -382,7 +503,7 @@ const PrivateEquityTokenization = () => {
 
         {/* CTA Section */}
         <FadeSection>
-          <div className="relative">
+          <div id="cta" className="relative">
             <div className="absolute "></div>
             <div className="container mx-auto text-center relative z-10 px-6 py-24">
 
