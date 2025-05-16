@@ -56,54 +56,12 @@ const SecurityIcon = () => (
   </svg>
 );
 
-const DiversityIcon = () => (
-  <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="xs:w-10 xs:h-10 w-8 h-8">
-    <circle cx="15" cy="12" r="4" stroke="url(#paint0_linear)" strokeWidth="1.5"/>
-    <circle cx="25" cy="12" r="4" stroke="url(#paint0_linear)" strokeWidth="1.5"/>
-    <path d="M11 21C11 19.3431 12.3431 18 14 18H16C17.6569 18 19 19.3431 19 21V32H11V21Z" stroke="url(#paint1_linear)" strokeWidth="1.5"/>
-    <path d="M21 21C21 19.3431 22.3431 18 24 18H26C27.6569 18 29 19.3431 29 21V32H21V21Z" stroke="url(#paint1_linear)" strokeWidth="1.5"/>
-    <defs>
-      <linearGradient id="paint0_linear" x1="6" y1="6" x2="34" y2="34" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#10B981"/>
-        <stop offset="1" stopColor="#065F46"/>
-      </linearGradient>
-      <linearGradient id="paint1_linear" x1="11" y1="18" x2="29" y2="32" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#10B981"/>
-        <stop offset="1" stopColor="#065F46"/>
-      </linearGradient>
-    </defs>
-  </svg>
-);
 
 const ArrowIcon = () => (
   <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline">
     <path d="M4.16667 15.8333L15.8333 4.16667M15.8333 4.16667H7.5M15.8333 4.16667V12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
-
-// Animated Button Component adapted to match Real Estate theme
-const AnimatedButton = ({ children, className, primary }) => {
-  return (
-    <motion.button
-      className={`relative overflow-hidden group ${
-        primary 
-          ? "bg-[#00A86B]/10 backdrop-blur-lg text-[#00A86B] border border-[#00A86B]/50" 
-          : "bg-[#001a12]/10 backdrop-blur-lg text-[#DDFFDD] border border-[#00A86B]/30"
-      } rounded-full px-3 xs:px-4 sm:px-6 py-2 xs:py-2.5 sm:py-3 text-xs xs:text-sm font-medium tracking-wide ${className}`}
-      style={{
-        boxShadow: primary ? 
-          '0 0 15px rgba(0,168,107,0.2)' : 
-          '0 0 15px rgba(0,168,107,0.1)'
-      }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.98 }}
-    >
-      <span className="relative z-10 flex items-center justify-center gap-2">
-        {children}
-      </span>
-    </motion.button>
-  );
-};
 
 // Asset Type Button with tooltip
 const AssetTypeButton = ({ label }) => {
@@ -154,22 +112,6 @@ const AssetTypeButton = ({ label }) => {
   );
 };
 
-// Section Header with animation - adapted to match Real Estate theme
-const SectionHeader = ({ children, accent }) => {
-  return (
-    <motion.h2 
-      className={`font-['Orbitron'] font-bold text-xl xs:text-2xl sm:text-3xl md:text-4xl mb-4 xs:mb-6 md:mb-12 tracking-tight ${
-        accent ? "text-emerald-400" : "text-white"
-      }`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-    >
-      {children}
-    </motion.h2>
-  );
-};
 
 // Feature Card with hover effects - adapted to match Real Estate theme
 const FeatureCard = ({ icon, title, description }) => {
@@ -576,79 +518,6 @@ const DiverseAssetTokenization = () => {
         </div>
       </motion.section>
 
-      {/* Add custom style tag for fonts */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
-        
-        .xs\\:text-base {
-          font-size: 1rem; /* 16px */
-          line-height: 1.5rem; /* 24px */
-        }
-        .xs\\:text-sm {
-          font-size: 0.875rem; /* 14px */
-          line-height: 1.25rem; /* 20px */
-        }
-        .xs\\:text-xs {
-          font-size: 0.75rem; /* 12px */
-          line-height: 1rem; /* 16px */
-        }
-        .xs\\:text-lg {
-          font-size: 1.125rem; /* 18px */
-          line-height: 1.75rem; /* 28px */
-        }
-        .xs\\:text-xl {
-          font-size: 1.25rem; /* 20px */
-          line-height: 1.75rem; /* 28px */
-        }
-        .xs\\:text-2xl {
-          font-size: 1.5rem; /* 24px */
-          line-height: 2rem; /* 32px */
-        }
-        .xs\\:text-3xl {
-          font-size: 1.875rem; /* 30px */
-          line-height: 2.25rem; /* 36px */
-        }
-        .xs\\:text-4xl {
-          font-size: 2.25rem; /* 36px */
-          line-height: 2.5rem; /* 40px */
-        }
-        .xs\\:p-2 {
-          padding: 0.5rem; /* 8px */
-        }
-        .xs\\:p-3 {
-          padding: 0.75rem; /* 12px */
-        }
-        .xs\\:p-4 {
-          padding: 1rem; /* 16px */
-        }
-        .xs\\:px-3 {
-          padding-left: 0.75rem; /* 12px */
-          padding-right: 0.75rem; /* 12px */
-        }
-        .xs\\:py-1\\.5 {
-          padding-top: 0.375rem; /* 6px */
-          padding-bottom: 0.375rem; /* 6px */
-        }
-        .xs\\:py-1 {
-          padding-top: 0.25rem; /* 4px */
-          padding-bottom: 0.25rem; /* 4px */
-        }
-        .xs\\:mb-2 {
-          margin-bottom: 0.5rem; /* 8px */
-        }
-        .xs\\:mb-4 {
-          margin-bottom: 1rem; /* 16px */
-        }
-        .xs\\:mb-6 {
-          margin-bottom: 1.5rem; /* 24px */
-        }
-        .xs\\:gap-2 {
-          gap: 0.5rem; /* 8px */
-        }
-        .xs\\:rounded-xl {
-          border-radius: 0.75rem; /* 12px */
-        }
-      `}</style>
     </div>
   );
 };
