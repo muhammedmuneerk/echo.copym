@@ -141,12 +141,6 @@ const CommoditiesTokenization = () => {
           {/* Hero content without parallax */}
           <div className="relative z-10 max-w-3xl transition-all duration-1000">
             <div className="mb-2 inline-block">
-              <div className="flex items-center mb-1">
-                <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-pulse"></span>
-                <span className="uppercase text-xs tracking-widest text-emerald-500 font-medium">
-                  Blockchain Innovation
-                </span>
-              </div>
             </div>
 
             <Typography
@@ -199,15 +193,6 @@ const CommoditiesTokenization = () => {
             </div>
           </div>
 
-          {/* Scrolling indicator */}
-          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-            <span className="text-gray-500 text-sm mb-2">
-              Scroll to explore
-            </span>
-            <div className="w-6 h-10 border border-gray-700 rounded-full flex items-center justify-center p-1">
-              <div className="w-1 h-1 bg-emerald-500 rounded-full animate-scroll-indicator"></div>
-            </div>
-          </div>
         </section>
 
         {/* Redefine Commodity Investment Section */}
@@ -780,51 +765,6 @@ const CommoditiesTokenization = () => {
               </button>
             </div>
 
-            {/* Additional trust indicators */}
-            <div className="mt-16 flex flex-wrap justify-center gap-8 text-gray-500 text-sm">
-              <div className="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-2 text-emerald-500"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-                Secure Blockchain Technology
-              </div>
-
-              <div className="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-2 text-emerald-500"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-                24/7 Global Trading
-              </div>
-
-              <div className="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-2 text-emerald-500"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                </svg>
-                Real-time Market Analytics
-              </div>
-            </div>
           </div>
         </section>
       </div>
