@@ -6,7 +6,7 @@ export default {
       backgroundImage: {
         "custom-gradient":
         // "linear-gradient(to bottom right, rgb(12,33,75), rgba(47,118,51,1), rgba(47,118,50,1))",
-        "linear-gradient(90deg, rgb(12, 33, 75, 0.9) 0%, rgba(47, 118, 50, 0.9) 70%)",
+        "linear-gradient(90deg, rgb(12, 33, 75, 0.9) 0%, rgba(47, 118, 50, 0.6) 70%)",
         // linear-gradient(to right, #00f260, #0575e6)
           // "linear-gradient(90deg, rgb(12, 33, 75) 0%, rgba(47, 118, 51, 1) 50%, rgba(47, 118, 50, 1) 100%)",
       },
