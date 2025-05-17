@@ -11,6 +11,7 @@ import GradientLetters from "../../components/GradientLetters";
 import BackgroundPattern from "../../ui/BackgroundPattern";
 import FloatingNavigation from '../../components/FloatingNavigation';
 import useSectionObserver from '../../hooks/useSectionObserver';
+import AnimatedCard from "../../ui/AnimatedCard";
 
 const FadeSection = ({ children }) => (
   <motion.div
@@ -151,7 +152,8 @@ const activeSection = useSectionObserver(sections);
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {/* Card 1 */}
-                <div className="bg-[#001a12]/30 backdrop-blur-md border border-[#00A86B]/20 p-6 rounded-2xl transition-all hover:bg-[#001a12]/40">
+                <AnimatedCard>
+                <div className=" p-6 ">
                   <div className="text-[#00A86B] mb-4">
                     <Leaf className="w-8 h-8" />
                   </div>
@@ -160,9 +162,11 @@ const activeSection = useSectionObserver(sections);
                     Direct investment in carbon offset and sustainability projects
                   </p>
                 </div>
+                </AnimatedCard>
 
                 {/* Card 2 */}
-                <div className="bg-[#001a12]/30 backdrop-blur-md border border-[#00A86B]/20 p-6 rounded-2xl transition-all hover:bg-[#001a12]/40">
+                <AnimatedCard>
+                <div className=" p-6 ">
                   <div className="text-[#00A86B] mb-4">
                     <Globe2 className="w-8 h-8" />
                   </div>
@@ -171,9 +175,11 @@ const activeSection = useSectionObserver(sections);
                 Trade carbon credits across international markets
               </p>
             </div>
+            </AnimatedCard>
 
                 {/* Card 3 */}
-                <div className="bg-[#001a12]/30 backdrop-blur-md border border-[#00A86B]/20 p-6 rounded-2xl transition-all hover:bg-[#001a12]/40">
+                <AnimatedCard>
+                <div className=" p-6 ">
                   <div className="text-[#00A86B] mb-4">
                     <Shield className="w-8 h-8" />
                   </div>
@@ -182,6 +188,7 @@ const activeSection = useSectionObserver(sections);
                     Blockchain-verified carbon credit authenticity and tracking
                   </p>
                 </div>
+                </AnimatedCard>
               </div>
             </div>
           </div>
