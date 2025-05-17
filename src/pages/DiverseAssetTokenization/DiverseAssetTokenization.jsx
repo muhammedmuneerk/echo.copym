@@ -5,6 +5,7 @@ import GradientLetters from "../../components/GradientLetters";
 import BackgroundPattern from "../../ui/BackgroundPattern";
 import FloatingNavigation from '../../components/FloatingNavigation';
 import useSectionObserver from '../../hooks/useSectionObserver';
+import AnimatedCard from "../../ui/AnimatedCard";
 
 // Custom SVG Icons - Keeping original icons
 const TokenizationIcon = () => (
@@ -372,23 +373,47 @@ const DiverseAssetTokenization = () => {
 
             {/* Feature Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <FeatureCard
-                icon={<TokenizationIcon />}
-                title="Flexible Tokenization"
-                description="Tokenize virtually any asset with unique blockchain solutions tailored to your specific requirements"
-              />
+              <AnimatedCard>
+                <div className="p-1 ">
+                  <div className="mb-3 xs:mb-4 relative z-10">
+                    <div className="w-12 h-12 rounded-md bg-emerald-500 bg-opacity-10 flex items-center justify-center mb-4 transition-transform duration-300">
+                      <TokenizationIcon />
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-white transition-colors duration-300">Flexible Tokenization</h3>
+                  <p className="text-gray-400">
+                    Tokenize virtually any asset with unique blockchain solutions tailored to your specific requirements
+                  </p>
+                </div>
+              </AnimatedCard>
 
-              <FeatureCard
-                icon={<GlobalIcon />}
-                title="Global Accessibility"
-                description="Open up new investment opportunities across diverse asset types with worldwide accessibility"
-              />
+              <AnimatedCard>
+                <div className="p-1 ">
+                  <div className="mb-3 xs:mb-4 relative z-10">
+                    <div className="w-12 h-12 rounded-md bg-emerald-500 bg-opacity-10 flex items-center justify-center mb-4 transition-transform duration-300">
+                      <GlobalIcon />
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-white transition-colors duration-300">Global Accessibility</h3>
+                  <p className="text-gray-400">
+                    Open up new investment opportunities across diverse asset types with worldwide accessibility
+                  </p>
+                </div>
+              </AnimatedCard>
 
-              <FeatureCard
-                icon={<SecurityIcon />}
-                title="Comprehensive Compliance"
-                description="Robust legal and regulatory frameworks for diverse asset types with built-in verification systems"
-              />
+              <AnimatedCard>
+                <div className="p-1 ">
+                  <div className="mb-3 xs:mb-4 relative z-10">
+                    <div className="w-12 h-12 rounded-md bg-emerald-500 bg-opacity-10 flex items-center justify-center mb-4 transition-transform duration-300">
+                      <SecurityIcon />
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-white transition-colors duration-300">Comprehensive Compliance</h3>
+                  <p className="text-gray-400">
+                    Robust legal and regulatory frameworks for diverse asset types with built-in verification systems
+                  </p>
+                </div>
+              </AnimatedCard>
             </div>
           </motion.div>
 
