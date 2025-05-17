@@ -5,6 +5,7 @@ import PropertyCard from "./PropertyCard";
 import BackgroundTheme from "../../ui/GridBackgroundTheme";
 import GradientLetters from "../../components/GradientLetters";
 import { Container, Typography, Box, Grid } from "@mui/material";
+import BackgroundPattern from "../../ui/BackgroundPattern";
 import FloatingNavigation from '../../components/FloatingNavigation';
 import useSectionObserver from '../../hooks/useSectionObserver';
 
@@ -73,7 +74,8 @@ const RealEstateTokenization = () => {
   // Removed animation variants that were used for initial loading
 
   return (
-    <div>
+    <div className="relative">
+      <BackgroundPattern />
       {/* Hero Section */}
       <section id="hero" className="relative container mx-auto px-6 py-24">
         <div className="max-w-4xl mt-20 relative z-10">

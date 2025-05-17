@@ -28,6 +28,7 @@ import {
 import { Download, RefreshCw } from 'react-feather';
 import ContinentalGoldMap from "../../components/ContinentalGoldMap";
 import InvestmentCalculator from "../../components/InvestmentCalculator";
+import BackgroundPattern from "../../ui/BackgroundPattern";
 import FloatingNavigation from '../../components/FloatingNavigation';
 import useSectionObserver from '../../hooks/useSectionObserver';
 
@@ -946,7 +947,9 @@ const GoldTokenization = () => {
   });
   
   return (
-    <div className="min-h-screen  text-white">
+    <div className="min-h-screen relative text-white">
+
+      <BackgroundPattern />
       
       {/* Animated background particle effect */}
       <GoldParticleFlow />
