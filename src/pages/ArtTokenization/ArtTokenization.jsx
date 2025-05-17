@@ -14,6 +14,7 @@ import GradientLetters from "../../components/GradientLetters";
 import BackgroundPattern from "../../ui/BackgroundPattern";
 import FloatingNavigation from '../../components/FloatingNavigation';
 import useSectionObserver from '../../hooks/useSectionObserver';
+import AnimatedCard from "../../ui/AnimatedCard";
 
 
 const FadeSection = ({ children }) => (
@@ -176,9 +177,11 @@ const ArtTokenization = () => {
                     ownership and blockchain technology
                   </p>
 
-                  <div className="flex flex-col gap-6">
+                  <div className="flex flex-col gap-6 w-full max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Feature Card 1 */}
-                    <div className="bg-[#001a12]/30 backdrop-blur-md border border-[#00A86B]/20 p-6 rounded-2xl transition-all hover:bg-[#001a12]/40">
+                    <AnimatedCard>
+                    <div className="  p-6 ">
                       <div className="text-[#00A86B] mb-4">
                         <Palette fontSize="large" />
                       </div>
@@ -190,9 +193,11 @@ const ArtTokenization = () => {
                         barriers
                       </p>
                     </div>
+                    </AnimatedCard>
 
                     {/* Feature Card 2 */}
-                    <div className="bg-[#001a12]/30 backdrop-blur-md border border-[#00A86B]/20 p-6 rounded-2xl transition-all hover:bg-[#001a12]/40">
+                    <AnimatedCard>
+                    <div className="p-6 ">
                       <div className="text-[#00A86B] mb-4">
                         <Shield fontSize="large" />
                       </div>
@@ -203,9 +208,14 @@ const ArtTokenization = () => {
                         Blockchain-backed authenticity and ownership tracking
                       </p>
                     </div>
+                    </AnimatedCard>
+                    </div>
 
+                    <div className="flex justify-center">
+                      <div className="w-full md:w-1/2">
                     {/* Feature Card 3 */}
-                    <div className="bg-[#001a12]/30 backdrop-blur-md border border-[#00A86B]/20 p-6 rounded-2xl transition-all hover:bg-[#001a12]/40">
+                    <AnimatedCard>
+                    <div className="p-6 ">
                       <div className="text-[#00A86B] mb-4">
                         <Language fontSize="large" />
                       </div>
@@ -216,6 +226,10 @@ const ArtTokenization = () => {
                         Access international art investments seamlessly
                       </p>
                     </div>
+                    </AnimatedCard>
+                    </div>
+                    </div>
+
                   </div>
                 </div>
 
