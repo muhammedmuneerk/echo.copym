@@ -371,36 +371,37 @@ const DiverseAssetTokenization = () => {
               efficiency.
             </p>
 
-            {/* Feature Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <AnimatedCard>
-                <div className="p-1 ">
-                  <div className="mb-3 xs:mb-4 relative z-10">
-                    <div className="w-12 h-12 rounded-md bg-emerald-500 bg-opacity-10 flex items-center justify-center mb-4 transition-transform duration-300">
-                      <TokenizationIcon />
-                    </div>
+           {/* Feature Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <AnimatedCard>
+              <div className="p-1 ">
+                <div className="mb-3 xs:mb-4 relative z-10">
+                  <div className="w-12 h-12 rounded-md bg-emerald-500 bg-opacity-10 flex items-center justify-center mb-4 transition-transform duration-300">
+                    <TokenizationIcon />
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-white transition-colors duration-300">Flexible Tokenization</h3>
-                  <p className="text-gray-400">
-                    Tokenize virtually any asset with unique blockchain solutions tailored to your specific requirements
-                  </p>
                 </div>
-              </AnimatedCard>
-
-              <AnimatedCard>
-                <div className="p-1 ">
-                  <div className="mb-3 xs:mb-4 relative z-10">
-                    <div className="w-12 h-12 rounded-md bg-emerald-500 bg-opacity-10 flex items-center justify-center mb-4 transition-transform duration-300">
-                      <GlobalIcon />
-                    </div>
+                <h3 className="text-xl font-bold mb-2 text-white transition-colors duration-300">Flexible Tokenization</h3>
+                <p className="text-gray-400">
+                  Tokenize virtually any asset with unique blockchain solutions tailored to your specific requirements
+                </p>
+              </div>
+            </AnimatedCard>
+            
+            <AnimatedCard>
+              <div className="p-1 ">
+                <div className="mb-3 xs:mb-4 relative z-10">
+                  <div className="w-12 h-12 rounded-md bg-emerald-500 bg-opacity-10 flex items-center justify-center mb-4 transition-transform duration-300">
+                    <GlobalIcon />
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-white transition-colors duration-300">Global Accessibility</h3>
-                  <p className="text-gray-400">
-                    Open up new investment opportunities across diverse asset types with worldwide accessibility
-                  </p>
                 </div>
-              </AnimatedCard>
-
+                <h3 className="text-xl font-bold mb-2 text-white transition-colors duration-300">Global Accessibility</h3>
+                <p className="text-gray-400">
+                  Open up new investment opportunities across diverse asset types with worldwide accessibility
+                </p>
+              </div>
+            </AnimatedCard>
+            
+            <div className="col-span-1 md:col-span-2 md:mx-auto w-full md:w-1/2">
               <AnimatedCard>
                 <div className="p-1 ">
                   <div className="mb-3 xs:mb-4 relative z-10">
@@ -415,6 +416,7 @@ const DiverseAssetTokenization = () => {
                 </div>
               </AnimatedCard>
             </div>
+          </div>
           </motion.div>
 
           {/* Right Side - Asset Types with Interactive Elements */}
