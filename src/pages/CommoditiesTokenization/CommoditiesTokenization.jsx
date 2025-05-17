@@ -7,6 +7,7 @@ import GradientLetters from "../../components/GradientLetters";
 import BackgroundPattern from "../../ui/BackgroundPattern";
 import FloatingNavigation from '../../components/FloatingNavigation';
 import useSectionObserver from '../../hooks/useSectionObserver';
+import AnimatedCard from "../../ui/AnimatedCard";
 
 // Custom Card component with glass-morphism effect
 const GlassCard = ({ children, className, hoverEffect = false }) => {
@@ -98,9 +99,9 @@ const GoldenCoin = () => {
 // Feature card component
 const FeatureCard = ({ icon, title, description }) => {
   return (
-    <div className="group relative bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800 p-6 rounded-lg transition-all duration-300 ease-in-out hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 overflow-hidden">
+    <AnimatedCard>
+    <div className="group relative  p-4 overflow-hidden">
       {/* Border glow overlay */}
-      <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 border border-emerald-500/30 rounded-lg"></div>
       
       <div className="text-emerald-500 mb-6 group-hover:scale-110 transition-transform duration-300">
         {icon}
@@ -112,6 +113,7 @@ const FeatureCard = ({ icon, title, description }) => {
         {description}
       </p>
     </div>
+    </AnimatedCard>
   );
 };
 
@@ -525,7 +527,7 @@ const CommoditiesTokenization = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {activeTab === "preciousMetals" && (
                 <>
-                  <GlassCard
+                  <AnimatedCard
                     className="p-6 text-left transform transition-all duration-500 hover:translate-y-[-8px]"
                     hoverEffect
                   >
@@ -543,9 +545,9 @@ const CommoditiesTokenization = () => {
                       <span className="text-gray-500">Min. Investment</span>
                       <span className="text-white">$100</span>
                     </div>
-                  </GlassCard>
+                  </AnimatedCard>
 
-                  <GlassCard
+                  <AnimatedCard
                     className="p-6 text-left transform transition-all duration-500 hover:translate-y-[-8px]"
                     hoverEffect
                   >
@@ -563,9 +565,9 @@ const CommoditiesTokenization = () => {
                       <span className="text-gray-500">Min. Investment</span>
                       <span className="text-white">$50</span>
                     </div>
-                  </GlassCard>
+                  </AnimatedCard>
 
-                  <GlassCard
+                  <AnimatedCard
                     className="p-6 text-left transform transition-all duration-500 hover:translate-y-[-8px]"
                     hoverEffect
                   >
@@ -583,7 +585,7 @@ const CommoditiesTokenization = () => {
                       <span className="text-gray-500">Min. Investment</span>
                       <span className="text-white">$150</span>
                     </div>
-                  </GlassCard>
+                  </AnimatedCard>
                 </>
               )}
 
