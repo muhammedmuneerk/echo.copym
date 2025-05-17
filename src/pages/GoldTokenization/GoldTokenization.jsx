@@ -28,6 +28,8 @@ import {
 import { Download, RefreshCw } from 'react-feather';
 import ContinentalGoldMap from "../../components/ContinentalGoldMap";
 import InvestmentCalculator from "../../components/InvestmentCalculator";
+import FloatingNavigation from '../../components/FloatingNavigation';
+import useSectionObserver from '../../hooks/useSectionObserver';
 
 // WebGL Gold Particle Flow Component
 const GoldParticleFlow = () => {
@@ -924,6 +926,17 @@ const AdvancedSearch = () => {
 const GoldTokenization = () => {
   const { scrollYProgress } = useScroll();
   const scrollProgress = useTransform(scrollYProgress, [0, 1], [0, 100]);
+
+  // Define sections for navigation
+  const sections = [
+    { id: "hero", title: "Overview" },
+    { id: "analytics", title: "Analytics" },
+    { id: "portfolio", title: "Portfolio" },
+    { id: "calculator", title: "Calculator" },
+    { id: "opportunities", title: "Opportunities" },
+  ];
+  
+  const activeSection = useSectionObserver(sections);
   
   // Use spring for smooth scrollbar
   const scaleX = useSpring(scrollProgress, {
@@ -939,7 +952,7 @@ const GoldTokenization = () => {
       <GoldParticleFlow />
       
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center">
+      <section id="hero" className="relative min-h-[90vh] flex items-center">
         <div className="container mx-auto px-4 py-20 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div>
@@ -1015,7 +1028,7 @@ const GoldTokenization = () => {
       </section>
       
       {/* Market Data Section */}
-      <section className="py-16">
+      <section id="analytics" className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto mb-12 text-center">
 
@@ -1058,7 +1071,7 @@ const GoldTokenization = () => {
       </section>
       
       {/* Portfolio Allocation Section */}
-      <section className="py-16 ">
+      <section id="portfolio" className="py-16 ">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto mb-12 text-center">
 
@@ -1101,7 +1114,7 @@ const GoldTokenization = () => {
       </section>
       
       {/* Investment Calculator Section */}
-      <section className="py-16 ">
+      <section id="calculator" className="py-16 ">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto mb-12 text-center">
 
@@ -1144,7 +1157,7 @@ const GoldTokenization = () => {
       </section>
       
       {/* Search Interface Section */}
-      <section className="py-16">
+      <section id="opportunities" className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto mb-12 text-center">
 
@@ -1185,7 +1198,7 @@ const GoldTokenization = () => {
           <AdvancedSearch />
         </div>
       </section>
-    
+      <FloatingNavigation sections={sections} activeSection={activeSection} />
     </div>
   );
 };
