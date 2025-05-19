@@ -28,6 +28,9 @@ import {
 import { Download, RefreshCw } from 'react-feather';
 import ContinentalGoldMap from "../../components/ContinentalGoldMap";
 import InvestmentCalculator from "../../components/InvestmentCalculator";
+import BackgroundPattern from "../../ui/BackgroundPattern";
+import FloatingNavigation from '../../components/FloatingNavigation';
+import useSectionObserver from '../../hooks/useSectionObserver';
 
 // WebGL Gold Particle Flow Component
 const GoldParticleFlow = () => {
@@ -924,6 +927,17 @@ const AdvancedSearch = () => {
 const GoldTokenization = () => {
   const { scrollYProgress } = useScroll();
   const scrollProgress = useTransform(scrollYProgress, [0, 1], [0, 100]);
+
+  // Define sections for navigation
+  const sections = [
+    { id: "hero", title: "Overview" },
+    { id: "analytics", title: "Analytics" },
+    { id: "portfolio", title: "Portfolio" },
+    { id: "calculator", title: "Calculator" },
+    { id: "opportunities", title: "Opportunities" },
+  ];
+  
+  const activeSection = useSectionObserver(sections);
   
   // Use spring for smooth scrollbar
   const scaleX = useSpring(scrollProgress, {
@@ -933,18 +947,15 @@ const GoldTokenization = () => {
   });
   
   return (
-    <div className="min-h-screen  text-white">
-      {/* Fixed progress bar */}
-      <motion.div 
-        className="fixed top-0 left-0 right-0 h-1 bg-yellow-500 origin-left z-50"
-        style={{ scaleX }}
-      />
+    <div className="min-h-screen relative text-white">
+
+      <BackgroundPattern />
       
       {/* Animated background particle effect */}
       <GoldParticleFlow />
       
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center">
+      <section id="hero" className="relative min-h-[90vh] flex items-center">
         <div className="container mx-auto px-4 py-20 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div>
@@ -966,7 +977,7 @@ const GoldTokenization = () => {
               </motion.h1>
               
               <motion.p 
-                className="text-xl text-gray-300 mb-8 max-w-2xl"
+                className="text-lg text-gray-300 mb-8 max-w-2xl"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -1008,7 +1019,7 @@ const GoldTokenization = () => {
         </div>
         
         {/* Scrolldown indicator */}
-        <motion.div 
+        {/* <motion.div 
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, y: [0, 10, 0] }}
@@ -1016,16 +1027,43 @@ const GoldTokenization = () => {
         >
           <div className="text-gray-400 text-sm mb-2">Scroll to explore</div>
           <ChevronDown size={24} className="text-yellow-500" />
-        </motion.div>
+        </motion.div> */}
       </section>
       
       {/* Market Data Section */}
-      <section className="py-16">
+      <section id="analytics" className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto mb-12 text-center">
-            <h2 className="text-3xl font-bold mb-4">
-              Real-Time <span className="text-yellow-500">Gold Market</span> Analytics
-            </h2>
+
+                <Typography
+                  variant="h2"
+                  className="text-3xl sm:text-4xl md:text-5xl text-center mb-4 pb-1"
+                    >
+                  <Box component="div" className="flex flex-col flex-wrap justify-center">
+                    {/* Large Screens (1 lines) */}
+                    <Box className="hidden lg:block">
+                      <GradientLetters
+                        text="Real-Time Gold Market Analytics"
+                        keyPrefix="lg-line1"
+                      />
+                    </Box>
+
+                    {/* Small & Medium Screens (3 lines) */}
+                    <Box className="block lg:hidden">
+                      <GradientLetters
+                        text="Real-Time Gold Market"
+                        keyPrefix="sm-line1"
+                      />
+                    </Box>
+                    <Box className="block lg:hidden">
+                      <GradientLetters
+                        text="Analytics"
+                        keyPrefix="sm-line2"
+                      />
+                    </Box>
+                  </Box>
+                </Typography>
+
             <p className="text-gray-400">
               Stay informed with up-to-date market data, charts, and trends to optimize your gold investment strategy.
             </p>
@@ -1036,12 +1074,39 @@ const GoldTokenization = () => {
       </section>
       
       {/* Portfolio Allocation Section */}
-      <section className="py-16 ">
+      <section id="portfolio" className="py-16 ">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto mb-12 text-center">
-            <h2 className="text-3xl font-bold mb-4">
-              Optimize Your <span className="text-yellow-500">Gold Portfolio</span>
-            </h2>
+
+                <Typography
+                  variant="h2"
+                  className="text-3xl sm:text-4xl md:text-5xl text-center mb-4 pb-1"
+                    >
+                  <Box component="div" className="flex flex-col flex-wrap justify-center">
+                    {/* Large Screens (1 lines) */}
+                    <Box className="hidden lg:block">
+                      <GradientLetters
+                        text="Optimize Your Gold Portfolio"
+                        keyPrefix="lg-line1"
+                      />
+                    </Box>
+
+                    {/* Small & Medium Screens (3 lines) */}
+                    <Box className="block lg:hidden">
+                      <GradientLetters
+                        text="Optimize Your Gold"
+                        keyPrefix="sm-line1"
+                      />
+                    </Box>
+                    <Box className="block lg:hidden">
+                      <GradientLetters
+                        text="Portfolio"
+                        keyPrefix="sm-line1"
+                      />
+                    </Box>
+                  </Box>
+                </Typography>
+
             <p className="text-gray-400">
               Design a balanced gold investment strategy tailored to your risk tolerance and financial goals.
             </p>
@@ -1052,12 +1117,39 @@ const GoldTokenization = () => {
       </section>
       
       {/* Investment Calculator Section */}
-      <section className="py-16 ">
+      <section id="calculator" className="py-16 ">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto mb-12 text-center">
-            <h2 className="text-3xl font-bold mb-4">
-              Advanced <span className="text-yellow-500">Gold Investment</span> Calculator
-            </h2>
+
+                <Typography
+                  variant="h2"
+                  className="text-3xl sm:text-4xl md:text-5xl text-center mb-4 pb-1"
+                    >
+                  <Box component="div" className="flex flex-col flex-wrap justify-center">
+                    {/* Large Screens (1 lines) */}
+                    <Box className="hidden lg:block">
+                      <GradientLetters
+                        text="Advanced Gold Investment Calculator"
+                        keyPrefix="lg-line1"
+                      />
+                    </Box>
+
+                    {/* Small & Medium Screens (3 lines) */}
+                    <Box className="block lg:hidden">
+                      <GradientLetters
+                        text="Advanced Gold Investment"
+                        keyPrefix="sm-line1"
+                      />
+                    </Box>
+                    <Box className="block lg:hidden">
+                      <GradientLetters
+                        text="Calculator"
+                        keyPrefix="sm-line1"
+                      />
+                    </Box>
+                  </Box>
+                </Typography>
+
             <p className="text-gray-400">
               Project your returns with tax-optimized, jurisdiction-specific gold investment simulations.
             </p>
@@ -1068,12 +1160,39 @@ const GoldTokenization = () => {
       </section>
       
       {/* Search Interface Section */}
-      <section className="py-16">
+      <section id="opportunities" className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto mb-12 text-center">
-            <h2 className="text-3xl font-bold mb-4">
-              <span className="text-yellow-500">Discover</span> Gold Investment Opportunities
-            </h2>
+
+          <Typography
+                  variant="h2"
+                  className="text-3xl sm:text-4xl md:text-5xl text-center mb-4 pb-1"
+                    >
+                  <Box component="div" className="flex flex-col flex-wrap justify-center">
+                    {/* Large Screens (1 lines) */}
+                    <Box className="hidden lg:block">
+                      <GradientLetters
+                        text="Discover Gold Investment Opportunities"
+                        keyPrefix="lg-line1"
+                      />
+                    </Box>
+
+                    {/* Small & Medium Screens (3 lines) */}
+                    <Box className="block lg:hidden">
+                      <GradientLetters
+                        text="Discover Gold Investment"
+                        keyPrefix="sm-line1"
+                      />
+                    </Box>
+                    <Box className="block lg:hidden">
+                      <GradientLetters
+                        text="Opportunities"
+                        keyPrefix="sm-line1"
+                      />
+                    </Box>
+                  </Box>
+                </Typography>
+
             <p className="text-gray-400">
               Explore and analyze a wide range of gold investment vehicles, from physical bullion to tokenized assets.
             </p>
@@ -1082,7 +1201,7 @@ const GoldTokenization = () => {
           <AdvancedSearch />
         </div>
       </section>
-    
+      <FloatingNavigation sections={sections} activeSection={activeSection} />
     </div>
   );
 };
