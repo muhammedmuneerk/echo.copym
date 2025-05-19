@@ -8,6 +8,7 @@ import ComparativeSnapshot from "./ComparisonCard";
 import GradientLetters from "../../components/GradientLetters";
 import FloatingNavigation from '../../components/FloatingNavigation';
 import useSectionObserver from '../../hooks/useSectionObserver';
+import BackgroundPattern from "../../ui/BackgroundPattern";
 
 const esgData = [
   {
@@ -63,6 +64,7 @@ const GreenTokenization = () => {
   return (
     <>
       <div className="text-white min-h-screen relative overflow-hidden font-sans">
+        <BackgroundPattern /> 
         {/* Floating Navigation */}
         <FloatingNavigation sections={sections} activeSection={activeSection} />
        
