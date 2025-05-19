@@ -4,9 +4,12 @@ import { motion } from "framer-motion";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import BackgroundGlowEffect from "../ui/BackgroundGlowEffect";
 import GradientLetters from "./GradientLetters";
+import Buttons from "./Buttons";
 
 export default function Hero() {
   return (
+
+    
     <Box className="min-h-screen relative overflow-hidden">
       {/* Overlay gradient for better text readability */}
       <div className="absolute inset-0">
@@ -27,6 +30,8 @@ export default function Hero() {
               className="w-full" // Added full width for better mobile alignment
             >
               {/* Improved responsive heading with proper text scaling */}
+             <Buttons/>
+
               <Typography
                 variant="h1"
                 className="mt-16 sm:mt-20 text-4xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight sm:leading-snug text-center"
@@ -75,6 +80,7 @@ export default function Hero() {
                 real-world asset class. Access all the tools, networks, and
                 liquidity you need in a single ecosystem.
               </Typography>
+           
 
               {/* Responsive button container with improved spacing */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0">
