@@ -2,13 +2,13 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom"; // Added import for navigation links
 import TokenizationJourney from "./TokenizationJourney";
 import TokenizationComparison from "./TokenizationComparison";
 import { 
   GlassMorphismCard, 
   MorphingButton, 
   GradientText
-  // HorizontalScrollContainer removed from import
 } from "./UIComponents";
 import "./TokenizationHub.css";
 import { Typography, Box } from "@mui/material";
@@ -19,7 +19,7 @@ import BackgroundPattern from "../../ui/BackgroundPattern";
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
-// Asset categories data
+// Asset categories data with navigation paths
 const assetCategories = [
   {
     title: "Real Estate",
@@ -31,6 +31,7 @@ const assetCategories = [
       "Access to global real estate markets",
     ],
     color: "#00ff85",
+    path: "/tokenization/real-estate", // Added navigation path
     icon: (
       <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -48,6 +49,7 @@ const assetCategories = [
       "Access to exclusive art collections",
     ],
     color: "#00e676",
+    path: "/tokenization/art", // Added navigation path
     icon: (
       <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 19l7-7 3 3-7 7-3-3z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -67,6 +69,7 @@ const assetCategories = [
       "Reduced custody costs",
     ],
     color: "#00ff85",
+    path: "/tokenization/commodities", // Added navigation path
     icon: (
       <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M19 9l-7 4-7-4m14 0l-7-4-7 4m14 0v6l-7 4m-7-10v6l7 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -83,6 +86,7 @@ const assetCategories = [
       "Enhanced environmental impact tracking",
     ],
     color: "#00cc66",
+    path: "/tokenization/carbon-credits", // Added navigation path
     icon: (
       <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M2 22l6-6M17 8l4-4M12 12l4-4M7 7l4-4M22 22l-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -100,6 +104,7 @@ const assetCategories = [
       "Enhanced secondary market trading",
     ],
     color: "#00e676",
+    path: "/tokenization/private-equity", // Added navigation path
     icon: (
       <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -116,6 +121,7 @@ const assetCategories = [
       "Innovative asset structures",
     ],
     color: "#00ff85",
+    path: "/tokenization/other-assets", // Added navigation path
     icon: (
       <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -124,8 +130,6 @@ const assetCategories = [
     )
   },
 ];
-
-
 
 // Main TokenizationHub component
 export default function TokenizationHub() {
@@ -313,7 +317,7 @@ export default function TokenizationHub() {
             </p>
           </motion.div>
           
-          {/* Asset Grid - NEW STRUCTURE */}
+          {/* Asset Grid - UPDATED STRUCTURE WITH NAVIGATION LINKS */}
           <div className="asset-grid">
             {assetCategories.map((category, index) => (
               <motion.div
@@ -328,14 +332,6 @@ export default function TokenizationHub() {
                   <div className="asset-card-content">
                     <motion.div 
                       className="asset-icon"
-                      // animate={{ 
-                      //   rotate: 360,
-                      //   scale: [1, 1.1, 1]
-                      // }}
-                      // transition={{ 
-                      //   rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                      //   scale: { duration: 3, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }
-                      // }}
                     >
                       {category.icon}
                     </motion.div>
@@ -390,11 +386,15 @@ export default function TokenizationHub() {
                             </button>
                           </div>
                         </div>
+                        {/* Updated "Learn More" button with Link component */}
                         <div className="relative rounded-full p-[2px] bg-[linear-gradient(90deg,rgba(1,132,58,0.73)_0%,rgba(0,255,132,0.6)_100%)] transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,255,132,0.5)]">
                           <div className="bg-black rounded-full w-full h-full">
-                            <button className="rounded-full px-6 py-2 font-semibold w-full text-white backdrop-blur-md bg-white/5 hover:bg-white/10 whitespace-nowrap">
+                            <Link 
+                              to={category.path} 
+                              className="rounded-full px-6 py-2 font-semibold w-full text-white backdrop-blur-md bg-white/5 hover:bg-white/10 whitespace-nowrap flex items-center justify-center"
+                            >
                               Learn More
-                            </button>
+                            </Link>
                           </div>
                         </div>
                       </div>
