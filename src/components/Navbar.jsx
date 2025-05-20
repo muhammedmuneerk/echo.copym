@@ -48,17 +48,17 @@ const navigationItems = [
   {
     label: "Tokenization",
     icon: <RefreshCw size={18} className="text-green-500" />,
-    to:"/tokenization"
-    // items: [
-    //   // { label: "Echo Asset Tokenization", to: "/tokenization", icon: <BarChart3 size={18} className="text-green-500" /> },
-    //   // { label: "Gold Tokenization Hub", to: "/tokenization/gold", icon: <Coins size={18} className="text-green-500" /> },
-    //   // { label: "Real Estate", to: "/tokenization/real-estate", icon: <Building2 size={18} className="text-green-500" /> },
-    //   // { label: "Art & Collectibles", to: "/tokenization/art", icon: <Palette size={18} className="text-green-500" /> },
-    //   // { label: "Commodities", to: "/tokenization/commodities", icon: <Droplet size={18} className="text-green-500" /> },
-    //   // { label: "Carbon Credits", to: "/tokenization/carbon-credits", icon: <Recycle size={18} className="text-green-500" /> },
-    //   // { label: "Private Equity", to: "/tokenization/private-equity", icon: <Briefcase size={18} className="text-green-500" /> },
-    //   // { label: "Other Asset Classes", to: "/tokenization/other-assets", icon: <LinkIcon size={18} className="text-green-500" /> },
-    // ],
+    to:"/tokenization",
+    items: [
+      { label: "Echo Asset Tokenization", to: "/tokenization", icon: <BarChart3 size={18} className="text-green-500" /> },
+      { label: "Gold Tokenization Hub", to: "/tokenization/gold", icon: <Coins size={18} className="text-green-500" /> },
+      { label: "Real Estate", to: "/tokenization/real-estate", icon: <Building2 size={18} className="text-green-500" /> },
+      { label: "Art & Collectibles", to: "/tokenization/art", icon: <Palette size={18} className="text-green-500" /> },
+      { label: "Commodities", to: "/tokenization/commodities", icon: <Droplet size={18} className="text-green-500" /> },
+      { label: "Carbon Credits", to: "/tokenization/carbon-credits", icon: <Recycle size={18} className="text-green-500" /> },
+      { label: "Private Equity", to: "/tokenization/private-equity", icon: <Briefcase size={18} className="text-green-500" /> },
+      { label: "Other Asset Classes", to: "/tokenization/other-assets", icon: <LinkIcon size={18} className="text-green-500" /> },
+    ],
   },
   {
     label: "Marketplace",
