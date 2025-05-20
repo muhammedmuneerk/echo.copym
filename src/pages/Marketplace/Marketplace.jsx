@@ -87,7 +87,7 @@ const categories = [
 const categoryToPath = {
   "Real Estate": "/tokenization/real-estate",
   "Art": "/tokenization/art",
-  "Commodities": "/tokenization/commodities",
+  "Commodities": "/tokenization/gold",
   "Infrastructure": "/tokenization/carbon-credits", // Closest match from navigation
   "Startups": "/tokenization/private-equity", // Closest match from navigation
   // Default fallback
