@@ -4,6 +4,7 @@ import { Typography, Box } from "@mui/material";
 import GradientLetters from "../../components/GradientLetters";
 import { TrendingUp, MapPin, Coins, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom"; // Import Link for navigation
+import BackgroundPattern from "../../ui/BackgroundPattern";
 
 const mockAssets = [
   {
@@ -182,6 +183,7 @@ export default function Marketplace() {
 
   return (
     <div className="w-full min-h-screen py-16 text-white">
+      <BackgroundPattern/>
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header Section */}
         <motion.div
