@@ -401,7 +401,7 @@ const DiverseAssetTokenization = () => {
               </div>
             </AnimatedCard>
             
-            <div className="col-span-1 md:col-span-2 md:mx-auto w-full md:w-1/2">
+            <div className="col-span-1 md:col-span-2  w-full md:w-1/2"> {/* md:mx-auto */}
               <AnimatedCard>
                 <div className="p-1 ">
                   <div className="mb-3 xs:mb-4 relative z-10">

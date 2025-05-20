@@ -211,7 +211,7 @@ const ArtTokenization = () => {
                     </AnimatedCard>
                     </div>
 
-                    <div className="flex justify-center">
+                    <div className="flex "> {/*  justify-center  */}
                       <div className="w-full md:w-1/2">
                     {/* Feature Card 3 */}
                     <AnimatedCard>
