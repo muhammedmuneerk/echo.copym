@@ -8,6 +8,7 @@ import BackgroundPattern from "../../ui/BackgroundPattern";
 import FloatingNavigation from '../../components/FloatingNavigation';
 import useSectionObserver from '../../hooks/useSectionObserver';
 import AnimatedCard from "../../ui/AnimatedCard";
+import CustomButton from "../../components/CustomButton"
 
 // Custom Card component with glass-morphism effect
 const GlassCard = ({ children, className, hoverEffect = false }) => {
@@ -198,14 +199,12 @@ const CommoditiesTokenization = () => {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <button className="bg-[#00A86B]/10 backdrop-blur-lg text-[#00A86B] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105 group">
-                Start Tokenizing Commodities
-                <ArrowRight className="inline-block ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
+              
+              <CustomButton label="Start Tokenizing Commodities" />
+                {/* <ArrowRight className="inline-block ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" /> */}              
 
-              <button className="bg-[#001a12]/10 backdrop-blur-lg text-[#DDFFDD] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/30 shadow-[0_0_15px_rgba(0,168,107,0.1)] hover:shadow-[0_0_25px_rgba(0,168,107,0.2)] hover:bg-[#001a12]/20 hover:scale-105">
-                Explore Market Insights
-              </button>
+              <CustomButton label="Explore Market Insights" />
+             
             </div>
           </div>
 
@@ -771,14 +770,11 @@ const CommoditiesTokenization = () => {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <button className="bg-[#00A86B]/10 backdrop-blur-lg text-[#00A86B] px-8 py-4 rounded-full font-medium transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105 text-lg group">
-                Start Investing
-                <ArrowRight className="inline-block ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
 
-              <button className="bg-[#001a12]/10 backdrop-blur-lg text-[#DDFFDD] px-8 py-4 rounded-full font-medium transition-all border border-[#00A86B]/30 shadow-[0_0_15px_rgba(0,168,107,0.1)] hover:shadow-[0_0_25px_rgba(0,168,107,0.2)] hover:bg-[#001a12]/20 hover:scale-105 text-lg">
-                Learn More
-              </button>
+              <CustomButton label="Start Investing" />
+
+              <CustomButton label="Learn More" />
+              
             </div>
 
           </div>

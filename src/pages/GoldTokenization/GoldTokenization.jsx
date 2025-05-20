@@ -31,6 +31,7 @@ import InvestmentCalculator from "../../components/InvestmentCalculator";
 import BackgroundPattern from "../../ui/BackgroundPattern";
 import FloatingNavigation from '../../components/FloatingNavigation';
 import useSectionObserver from '../../hooks/useSectionObserver';
+import CustomButton from "../../components/CustomButton"
 
 
 // Portfolio Allocation System
@@ -651,13 +652,12 @@ const GoldTokenization = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <button className="bg-yellow-500 text-black px-8 py-3 rounded-full text-lg font-medium hover:bg-yellow-400 transition-all flex items-center gap-2">
-                  Get Started
-                  <ArrowRight size={18} />
-                </button>
-                <button className="bg-transparent border border-yellow-500 text-yellow-500 px-8 py-3 rounded-full text-lg font-medium hover:bg-yellow-500/10 transition-all">
-                  Learn More
-                </button>
+                
+                <CustomButton label="Get Started" /> 
+                  {/* <ArrowRight size={18} /> */}
+                
+                <CustomButton label="Learn More" />
+                
               </motion.div>
             </div>
             

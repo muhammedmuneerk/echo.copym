@@ -9,6 +9,7 @@ import BackgroundPattern from "../../ui/BackgroundPattern";
 import FloatingNavigation from '../../components/FloatingNavigation';
 import useSectionObserver from '../../hooks/useSectionObserver';
 import AnimatedCard from "../../ui/AnimatedCard";
+import CustomButton from "../../components/CustomButton"
 
 // Custom components to replace MUI
 
@@ -120,31 +121,15 @@ const RealEstateTokenization = () => {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <motion.button
-              onClick={() => {}}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-[#00A86B]/10 backdrop-blur-lg text-[#00A86B] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105 group"
-            >
-              <span className="flex items-center">
-                Start Tokenizing
-                <motion.span
-                  initial={{ x: 0 }}
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
-                </motion.span>
-              </span>
-            </motion.button>
-            <motion.button
-              onClick={() => {}}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-[#001a12]/10 backdrop-blur-lg text-[#DDFFDD] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/30 shadow-[0_0_15px_rgba(0,168,107,0.1)] hover:shadow-[0_0_25px_rgba(0,168,107,0.2)] hover:bg-[#001a12]/20 hover:scale-105"
-            >
-              Learn More
-            </motion.button>
+
+            <CustomButton
+              label="Start Tokenizing"
+              />
+
+            <CustomButton
+              label="Learn More"
+              />
+
           </div>
         </div>
       </section>
@@ -505,23 +490,13 @@ const RealEstateTokenization = () => {
           </p>
 
           <div className="flex flex-wrap justify-center gap-6">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-[#00A86B]/10 backdrop-blur-lg text-[#00A86B] px-8 py-4 rounded-full font-medium transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105 text-lg group"
-            >
-              <span className="flex items-center">
-                Start Tokenizing
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </span>
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-[#001a12]/10 backdrop-blur-lg text-[#DDFFDD] px-8 py-4 rounded-full font-medium transition-all border border-[#00A86B]/30 shadow-[0_0_15px_rgba(0,168,107,0.1)] hover:shadow-[0_0_25px_rgba(0,168,107,0.2)] hover:bg-[#001a12]/20 hover:scale-105 text-lg"
-            >
-              Schedule Consultation
-            </motion.button>
+            
+            <CustomButton label="Start Tokenizing"
+            />
+
+            <CustomButton label="Schedule Consultation"
+            />
+        
           </div>
         </div>
       </section>

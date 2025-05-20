@@ -6,6 +6,7 @@ import BackgroundPattern from "../../ui/BackgroundPattern";
 import FloatingNavigation from '../../components/FloatingNavigation';
 import useSectionObserver from '../../hooks/useSectionObserver';
 import AnimatedCard from "../../ui/AnimatedCard";
+import CustomButton from "../../components/CustomButton"
 
 // Custom SVG Icons - Keeping original icons
 const TokenizationIcon = () => (
@@ -310,23 +311,12 @@ const DiverseAssetTokenization = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="bg-[#00A86B]/10 backdrop-blur-lg text-[#00A86B] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105 group"
-              >
-                <span className="flex items-center">
-                  Explore Solutions
-                  <ArrowIcon className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
-                </span>
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="bg-[#001a12]/10 backdrop-blur-lg text-[#DDFFDD] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/30 shadow-[0_0_15px_rgba(0,168,107,0.1)] hover:shadow-[0_0_25px_rgba(0,168,107,0.2)] hover:bg-[#001a12]/20 hover:scale-105"
-              >
-                Learn More
-              </motion.button>
+              
+              <CustomButton label="Explore Solutions" />
+                  {/* <ArrowIcon className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" /> */}
+       
+              <CustomButton label="Learn More" />
+             
             </motion.div>
           </motion.div>
         </section>
@@ -546,15 +536,12 @@ const DiverseAssetTokenization = () => {
             className="flex flex-wrap justify-center gap-6"
             variants={itemVariants}
           >
-            <button className="bg-[#00A86B]/10 backdrop-blur-lg text-[#00A86B] px-8 py-4 rounded-full font-medium transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105 text-lg group">
-              <span className="flex items-center">
-                Explore Custom Solutions
-                <ArrowIcon className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-              </span>
-            </button>
-            <button className="bg-[#001a12]/10 backdrop-blur-lg text-[#DDFFDD] px-8 py-4 rounded-full font-medium transition-all border border-[#00A86B]/30 shadow-[0_0_15px_rgba(0,168,107,0.1)] hover:shadow-[0_0_25px_rgba(0,168,107,0.2)] hover:bg-[#001a12]/20 hover:scale-105 text-lg">
-              Speak with Experts
-            </button>
+
+            <CustomButton label="Explore Custom Solutions" />
+              {/* <ArrowIcon className="ml-2 group-hover:translate-x-1 transition-transform duration-300" /> */}
+         
+            <CustomButton label="Speak with Experts" />
+            
           </motion.div>
         </div>
       </motion.section>

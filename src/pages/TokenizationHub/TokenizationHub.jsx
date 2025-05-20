@@ -668,9 +668,9 @@ export default function TokenizationHub() {
 
             <div style={{ marginTop: "32px" }}>
               <div className="relative rounded-full p-[2px]">
-                <div className="rounded-full w-full h-full">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <CustomButton
-                    title=" Contact Our Team"
+                    label=" Contact Our Team"
                     
 
                     // {/* <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

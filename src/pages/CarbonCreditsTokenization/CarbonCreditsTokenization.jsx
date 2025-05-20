@@ -12,6 +12,7 @@ import BackgroundPattern from "../../ui/BackgroundPattern";
 import FloatingNavigation from '../../components/FloatingNavigation';
 import useSectionObserver from '../../hooks/useSectionObserver';
 import AnimatedCard from "../../ui/AnimatedCard";
+import CustomButton from "../../components/CustomButton"
 
 const FadeSection = ({ children }) => (
   <motion.div
@@ -96,12 +97,11 @@ const activeSection = useSectionObserver(sections);
               </p>
 
               <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-8">
-                <button className="bg-[#00A86B]/10 backdrop-blur-lg text-[#00A86B] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105">
-                  Start Green Investment
-                </button>
-                <button className="bg-[#001a12]/10 backdrop-blur-lg text-[#DDFFDD] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/30 shadow-[0_0_15px_rgba(0,168,107,0.1)] hover:shadow-[0_0_25px_rgba(0,168,107,0.2)] hover:bg-[#001a12]/20 hover:scale-105">
-                  Speak with Experts
-                </button>
+
+                <CustomButton label="Start Green Investment" />
+                
+                <CustomButton label="Speak with Experts" />
+                
               </div>
             </div>
 
@@ -380,13 +380,12 @@ const activeSection = useSectionObserver(sections);
                 and supporting global sustainability efforts.
               </p>
           <div className="flex flex-wrap justify-center gap-4">
-                <button className="bg-[#00A86B]/10 backdrop-blur-lg text-[#00A86B] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105 flex items-center">
-                  <span>Start Your Green Investment Journey</span>
-                  <ArrowRightAlt className="ml-2 text-[#00A86B]" />
-            </button>
-                <button className="bg-[#001a12]/10 backdrop-blur-lg text-[#DDFFDD] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/30 shadow-[0_0_15px_rgba(0,168,107,0.1)] hover:shadow-[0_0_25px_rgba(0,168,107,0.2)] hover:bg-[#001a12]/20 hover:scale-105">
-              Speak with Experts
-            </button>
+            
+                <CustomButton label="Start Your Green Investment Journey" />
+                  {/* <ArrowRightAlt className="ml-2 text-[#00A86B]" /> */}
+            
+                <CustomButton label="Speak with Experts" />
+            
           </div>
         </div>
       </div>
