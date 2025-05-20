@@ -9,7 +9,7 @@ import GradientLetters from "../../components/GradientLetters";
 import FloatingNavigation from '../../components/FloatingNavigation';
 import useSectionObserver from '../../hooks/useSectionObserver';
 import BackgroundPattern from "../../ui/BackgroundPattern";
-
+import CustomButton from "../../components/CustomButton"
 const esgData = [
   {
     title: "Environmental",
@@ -123,12 +123,13 @@ const GreenTokenization = () => {
                 </p>
 
                 <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-8">
-                  <button className="bg-[#00A86B]/10 backdrop-blur-lg text-[#00A86B] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105">
-                    Start Green Investing
-                  </button>
-                  <button className="bg-[#001a12]/10 backdrop-blur-lg text-[#DDFFDD] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/30 shadow-[0_0_15px_rgba(0,168,107,0.1)] hover:shadow-[0_0_25px_rgba(0,168,107,0.2)] hover:bg-[#001a12]/20 hover:scale-105">
-                    Learn More
-                  </button>
+                  <CustomButton
+                  title="Start Green Investing"/>
+                    
+                  <CustomButton
+                  title="Learn More"/>
+                    
+                  
                 </div>
               </div>
 
@@ -473,12 +474,15 @@ const GreenTokenization = () => {
                   Make your investments count for the planet.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <button className="bg-[#00A86B]/10 backdrop-blur-lg text-[#00A86B] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/50 shadow-[0_0_15px_rgba(0,168,107,0.2)] hover:shadow-[0_0_25px_rgba(0,168,107,0.4)] hover:bg-[#00A86B]/20 hover:scale-105">
-                    Start Green Investing
-                  </button>
-                  <button className="bg-[#001a12]/10 backdrop-blur-lg text-[#DDFFDD] px-8 py-3 rounded-full font-medium transition-all border border-[#00A86B]/30 shadow-[0_0_15px_rgba(0,168,107,0.1)] hover:shadow-[0_0_25px_rgba(0,168,107,0.2)] hover:bg-[#001a12]/20 hover:scale-105">
-                    Learn More
-                  </button>
+                 
+                 <CustomButton
+                 title="Start Green Investing"/>
+                    
+                 
+                   <CustomButton
+                 title="Learn More"/>
+                    
+                  
                 </div>
               </div>
             </div>

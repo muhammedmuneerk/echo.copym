@@ -1,20 +1,19 @@
 import React from "react";
 import { Container, Typography, Button, Box } from "@mui/material";
 import { motion } from "framer-motion";
-import { KeyboardArrowDown } from "@mui/icons-material";
+import { KeyboardArrowDown, Title } from "@mui/icons-material";
 import BackgroundGlowEffect from "../ui/BackgroundGlowEffect";
 import GradientLetters from "./GradientLetters";
-import Buttons from "./Buttons";
+import Buttons from "./CustomButton";
+import CustomButton from "./CustomButton";
 
 export default function Hero() {
   return (
-
-    
     <Box className="min-h-screen relative overflow-hidden">
       {/* Overlay gradient for better text readability */}
       <div className="absolute inset-0">
-        <Container 
-          maxWidth="xl" 
+        <Container
+          maxWidth="xl"
           className="relative z-20 px-4 sm:px-6 md:px-8" // Added responsive padding
         >
           <motion.div
@@ -30,7 +29,6 @@ export default function Hero() {
               className="w-full" // Added full width for better mobile alignment
             >
               {/* Improved responsive heading with proper text scaling */}
-             <Buttons/>
 
               <Typography
                 variant="h1"
@@ -39,32 +37,50 @@ export default function Hero() {
               >
                 {/* Large/Medium Screens: Full lines */}
                 <Box component="div" className="hidden md:block">
-                  <GradientLetters text="The Complete Ecosystem" keyPrefix="line1-lg" />
+                  <GradientLetters
+                    text="The Complete Ecosystem"
+                    keyPrefix="line1-lg"
+                  />
                 </Box>
                 <Box component="div" className="hidden md:block mt-1">
-                  <GradientLetters 
-                    text="for Real World Asset Tokenization" 
-                    keyPrefix="line2-char" 
+                  <GradientLetters
+                    text="for Real World Asset Tokenization"
+                    keyPrefix="line2-char"
                   />
                 </Box>
 
                 {/* Tablet Screens: Adjusted lines */}
                 <Box component="div" className="hidden sm:block md:hidden">
-                  <GradientLetters text="The Complete Ecosystem" keyPrefix="line1-md-1" />
+                  <GradientLetters
+                    text="The Complete Ecosystem"
+                    keyPrefix="line1-md-1"
+                  />
                 </Box>
                 <Box component="div" className="hidden sm:block md:hidden">
-                  <GradientLetters text="for Real World" keyPrefix="line1-md-2" />
+                  <GradientLetters
+                    text="for Real World"
+                    keyPrefix="line1-md-2"
+                  />
                 </Box>
                 <Box component="div" className="hidden sm:block md:hidden mt-1">
-                  <GradientLetters text="Asset Tokenization" keyPrefix="line2-md-1" />
+                  <GradientLetters
+                    text="Asset Tokenization"
+                    keyPrefix="line2-md-1"
+                  />
                 </Box>
 
                 {/* Mobile Screens: More compact lines */}
                 <Box component="div" className="block sm:hidden">
-                  <GradientLetters text="The Complete Ecosystem" keyPrefix="line1-sm-1" />
+                  <GradientLetters
+                    text="The Complete Ecosystem"
+                    keyPrefix="line1-sm-1"
+                  />
                 </Box>
                 <Box component="div" className="block sm:hidden">
-                  <GradientLetters text="for Real World Assets" keyPrefix="line1-sm-2" />
+                  <GradientLetters
+                    text="for Real World Assets"
+                    keyPrefix="line1-sm-2"
+                  />
                 </Box>
                 <Box component="div" className="block sm:hidden">
                   <GradientLetters text="Tokenization" keyPrefix="line1-sm-3" />
@@ -80,26 +96,30 @@ export default function Hero() {
                 real-world asset class. Access all the tools, networks, and
                 liquidity you need in a single ecosystem.
               </Typography>
-           
 
               {/* Responsive button container with improved spacing */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0">
-                {["Explore Asset Tokenization", "Start Tokenizing Now"].map((label, index) => (
-                  <div
-                    key={index}
-                    className="relative rounded-full p-[2px] bg-[linear-gradient(90deg,rgba(1,132,58,0.73)_0%,rgba(0,255,132,0.6)_100%)] transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,255,132,0.5)]"
-                  >
-                    <div className="bg-black rounded-full w-full h-full">
-                      <Button
+              <div className="flex justify-center px-4 sm:px-0">
+                <div className="flex flex-row gap-3 sm:gap-4">
+                  <div>
+                    <div>
+                      <CustomButton
                         variant="text"
                         size="large"
-                        className="rounded-full px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold w-full text-white backdrop-blur-md bg-white/5 hover:bg-white/10"
-                      >
-                        {label}
-                      </Button>
+                        title="Explore Asset Tokenization"
+                      />
                     </div>
                   </div>
-                ))}
+
+                  <div>
+                    <div>
+                      <CustomButton
+                        variant="text"
+                        size="large"
+                        title="Start Tokenizing Now"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </motion.div>
