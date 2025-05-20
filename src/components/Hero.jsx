@@ -99,26 +99,23 @@ export default function Hero() {
 
               {/* Responsive button container with improved spacing */}
               <div className="flex justify-center px-4 sm:px-0">
-                <div className="flex flex-row gap-3 sm:gap-4">
-                  <div>
-                    <div>
+                <div className="md:flex lg:flex-row gap-3 sm:gap-4">
+                 
+                    <div className="my-3">
                       <CustomButton
-                        variant="text"
-                        size="large"
-                        title="Explore Asset Tokenization"
+                        label="Explore Asset Tokenization"
+                        onClick={() => handleAction()}
                       />
                     </div>
-                  </div>
+                 
 
-                  <div>
-                    <div>
+                    <div className="my-3">
                       <CustomButton
-                        variant="text"
-                        size="large"
-                        title="Start Tokenizing Now"
+                        label="Start Tokenizing Now"
+                        onClick={() => handleAction()}
                       />
                     </div>
-                  </div>
+                 
                 </div>
               </div>
             </motion.div>

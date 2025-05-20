@@ -62,11 +62,11 @@ export default function CTA() {
           value of their assets on the Copym platform.
         </Typography>
 
-        <div>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <CustomButton
             variant="text"
             size="large"
-            title="Explore Asset Tokenization"
+            label="Explore Asset Tokenization"
           />
         </div>
 

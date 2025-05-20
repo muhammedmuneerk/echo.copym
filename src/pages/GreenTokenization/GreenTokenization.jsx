@@ -124,10 +124,10 @@ const GreenTokenization = () => {
 
                 <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-8">
                   <CustomButton
-                  title="Start Green Investing"/>
+                  label="Start Green Investing"/>
                     
                   <CustomButton
-                  title="Learn More"/>
+                  label="Learn More"/>
                     
                   
                 </div>
@@ -476,11 +476,11 @@ const GreenTokenization = () => {
                 <div className="flex flex-wrap justify-center gap-4">
                  
                  <CustomButton
-                 title="Start Green Investing"/>
+                 label="Start Green Investing"/>
                     
                  
                    <CustomButton
-                 title="Learn More"/>
+                 label="Learn More"/>
                     
                   
                 </div>
