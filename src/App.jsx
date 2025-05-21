@@ -20,6 +20,7 @@ import CommoditiesTokenization from "./pages/issuer/CommoditiesTokenization/Comm
 import CarbonCreditsTokenization from "./pages/issuer/CarbonCreditsTokenization/CarbonCreditsTokenization";
 import PrivateEquityTokenization from "./pages/issuer/PrivateEquityTokenization/PrivateEquityTokenization";
 import DiverseAssetTokenization from "./pages/issuer/DiverseAssetTokenization/DiverseAssetTokenization";
+import RealEstateMarket from "./pages/investor/RealEstateMarket/RealEstateMarket";
 import GreenTokenization from "./pages/GreenTokenization/GreenTokenization";
 import SplashScreen from "./components/SplashScreen";
 import ScrollToTop from "./components/ScrollToTop";
@@ -143,6 +144,7 @@ function App() {
           <Route path="/tokenization/carbon-credits" element={<CarbonCreditsTokenization />} />
           <Route path="/tokenization/private-equity" element={<PrivateEquityTokenization />} />
           <Route path="/tokenization/other-assets" element={<DiverseAssetTokenization />} />
+          <Route path="/market/real-estate/" element={<RealEstateMarket />} />
         </Routes>
       </main>
       <Footer />
