@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring } from "fram
 import { Container, Typography, Button, Box } from "@mui/material";
 import { MapContainer, TileLayer, CircleMarker, Polygon, Tooltip, ZoomControl, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import GradientLetters from "../../components/GradientLetters";
+import GradientLetters from "../../../components/GradientLetters";
 import * as d3 from 'd3';
 import {
   ArrowRight,
@@ -26,12 +26,12 @@ import {
   PieChart
 } from "lucide-react";
 import { Download, RefreshCw } from 'react-feather';
-import ContinentalGoldMap from "../../components/ContinentalGoldMap";
-import InvestmentCalculator from "../../components/InvestmentCalculator";
-import BackgroundPattern from "../../ui/BackgroundPattern";
-import FloatingNavigation from '../../components/FloatingNavigation';
-import useSectionObserver from '../../hooks/useSectionObserver';
-import CustomButton from "../../components/CustomButton"
+import ContinentalGoldMap from "../../../components/ContinentalGoldMap";
+import InvestmentCalculator from "../../../components/InvestmentCalculator";
+import BackgroundPattern from "../../../ui/BackgroundPattern";
+import FloatingNavigation from '../../../components/FloatingNavigation';
+import useSectionObserver from '../../../hooks/useSectionObserver';
+import CustomButton from "../../../components/CustomButton"
 
 
 // Portfolio Allocation System

@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Check, ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Building, BarChart, ShieldCheck, Globe, Landmark, FileCheck, Coins, Repeat } from "lucide-react";
 import PropertyCard from "./PropertyCard";
-import BackgroundTheme from "../../ui/GridBackgroundTheme";
-import GradientLetters from "../../components/GradientLetters";
+import BackgroundTheme from "../../../ui/GridBackgroundTheme";
+import GradientLetters from "../../../components/GradientLetters";
 import { Container, Typography, Box, Grid } from "@mui/material";
-import BackgroundPattern from "../../ui/BackgroundPattern";
-import FloatingNavigation from '../../components/FloatingNavigation';
-import useSectionObserver from '../../hooks/useSectionObserver';
-import AnimatedCard from "../../ui/AnimatedCard";
-import CustomButton from "../../components/CustomButton"
+import BackgroundPattern from "../../../ui/BackgroundPattern";
+import FloatingNavigation from '../../../components/FloatingNavigation';
+import useSectionObserver from '../../../hooks/useSectionObserver';
+import AnimatedCard from "../../../ui/AnimatedCard";
+import CustomButton from "../../../components/CustomButton"
 
 // Custom components to replace MUI
 

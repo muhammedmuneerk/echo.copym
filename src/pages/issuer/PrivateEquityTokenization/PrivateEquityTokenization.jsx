@@ -5,13 +5,13 @@ import LockIcon from "@mui/icons-material/Lock";
 import { ArrowRightAlt } from "@mui/icons-material";
 import {Box, Typography,Grid, } from "@mui/material";
 import { Globe2, ChartBar, Shield, Building2, BarChart3 } from "lucide-react";
-import BackgroundTheme from "../../ui/GridBackgroundTheme";
-import GradientLetters from "../../components/GradientLetters";
-import BackgroundPattern from "../../ui/BackgroundPattern";
-import FloatingNavigation from '../../components/FloatingNavigation';
-import useSectionObserver from '../../hooks/useSectionObserver';
-import AnimatedCard from "../../ui/AnimatedCard";
-import CustomButton from "../../components/CustomButton"
+import BackgroundTheme from "../../../ui/GridBackgroundTheme";
+import GradientLetters from "../../../components/GradientLetters";
+import BackgroundPattern from "../../../ui/BackgroundPattern";
+import FloatingNavigation from '../../../components/FloatingNavigation';
+import useSectionObserver from '../../../hooks/useSectionObserver';
+import AnimatedCard from "../../../ui/AnimatedCard";
+import CustomButton from "../../../components/CustomButton"
 
 const FadeSection = ({ children }) => (
   <motion.div

@@ -7,12 +7,12 @@ import {
 } from "@mui/icons-material";
 import { Leaf, Globe2, Shield, Users } from "lucide-react";
 import { Box, Typography, Grid, Container } from "@mui/material";
-import GradientLetters from "../../components/GradientLetters";
-import BackgroundPattern from "../../ui/BackgroundPattern";
-import FloatingNavigation from '../../components/FloatingNavigation';
-import useSectionObserver from '../../hooks/useSectionObserver';
-import AnimatedCard from "../../ui/AnimatedCard";
-import CustomButton from "../../components/CustomButton"
+import GradientLetters from "../../../components/GradientLetters";
+import BackgroundPattern from "../../../ui/BackgroundPattern";
+import FloatingNavigation from '../../../components/FloatingNavigation';
+import useSectionObserver from '../../../hooks/useSectionObserver';
+import AnimatedCard from "../../../ui/AnimatedCard";
+import CustomButton from "../../../components/CustomButton"
 
 const FadeSection = ({ children }) => (
   <motion.div

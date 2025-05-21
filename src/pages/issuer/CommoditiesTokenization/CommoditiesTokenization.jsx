@@ -3,12 +3,12 @@ import { Button } from "@mui/material";
 import { ChevronLeft, ChevronRight, ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion"; // Added import for motion component
 import { Container, Typography, Box, Grid } from "@mui/material";
-import GradientLetters from "../../components/GradientLetters";
-import BackgroundPattern from "../../ui/BackgroundPattern";
-import FloatingNavigation from '../../components/FloatingNavigation';
-import useSectionObserver from '../../hooks/useSectionObserver';
-import AnimatedCard from "../../ui/AnimatedCard";
-import CustomButton from "../../components/CustomButton"
+import GradientLetters from "../../../components/GradientLetters";
+import BackgroundPattern from "../../../ui/BackgroundPattern";
+import FloatingNavigation from '../../../components/FloatingNavigation';
+import useSectionObserver from '../../../hooks/useSectionObserver';
+import AnimatedCard from "../../../ui/AnimatedCard";
+import CustomButton from "../../../components/CustomButton"
 
 // Custom Card component with glass-morphism effect
 const GlassCard = ({ children, className, hoverEffect = false }) => {

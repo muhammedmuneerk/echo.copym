@@ -10,12 +10,12 @@ import {
 } from "@mui/icons-material";
 import { Box, Typography, Container, Grid } from "@mui/material";
 import { ArrowRight, ArrowLeft, Globe2, Users } from "lucide-react";
-import GradientLetters from "../../components/GradientLetters";
-import BackgroundPattern from "../../ui/BackgroundPattern";
-import FloatingNavigation from '../../components/FloatingNavigation';
-import useSectionObserver from '../../hooks/useSectionObserver';
-import AnimatedCard from "../../ui/AnimatedCard";
-import CustomButton from "../../components/CustomButton"
+import GradientLetters from "../../../components/GradientLetters";
+import BackgroundPattern from "../../../ui/BackgroundPattern";
+import FloatingNavigation from '../../../components/FloatingNavigation';
+import useSectionObserver from '../../../hooks/useSectionObserver';
+import AnimatedCard from "../../../ui/AnimatedCard";
+import CustomButton from "../../../components/CustomButton"
 
 
 const FadeSection = ({ children }) => (
