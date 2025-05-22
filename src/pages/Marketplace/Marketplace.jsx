@@ -87,7 +87,7 @@ const categories = [
 // Map asset categories to navigation paths
 const categoryToPath = {
   "Real Estate": "/market/real-estate",
-  "Art": "/tokenization/art",
+  "Art": "/market/art",
   "Commodities": "/tokenization/gold",
   "Infrastructure": "/tokenization/carbon-credits", // Closest match from navigation
   "Startups": "/tokenization/private-equity", // Closest match from navigation

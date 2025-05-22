@@ -29,6 +29,7 @@ import GoldTokenizationPopup from "./components/GoldTokenizatinPopup";
 import ScrollAnimationWrapper from "./components/ScrollAnimationWrapper";
 import BackgroundPattern from "./ui/BackgroundPattern";
 import { div } from "framer-motion/client";
+import ArtMarket from "./pages/investor/ArtMarket/ArtMarket";
 
 /**
  * HomePage component - Main landing page layout
@@ -145,6 +146,7 @@ function App() {
           <Route path="/tokenization/private-equity" element={<PrivateEquityTokenization />} />
           <Route path="/tokenization/other-assets" element={<DiverseAssetTokenization />} />
           <Route path="/market/real-estate/" element={<RealEstateMarket />} />
+          <Route path="/market/art/" element={<ArtMarket />} />
         </Routes>
       </main>
       <Footer />
