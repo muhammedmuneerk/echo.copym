@@ -90,7 +90,7 @@ const categoryToPath = {
   "Art": "/market/art",
   "Commodities": "/tokenization/gold",
   "Infrastructure": "/tokenization/carbon-credits", // Closest match from navigation
-  "Startups": "/tokenization/private-equity", // Closest match from navigation
+  "Startups": "/market/private-equity", // Closest match from navigation
   // Default fallback
   "default": "/tokenization"
 };

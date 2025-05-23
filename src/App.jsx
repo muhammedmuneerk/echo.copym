@@ -30,6 +30,7 @@ import ScrollAnimationWrapper from "./components/ScrollAnimationWrapper";
 import BackgroundPattern from "./ui/BackgroundPattern";
 import { div } from "framer-motion/client";
 import ArtMarket from "./pages/investor/ArtMarket/ArtMarket";
+import PrivateEquityMarket from "./pages/investor/PrivateEquityMarket/PrivateEquityMarket";
 
 /**
  * HomePage component - Main landing page layout
@@ -147,6 +148,7 @@ function App() {
           <Route path="/tokenization/other-assets" element={<DiverseAssetTokenization />} />
           <Route path="/market/real-estate/" element={<RealEstateMarket />} />
           <Route path="/market/art/" element={<ArtMarket />} />
+          <Route path="/market/private-equity/" element={<PrivateEquityMarket />} />
         </Routes>
       </main>
       <Footer />
