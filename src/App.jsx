@@ -31,6 +31,7 @@ import BackgroundPattern from "./ui/BackgroundPattern";
 import { div } from "framer-motion/client";
 import ArtMarket from "./pages/investor/ArtMarket/ArtMarket";
 import PrivateEquityMarket from "./pages/investor/PrivateEquityMarket/PrivateEquityMarket";
+import CarbonCreditsMarket from "./pages/investor/CarbonCreditsMarket/CarbonCreditsMarket";
 
 /**
  * HomePage component - Main landing page layout
@@ -149,6 +150,7 @@ function App() {
           <Route path="/market/real-estate/" element={<RealEstateMarket />} />
           <Route path="/market/art/" element={<ArtMarket />} />
           <Route path="/market/private-equity/" element={<PrivateEquityMarket />} />
+          <Route path="/market/carbon-credits/" element={<CarbonCreditsMarket />} />
         </Routes>
       </main>
       <Footer />
