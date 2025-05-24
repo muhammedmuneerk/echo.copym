@@ -29,7 +29,7 @@ import {
 import { Download, RefreshCw } from 'react-feather';
 
 // Private Equity Market Visualization Component
-const GlobalPrivateEquityDashboard = () => {
+const GlobalPrivateEquityMarketDashboard = () => {
   const [activeTimeframe, setActiveTimeframe] = useState('1Y');
   const [activeView, setActiveView] = useState('map');
   const [selectedRegion, setSelectedRegion] = useState(null);
@@ -983,4 +983,4 @@ const GlobalPrivateEquityDashboard = () => {
   );
 };
 
-export default GlobalPrivateEquityDashboard;
+export default GlobalPrivateEquityMarketDashboard;

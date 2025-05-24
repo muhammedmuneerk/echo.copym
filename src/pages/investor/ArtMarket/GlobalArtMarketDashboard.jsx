@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { MapContainer, TileLayer, CircleMarker, Polygon, Tooltip, ZoomControl, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import * as d3 from 'd3';
@@ -10,24 +11,25 @@ import {
   ChevronDown,
   Check,
   Globe,
-  Shield,
+  Palette,
   Building,
   Search,
   Moon,
   Sun,
-  Fingerprint,
-  Lock,
+  Home,
   TrendingUp,
   BarChart,
   LineChart,
   DollarSign,
-  PieChart
+  PieChart,
+  Crown,
+  Star,
+  Gem
 } from "lucide-react";
 import { Download, RefreshCw } from 'react-feather';
 
-
-// Market Data Visualization Component
-const ContinentalGoldMap = () => {
+// Art & Collectibles Market Visualization Component
+const GlobalArtMarketDashboard = () => {
   const [activeTimeframe, setActiveTimeframe] = useState('1M');
   const [activeView, setActiveView] = useState('map');
   const [selectedRegion, setSelectedRegion] = useState(null);
@@ -56,126 +58,120 @@ const ContinentalGoldMap = () => {
             onClick={handleReset}
             title="Reset Map View"
           >
-            <RefreshCw size={16} className="text-yellow-500" />
+            <RefreshCw size={16} className="text-purple-500" />
           </button>
         </div>
       </div>
     );
   };
   
-  // Accurate gold data by region with ISO country codes
-  const goldData = {
+  // Art & Collectibles data by region
+  const artCollectiblesData = {
     "North America": {
       code: "NA",
-      // color: "#FFD700",
-      // fillColor: "#FFD700",
       borders: [
         [[49, -125], [25, -125], [25, -65], [49, -65]]
       ],
-      reserves: 11400,  // in metric tons
-      production: 330,  // annual production in metric tons
-      countries: ["United States", "Canada", "Mexico"],
-      majorMines: [
-        { name: "Nevada Gold Mines", coordinates: [40.8, -116.5], production: 115 },
-        { name: "Peñasquito", coordinates: [24.1, -101.9], production: 34 },
-        { name: "Canadian Malartic", coordinates: [48.1, -78.1], production: 25 }
+      avgPrice: 850000,  // in USD
+      inventory: 450000,  // number of artworks/collectibles for sale
+      marketGrowth: 8.5, // percent annually
+      categories: ["Contemporary Art", "Classic Cars", "Fine Wine", "Vintage Watches", "Comics"],
+      majorCities: [
+        { name: "New York", coordinates: [40.7, -74.0], avgPrice: 1500000, inventory: 85000, specialty: "Contemporary Art" },
+        { name: "Los Angeles", coordinates: [34.0, -118.2], avgPrice: 920000, inventory: 42000, specialty: "Hollywood Memorabilia" },
+        { name: "Chicago", coordinates: [41.9, -87.6], avgPrice: 650000, inventory: 28000, specialty: "Modern Art" }
       ],
-      priceData: generatePriceData(1880, 0.05)
+      priceData: generatePriceData(850000, 0.12),
     },
     "South America": {
       code: "SA",
-      // color: "#FFA500",
-      // fillColor: "#FFA500",
       borders: [
         [[-4, -81], [-4, -35], [-55, -35], [-55, -81]]
       ],
-      reserves: 8700,
-      production: 520,
-      countries: ["Peru", "Brazil", "Chile", "Colombia", "Argentina"],
-      majorMines: [
-        { name: "Yanacocha", coordinates: [-6.9, -78.5], production: 28 },
-        { name: "Cerro Vanguardia", coordinates: [-48.3, -68.2], production: 16 },
-        { name: "Pueblo Viejo", coordinates: [18.9, -70.2], production: 48 }
+      avgPrice: 280000,
+      inventory: 180000,
+      marketGrowth: 12.3,
+      categories: ["Pre-Columbian Art", "Modern Latin Art", "Silver Artifacts", "Gemstones", "Folk Art"],
+      majorCities: [
+        { name: "São Paulo", coordinates: [-23.5, -46.6], avgPrice: 420000, inventory: 35000, specialty: "Brazilian Modern Art" },
+        { name: "Buenos Aires", coordinates: [-34.6, -58.4], avgPrice: 320000, inventory: 22000, specialty: "Tango Memorabilia" },
+        { name: "Bogotá", coordinates: [4.7, -74.1], avgPrice: 180000, inventory: 15000, specialty: "Emeralds & Gold" }
       ],
-      priceData: generatePriceData(1875, 0.06)
+      priceData: generatePriceData(280000, 0.15),
     },
     "Europe": {
       code: "EU",
-      // color: "#4169E1",
-      // fillColor: "#4169E1",
       borders: [
         [[35, -10], [35, 40], [70, 40], [70, -10]]
       ],
-      reserves: 2400,
-      production: 140,
-      countries: ["Russia", "Finland", "Sweden", "Turkey"],
-      majorMines: [
-        { name: "Kupol", coordinates: [66.6, 169.1], production: 21 },
-        { name: "Kittila", coordinates: [67.9, 25.4], production: 14 },
-        { name: "Olimpiada", coordinates: [59.2, 92.9], production: 32 }
+      avgPrice: 1200000,
+      inventory: 680000,
+      marketGrowth: 6.2,
+      categories: ["Old Masters", "Impressionist", "Antique Furniture", "Rare Books", "Classical Sculptures"],
+      majorCities: [
+        { name: "London", coordinates: [51.5, -0.1], avgPrice: 2100000, inventory: 120000, specialty: "Old Masters" },
+        { name: "Paris", coordinates: [48.9, 2.3], avgPrice: 1800000, inventory: 95000, specialty: "Impressionist Art" },
+        { name: "Zurich", coordinates: [47.4, 8.5], avgPrice: 1650000, inventory: 45000, specialty: "Private Collections" }
       ],
-      priceData: generatePriceData(1890, 0.04)
-    },
-    "Africa": {
-      code: "AF",
-      // color: "#32CD32",
-      // fillColor: "#32CD32",
-      borders: [
-        [[35, -18], [35, 50], [-35, 50], [-35, -18]]
-      ],
-      reserves: 19800,
-      production: 870,
-      countries: ["South Africa", "Ghana", "Sudan", "Mali", "Tanzania"],
-      majorMines: [
-        { name: "Tarkwa", coordinates: [5.3, -1.9], production: 42 },
-        { name: "Kibali", coordinates: [3.1, 29.6], production: 31 },
-        { name: "Loulo-Gounkoto", coordinates: [13.0, -11.5], production: 27 }
-      ],
-      priceData: generatePriceData(1860, 0.07)
+      priceData: generatePriceData(1200000, 0.08),
     },
     "Asia": {
       code: "AS",
-      // color: "#9932CC",
-      // fillColor: "#9932CC",
       borders: [
         [[35, 40], [35, 145], [0, 145], [0, 90], [10, 40]]
       ],
-      reserves: 23500,
-      production: 930,
-      countries: ["China", "Indonesia", "Kazakhstan", "Uzbekistan", "Philippines"],
-      majorMines: [
-        { name: "Muruntau", coordinates: [41.5, 64.6], production: 66 },
-        { name: "Grasberg", coordinates: [-4.1, 137.1], production: 49 },
-        { name: "Telfer", coordinates: [-21.7, 122.2], production: 18 }
+      avgPrice: 950000,
+      inventory: 820000,
+      marketGrowth: 18.2,
+      categories: ["Chinese Antiquities", "Japanese Art", "Jade & Porcelain", "Calligraphy", "Buddha Sculptures"],
+      majorCities: [
+        { name: "Hong Kong", coordinates: [22.3, 114.2], avgPrice: 1800000, inventory: 95000, specialty: "Chinese Antiquities" },
+        { name: "Tokyo", coordinates: [35.7, 139.8], avgPrice: 1200000, inventory: 75000, specialty: "Japanese Art" },
+        { name: "Singapore", coordinates: [1.3, 103.8], avgPrice: 1400000, inventory: 42000, specialty: "Southeast Asian Art" }
       ],
-      priceData: generatePriceData(1870, 0.08)
+      priceData: generatePriceData(950000, 0.16),
+    },
+    "Africa": {
+      code: "AF",
+      borders: [
+        [[35, -18], [35, 50], [-35, 50], [-35, -18]]
+      ],
+      avgPrice: 180000,
+      inventory: 120000,
+      marketGrowth: 15.8,
+      categories: ["African Tribal Art", "Contemporary African Art", "Precious Stones", "Masks & Sculptures", "Textiles"],
+      majorCities: [
+        { name: "Cape Town", coordinates: [-33.9, 18.4], avgPrice: 280000, inventory: 18000, specialty: "Contemporary African Art" },
+        { name: "Lagos", coordinates: [6.5, 3.4], avgPrice: 220000, inventory: 25000, specialty: "Yoruba Art" },
+        { name: "Marrakech", coordinates: [31.6, -8.0], avgPrice: 150000, inventory: 15000, specialty: "Islamic Art" }
+      ],
+      priceData: generatePriceData(180000, 0.18),
     },
     "Oceania": {
       code: "OC",
-      // color: "#FF4500",
-      // fillColor: "#FF4500",
       borders: [
         [[-5, 120], [-5, 180], [-45, 180], [-45, 110], [-15, 110]]
       ],
-      reserves: 10100,
-      production: 380,
-      countries: ["Australia", "Papua New Guinea"],
-      majorMines: [
-        { name: "Cadia Valley", coordinates: [-33.4, 149.0], production: 38 },
-        { name: "Boddington", coordinates: [-32.7, 116.3], production: 27 },
-        { name: "Tanami", coordinates: [-19.9, 129.7], production: 16 }
+      avgPrice: 420000,
+      inventory: 85000,
+      marketGrowth: 9.7,
+      categories: ["Aboriginal Art", "Pacific Island Art", "Contemporary Australian Art", "Opals", "Tribal Artifacts"],
+      majorCities: [
+        { name: "Sydney", coordinates: [-33.9, 151.2], avgPrice: 650000, inventory: 32000, specialty: "Aboriginal Art" },
+        { name: "Melbourne", coordinates: [-37.8, 145.0], avgPrice: 580000, inventory: 28000, specialty: "Contemporary Art" },
+        { name: "Auckland", coordinates: [-36.8, 174.8], avgPrice: 380000, inventory: 15000, specialty: "Maori Art" }
       ],
-      priceData: generatePriceData(1865, 0.05)
+      priceData: generatePriceData(420000, 0.11),
     }
   };
   
   // Generate realistic price data with trends and volatility
   function generatePriceData(basePrice, volatilityFactor) {
     const trendFactors = {
-      '1D': { points: 24, trend: 0.02, cycle: 6 },
-      '1W': { points: 7, trend: 0.1, cycle: 3 },
-      '1M': { points: 30, trend: 0.4, cycle: 10 },
-      '1Y': { points: 12, trend: 1.2, cycle: 4 }
+      '1D': { points: 24, trend: 0.002, cycle: 6 },
+      '1W': { points: 7, trend: 0.015, cycle: 3 },
+      '1M': { points: 30, trend: 0.035, cycle: 8 },
+      '1Y': { points: 12, trend: 0.12, cycle: 4 }
     };
     
     const result = {};
@@ -185,28 +181,28 @@ const ContinentalGoldMap = () => {
       const data = [];
       let price = basePrice;
       
-      // Add general trend
-      const trendDirection = Math.random() > 0.5 ? 1 : -1;
+      // Art market usually trends upward with high volatility
+      const trendDirection = Math.random() > 0.2 ? 1 : -1;
       
       for (let i = 0; i < points; i++) {
-        // Add cyclical component
-        const cyclical = Math.sin((i / points) * cycle * Math.PI) * basePrice * volatilityFactor;
+        // Add cyclical component (seasonal effects)
+        const cyclical = Math.sin((i / points) * cycle * Math.PI) * basePrice * volatilityFactor * 0.15;
         
-        // Add random walk
-        const random = (Math.random() - 0.5) * basePrice * volatilityFactor;
+        // Add random walk (high volatility in art market)
+        const random = (Math.random() - 0.5) * basePrice * volatilityFactor * 0.2;
         
         // Add trend
         const trendComponent = (i / points) * trend * basePrice * trendDirection;
         
         price = basePrice + cyclical + random + trendComponent;
         
-        // Calculate daily high/low/open/close
-        const dailyVolatility = basePrice * volatilityFactor * 0.2;
+        // Calculate daily high/low/open/close with higher volatility
+        const dailyVolatility = basePrice * volatilityFactor * 0.03;
         const open = price - (Math.random() - 0.5) * dailyVolatility;
         const close = price;
         const high = Math.max(open, close) + Math.random() * dailyVolatility;
         const low = Math.min(open, close) - Math.random() * dailyVolatility;
-        const volume = (Math.random() * 0.5 + 0.75) * (basePrice / 1000);
+        const volume = Math.floor((Math.random() * 0.4 + 0.6) * 500); // Lower transaction volume than real estate
         
         data.push({
           date: i,
@@ -215,7 +211,7 @@ const ContinentalGoldMap = () => {
           high,
           low,
           close,
-          volume
+          volume // number of sales/auctions
         });
       }
       
@@ -227,12 +223,12 @@ const ContinentalGoldMap = () => {
   
   // Global averages
   const getGlobalData = () => {
-    const regions = Object.keys(goldData);
+    const regions = Object.keys(artCollectiblesData);
     const globalPriceData = {};
     
     // Calculate global price data
-    Object.keys(goldData[regions[0]].priceData).forEach(timeframe => {
-      const points = goldData[regions[0]].priceData[timeframe].length;
+    Object.keys(artCollectiblesData[regions[0]].priceData).forEach(timeframe => {
+      const points = artCollectiblesData[regions[0]].priceData[timeframe].length;
       const globalData = [];
       
       for (let i = 0; i < points; i++) {
@@ -247,7 +243,7 @@ const ContinentalGoldMap = () => {
         };
         
         regions.forEach(region => {
-          const regionData = goldData[region].priceData[timeframe][i];
+          const regionData = artCollectiblesData[region].priceData[timeframe][i];
           globalPoint.price += regionData.price;
           globalPoint.open += regionData.open;
           globalPoint.close += regionData.close;
@@ -267,15 +263,15 @@ const ContinentalGoldMap = () => {
       globalPriceData[timeframe] = globalData;
     });
     
-    const totalReserves = regions.reduce((sum, region) => 
-      sum + goldData[region].reserves, 0);
+    const totalInventory = regions.reduce((sum, region) => 
+      sum + artCollectiblesData[region].inventory, 0);
       
-    const totalProduction = regions.reduce((sum, region) => 
-      sum + goldData[region].production, 0);
+    const averageMarketGrowth = regions.reduce((sum, region) => 
+      sum + artCollectiblesData[region].marketGrowth, 0) / regions.length;
       
-    const allMines = regions.flatMap(region => 
-      goldData[region].majorMines.map(mine => ({
-        ...mine,
+    const allCities = regions.flatMap(region => 
+      artCollectiblesData[region].majorCities.map(city => ({
+        ...city,
         region
       }))
     );
@@ -283,10 +279,11 @@ const ContinentalGoldMap = () => {
     return {
       name: "Global",
       code: "GLOBAL",
-      color: "#FFD700",
-      reserves: totalReserves,
-      production: totalProduction,
-      majorMines: allMines,
+      color: "#8B5CF6",
+      avgPrice: regions.reduce((sum, region) => sum + artCollectiblesData[region].avgPrice, 0) / regions.length,
+      inventory: totalInventory,
+      marketGrowth: averageMarketGrowth,
+      majorCities: allCities,
       priceData: globalPriceData
     };
   };
@@ -303,7 +300,7 @@ const ContinentalGoldMap = () => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      minimumFractionDigits: 2
+      maximumFractionDigits: 0
     }).format(num);
   };
   
@@ -381,7 +378,7 @@ const ContinentalGoldMap = () => {
       
     // Get data for selected region or global
     const chartData = region 
-      ? goldData[region].priceData[activeTimeframe]
+      ? artCollectiblesData[region].priceData[activeTimeframe]
       : globalData.priceData[activeTimeframe];
       
     // Create scales
@@ -391,8 +388,8 @@ const ContinentalGoldMap = () => {
       
     const y = d3.scaleLinear()
       .domain([
-        d3.min(chartData, d => d.low) * 0.998,
-        d3.max(chartData, d => d.high) * 1.002
+        d3.min(chartData, d => d.low) * 0.995,
+        d3.max(chartData, d => d.high) * 1.005
       ])
       .range([innerHeight, 0]);
       
@@ -448,8 +445,8 @@ const ContinentalGoldMap = () => {
       .attr("height", d => innerHeight - volumeScale(d.volume))
       .attr("fill", (d, i) => {
         return i > 0 && chartData[i].close > chartData[i-1].close
-          ? "rgba(50, 205, 50, 0.3)"
-          : "rgba(255, 69, 0, 0.3)";
+          ? "rgba(139, 92, 246, 0.3)" // Purple for art market
+          : "rgba(239, 68, 68, 0.3)"; // Red for negative
       });
       
     // Add candles
@@ -465,7 +462,7 @@ const ContinentalGoldMap = () => {
       .attr("x2", (d, i) => x(i))
       .attr("y1", d => y(d.high))
       .attr("y2", d => y(d.low))
-      .attr("stroke", d => d.open > d.close ? "#FF4500" : "#32CD32")
+      .attr("stroke", d => d.open > d.close ? "#EF4444" : "#8B5CF6")
       .attr("stroke-width", 1);
       
     // Add candle bodies
@@ -478,7 +475,7 @@ const ContinentalGoldMap = () => {
       .attr("y", d => y(Math.max(d.open, d.close)))
       .attr("width", candleWidth)
       .attr("height", d => Math.abs(y(d.open) - y(d.close)))
-      .attr("fill", d => d.open > d.close ? "#FF4500" : "#32CD32");
+      .attr("fill", d => d.open > d.close ? "#EF4444" : "#8B5CF6");
       
     // Add tooltip interaction area
     chartGroup.append("rect")
@@ -500,19 +497,19 @@ const ContinentalGoldMap = () => {
         tooltip.style("visibility", "visible")
           .style("opacity", 1)
           .html(`
-            <div class="p-2 rounded-lg bg-gray-900/90 backdrop-blur-md border border-yellow-500/30">
-              <div class="text-yellow-500 font-bold">${formatDate(activeTimeframe, i)}</div>
+            <div class="p-2 rounded-lg bg-gray-900/90 backdrop-blur-md border border-purple-500/30">
+              <div class="text-purple-500 font-bold">${formatDate(activeTimeframe, i)}</div>
               <div class="grid grid-cols-2 gap-x-3 gap-y-1 mt-1">
                 <div class="text-xs text-gray-300">Open:</div>
-                <div class="text-xs text-yellow-100">${formatCurrency(item.open)}</div>
+                <div class="text-xs text-purple-100">${formatCurrency(item.open)}</div>
                 <div class="text-xs text-gray-300">High:</div>
-                <div class="text-xs text-yellow-100">${formatCurrency(item.high)}</div>
+                <div class="text-xs text-purple-100">${formatCurrency(item.high)}</div>
                 <div class="text-xs text-gray-300">Low:</div>
-                <div class="text-xs text-yellow-100">${formatCurrency(item.low)}</div>
+                <div class="text-xs text-purple-100">${formatCurrency(item.low)}</div>
                 <div class="text-xs text-gray-300">Close:</div>
-                <div class="text-xs text-yellow-100">${formatCurrency(item.close)}</div>
+                <div class="text-xs text-purple-100">${formatCurrency(item.close)}</div>
                 <div class="text-xs text-gray-300">Volume:</div>
-                <div class="text-xs text-yellow-100">${formatNumber(item.volume.toFixed(1))} tons</div>
+                <div class="text-xs text-purple-100">${formatNumber(item.volume)} sales</div>
               </div>
             </div>
           `)
@@ -531,7 +528,7 @@ const ContinentalGoldMap = () => {
           .attr("x2", x(i))
           .attr("y1", 0)
           .attr("y2", innerHeight)
-          .attr("stroke", "#FFD700")
+          .attr("stroke", "#8B5CF6")
           .attr("stroke-width", 1)
           .attr("stroke-dasharray", "3,3");
           
@@ -542,7 +539,7 @@ const ContinentalGoldMap = () => {
           .attr("x2", innerWidth)
           .attr("y1", y(item.close))
           .attr("y2", y(item.close))
-          .attr("stroke", "#FFD700")
+          .attr("stroke", "#8B5CF6")
           .attr("stroke-width", 1)
           .attr("stroke-dasharray", "3,3");
           
@@ -551,7 +548,7 @@ const ContinentalGoldMap = () => {
           .attr("class", "crosshair-label")
           .attr("x", innerWidth + 5)
           .attr("y", y(item.close) + 4)
-          .attr("fill", "#FFD700")
+          .attr("fill", "#8B5CF6")
           .attr("font-size", "10px")
           .text(formatCurrency(item.close));
       })
@@ -567,10 +564,10 @@ const ContinentalGoldMap = () => {
       .attr("x", innerWidth / 2)
       .attr("y", -10)
       .attr("text-anchor", "middle")
-      .attr("fill", "#FFD700")
+      .attr("fill", "#8B5CF6")
       .attr("font-size", "14px")
       .attr("font-weight", "bold")
-      .text(`${region || 'Global'} Gold Price - ${activeTimeframe} View`);
+      .text(`${region || 'Global'} Art & Collectibles Prices - ${activeTimeframe} View`);
       
     // Add axes labels
     chartGroup.append("text")
@@ -588,7 +585,7 @@ const ContinentalGoldMap = () => {
       .attr("text-anchor", "middle")
       .attr("fill", "#E6E6FA")
       .attr("font-size", "12px")
-      .text("Gold Price (USD/oz)");
+      .text("Average Price (USD)");
   };
   
   // Effect to update charts when timeframe or view changes
@@ -605,22 +602,22 @@ const ContinentalGoldMap = () => {
     legend.selectAll("*").remove();
     
     const legendContainer = legend.append("div")
-      .attr("class", "grid grid-cols-2 gap-2 p-2 bg-gray-900/50 backdrop-blur-md rounded-lg border border-yellow-500/20");
+      .attr("class", "grid grid-cols-2 gap-2 p-2 bg-gray-900/50 backdrop-blur-md rounded-lg border border-purple-500/20");
       
-    // Production legend
-    const productionItems = Object.entries(goldData)
-      .sort((a, b) => b[1].production - a[1].production)
+    // Price legend
+    const priceItems = Object.entries(artCollectiblesData)
+      .sort((a, b) => b[1].avgPrice - a[1].avgPrice)
       .map(([region, data]) => ({
         name: region,
-        value: data.production,
+        value: data.avgPrice,
         color: data.color
       }));
       
     legendContainer.append("div")
       .attr("class", "col-span-2")
-      .html(`<div class="text-xs font-bold text-yellow-500 mb-1">Annual Gold Production (tons)</div>`);
+      .html(`<div class="text-xs font-bold text-purple-500 mb-1">Average Art & Collectibles Prices (USD)</div>`);
       
-    productionItems.forEach(item => {
+    priceItems.forEach(item => {
       legendContainer.append("div")
         .attr("class", "flex items-center space-x-1")
         .html(`
@@ -630,56 +627,65 @@ const ContinentalGoldMap = () => {
         
       legendContainer.append("div")
         .attr("class", "text-right")
-        .html(`<div class="text-xs text-yellow-200">${formatNumber(item.value)}</div>`);
+        .html(`<div class="text-xs text-purple-200">${formatCurrency(item.value)}</div>`);
     });
     
-    // Add global total
+    // Add global average
     legendContainer.append("div")
       .attr("class", "col-span-1 mt-1 border-t border-gray-600 pt-1")
-      .html(`<div class="text-xs font-semibold text-gray-300">Global Total:</div>`);
+      .html(`<div class="text-xs font-semibold text-gray-300">Global Average:</div>`);
       
     legendContainer.append("div")
       .attr("class", "text-right mt-1 border-t border-gray-600 pt-1")
-      .html(`<div class="text-xs font-semibold text-yellow-300">${formatNumber(globalData.production)}</div>`);
+      .html(`<div class="text-xs font-semibold text-purple-300">${formatCurrency(globalData.avgPrice)}</div>`);
       
     setIsLoading(false);
   }, []);
+  
   
   // Region details component
   const RegionDetails = () => {
     if (!selectedRegion) return null;
     
-    const regionData = goldData[selectedRegion];
+    const regionData = artCollectiblesData[selectedRegion];
     return (
-      <div className="bg-gray-900/50 backdrop-blur-md rounded-lg border border-yellow-500/20 p-3 mt-4">
-        <h4 className="font-bold text-yellow-500 mb-2">{selectedRegion} Details</h4>
+      <div className="bg-gray-900/50 backdrop-blur-md rounded-lg border border-purple-500/20 p-3 mt-4">
+        <h4 className="font-bold text-purple-500 mb-2 flex items-center">
+          <Palette className="mr-2" size={16} />
+          {selectedRegion} Art Market Details
+        </h4>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <p className="text-sm text-gray-300">Gold Reserves:</p>
-            <p className="text-lg font-semibold text-yellow-300">{formatNumber(regionData.reserves)} tons</p>
+            <p className="text-sm text-gray-300">Average Artwork Price:</p>
+            <p className="text-lg font-semibold text-purple-300">{formatCurrency(regionData.avgPrice)}</p>
           </div>
           <div>
-            <p className="text-sm text-gray-300">Annual Production:</p>
-            <p className="text-lg font-semibold text-yellow-300">{formatNumber(regionData.production)} tons</p>
+            <p className="text-sm text-gray-300">Annual Growth Rate:</p>
+            <p className="text-lg font-semibold text-purple-300">{regionData.marketGrowth}%</p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-300">Available Inventory:</p>
+            <p className="text-lg font-semibold text-purple-300">{formatNumber(regionData.inventory)} pieces</p>
           </div>
           <div className="col-span-2">
-            <p className="text-sm text-gray-300 mb-1">Major Producers:</p>
+            <p className="text-sm text-gray-300 mb-1">Popular Categories:</p>
             <div className="flex flex-wrap gap-1">
-              {regionData.countries.map(country => (
-                <span key={country} className="bg-yellow-500/10 text-yellow-200 text-xs px-2 py-1 rounded">
-                  {country}
+              {regionData.categories.map(category => (
+                <span key={category} className="bg-purple-500/10 text-purple-200 text-xs px-2 py-1 rounded">
+                  {category}
                 </span>
               ))}
             </div>
           </div>
           <div className="col-span-2 mt-1">
-            <p className="text-sm text-gray-300 mb-1">Top Mines:</p>
+            <p className="text-sm text-gray-300 mb-1">Major Art Centers:</p>
             <div className="grid grid-cols-2 gap-2">
-              {regionData.majorMines.slice(0, 4).map(mine => (
-                <div key={mine.name} className="bg-gray-800/50 rounded p-2">
-                  <div className="font-semibold text-white text-sm">{mine.name}</div>
-                  <div className="text-xs text-yellow-200">{mine.production} tons/year</div>
-                  <div className="text-xs text-gray-400">({mine.coordinates[0].toFixed(1)}°, {mine.coordinates[1].toFixed(1)}°)</div>
+              {regionData.majorCities.slice(0, 4).map(city => (
+                <div key={city.name} className="bg-gray-800/50 rounded p-2">
+                  <div className="font-semibold text-white text-sm">{city.name}</div>
+                  <div className="text-xs text-purple-200">{formatCurrency(city.avgPrice)} avg</div>
+                  <div className="text-xs text-gray-400">{formatNumber(city.inventory)} pieces</div>
+                  <div className="text-xs text-purple-300">{city.specialty}</div>
                 </div>
               ))}
             </div>
@@ -688,16 +694,19 @@ const ContinentalGoldMap = () => {
       </div>
     );
   };
+
+  const annualSales = Math.round(globalData.inventory * 0.25); // Assuming 25% inventory turnover annually
   
   return (
-    <div className="bg-gray-900/80 backdrop-blur-xl border border-yellow-500/20 rounded-xl overflow-hidden">
-      <div className="flex justify-between items-center p-4 border-b border-yellow-500/20">
+    <div className="bg-gray-900/80 backdrop-blur-xl border border-purple-500/20 rounded-xl overflow-hidden">
+      <div className="flex justify-between items-center p-4 border-b border-purple-500/20">
         <div className="flex items-center">
-          <h3 className="text-xl font-bold text-yellow-500">
-            Global Gold Data
+          <Palette className="mr-2 text-purple-500" size={20} />
+          <h3 className="text-xl font-bold text-purple-500">
+            Global Art & Collectibles Market
           </h3>
           {selectedRegion && (
-            <span className="ml-2 text-sm bg-yellow-500/20 text-yellow-300 px-2 py-0.5 rounded-full">
+            <span className="ml-2 text-sm bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full">
               {selectedRegion}
             </span>
           )}
@@ -708,7 +717,7 @@ const ContinentalGoldMap = () => {
               key={timeframe}
               className={`px-3 py-1 text-sm rounded-md transition-all ${
                 activeTimeframe === timeframe
-                  ? "bg-yellow-500/20 text-yellow-500"
+                  ? "bg-purple-500/20 text-purple-500"
                   : "text-gray-400 hover:bg-gray-800"
               }`}
               onClick={() => setActiveTimeframe(timeframe)}
@@ -719,16 +728,16 @@ const ContinentalGoldMap = () => {
         </div>
       </div>
 
-      <div className="flex justify-between items-center p-2 px-4 border-b border-yellow-500/10">
+      <div className="flex justify-between items-center p-2 px-4 border-b border-purple-500/10">
         <div className="text-sm text-gray-400">
           {hoveredRegion
-            ? `Exploring: ${hoveredRegion}`
-            : "Hover over regions to explore"}
+            ? `Exploring: ${hoveredRegion} Art Market`
+            : "Hover over regions to explore art markets"}
         </div>
         <div className="flex space-x-2">
           <button
             className={`p-1 rounded flex items-center space-x-1 ${
-              activeView === "map" ? "text-yellow-500" : "text-gray-400"
+              activeView === "map" ? "text-purple-500" : "text-gray-400"
             }`}
             onClick={() => setActiveView("map")}
             title="Map View"
@@ -738,7 +747,7 @@ const ContinentalGoldMap = () => {
           </button>
           <button
             className={`p-1 rounded flex items-center space-x-1 ${
-              activeView === "chart" ? "text-yellow-500" : "text-gray-400"
+              activeView === "chart" ? "text-purple-500" : "text-gray-400"
             }`}
             onClick={() => setActiveView("chart")}
             title="Chart View"
@@ -748,7 +757,7 @@ const ContinentalGoldMap = () => {
           </button>
           {selectedRegion && (
             <button
-              className="px-2 py-1 text-xs rounded bg-yellow-500/10 text-yellow-500 hover:bg-yellow-500/20 flex items-center"
+              className="px-2 py-1 text-xs rounded bg-purple-500/10 text-purple-500 hover:bg-purple-500/20 flex items-center"
               onClick={handleResetSelection}
             >
               <Globe size={12} className="mr-1" />
@@ -765,16 +774,16 @@ const ContinentalGoldMap = () => {
           {activeView === "map" ? (
             <div className="relative h-[525px] bg-gray-900/30 rounded-lg overflow-hidden">
               <MapContainer
-              attributionControl={false} //remove the "Leaflet" text that appears in the bottom right corner of the map
+                attributionControl={false}
                 center={[20, 0]}
                 zoom={2}
                 style={{ height: "100%", width: "100%", background: "#0a1428" }}
-                zoomControl={false} // Disable the default zoom controls
+                zoomControl={false}
                 maxBounds={[
                   [90, -180],
                   [-90, 180],
-                ]} // Restrict the map to a single world view
-                maxBoundsViscosity={1.0} // Prevents panning outside the bounds
+                ]}
+                maxBoundsViscosity={1.0}
                 whenCreated={(mapInstance) => {
                   mapRef.current = mapInstance;
                 }}
@@ -782,33 +791,31 @@ const ContinentalGoldMap = () => {
                 {/* Dark-themed map tiles */}
                 <TileLayer
                   url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-                  noWrap={true} // Prevents the map from repeating horizontally
+                  noWrap={true}
                 />
 
                 {/* Add region polygons */}
-                {Object.entries(goldData).map(([region, data]) =>
+                {Object.entries(artCollectiblesData).map(([region, data]) =>
                   data.borders.map((border, i) => (
                     <Polygon
                       key={`${region}-border-${i}`}
                       positions={border}
                       pathOptions={{
                         fillColor: data.color,
-                        fillOpacity: selectedRegion === region ? 0.0 : 0.0,
-                        weight: 0.1,
-                        color: "#555",
-                        opacity: 0.1,
+                        fillOpacity: selectedRegion === region ? 0 : 0,
+                        weight: 0,
+                        color: data.color,
+                        opacity: 0,
                       }}
                       eventHandlers={{
                         mouseover: (e) => {
                           setHoveredRegion(region);
                           e.target.setStyle({
-                            fillOpacity: 0.0,
                           });
                         },
                         mouseout: (e) => {
                           setHoveredRegion(null);
                           e.target.setStyle({
-                            fillOpacity: selectedRegion === region ? 0.0 : 0.0,
                           });
                         },
                         click: () => {
@@ -819,30 +826,27 @@ const ContinentalGoldMap = () => {
                   ))
                 )}
 
-                {/* Add gold mines */}
-                {Object.entries(goldData).map(([region, data]) =>
-                  data.majorMines.map((mine, i) => (
+                {/* Add major art centers */}
+                {Object.entries(artCollectiblesData).map(([region, data]) =>
+                  data.majorCities.map((city, i) => (
                     <CircleMarker
-                      key={`${region}-mine-${i}`}
-                      center={mine.coordinates}
-                      radius={Math.log(mine.production) * 1.2}
-                      pathOptions={
-                        {
-                          // fillColor: '#FFD700',
-                          // fillOpacity: 0.8,
-                          // color: '#222',
-                          // weight: 1
-                        }
-                      }
+                      key={`${region}-city-${i}`}
+                      center={city.coordinates}
+                      radius={Math.log(city.inventory) * 0.4}
                     >
                       <Tooltip>
-                        <div className="p-1">
-                          <div className="font-bold text-yellow-500">
-                            {mine.name}
+                        <div className="p-2">
+                          <div className="font-bold text-purple-600 flex items-center">
+                            <Crown size={14} className="mr-1" />
+                            {city.name}
                           </div>
                           <div className="text-sm">
-                            Production: {mine.production} tons/year
+                            Avg Price: {formatCurrency(city.avgPrice)}
                           </div>
+                          <div className="text-sm">
+                            Inventory: {formatNumber(city.inventory)} pieces
+                          </div>
+                          <div className="text-sm">Specialty: {city.specialty}</div>
                           <div className="text-sm">Region: {region}</div>
                         </div>
                       </Tooltip>
@@ -867,47 +871,55 @@ const ContinentalGoldMap = () => {
           )}
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
             </div>
           )}
         </div>
 
         <div className="bg-gray-900/30 rounded-lg p-3">
           <div className="flex items-center justify-between mb-3">
-            <h4 className="text-yellow-500 font-bold">Gold Market Overview</h4>
+            <h4 className="text-purple-500 font-bold flex items-center">
+              <Gem className="mr-2" size={16} />
+              Art Market Overview
+            </h4>
             <Search size={16} className="text-gray-400" />
           </div>
 
           <div className="space-y-4">
             <div>
-              <h5 className="text-sm text-gray-300 mb-1">
-                Global Gold Production
+              <h5 className="text-sm text-gray-300 mb-1 flex items-center">
+                <Star className="mr-1" size={12} />
+                Global Art Inventory
               </h5>
-              <div className="text-2xl font-bold text-yellow-300">
-                {formatNumber(globalData.production)} tons{" "}
+              <div className="text-2xl font-bold text-purple-300">
+                {formatNumber(Math.round(globalData.inventory / 1000))}K pieces{" "}
+                <span className="text-xs text-green-400">available</span>
+              </div>
+              <div className="text-xs text-gray-400">
+                Based on major auction houses & galleries
+              </div>
+            </div>
+
+            <div>
+              <h5 className="text-sm text-gray-300 mb-1 flex items-center">
+                <TrendingUp className="mr-1" size={12} />
+                Annual Sales Volume
+              </h5>
+              <div className="text-2xl font-bold text-purple-300">
+                {formatNumber(Math.round(annualSales / 1000))}K sales{" "}
                 <span className="text-xs text-green-400">/ year</span>
               </div>
               <div className="text-xs text-gray-400">
-                Based on latest World Gold Council data
-              </div>
-            </div>
-
-            <div>
-              <h5 className="text-sm text-gray-300 mb-1">Known Reserves</h5>
-              <div className="text-2xl font-bold text-yellow-300">
-                {formatNumber(globalData.reserves)} tons
-              </div>
-              <div className="text-xs text-gray-400">
-                Economically viable at current prices
+                Estimated market transactions annually
               </div>
             </div>
 
             <div>
               <h5 className="text-sm text-gray-300 mb-1">
-                Current Price Trends
+                Regional Performance
               </h5>
               <div className="grid grid-cols-2 gap-2 mt-2">
-                {Object.entries(goldData)
+                {Object.entries(artCollectiblesData)
                   .slice(0, 4)
                   .map(([region, data]) => {
                     const currentPrice =
@@ -920,18 +932,20 @@ const ContinentalGoldMap = () => {
                       ((currentPrice - previousPrice) / previousPrice) * 100;
 
                     return (
-                      <div key={region} className="flex items-center space-x-2">
+                      <div key={region} className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div
+                            className="w-3 h-3 rounded-full"
+                            style={{ backgroundColor: data.color }}
+                          ></div>
+                          <div className="text-xs text-gray-300">{region}</div>
+                        </div>
                         <div
-                          className="w-2 h-2 rounded-full"
-                          style={{ backgroundColor: data.color }}
-                        ></div>
-                        <div className="text-xs text-gray-300">{region}</div>
-                        <div
-                          className={`text-xs ${
+                          className={`text-xs font-semibold ${
                             change >= 0 ? "text-green-400" : "text-red-400"
                           }`}
                         >
-                          {change >= 0 ? "↑" : "↓"}{" "}
+                          {change >= 0 ? "↗" : "↘"}{" "}
                           {Math.abs(change).toFixed(1)}%
                         </div>
                       </div>
@@ -941,8 +955,6 @@ const ContinentalGoldMap = () => {
             </div>
 
             <div ref={legendRef} className="mt-4"></div>
-
-          
           </div>
         </div>
       </div>
@@ -955,4 +967,4 @@ const ContinentalGoldMap = () => {
   );
 };
 
-export default ContinentalGoldMap ;
+export default GlobalArtMarketDashboard;

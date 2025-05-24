@@ -88,7 +88,7 @@ const categories = [
 const categoryToPath = {
   "Real Estate": "/market/real-estate",
   "Art": "/market/art",
-  "Commodities": "/tokenization/gold",
+  "Commodities": "/market/gold",
   "Infrastructure": "/market/carbon-credits", // Closest match from navigation
   "Startups": "/market/private-equity", // Closest match from navigation
   // Default fallback

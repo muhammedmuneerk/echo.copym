@@ -40,7 +40,7 @@ import {
   PieChart,
 } from "lucide-react";
 import { Download, RefreshCw } from "react-feather";
-import ContinentalRealEstateMap from "./ContinentalRealEstateMap";
+import GlobalRealEstateMarketDashboard from "./GlobalRealEstateMarketDashboard";
 import RealEstateCalculator from "./RealEstateCalculator";
 import BackgroundPattern from "../../../ui/BackgroundPattern";
 import FloatingNavigation from "../../../components/FloatingNavigation";
@@ -195,7 +195,7 @@ const RealEstateMarket = () => {
             </p>
           </div>
 
-          <ContinentalRealEstateMap />
+          <GlobalRealEstateMarketDashboard />
         </div>
       </section>
 

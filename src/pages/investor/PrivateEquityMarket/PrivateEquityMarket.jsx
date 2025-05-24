@@ -40,7 +40,7 @@ import {
   PieChart,
 } from "lucide-react";
 import { Download, RefreshCw } from "react-feather";
-import GlobalPrivateEquityDashboard from "./GlobalPrivateEquityDashboard";
+import GlobalPrivateEquityMarketDashboard from "./GlobalPrivateEquityMarketDashboard";
 import PrivateEquityCalculator from "./PrivateEquityCalculator";
 import BackgroundPattern from "../../../ui/BackgroundPattern";
 import FloatingNavigation from "../../../components/FloatingNavigation";
@@ -199,7 +199,7 @@ const PrivateEquityMarket = () => {
             </p>
           </div>
 
-          <GlobalPrivateEquityDashboard />
+          <GlobalPrivateEquityMarketDashboard />
         </div>
       </section>
 

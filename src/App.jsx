@@ -13,7 +13,7 @@ import Footer from "./components/Footer";
 import CTA from "./components/CTA";
 import Marketplace from "./pages/Marketplace/Marketplace";
 import TokenizationHub from "./pages/TokenizationHub/TokenizationHub";
-import GoldTokenization from "./pages/investor/GoldTokenization/GoldTokenization";
+import GoldMarket from "./pages/investor/GoldMarket/GoldMarket";
 import RealEstateTokenization from "./pages/issuer/RealEstateTokenization/RealEstateTokenization";
 import ArtTokenization from "./pages/issuer/ArtTokenization/ArtTokenization";
 import CommoditiesTokenization from "./pages/issuer/CommoditiesTokenization/CommoditiesTokenization";
@@ -140,13 +140,13 @@ function App() {
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/tokenization" element={<TokenizationHub />} />
           <Route path="/green-tokenization" element={<GreenTokenization />} />
-          <Route path="/tokenization/gold/" element={<GoldTokenization />} />
           <Route path="/tokenization/real-estate/" element={<RealEstateTokenization />} />
           <Route path="/tokenization/art" element={<ArtTokenization />} />
           <Route path="/tokenization/Commodities" element={<CommoditiesTokenization />} />
           <Route path="/tokenization/carbon-credits" element={<CarbonCreditsTokenization />} />
           <Route path="/tokenization/private-equity" element={<PrivateEquityTokenization />} />
           <Route path="/tokenization/other-assets" element={<DiverseAssetTokenization />} />
+          <Route path="/market/gold/" element={<GoldMarket />} />
           <Route path="/market/real-estate/" element={<RealEstateMarket />} />
           <Route path="/market/art/" element={<ArtMarket />} />
           <Route path="/market/private-equity/" element={<PrivateEquityMarket />} />

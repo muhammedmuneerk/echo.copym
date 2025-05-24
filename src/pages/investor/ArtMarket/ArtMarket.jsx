@@ -40,7 +40,7 @@ import {
   PieChart,
 } from "lucide-react";
 import { Download, RefreshCw } from "react-feather";
-import ContinentalArtMap from "./ContinentalArtMap";
+import GlobalArtMarketDashboard from "./GlobalArtMarketDashboard";
 import ArtCalculator from "./ArtCalculator";
 import BackgroundPattern from "../../../ui/BackgroundPattern";
 import FloatingNavigation from "../../../components/FloatingNavigation";
@@ -181,7 +181,7 @@ const ArtMarket = () => {
             </p>
           </div>
 
-          <ContinentalArtMap />
+          <GlobalArtMarketDashboard />
         </div>
       </section>
 
