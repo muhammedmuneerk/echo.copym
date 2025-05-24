@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 import { Download, RefreshCw } from 'react-feather';
 import GlobalGoldMarketDashboard from "./GlobalGoldMarketDashboard";
-import InvestmentCalculator from "./InvestmentCalculator";
+import GoldCalculator from "./GoldCalculator";
 import GoldPortfolioAllocation from "./GoldPortfolioAllocation";
 import AdvancedSearch from "./AdvancedSearch";
 import BackgroundPattern from "../../../ui/BackgroundPattern";
@@ -263,7 +263,7 @@ const GoldMarket = () => {
             </p>
           </div>
           
-          <InvestmentCalculator />
+          <GoldCalculator />
         </div>
       </section>
       
