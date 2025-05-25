@@ -16,7 +16,7 @@ export default function Footer() {
           viewport={{ once: true }}
         >
           <Box className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Logo and Description */}
+            {/* Logo and Description - Full width on mobile, 2 cols on desktop */}
             <Box className="md:col-span-2">
               <Typography
                 variant="h6"
@@ -38,50 +38,53 @@ export default function Footer() {
               </Typography>
             </Box>
 
-            {/* Quick Links */}
-            <Box>
-              <Typography
-                variant="overline"
-                className="text-primary font-medium block mb-4"
-              >
-                Quick Links
-              </Typography>
-              <Box className="flex flex-col gap-2">
-                {["About", "Features", "Documentation", "Blog"].map((link) => (
-                  <Typography
-                    key={link}
-                    variant="body2"
-                    className="text-text-secondary hover:text-white cursor-pointer transition-colors"
-                  >
-                    {link}
-                  </Typography>
-                ))}
+            {/* Links Section - Side by side on mobile, separate columns on desktop */}
+            <Box className="md:col-span-2 grid grid-cols-2 md:grid-cols-2 gap-8">
+              {/* Quick Links */}
+              <Box>
+                <Typography
+                  variant="overline"
+                  className="text-primary font-medium block mb-4 text-sm"
+                >
+                  Quick Links
+                </Typography>
+                <Box className="flex flex-col gap-2">
+                  {["About", "Features", "Documentation", "Blog"].map((link) => (
+                    <Typography
+                      key={link}
+                      variant="body2"
+                      className="text-text-secondary hover:text-white cursor-pointer transition-colors text-sm"
+                    >
+                      {link}
+                    </Typography>
+                  ))}
+                </Box>
               </Box>
-            </Box>
 
-            {/* Resources */}
-            <Box>
-              <Typography
-                variant="overline"
-                className="text-primary font-medium block mb-4"
-              >
-                Resources
-              </Typography>
-              <Box className="flex flex-col gap-2">
-                {[
-                  "API Reference",
-                  "Help Center",
-                  "Privacy Policy",
-                  "Terms of Service",
-                ].map((link) => (
-                  <Typography
-                    key={link}
-                    variant="body2"
-                    className="text-text-secondary hover:text-white cursor-pointer transition-colors"
-                  >
-                    {link}
-                  </Typography>
-                ))}
+              {/* Resources */}
+              <Box>
+                <Typography
+                  variant="overline"
+                  className="text-primary font-medium block mb-4 text-sm"
+                >
+                  Resources
+                </Typography>
+                <Box className="flex flex-col gap-2">
+                  {[
+                    "API Reference",
+                    "Help Center",
+                    "Privacy Policy",
+                    "Terms of Service",
+                  ].map((link) => (
+                    <Typography
+                      key={link}
+                      variant="body2"
+                      className="text-text-secondary hover:text-white cursor-pointer transition-colors text-sm"
+                    >
+                      {link}
+                    </Typography>
+                  ))}
+                </Box>
               </Box>
             </Box>
           </Box>
@@ -99,7 +102,7 @@ export default function Footer() {
       </Container>
 
       {/* Enhanced background gradient highlight with Glow Effect */}
-     {/* <BackgroundGlowEffect/> */}
+      {/* <BackgroundGlowEffect/> */}
     </Box>
   );
 }
