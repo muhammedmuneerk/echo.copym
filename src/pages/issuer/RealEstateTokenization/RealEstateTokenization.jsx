@@ -10,6 +10,7 @@ import FloatingNavigation from '../../../components/FloatingNavigation';
 import useSectionObserver from '../../../hooks/useSectionObserver';
 import AnimatedCard from "../../../ui/AnimatedCard";
 import CustomButton from "../../../components/CustomButton"
+import ScrollAnimationWrapper from "../../../components/ScrollAnimationWrapper";
 
 // Custom components to replace MUI
 
@@ -78,6 +79,7 @@ const RealEstateTokenization = () => {
   return (
     <div className="relative">
       <BackgroundPattern />
+      <ScrollAnimationWrapper>
       {/* Hero Section */}
       <section id="hero" className="relative container mx-auto px-6 py-24">
         <div className="max-w-4xl mt-20 relative z-10">
@@ -500,6 +502,7 @@ const RealEstateTokenization = () => {
           </div>
         </div>
       </section>
+      </ScrollAnimationWrapper>
       <FloatingNavigation sections={sections} activeSection={activeSection} />
     </div>
   );
