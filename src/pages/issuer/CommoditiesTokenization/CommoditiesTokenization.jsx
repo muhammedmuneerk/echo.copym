@@ -9,6 +9,7 @@ import FloatingNavigation from '../../../components/FloatingNavigation';
 import useSectionObserver from '../../../hooks/useSectionObserver';
 import AnimatedCard from "../../../ui/AnimatedCard";
 import CustomButton from "../../../components/CustomButton"
+import ScrollAnimationWrapper from "../../../components/ScrollAnimationWrapper";
 
 // Custom Card component with glass-morphism effect
 const GlassCard = ({ children, className, hoverEffect = false }) => {
@@ -142,6 +143,7 @@ const CommoditiesTokenization = () => {
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
       <BackgroundPattern />
+      <ScrollAnimationWrapper>
       <div className="relative z-10">
         {/* Hero Section */}
         <section
@@ -781,6 +783,7 @@ const CommoditiesTokenization = () => {
         </section>
       </div>
       <FloatingNavigation sections={sections} activeSection={activeSection} />
+      </ScrollAnimationWrapper>
 
     </div>
   );

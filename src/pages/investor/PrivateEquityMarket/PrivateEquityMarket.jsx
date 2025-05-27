@@ -48,6 +48,7 @@ import useSectionObserver from "../../../hooks/useSectionObserver";
 import CustomButton from "../../../components/CustomButton";
 import PrivateEquityPortfolioAllocation from "./PrivateEquityPortfolioAllocation";
 import AdvancedSearch from "./AdvancedSearch";
+import ScrollAnimationWrapper from "../../../components/ScrollAnimationWrapper";
 
 // The main PrivateEquity Tokenization component
 const PrivateEquityMarket = () => {
@@ -75,7 +76,7 @@ const PrivateEquityMarket = () => {
   return (
     <div className="min-h-screen relative text-white">
       <BackgroundPattern />
-
+      <ScrollAnimationWrapper>
       {/* Hero Section */}
       <section id="hero" className="relative min-h-[90vh] flex items-center">
         <div className="container mx-auto px-4 py-20 relative z-10">
@@ -336,6 +337,7 @@ const PrivateEquityMarket = () => {
         </div>
       </section>
       <FloatingNavigation sections={sections} activeSection={activeSection} />
+      </ScrollAnimationWrapper>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import FloatingNavigation from '../../../components/FloatingNavigation';
 import useSectionObserver from '../../../hooks/useSectionObserver';
 import AnimatedCard from "../../../ui/AnimatedCard";
 import CustomButton from "../../../components/CustomButton"
+import ScrollAnimationWrapper from "../../../components/ScrollAnimationWrapper";
 
 // Custom SVG Icons - Keeping original icons
 const TokenizationIcon = () => (
@@ -224,6 +225,7 @@ const DiverseAssetTokenization = () => {
   return (
     <div className="text-white min-h-screen relative overflow-hidden font-sans">
       <BackgroundPattern />
+      <ScrollAnimationWrapper>
        <FloatingNavigation sections={sections} activeSection={activeSection} />
       {/* Header Section with Parallax */}
       <div ref={headerRef} className="relative overflow-hidden">
@@ -545,7 +547,7 @@ const DiverseAssetTokenization = () => {
           </motion.div>
         </div>
       </motion.section>
-
+      </ScrollAnimationWrapper>
     </div>
   );
 };

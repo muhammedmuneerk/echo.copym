@@ -48,6 +48,7 @@ import useSectionObserver from "../../../hooks/useSectionObserver";
 import CustomButton from "../../../components/CustomButton";
 import CarbonCreditsPortfolioAllocation from "./CarbonCreditsPortfolioAllocation";
 import AdvancedSearch from "./AdvancedSearch";
+import ScrollAnimationWrapper from "../../../components/ScrollAnimationWrapper";
 
 // The main Carbon Credits Tokenization component
 const CarbonCreditsMarket = () => {
@@ -75,7 +76,7 @@ const CarbonCreditsMarket = () => {
   return (
     <div className="min-h-screen relative text-white">
       <BackgroundPattern />
-
+      <ScrollAnimationWrapper>
       {/* Hero Section */}
       <section id="hero" className="relative min-h-[90vh] flex items-center">
         <div className="container mx-auto px-4 py-20 relative z-10">
@@ -345,6 +346,7 @@ const CarbonCreditsMarket = () => {
         </div>
       </section>
       <FloatingNavigation sections={sections} activeSection={activeSection} />
+      </ScrollAnimationWrapper>
     </div>
   );
 };

@@ -34,6 +34,7 @@ import BackgroundPattern from "../../../ui/BackgroundPattern";
 import FloatingNavigation from '../../../components/FloatingNavigation';
 import useSectionObserver from '../../../hooks/useSectionObserver';
 import CustomButton from "../../../components/CustomButton"
+import ScrollAnimationWrapper from "../../../components/ScrollAnimationWrapper";
 
 // The main Gold Tokenization component
 const GoldMarket = () => {
@@ -62,6 +63,7 @@ const GoldMarket = () => {
     <div className="min-h-screen relative text-white">
 
       <BackgroundPattern />
+      <ScrollAnimationWrapper>
      
       {/* Hero Section */}
       <section id="hero" className="relative min-h-[90vh] flex items-center">
@@ -310,6 +312,7 @@ const GoldMarket = () => {
         </div>
       </section>
       <FloatingNavigation sections={sections} activeSection={activeSection} />
+      </ScrollAnimationWrapper>
     </div>
   );
 };

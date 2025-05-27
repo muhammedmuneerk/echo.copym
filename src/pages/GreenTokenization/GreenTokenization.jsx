@@ -10,6 +10,7 @@ import FloatingNavigation from '../../components/FloatingNavigation';
 import useSectionObserver from '../../hooks/useSectionObserver';
 import BackgroundPattern from "../../ui/BackgroundPattern";
 import CustomButton from "../../components/CustomButton"
+import ScrollAnimationWrapper from "../../components/ScrollAnimationWrapper";
 const esgData = [
   {
     title: "Environmental",
@@ -67,6 +68,7 @@ const GreenTokenization = () => {
         <BackgroundPattern /> 
         {/* Floating Navigation */}
         <FloatingNavigation sections={sections} activeSection={activeSection} />
+        <ScrollAnimationWrapper>
        
         {/* Hero Section */}
         <section id="hero" className="relative container mx-auto px-6 py-24">
@@ -488,6 +490,7 @@ const GreenTokenization = () => {
             </div>
           </FadeSection>
         </section>
+        </ScrollAnimationWrapper>
       </div>
       <style jsx global>{`
         .gradient-letter {

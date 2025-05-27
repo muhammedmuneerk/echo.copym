@@ -12,6 +12,7 @@ import FloatingNavigation from '../../../components/FloatingNavigation';
 import useSectionObserver from '../../../hooks/useSectionObserver';
 import AnimatedCard from "../../../ui/AnimatedCard";
 import CustomButton from "../../../components/CustomButton"
+import ScrollAnimationWrapper from "../../../components/ScrollAnimationWrapper";
 
 const FadeSection = ({ children }) => (
   <motion.div
@@ -44,6 +45,7 @@ const PrivateEquityTokenization = () => {
     <div className="text-white min-h-screen relative overflow-hidden font-sans">
       <BackgroundPattern/>      
 
+      <ScrollAnimationWrapper>
       {/* Floating Navigation */}
       <FloatingNavigation sections={sections} activeSection={activeSection} />
 
@@ -454,6 +456,7 @@ const PrivateEquityTokenization = () => {
           </div>
         </FadeSection>
       </div>
+      </ScrollAnimationWrapper>
       
       <style jsx global>{`
         .gradient-letter {

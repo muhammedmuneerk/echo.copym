@@ -16,6 +16,7 @@ import FloatingNavigation from '../../../components/FloatingNavigation';
 import useSectionObserver from '../../../hooks/useSectionObserver';
 import AnimatedCard from "../../../ui/AnimatedCard";
 import CustomButton from "../../../components/CustomButton"
+import ScrollAnimationWrapper from "../../../components/ScrollAnimationWrapper";
 
 
 const FadeSection = ({ children }) => (
@@ -80,6 +81,7 @@ const ArtTokenization = () => {
       <BackgroundPattern /> 
       {/* Content sections continue from here */}
       {/* Hero Section */}
+      <ScrollAnimationWrapper>
       <section id="hero" className="relative container mx-auto px-6 py-24">
         <FadeSection>
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 text-left pt-8">
@@ -503,6 +505,7 @@ const ArtTokenization = () => {
         </FadeSection>
       </section>
       <FloatingNavigation sections={sections} activeSection={activeSection} />
+      </ScrollAnimationWrapper>
 
       <style jsx global>{`
         .gradient-letter {

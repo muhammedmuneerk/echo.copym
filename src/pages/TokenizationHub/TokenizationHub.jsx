@@ -17,6 +17,7 @@ import useSectionObserver from "../../hooks/useSectionObserver";
 import FloatingNavigation from "../../components/FloatingNavigation";
 import BackgroundPattern from "../../ui/BackgroundPattern";
 import CustomButton from "../../components/CustomButton";
+import ScrollAnimationWrapper from "../../components/ScrollAnimationWrapper";
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
@@ -262,7 +263,7 @@ export default function TokenizationHub() {
     <div className="tokenization-hub">
       {/* Background pattern */}
       <BackgroundPattern />
-
+      <ScrollAnimationWrapper>
       {/* Main content */}
       <div className="main-content">
         {/* Header Section */}
@@ -686,6 +687,7 @@ export default function TokenizationHub() {
         {/* Floating Navigation */}
         <FloatingNavigation sections={sections} activeSection={activeSection} />
       </div>
+      </ScrollAnimationWrapper>
     </div>
   );
 }
