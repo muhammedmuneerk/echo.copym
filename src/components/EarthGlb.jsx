@@ -4,7 +4,7 @@ import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
 const RotatingEarth = () => {
-  const { scene } = useGLTF('/models/earth/earth.glb');
+  const { scene } = useGLTF('/models/earth-new/earth.glb');
   const earthRef = useRef();
   const { camera, size } = useThree();
 
