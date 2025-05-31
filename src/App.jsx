@@ -46,8 +46,8 @@ function HomePage() {
         <Hero />
       </section>
       
-      <GreenTokenizationPopup />
-      <GoldTokenizationPopup />
+      {/* <GreenTokenizationPopup />
+      <GoldTokenizationPopup /> */}
       
       <div style={{ position: 'relative' }}>
         <section className="blockchains-section">
@@ -101,11 +101,11 @@ function App() {
       if (appRef.current) {
         animate('.bg-background', {
           opacity: [0, 1],
-          duration: 800,
+          duration: 7000,
           easing: 'easeInOutQuad'
         });
       }
-    }, 5000); 
+    }, 7000); 
 
     return () => clearTimeout(timer);
   }, []);
@@ -123,9 +123,9 @@ function App() {
   }, [showSplash]);
 
   // Show splash screen during initial load
-  // if (showSplash) {
-  //   return <SplashScreen />;
-  // }
+  if (showSplash) {
+    return <SplashScreen />;
+  }
 
   return (
     <Box 
