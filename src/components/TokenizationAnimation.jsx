@@ -336,7 +336,7 @@ const TokenizationAnimation = ({ isMobile = false, isTablet = false }) => {
       )}
 
       {/* Floating particles - reduced for mobile */}
-      {Array.from({ length: isMobile ? 10 : isTablet ? 15 : 20 }, (_, i) => (
+      {/* {Array.from({ length: isMobile ? 10 : isTablet ? 15 : 20 }, (_, i) => (
         <motion.div
           key={`particle-${i}`}
           className="absolute w-1 h-1 bg-emerald-400 rounded-full"
@@ -356,7 +356,7 @@ const TokenizationAnimation = ({ isMobile = false, isTablet = false }) => {
             top: Math.random() * (isMobile ? 200 : isTablet ? 250 : 300) // Original desktop range
           }}
         />
-      ))}
+      ))} */}
     </div>
   );
 };
