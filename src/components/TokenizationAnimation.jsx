@@ -1,362 +1,511 @@
 import { Box } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
-// Asset Icons
+// Modern Asset Icons with improved design
 const AssetIcons = {
-  RealEstate: ({ size = 32 }) => (
+  RealEstate: ({ size = 20, color = "#3B82F6" }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M9 22V12h6v10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path 
+        d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" 
+        stroke={color} 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+        fill={`${color}20`}
+      />
+      <path 
+        d="M9 22V12h6v10" 
+        stroke={color} 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+      />
     </svg>
   ),
-  Gold: ({ size = 32 }) => (
+  Finance: ({ size = 20, color = "#10B981" }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none"/>
-      <text x="12" y="16" textAnchor="middle" fontSize="8" fill="currentColor">Au</text>
+      <path 
+        d="M12 2L2 7l10 5 10-5-10-5z" 
+        stroke={color} 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+        fill={`${color}20`}
+      />
+      <path 
+        d="M2 17l10 5 10-5M2 12l10 5 10-5" 
+        stroke={color} 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+      />
     </svg>
   ),
-  CarbonCredits: ({ size = 32 }) => (
+  Commodities: ({ size = 20, color = "#F59E0B" }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path d="M17 3.34a10 10 0 1 1-14.995 8.984" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-      <path d="M12 7v10M8 9l4-2 4 2M8 15l4 2 4-2" stroke="currentColor" strokeWidth="1.5"/>
+      <circle 
+        cx="12" 
+        cy="12" 
+        r="10" 
+        stroke={color} 
+        strokeWidth="2" 
+        fill={`${color}20`}
+      />
+      <path 
+        d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" 
+        stroke={color} 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+      />
     </svg>
   ),
-  PrivateEquity: ({ size = 32 }) => (
+  Technology: ({ size = 20, color = "#8B5CF6" }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <rect 
+        x="2" 
+        y="3" 
+        width="20" 
+        height="14" 
+        rx="2" 
+        ry="2" 
+        stroke={color} 
+        strokeWidth="2"
+        fill={`${color}20`}
+      />
+      <line 
+        x1="8" 
+        y1="21" 
+        x2="16" 
+        y2="21" 
+        stroke={color} 
+        strokeWidth="2"
+      />
+      <line 
+        x1="12" 
+        y1="17" 
+        x2="12" 
+        y2="21" 
+        stroke={color} 
+        strokeWidth="2"
+      />
     </svg>
   ),
-  Art: ({ size = 32 }) => (
+  Art: ({ size = 20, color = "#EC4899" }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke="currentColor" strokeWidth="2" fill="none"/>
-      <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/>
-      <path d="M21 15l-5-5L5 21" stroke="currentColor" strokeWidth="2"/>
+      <rect 
+        x="3" 
+        y="3" 
+        width="18" 
+        height="18" 
+        rx="2" 
+        ry="2" 
+        stroke={color} 
+        strokeWidth="2" 
+        fill={`${color}20`}
+      />
+      <circle cx="8.5" cy="8.5" r="1.5" fill={color}/>
+      <path 
+        d="M21 15l-5-5L5 21" 
+        stroke={color} 
+        strokeWidth="2"
+      />
     </svg>
   ),
-  Infrastructure: ({ size = 32 }) => (
+  Energy: ({ size = 20, color = "#06B6D4" }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path 
+        d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" 
+        stroke={color} 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+        fill={`${color}20`}
+      />
     </svg>
   )
 };
 
-// Token component
-const Token = ({ x, y, delay = 0, targetX, targetY, color = "#00ff85", isMobile = false }) => (
+// Floating Token Component
+const FloatingToken = ({ 
+  startPos, 
+  endPos, 
+  delay = 0, 
+  color = "#10B981", 
+  duration = 2,
+  onComplete 
+}) => (
   <motion.div
     initial={{ 
-      x, 
-      y, 
+      x: startPos.x, 
+      y: startPos.y, 
       scale: 0, 
-      opacity: 0,
-      background: color
+      opacity: 0 
     }}
     animate={{ 
-      x: [x, targetX], 
-      y: [y, targetY], 
-      scale: [0, 1, 0.8], 
-      opacity: [0, 1, 0.8],
-      background: [color, "#ffffff", color]
+      x: endPos.x, 
+      y: endPos.y, 
+      scale: [0, 1.2, 1], 
+      opacity: [0, 1, 0.8] 
     }}
     transition={{ 
-      duration: 2, 
+      duration, 
       delay,
       ease: "easeInOut"
     }}
-    className={`absolute ${isMobile ? 'w-2 h-2' : 'w-3 h-3'} rounded-full shadow-lg`}
+    onAnimationComplete={onComplete}
+    className="absolute w-2 h-2 rounded-full"
     style={{
-      boxShadow: `0 0 ${isMobile ? '6px' : '10px'} ${color}`,
+      background: `radial-gradient(circle, ${color} 0%, ${color}80 100%)`,
+      boxShadow: `0 0 8px ${color}60`,
     }}
   />
 );
 
-// Investor avatar component
-const InvestorAvatar = ({ x, y, delay = 0, isMobile = false }) => (
-  <motion.div
-    initial={{ scale: 0, opacity: 0 }}
-    animate={{ scale: 1, opacity: 1 }}
-    transition={{ duration: 0.5, delay }}
-    className={`absolute ${isMobile ? 'w-6 h-6 text-xs' : 'w-8 h-8 text-xs'} rounded-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center text-white font-bold shadow-lg`}
-    style={{ left: x, top: y }}
-  >
-    👤
-  </motion.div>
+// Investor Node Component
+const InvestorNode = ({ x, y, delay = 0, index, total }) => {
+  const colors = ['#3B82F6', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4'];
+  const color = colors[index % colors.length];
+  
+  return (
+    <motion.div
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 0.6, delay }}
+      className="absolute w-8 h-8 rounded-full flex items-center justify-center"
+      style={{ 
+        left: x - 16, 
+        top: y - 16,
+        background: `linear-gradient(135deg, ${color}40, ${color}20)`,
+        border: `2px solid ${color}`,
+        boxShadow: `0 0 15px ${color}30`
+      }}
+    >
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        className="w-4 h-4 rounded-full"
+        style={{ background: `radial-gradient(circle, ${color}, ${color}80)` }}
+      />
+    </motion.div>
+  );
+};
+
+// Connection Line Component
+const ConnectionLine = ({ start, end, delay = 0, color = "#10B981" }) => (
+  <motion.line
+    x1={start.x}
+    y1={start.y}
+    x2={end.x}
+    y2={end.y}
+    stroke={`${color}60`}
+    strokeWidth="1.5"
+    strokeDasharray="3,3"
+    initial={{ pathLength: 0, opacity: 0 }}
+    animate={{ pathLength: 1, opacity: 0.6 }}
+    transition={{ duration: 1.5, delay, ease: "easeInOut" }}
+  />
 );
 
-// Main animation sequence component
-const TokenizationAnimation = ({ isMobile = false, isTablet = false }) => {
-  const [currentPhase, setCurrentPhase] = useState(0);
-  const [showTokens, setShowTokens] = useState(false);
-  const [showInvestors, setShowInvestors] = useState(false);
+const TokenizationAnimation = ({ isMobile = false }) => {
+  const [animationPhase, setAnimationPhase] = useState(0);
+  const [activeTokens, setActiveTokens] = useState([]);
+  const [showConnections, setShowConnections] = useState(false);
 
-  // Desktop stays exactly the same as original, mobile/tablet get responsive scaling
+  // Compact sizing for better fit
+  const centerX = isMobile ? 160 : 200;
+  const centerY = isMobile ? 160 : 200;
+  const radius = isMobile ? 80 : 100;
+
+  // Asset configuration
   const assets = [
-    { 
-      icon: AssetIcons.RealEstate, 
-      color: "#4169E1", 
-      name: "Real Estate",
-      position: isMobile ? 
-        { x: 60 * 0.7, y: 90 * 0.7 } : 
-        isTablet ? 
-        { x: 80 * 0.85, y: 120 * 0.85 } : 
-        { x: 100, y: 150 } // Original desktop values
-    },
-    { 
-      icon: AssetIcons.Gold, 
-      color: "#FFD700", 
-      name: "Gold",
-      position: isMobile ? 
-        { x: 140 * 0.7, y: 70 * 0.7 } : 
-        isTablet ? 
-        { x: 170 * 0.85, y: 95 * 0.85 } : 
-        { x: 200, y: 120 } // Original desktop values
-    },
-    { 
-      icon: AssetIcons.CarbonCredits, 
-      color: "#00ff85", 
-      name: "Carbon Credits",
-      position: isMobile ? 
-        { x: 80 * 0.7, y: 150 * 0.7 } : 
-        isTablet ? 
-        { x: 100 * 0.85, y: 185 * 0.85 } : 
-        { x: 120, y: 220 } // Original desktop values
-    },
-    { 
-      icon: AssetIcons.PrivateEquity, 
-      color: "#00e676", 
-      name: "Private Equity",
-      position: isMobile ? 
-        { x: 120 * 0.7, y: 120 * 0.7 } : 
-        isTablet ? 
-        { x: 150 * 0.85, y: 150 * 0.85 } : 
-        { x: 180, y: 180 } // Original desktop values
-    },
-    { 
-      icon: AssetIcons.Art, 
-      color: "#9C27B0", 
-      name: "Art",
-      position: isMobile ? 
-        { x: 100 * 0.7, y: 55 * 0.7 } : 
-        isTablet ? 
-        { x: 125 * 0.85, y: 75 * 0.85 } : 
-        { x: 150, y: 100 } // Original desktop values
-    },
-    { 
-      icon: AssetIcons.Infrastructure, 
-      color: "#FF6B35", 
-      name: "Infrastructure",
-      position: isMobile ? 
-        { x: 50 * 0.7, y: 110 * 0.7 } : 
-        isTablet ? 
-        { x: 65 * 0.85, y: 140 * 0.85 } : 
-        { x: 80, y: 180 } // Original desktop values
-    }
+    { icon: AssetIcons.RealEstate, color: "#3B82F6", name: "Real Estate" },
+    { icon: AssetIcons.Finance, color: "#10B981", name: "Finance" },
+    { icon: AssetIcons.Commodities, color: "#F59E0B", name: "Commodities" },
+    { icon: AssetIcons.Technology, color: "#8B5CF6", name: "Technology" },
+    { icon: AssetIcons.Art, color: "#EC4899", name: "Art" },
+    { icon: AssetIcons.Energy, color: "#06B6D4", name: "Energy" }
   ];
 
-  const investors = isMobile ? [
-    { x: 200 * 0.7, y: 85 * 0.7 },
-    { x: 220 * 0.7, y: 65 * 0.7 },
-    { x: 240 * 0.7, y: 105 * 0.7 },
-    { x: 200 * 0.7, y: 125 * 0.7 },
-    { x: 225 * 0.7, y: 115 * 0.7 },
-    { x: 210 * 0.7, y: 95 * 0.7 }
-  ] : isTablet ? [
-    { x: 260 * 0.85, y: 112 * 0.85 },
-    { x: 285 * 0.85, y: 88 * 0.85 },
-    { x: 310 * 0.85, y: 136 * 0.85 },
-    { x: 260 * 0.85, y: 162 * 0.85 },
-    { x: 295 * 0.85, y: 152 * 0.85 },
-    { x: 275 * 0.85, y: 125 * 0.85 }
-  ] : [
-    // Original desktop values
-    { x: 320, y: 140 },
-    { x: 350, y: 110 },
-    { x: 380, y: 170 },
-    { x: 320, y: 200 },
-    { x: 360, y: 190 },
-    { x: 340, y: 160 }
-  ];
+  // Calculate positions
+  const assetPositions = assets.map((_, index) => {
+    const angle = (index * 360) / assets.length;
+    const x = centerX + radius * Math.cos((angle * Math.PI) / 180);
+    const y = centerY + radius * Math.sin((angle * Math.PI) / 180);
+    return { x, y };
+  });
 
+  const investorPositions = Array.from({ length: 6 }, (_, index) => {
+    const angle = (index * 360) / 6 + 30; // Offset for better positioning
+    const investorRadius = radius + (isMobile ? 60 : 75);
+    const x = centerX + investorRadius * Math.cos((angle * Math.PI) / 180);
+    const y = centerY + investorRadius * Math.sin((angle * Math.PI) / 180);
+    return { x, y };
+  });
+
+  // Animation sequence
   useEffect(() => {
     const sequence = [
-      () => setCurrentPhase(1), // Show assets
-      () => setCurrentPhase(2), // Start tokenization
-      () => setShowTokens(true), // Show tokens
-      () => setShowInvestors(true), // Show investors
-      () => setCurrentPhase(3), // Distribution phase
-      () => setCurrentPhase(0), // Reset for loop
+      { delay: 0, action: () => setAnimationPhase(1) }, // Show assets
+      { delay: 1500, action: () => setAnimationPhase(2) }, // Start tokenization
+      { delay: 3000, action: () => setAnimationPhase(3) }, // Show investors
+      { delay: 4500, action: () => setShowConnections(true) }, // Show network
+      { delay: 7000, action: () => { // Reset
+        setAnimationPhase(0);
+        setActiveTokens([]);
+        setShowConnections(false);
+      }},
     ];
 
-    let timeouts = [];
-    sequence.forEach((action, index) => {
-      timeouts.push(setTimeout(action, index * 1500));
-    });
+    const timeouts = sequence.map(({ delay, action }) => 
+      setTimeout(action, delay)
+    );
 
-    // Loop the animation
-    const loopTimeout = setTimeout(() => {
-      setCurrentPhase(0);
-      setShowTokens(false);
-      setShowInvestors(false);
-    }, sequence.length * 1500);
-
-    return () => {
-      timeouts.forEach(clearTimeout);
-      clearTimeout(loopTimeout);
-    };
+    return () => timeouts.forEach(clearTimeout);
   }, []);
+
+  // Generate flowing tokens
+  useEffect(() => {
+    if (animationPhase === 2) {
+      const tokenGenerationInterval = setInterval(() => {
+        const assetIndex = Math.floor(Math.random() * assets.length);
+        const investorIndex = Math.floor(Math.random() * investorPositions.length);
+        const tokenId = Date.now() + Math.random();
+
+        setActiveTokens(prev => [...prev, {
+          id: tokenId,
+          startPos: assetPositions[assetIndex],
+          endPos: investorPositions[investorIndex],
+          color: assets[assetIndex].color,
+          delay: 0
+        }]);
+
+        // Remove token after animation
+        setTimeout(() => {
+          setActiveTokens(prev => prev.filter(token => token.id !== tokenId));
+        }, 2500);
+      }, 400);
+
+      return () => clearInterval(tokenGenerationInterval);
+    }
+  }, [animationPhase, assetPositions, investorPositions, assets]);
 
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      {/* Central Tokenization Hub */}
+      {/* Background Effects */}
+      <div className="absolute inset-0">
+        {/* Animated rings */}
+        {[1, 2].map((ring) => (
+          <motion.div
+            key={ring}
+            className="absolute rounded-full border border-emerald-400/20"
+            style={{
+              width: radius * 2 * ring * 0.5,
+              height: radius * 2 * ring * 0.5,
+              left: centerX - (radius * ring * 0.5),
+              top: centerY - (radius * ring * 0.5),
+            }}
+            animate={{ 
+              scale: [1, 1.1, 1],
+              opacity: [0.3, 0.1, 0.3]
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              delay: ring * 0.5,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+
+        {/* Central glow */}
+        <motion.div
+          className="absolute rounded-full bg-gradient-to-r from-emerald-400/30 to-cyan-400/30 blur-xl"
+          style={{
+            width: isMobile ? 60 : 80,
+            height: isMobile ? 60 : 80,
+            left: centerX - (isMobile ? 30 : 40),
+            top: centerY - (isMobile ? 30 : 40),
+          }}
+          animate={{
+            scale: animationPhase >= 2 ? [1, 1.3, 1] : 1,
+            opacity: animationPhase >= 1 ? [0.5, 0.8, 0.5] : 0
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
+
+      {/* Central COPYM Hub */}
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ 
-          scale: currentPhase >= 2 ? 1 : 0.8, 
-          opacity: currentPhase >= 1 ? 1 : 0,
-          boxShadow: currentPhase >= 2 ? "0 0 30px rgba(0, 255, 133, 0.5)" : "none"
+          scale: animationPhase >= 1 ? 1 : 0,
+          opacity: animationPhase >= 1 ? 1 : 0,
+          rotate: animationPhase >= 2 ? 360 : 0
         }}
-        transition={{ duration: 1 }}
-        className={isMobile ? 
-          "absolute w-16 h-16 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center z-10" :
-          isTablet ?
-          "absolute w-18 h-18 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center z-10" :
-          "absolute w-20 h-20 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center z-10"
-        }
-        style={isMobile ? 
-          { left: "140px", top: "120px", transform: "translate(-50%, -50%)" } :
-          isTablet ?
-          { left: "180px", top: "150px", transform: "translate(-50%, -50%)" } :
-          { left: "50%", top: "50%", transform: "translate(-50%, -50%)" } // Original desktop positioning
-        }
+        transition={{ 
+          scale: { duration: 1 },
+          opacity: { duration: 1 },
+          rotate: { duration: 20, repeat: Infinity, ease: "linear" }
+        }}
+        className="absolute z-20 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center shadow-2xl"
+        style={{
+          width: isMobile ? 48 : 60,
+          height: isMobile ? 48 : 60,
+          left: centerX - (isMobile ? 24 : 30),
+          top: centerY - (isMobile ? 24 : 30),
+          boxShadow: '0 0 30px rgba(16, 185, 129, 0.6)'
+        }}
       >
-        {/* <span className={`text-white font-bold ${isMobile ? 'text-xs' : 'text-xs'}`}>
-          {isMobile ? 'COPYM' : 'COPYM'}
-        </span> */}
-
         <img
           src="/assets/icons/logo-svg-transparent.svg"
-          className={`${isMobile ? "w-16" : "w-24"}`}
+          alt="COPYM"
+          className={`${isMobile ? "w-6 h-6" : "w-8 h-8"} filter brightness-0 invert`}
         />
       </motion.div>
 
-      {/* Assets */}
+      {/* Asset Nodes */}
       {assets.map((asset, index) => (
         <motion.div
           key={asset.name}
-          initial={{ scale: 0, opacity: 0, x: asset.position.x, y: asset.position.y }}
+          initial={{ scale: 0, opacity: 0 }}
           animate={{ 
-            scale: currentPhase >= 1 ? 1 : 0,
-            opacity: currentPhase >= 1 ? 1 : 0,
-            x: currentPhase >= 2 ? asset.position.x + (isMobile ? 10 : isTablet ? 15 : 20) : asset.position.x, // Original desktop offset
-            y: currentPhase >= 2 ? asset.position.y + (isMobile ? 5 : isTablet ? 8 : 10) : asset.position.y // Original desktop offset
+            scale: animationPhase >= 1 ? 1 : 0,
+            opacity: animationPhase >= 1 ? 1 : 0,
+            y: animationPhase >= 2 ? [0, -3, 0] : 0
           }}
-          transition={{ duration: 0.8, delay: index * 0.1 }}
-          className={`absolute ${isMobile ? 'w-8 h-8' : isTablet ? 'w-10 h-10' : 'w-12 h-12'} rounded-lg flex items-center justify-center`}
-          style={{ 
-            background: `linear-gradient(135deg, ${asset.color}20, ${asset.color}40)`,
+          transition={{ 
+            scale: { duration: 0.8, delay: index * 0.1 },
+            opacity: { duration: 0.8, delay: index * 0.1 },
+            y: { duration: 2, repeat: Infinity, delay: index * 0.3 }
+          }}
+          className="absolute z-10 rounded-xl backdrop-blur-sm flex items-center justify-center"
+          style={{
+            width: isMobile ? 36 : 44,
+            height: isMobile ? 36 : 44,
+            left: assetPositions[index].x - (isMobile ? 18 : 22),
+            top: assetPositions[index].y - (isMobile ? 18 : 22),
+            background: `linear-gradient(135deg, ${asset.color}20, ${asset.color}10)`,
             border: `2px solid ${asset.color}`,
-            color: asset.color
+            boxShadow: `0 0 15px ${asset.color}40`
           }}
         >
-          <asset.icon size={isMobile ? 16 : isTablet ? 20 : 24} />
+          <asset.icon 
+            size={isMobile ? 16 : 18} 
+            color={asset.color} 
+          />
         </motion.div>
       ))}
 
-      {/* Tokenization beams */}
-      {currentPhase >= 2 && assets.map((asset, index) => (
-        <motion.div
-          key={`beam-${index}`}
-          initial={{ width: 0, opacity: 0 }}
-          animate={{ width: isMobile ? 35 : isTablet ? 50 : 60, opacity: 0.6 }} // Original desktop width
-          transition={{ duration: 1, delay: index * 0.1 }}
-          className="absolute h-0.5 origin-left"
-          style={{
-            left: asset.position.x + (isMobile ? 32 : isTablet ? 40 : 48), // Original desktop offset
-            top: asset.position.y + (isMobile ? 16 : isTablet ? 20 : 24), // Original desktop offset
-            background: `linear-gradient(to right, ${asset.color}, #00ff85)`,
-            transform: isMobile ? 
-              `rotate(${Math.atan2(120 - asset.position.y, 140 - asset.position.x) * 180 / Math.PI}deg)` :
-              isTablet ?
-              `rotate(${Math.atan2(150 - asset.position.y, 180 - asset.position.x) * 180 / Math.PI}deg)` :
-              `rotate(${Math.atan2(200 - asset.position.y, 250 - asset.position.x) * 180 / Math.PI}deg)`, // Original desktop calculation
-            boxShadow: `0 0 ${isMobile ? '6px' : '10px'} ${asset.color}`
-          }}
-        />
-      ))}
-
-      {/* Tokens */}
-      {showTokens && assets.map((asset, assetIndex) => 
-        Array.from({ length: isMobile ? 4 : 6 }, (_, tokenIndex) => (
-          <Token
-            key={`token-${assetIndex}-${tokenIndex}`}
-            x={isMobile ? 140 : isTablet ? 180 : 250} // Original desktop center
-            y={isMobile ? 120 : isTablet ? 150 : 200} // Original desktop center
-            delay={assetIndex * 0.1 + tokenIndex * 0.05}
-            targetX={investors[tokenIndex % investors.length].x}
-            targetY={investors[tokenIndex % investors.length].y}
-            color={asset.color}
-            isMobile={isMobile}
-          />
-        ))
+      {/* Energy Beams */}
+      {animationPhase >= 2 && (
+        <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 5 }}>
+          {assets.map((asset, index) => (
+            <motion.line
+              key={`beam-${index}`}
+              x1={assetPositions[index].x}
+              y1={assetPositions[index].y}
+              x2={centerX}
+              y2={centerY}
+              stroke={`url(#gradient-${index})`}
+              strokeWidth="2"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ 
+                pathLength: [0, 1, 0],
+                opacity: [0, 0.8, 0]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: index * 0.2,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+          
+          {/* Gradients for beams */}
+          <defs>
+            {assets.map((asset, index) => (
+              <linearGradient key={index} id={`gradient-${index}`}>
+                <stop offset="0%" stopColor={asset.color} stopOpacity="0" />
+                <stop offset="50%" stopColor={asset.color} stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#10B981" stopOpacity="0.4" />
+              </linearGradient>
+            ))}
+          </defs>
+        </svg>
       )}
 
-      {/* Investors */}
-      {showInvestors && investors.map((investor, index) => (
-        <InvestorAvatar
-          key={index}
-          x={investor.x}
-          y={investor.y}
-          delay={index * 0.1 + 1}
-          isMobile={isMobile}
+      {/* Floating Tokens */}
+      <AnimatePresence>
+        {activeTokens.map((token) => (
+          <FloatingToken
+            key={token.id}
+            startPos={token.startPos}
+            endPos={token.endPos}
+            color={token.color}
+            delay={token.delay}
+          />
+        ))}
+      </AnimatePresence>
+
+      {/* Investor Network */}
+      {animationPhase >= 3 && investorPositions.map((pos, index) => (
+        <InvestorNode
+          key={`investor-${index}`}
+          x={pos.x}
+          y={pos.y}
+          delay={index * 0.1}
+          index={index}
+          total={investorPositions.length}
         />
       ))}
 
-      {/* Connection lines between investors */}
-      {showInvestors && currentPhase >= 3 && (
-        <svg className="absolute inset-0 w-full h-full pointer-events-none">
-          {investors.map((investor, index) => 
-            investors.slice(index + 1).map((nextInvestor, nextIndex) => (
-              <motion.line
+      {/* Network Connections */}
+      {showConnections && (
+        <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
+          {investorPositions.map((pos, index) => 
+            investorPositions.slice(index + 1, index + 3).map((nextPos, nextIndex) => (
+              <ConnectionLine
                 key={`connection-${index}-${nextIndex}`}
-                x1={investor.x + (isMobile ? 12 : 16)} // Original desktop offset
-                y1={investor.y + (isMobile ? 12 : 16)} // Original desktop offset
-                x2={nextInvestor.x + (isMobile ? 12 : 16)} // Original desktop offset
-                y2={nextInvestor.y + (isMobile ? 12 : 16)} // Original desktop offset
-                stroke="rgba(0, 255, 133, 0.3)"
-                strokeWidth={isMobile ? "0.5" : "1"} // Original desktop stroke width
-                strokeDasharray="2,2"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 0.6 }}
-                transition={{ duration: 1, delay: 2 + index * 0.1 }}
+                start={pos}
+                end={nextPos}
+                delay={index * 0.1}
+                color="#10B981"
               />
             ))
           )}
         </svg>
       )}
 
-      {/* Floating particles - reduced for mobile */}
-      {/* {Array.from({ length: isMobile ? 10 : isTablet ? 15 : 20 }, (_, i) => (
+      {/* Floating Data Particles */}
+      {animationPhase >= 2 && [...Array(8)].map((_, i) => (
         <motion.div
           key={`particle-${i}`}
-          className="absolute w-1 h-1 bg-emerald-400 rounded-full"
+          className="absolute w-1 h-1 bg-emerald-400 rounded-full opacity-60"
+          style={{
+            left: centerX + Math.random() * (radius * 1.5) - (radius * 0.75),
+            top: centerY + Math.random() * (radius * 1.5) - (radius * 0.75),
+          }}
           animate={{
-            x: [Math.random() * (isMobile ? 280 : isTablet ? 350 : 400), Math.random() * (isMobile ? 280 : isTablet ? 350 : 400)], // Original desktop range
-            y: [Math.random() * (isMobile ? 200 : isTablet ? 250 : 300), Math.random() * (isMobile ? 200 : isTablet ? 250 : 300)], // Original desktop range
-            opacity: [0, 0.8, 0],
+            x: [0, Math.random() * 30 - 15],
+            y: [0, Math.random() * 30 - 15],
+            opacity: [0, 1, 0],
             scale: [0, 1, 0]
           }}
           transition={{
-            duration: 4 + Math.random() * 2,
+            duration: 3 + Math.random() * 2,
             repeat: Infinity,
-            delay: Math.random() * 2
-          }}
-          style={{
-            left: Math.random() * (isMobile ? 280 : isTablet ? 350 : 400), // Original desktop range
-            top: Math.random() * (isMobile ? 200 : isTablet ? 250 : 300) // Original desktop range
+            delay: Math.random() * 2,
+            ease: "easeInOut"
           }}
         />
-      ))} */}
+      ))}
     </div>
   );
 };
