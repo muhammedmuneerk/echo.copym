@@ -351,7 +351,7 @@ const TokenizationAnimation = ({ isMobile = false }) => {
         transition={{ 
           scale: { duration: 1 },
           opacity: { duration: 1 },
-          rotate: { duration: 20, repeat: Infinity, ease: "linear" }
+          
         }}
         className="absolute z-20 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center shadow-2xl"
         style={{
@@ -365,7 +365,7 @@ const TokenizationAnimation = ({ isMobile = false }) => {
         <img
           src="/assets/icons/logo-svg-transparent.svg"
           alt="COPYM"
-          className={`${isMobile ? "w-6 h-6" : "w-8 h-8"} filter brightness-0 invert`}
+          className={`${isMobile ? "w-10 h-10" : "w-15 h-15"} filter brightness-0 invert`}
         />
       </motion.div>
 

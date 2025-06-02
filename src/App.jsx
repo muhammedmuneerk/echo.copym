@@ -41,7 +41,7 @@ function HomePage() {
   return (
     <div className="relative">
       <BackgroundPattern/>
-    <ScrollAnimationWrapper>
+    
       <section className="hero-section">
         <Hero />
       </section>
@@ -50,6 +50,7 @@ function HomePage() {
       <GoldTokenizationPopup /> */}
       
       <div style={{ position: 'relative' }}>
+        <ScrollAnimationWrapper>
         <section className="blockchains-section">
           <Blockchains />
         </section>
@@ -57,6 +58,7 @@ function HomePage() {
         <section className="features-section">
           <Features />
         </section>
+        </ScrollAnimationWrapper>
         
         {/* <section className="global-markets-section">
           <GlobalMarkets />
@@ -66,6 +68,7 @@ function HomePage() {
           <Sliders />
         </section>
         
+        <ScrollAnimationWrapper>
         <section className="metrics-section">
           <Metrics />
         </section>
@@ -78,8 +81,8 @@ function HomePage() {
           src="/assets/sections/grid-bg-bottom.png"
           alt="Blockchains Banner"
         /> */}
+        </ScrollAnimationWrapper>
       </div>
-    </ScrollAnimationWrapper>
       </div>
   );
 }
