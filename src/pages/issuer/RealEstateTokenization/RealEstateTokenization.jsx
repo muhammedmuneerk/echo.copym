@@ -82,56 +82,65 @@ const RealEstateTokenization = () => {
       <ScrollAnimationWrapper>
       {/* Hero Section */}
       <section id="hero" className="relative container mx-auto px-6 py-24">
-        <div className="max-w-4xl mt-20 relative z-10">
-          <div className="h-px bg-gradient-to-r from-emerald-500 to-transparent absolute -top-4 left-0 w-[60%]" />
-          <div className="h-px bg-gradient-to-r from-emerald-500 to-transparent absolute -top-8 left-0 w-[30%]" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center  relative z-10">
+          {/* Left side - existing content */}
+          <div className="max-w-4xl lg:max-w-none">
+            <Typography
+              variant="h1"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 pb-1 text-center lg:text-left"
+            >
+              <Box component="div" className="flex flex-wrap justify-center lg:justify-start">
+                {/* Large Screens (1 lines) */}
+                <Box className="hidden lg:block">
+                  <GradientLetters
+                    text="Real Estate Tokenization"
+                    keyPrefix="lg-line1"
+                  />
+                </Box>
 
-          <Typography
-            variant="h1"
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 pb-1 text-center"
-          >
-            <Box component="div" className="flex flex-wrap">
-              {/* Large Screens (1 lines) */}
-              <Box className="hidden lg:block">
-                <GradientLetters
-                  text="Real Estate Tokenization"
-                  keyPrefix="lg-line1"
+                {/* Small and Medium screens: 3 lines */}
+                <Box className="block lg:hidden">
+                  <Box component="div" className="flex flex-wrap justify-center">
+                    <GradientLetters text="Real Estate" keyPrefix="sm-line1" />
+                  </Box>
+
+                  <Box component="div" className="flex flex-wrap justify-center">
+                    <GradientLetters text="Tokenization" keyPrefix="sm-line2" />
+                  </Box>
+                </Box>
+              </Box>
+            </Typography>
+
+            <h2 className="text-xl md:text-2xl font-medium mb-6 text-gray-300 text-center lg:text-left">
+              Transform Property Investment with Blockchain Technology
+            </h2>
+
+            <p className="text-gray-400 mb-8 max-w-2xl text-center lg:text-left lg:mx-0 mx-auto">
+              Democratize real estate investment through fractional ownership,
+              enhanced liquidity, and global accessibility. The future of property
+              investment is here.
+            </p>
+
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+              <CustomButton
+                label="Start Tokenizing"
                 />
-              </Box>
 
-              {/* Small and Medium screens: 3 lines */}
-              <Box className="block lg:hidden">
-                <Box component="div" className="flex flex-wrap ">
-                  <GradientLetters text="Real Estate" keyPrefix="sm-line1" />
-                </Box>
+              <CustomButton
+                label="Learn More"
+                />
+            </div>
+          </div>
 
-                <Box component="div" className="flex flex-wrap ">
-                  <GradientLetters text="Tokenization" keyPrefix="sm-line2" />
-                </Box>
-              </Box>
-            </Box>
-          </Typography>
-
-          <h2 className="text-xl md:text-2xl font-medium mb-6 text-gray-300">
-            Transform Property Investment with Blockchain Technology
-          </h2>
-
-          <p className="text-gray-400 mb-8 max-w-2xl">
-            Democratize real estate investment through fractional ownership,
-            enhanced liquidity, and global accessibility. The future of property
-            investment is here.
-          </p>
-
-          <div className="flex flex-wrap gap-4">
-
-            <CustomButton
-              label="Start Tokenizing"
+          {/* Right side - Image */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative">
+              <img
+                src="/assets/sections/realestate-tokenization.png"
+                alt="Real Estate Tokenization"
+                style={{ width: "90%", height: "90%" }}
               />
-
-            <CustomButton
-              label="Learn More"
-              />
-
+            </div>
           </div>
         </div>
       </section>
