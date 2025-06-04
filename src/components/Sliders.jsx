@@ -26,7 +26,7 @@ const cardData = [
   },
   {
     id: "green",
-    image: "/assets/images/img2.png",
+    image: "/assets/sliders/green-slider.png",
     title: "Green Tokenization",
     description: "Sustainable ESG Integration",
     detailText:
