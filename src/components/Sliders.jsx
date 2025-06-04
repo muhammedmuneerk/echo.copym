@@ -13,7 +13,7 @@ import {
 const cardData = [
   {
     id: "gold",
-    image: "/assets/images/img1.png",
+    image: "/assets/sliders/gold-slider.png",
     title: "Gold Tokenization",
     description: "Tokenized Gold for the Digital Age",
     detailText:
