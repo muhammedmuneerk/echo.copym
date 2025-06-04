@@ -18,43 +18,8 @@ const SplashScreen = () => {
     return () => window.removeEventListener("resize", checkDeviceType);
   }, []);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentStep((prev) => (prev + 1) % 4);
-    }, 3000);
 
-    return () => clearInterval(timer);
-  }, []);
 
-  const steps = [
-    {
-      title: "Real-World Assets",
-      subtitle: "Traditional investments meet blockchain technology",
-      highlight: "Physical assets digitized"
-    },
-    {
-      title: "Smart Tokenization",
-      subtitle: "Fractional ownership made accessible to everyone",
-      highlight: "Powered by blockchain"
-    },
-    {
-      title: "Global Access",
-      subtitle: "Invest from anywhere, anytime with complete transparency",
-      highlight: "Worldwide opportunity"
-    },
-    {
-      title: "Secure Trading",
-      subtitle: "Licensed platform with institutional-grade security",
-      highlight: "Trusted & regulated"
-    }
-  ];
-
-  const stats = [
-    { value: "$2.5B+", label: "Assets Tokenized" },
-    { value: "50K+", label: "Active Investors" },
-    { value: "99.9%", label: "Platform Uptime" },
-    { value: "24/7", label: "Global Trading" }
-  ];
 
   return (
     <Box className="relative h-screen bg-custom-gradient w-full  text-white overflow-hidden">
@@ -101,7 +66,7 @@ const SplashScreen = () => {
         ))}
       </div>
 
-      <Container maxWidth="xl" className="relative z-10 h-full">
+      <Container maxWidth="xl" className="relative z-10 h-full justify-center flex flex-col items-center">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -50 }}
@@ -113,21 +78,34 @@ const SplashScreen = () => {
         </motion.div>
 
         {/* Main Content Grid */}
-        <div className={`grid ${isMobile ? 'grid-cols-1 gap-4' : 'grid-cols-2 gap-8'} items-center h-[calc(100vh-120px)]`}>
+        <div className={`grid ${isMobile ? 'grid-cols-1 gap-4' : 'grid-cols-1 gap-8'} items-center h-[calc(100vh-120px)]`}>
           
-          {/* Left Side - Hero Content */}
+          
+          
+
+        
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="relative flex items-center justify-center"
+          >
+            <div className={`relative w-full ${isMobile ? 'h-80' : 'h-96'} flex lg:ml-20 mt-5 pt-5 lg:pl-10 items-center justify-center`}>
+              <TokenizationAnimation isMobile={isMobile} />
+            </div>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
             className="space-y-4"
           >
-            {/* Main Headline */}
-            <div className="space-y-3">
+          
+            <div className="space-y-3 items-center text-center">
               
-
               <Typography 
-                variant={isMobile ? "h4" : "h2"} 
+                variant={isMobile ? "h5" : "h4"} 
                 className="font-bold leading-tight"
               >
                 Welcome to the{" "}
@@ -138,46 +116,6 @@ const SplashScreen = () => {
               </Typography>
             </div>
 
-            {/* Dynamic Steps */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentStep}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-                className="p-4 rounded-xl bg-slate-800/50 backdrop-blur-sm border border-slate-700/50"
-              >
-                <div className="flex items-center space-x-2 mb-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <Typography variant="caption" className="text-emerald-400 font-semibold uppercase tracking-wider">
-                    {steps[currentStep].highlight}
-                  </Typography>
-                </div>
-                <Typography variant={isMobile ? "subtitle2" : "h6"} className="font-bold mb-1">
-                  {steps[currentStep].title}
-                </Typography>
-                <Typography variant="caption" className="text-slate-300">
-                  {steps[currentStep].subtitle}
-                </Typography>
-              </motion.div>
-            </AnimatePresence>
-
-            
-
-            
-          </motion.div>
-
-          {/* Right Side - Animation */}
-          <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="relative flex items-center justify-center"
-          >
-            <div className={`relative w-full ${isMobile ? 'h-80' : 'h-96'} flex lg:ml-20 mt-5 pt-5 lg:pl-10 items-center justify-center`}>
-              <TokenizationAnimation isMobile={isMobile} />
-            </div>
           </motion.div>
         </div>
       </Container>
