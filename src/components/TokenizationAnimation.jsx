@@ -363,9 +363,9 @@ const TokenizationAnimation = ({ isMobile = false }) => {
         }}
       >
         <img
-          src="/assets/icons/logo-svg-transparent.svg"
+          src="/assets/copym/logo-icon.png"
           alt="COPYM"
-          className={`${isMobile ? "w-10 h-10" : "w-15 h-15"} filter brightness-0 invert`}
+          className={`${isMobile ? "w-10 h-10" : "w-15 h-15"} filter brightness-0 invert m-2 p-2`}
         />
       </motion.div>
 

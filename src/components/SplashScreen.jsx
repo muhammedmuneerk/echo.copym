@@ -136,14 +136,6 @@ const SplashScreen = () => {
                 </span>{" "}
                 of Tokenization
               </Typography>
-
-              <Typography 
-                variant={isMobile ? "body2" : "body1"} 
-                className="text-slate-300 leading-relaxed max-w-lg"
-              >
-                Transform traditional assets into digital tokens. Invest fractionally, 
-                trade globally, and access previously exclusive opportunities.
-              </Typography>
             </div>
 
             {/* Dynamic Steps */}

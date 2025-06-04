@@ -23,9 +23,9 @@ export default function Footer() {
                 className="font-bold text-2xl tracking-tight flex items-center mb-4"
               >
                 <img
-                  src="/assets/icons/logo-svg.svg"
+                  src="/assets/copym/final-logo.png"
                   alt="COPYM"
-                  className="w-20 h-10 sm:w-30 sm:h-15 md:w-36 md:h-16 lg:w-48 lg:h-20 xl:w-40 xl:h-16"
+                  className="w-32 h-12 sm:w-30 sm:h-15 md:w-36 md:h-16 lg:w-48 lg:h-20 xl:w-40 xl:h-16"
                 />
               </Typography>
               <Typography

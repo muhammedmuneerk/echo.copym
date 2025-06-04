@@ -175,9 +175,9 @@ export default function Navbar() {
                 className="font-bold text-2xl tracking-tight flex items-center no-underline text-inherit cursor-pointer"
               >
                 <img
-                  src="/assets/icons/logo-svg.svg"
+                  src="/assets/copym/final-logo.png"
                   alt="COPYM"
-                  className="w-20 h-10 sm:w-40 sm:h-20 md:w-40 md:h-20 lg:w-48 lg:h-20 xl:w-50 xl:h-20"
+                  className="w-32 h-12 sm:w-40 sm:h-20 md:w-52 md:h-26 "
                 />
               </Typography>
             </motion.div>

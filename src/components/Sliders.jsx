@@ -39,7 +39,7 @@ const cardData = [
   },
   {
     id: "realestate",
-    image: "/assets/images/img3.png",
+    image: "/assets/sliders/realestate-slider.png",
     title: "Real Estate",
     description: "Real Estate Tokenization",
     detailText:
@@ -52,7 +52,7 @@ const cardData = [
   },
   {
     id: "art",
-    image: "/assets/images/img4.png",
+    image: "/assets/sliders/art-slider.png",
     title: "Art & Collectibles",
     description: "Art & Collectibles Tokenization",
     detailText:
@@ -65,7 +65,7 @@ const cardData = [
   },
   {
     id: "commodities",
-    image: "/assets/images/img5.png",
+    image: "/assets/sliders/commodites-slider.png",
     title: "Commodities",
     description: "Commodities Tokenization",
     detailText:
@@ -78,7 +78,7 @@ const cardData = [
   },
   {
     id: "carbon",
-    image: "/assets/images/img6.png",
+    image: "/assets/sliders/carboncredits-slider.png",
     title: "Carbon Credits",
     description: "Carbon Credits Tokenization",
     detailText:
@@ -91,7 +91,7 @@ const cardData = [
   },
   {
     id: "equity",
-    image: "/assets/images/img7.png",
+    image: "/assets/sliders/privateequity-slider.png",
     title: "Private Equity",
     description: "Private Equity Tokenization",
     detailText:
@@ -104,7 +104,7 @@ const cardData = [
   },
   {
     id: "diverse",
-    image: "/assets/images/img8.png",
+    image: "/assets/sliders/otherassets-slider.png",
     title: "Alternative Assets",
     description: "Diverse Asset Tokenization",
     detailText:
