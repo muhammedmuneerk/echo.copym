@@ -16,7 +16,7 @@ const mockAssets = [
     price: 250000,
     availableTokens: 750,
     totalTokens: 1000,
-    image: "/assets/images/office.jpg",
+    image: "/assets/images/premium-office-building.png",
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const mockAssets = [
     price: 15000,
     availableTokens: 65,
     totalTokens: 100,
-    image: "/assets/images/digital.jpg",
+    image: "/assets/images/digital-art-collection.png",
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const mockAssets = [
     price: 50000,
     availableTokens: 320,
     totalTokens: 500,
-    image: "/assets/images/gold.jpg",
+    image: "/assets/images/gold-reserve.png",
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const mockAssets = [
     price: 120000,
     availableTokens: 1800,
     totalTokens: 2000,
-    image: "/assets/images/solar.jpg",
+    image: "/assets/images/solar-farm-project.png",
   },
   {
     id: 5,
@@ -71,7 +71,7 @@ const mockAssets = [
     price: 350000,
     availableTokens: 1200,
     totalTokens: 1500,
-    image: "/assets/images/apartment.jpg",
+    image: "/assets/images/apartment-complex.png",
   },
 ];
 

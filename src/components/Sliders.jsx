@@ -19,7 +19,7 @@ const cardData = [
     detailText:
       "Access fractional ownership of gold assets with blockchain security and liquidity.",
     buttonText: "View Details",
-    link: "/tokenization/gold/",
+    link: "/market/gold/",
     color: "from-amber-400 to-yellow-600",
     bgColor: "from-amber-900/20 to-yellow-900/20",
     borderColor: "#FFD700",
