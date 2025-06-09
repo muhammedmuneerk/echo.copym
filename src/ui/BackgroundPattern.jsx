@@ -56,6 +56,12 @@ const BackgroundPattern = () => {
         animationDelay={1.5} 
       />
       
+      {/* Blur overlay layer */}
+      <div 
+        className="absolute inset-0 backdrop-blur-sm bg-black/10" 
+        style={{ zIndex: 5 }}
+      />
+      
       {/* Content container */}
       <div className="relative z-10 w-full h-full">
         {/* Your actual content would go here */}
