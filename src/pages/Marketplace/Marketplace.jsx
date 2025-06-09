@@ -16,7 +16,7 @@ const mockAssets = [
     price: 250000,
     availableTokens: 750,
     totalTokens: 1000,
-    image: "/assets/images/premium-office-building.png",
+    image: "/assets/images/premium-office-building-1.png",
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const mockAssets = [
     price: 15000,
     availableTokens: 65,
     totalTokens: 100,
-    image: "/assets/images/digital-art-collection.png",
+    image: "/assets/images/digital-art-collection-1.png",
   },
   {
     id: 3,
@@ -49,7 +49,7 @@ const mockAssets = [
     price: 120000,
     availableTokens: 1800,
     totalTokens: 2000,
-    image: "/assets/images/solar-farm-project.png",
+    image: "/assets/images/solar-farm-project-2.png",
   },
   {
     id: 5,
