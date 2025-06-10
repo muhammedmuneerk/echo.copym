@@ -60,7 +60,7 @@ const mockAssets = [
     price: 75000,
     availableTokens: 210,
     totalTokens: 300,
-    image: "/assets/images/tech-1.png",
+    image: "/assets/images/tech-2.png",
   },
   {
     id: 6,
