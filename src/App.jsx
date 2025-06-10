@@ -40,7 +40,7 @@ import CarbonCreditsMarket from "./pages/investor/CarbonCreditsMarket/CarbonCred
 function HomePage() {
   return (
     <div className="relative">
-      <BackgroundPattern/>
+      {/* <BackgroundPattern/> */}
     
       <section className="hero-section">
         <Hero />

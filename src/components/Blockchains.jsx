@@ -1,17 +1,9 @@
 import { Container, Typography, Box, Grid, useMediaQuery, useTheme } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { useGLTF, OrbitControls, Environment } from "@react-three/drei";
+import { useState, useEffect } from "react";
 import SectionImage from "./SectionImages";
 import BackgroundGlowEffect from "../ui/BackgroundGlowEffect";
 import GradientLetters from "./GradientLetters";
-
-// Model component
-function EarthGlobeModel() {
-  const { scene } = useGLTF("/models/animated_sci-fi_globe/animated_sci-fi_globe.gltf");
-  return <primitive object={scene} position={[0, 0, 0]} />;
-}
 
 const blockchains = [
   {
@@ -136,9 +128,9 @@ export default function Blockchains() {
   return (
     <Box
       id="blockchains-section"
-      className="py-8 md:py-12 lg:py-16 relative overflow-hidden"
+      className="py-12 md:py-16 lg:py-20 relative overflow-hidden"
     >
-      {/* 3D Model Canvas - For tablet and desktop only */}
+      {/* Blockchain Image - For tablet and desktop only */}
       {!isMobile && (
         <Box sx={{ 
           position: globeStyles.position, 
@@ -152,17 +144,18 @@ export default function Blockchains() {
           marginTop: globeStyles.marginTop,
           pointerEvents: "none",
           display: "flex",
-          justifyContent: "flex-end"
+          justifyContent: "flex-end",
+          padding: isTablet ? "40px 20px" : "60px 40px"
         }}>
-          <Suspense fallback={null}>
-            <Canvas camera={{ position: [0, 0, 10], fov: isTablet ? 18 : 18 }}>
-              <ambientLight intensity={0.5} />
-              <pointLight position={[10, 10, 10]} />
-              <EarthGlobeModel />
-              <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
-              <Environment preset="city" />
-            </Canvas>
-          </Suspense>
+          <img 
+            src="/assets/sections/blockchain-1.png" 
+            alt="Blockchain" 
+            style={{
+              width: "90%",
+              height: "90%",
+              objectFit: "contain"
+            }}
+          />
         </Box>
       )}
 
@@ -176,7 +169,7 @@ export default function Blockchains() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="mb-4 md:mb-6"
+              className="mb-8 md:mb-12"
             >
               <Typography
                 variant="h2"
@@ -221,39 +214,41 @@ export default function Blockchains() {
           </Grid>
         </Grid>
         
-        {/* 3D Model for Mobile - Between description and icons */}
+        {/* Blockchain Image for Mobile - Between description and icons */}
         {isMobile && (
           <Box sx={{ 
             width: "100%",
             zIndex: 0, 
             opacity: 0.5,
             height: globeStyles.height,
-            marginTop: globeStyles.marginTop,
-            marginBottom: globeStyles.marginBottom,
+            marginTop: "40px",
+            marginBottom: "-40px",
             pointerEvents: "none",
+            padding: "20px"
           }}>
-            <Suspense fallback={null}>
-              <Canvas camera={{ position: [0, 0, 10], fov: 18 }}>
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} />
-                <EarthGlobeModel />
-                <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.9} />
-                <Environment preset="city" />
-              </Canvas>
-            </Suspense>
+            <img 
+              src="/assets/sections/blockchain-1.png" 
+              alt="Blockchain" 
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain"
+              }}
+            />
           </Box>
         )}
 
         {/* Blockchain icons display */}
-        {/* Blockchain icons display - positioned below the 3D model on mobile */}
+        {/* Blockchain icons display - positioned below the image on mobile */}
         <Box
           sx={{
             position: "relative",
             width: "100%",
-            mt: isMobile ? 0 : isTablet ? 3 : 5, // No additional margin needed on mobile due to globe's negative margin
+            mt: isMobile ? 4 : isTablet ? 3 : -2, // Added margin on mobile for proper spacing from image
+            mb: isMobile ? 4 : isTablet ? 3 : 5, // Added bottom margin for better spacing
             display: "flex",
             justifyContent: "space-evenly",
-            zIndex: isMobile ? 2 : 1, // Higher z-index on mobile to ensure icons appear above the globe
+            zIndex: isMobile ? 2 : 1, // Higher z-index on mobile to ensure icons appear above the image
             px: isMobile ? 1 : 0
           }}
         >

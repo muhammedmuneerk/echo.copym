@@ -224,7 +224,7 @@ const DiverseAssetTokenization = () => {
   
   return (
     <div className="text-white min-h-screen relative overflow-hidden font-sans">
-      <BackgroundPattern />
+      {/* <BackgroundPattern /> */}
       <ScrollAnimationWrapper>
        <FloatingNavigation sections={sections} activeSection={activeSection} />
       {/* Header Section with Parallax */}

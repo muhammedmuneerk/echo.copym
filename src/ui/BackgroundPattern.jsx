@@ -58,7 +58,7 @@ const BackgroundPattern = () => {
       
       {/* Blur overlay layer */}
       <div 
-        className="absolute inset-0 backdrop-blur-sm bg-black/10" 
+        className="absolute inset-0 backdrop-blur-sm bg-black/0" 
         style={{ zIndex: 5 }}
       />
       
