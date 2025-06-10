@@ -135,11 +135,15 @@ const GreenTokenization = () => {
                 </div>
               </div>
 
-              {/* Earth GLB Section - Right */}
+              {/* Go Green Image Section - Right */}
               <div className="relative w-full md:w-1/2 flex items-center justify-center md:justify-end">
                 <div className="relative w-[400px] h-[400px] md:w-[500px] md:h-[500px] overflow-visible">
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <EarthGlb />
+                    <img 
+                      src="/assets/sections/gogreen.png" 
+                      alt="Go Green" 
+                      className="w-full h-full object-contain rounded-xl"
+                    />
                   </div>
                 </div>
               </div>
