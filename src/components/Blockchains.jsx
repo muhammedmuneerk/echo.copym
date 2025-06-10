@@ -128,7 +128,7 @@ export default function Blockchains() {
   return (
     <Box
       id="blockchains-section"
-      className="py-12 md:py-16 lg:py-20 relative overflow-hidden"
+      className="py-12 md:py-16 lg:py-10 relative overflow-hidden"
     >
       {/* Blockchain Image - For tablet and desktop only */}
       {!isMobile && (
@@ -244,8 +244,8 @@ export default function Blockchains() {
           sx={{
             position: "relative",
             width: "100%",
-            mt: isMobile ? 4 : isTablet ? 3 : -2, // Added margin on mobile for proper spacing from image
-            mb: isMobile ? 4 : isTablet ? 3 : 5, // Added bottom margin for better spacing
+            mt: isMobile ? 4 : isTablet ? 3 : 1, // Added margin on mobile for proper spacing from image
+            mb: isMobile ? 4 : isTablet ? 3 : 1, // Added bottom margin for better spacing
             display: "flex",
             justifyContent: "space-evenly",
             zIndex: isMobile ? 2 : 1, // Higher z-index on mobile to ensure icons appear above the image
