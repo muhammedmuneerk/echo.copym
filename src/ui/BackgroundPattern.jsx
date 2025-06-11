@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 const BackgroundPattern = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -17,260 +17,172 @@ const BackgroundPattern = () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
-  
-  // Calculate gradient position based on mouse movement
-  const gradientPosition = {
-    x: 50 + (mousePosition.x - 0.5) * 10,
-    y: 50 + (mousePosition.y - 0.5) * 10
-  };
-  
+
   return (
-    <div className="fixed w-full h-screen overflow-hidden ">
-      {/* Base gradient background */}
+    <div className="fixed w-full h-screen overflow-hidden" 
+         style={{ 
+           background: 'linear-gradient(90deg, rgba(11, 26, 161, 0.2) 0%, rgba(9, 121, 43, 0.2) 38%, rgba(24, 204, 14, 0.2) 100%)',
+           backgroundColor: '#050505'
+         }}>
+      {/* Dynamic gradient overlay that follows mouse */}
       <div 
-        className="absolute inset-0 "
+        className="absolute inset-0 opacity-30"
         style={{
-          backgroundPosition: `${gradientPosition.x}% ${gradientPosition.y}%`,
-          transition: 'background-position 0.5s ease-out'
+          background: `radial-gradient(600px circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(24, 204, 14, 0.15), transparent 70%)`,
+          transition: 'background 0.3s ease-out'
         }}
       />
       
-      {/* Circuit patterns */}
-      <CircuitLines />
+      {/* Grid pattern overlay */}
+      <GridPattern />
       
-      {/* Hexagon grid */}
-      <HexagonGrid />
+      {/* Circuit board patterns */}
+      <CircuitNetwork />
       
-      {/* Glowing orbs */}
-      <GlowingOrbs />
+      {/* Scanning lines */}
+      <ScanningLines />
       
-      {/* Tech circles */}
-      <TechCircle 
-        size={240} 
-        position={{ x: '10%', y: '30%' }} 
-        animationDelay={0} 
-      />
-      <TechCircle 
-        size={180} 
-        position={{ x: '85%', y: '70%' }} 
-        animationDelay={1.5} 
-      />
-      
-      {/* Blur overlay layer */}
-      <div 
-        className="absolute inset-0 backdrop-blur-sm bg-black/0" 
-        style={{ zIndex: 5 }}
-      />
-      
-      {/* Content container */}
-      <div className="relative z-10 w-full h-full">
-        {/* Your actual content would go here */}
+      {/* Content overlay */}
+      <div className="relative z-20 w-full h-full pointer-events-none">
+        {/* Content goes here */}
       </div>
     </div>
   );
 };
 
-// Circuit pattern component
-const CircuitLines = () => (
-  <div className="absolute inset-0 overflow-hidden opacity-30">
-    {/* Horizontal lines */}
-    {[...Array(20)].map((_, i) => (
-      <div 
-        key={`h-line-${i}`}
-        className="absolute h-px bg-cyan-400"
-        style={{
-          top: `${5 + i * 5}%`,
-          left: Math.random() * 30 + '%',
-          width: Math.random() * 40 + 10 + '%',
-          opacity: Math.random() * 0.5 + 0.2,
-          boxShadow: '0 0 5px rgba(6, 182, 212, 0.7)'
-        }}
-      />
-    ))}
-    
-    {/* Vertical lines */}
-    {[...Array(20)].map((_, i) => (
-      <div 
-        key={`v-line-${i}`}
-        className="absolute w-px bg-cyan-400"
-        style={{
-          left: `${5 + i * 5}%`,
-          top: Math.random() * 30 + '%',
-          height: Math.random() * 40 + 10 + '%',
-          opacity: Math.random() * 0.5 + 0.2,
-          boxShadow: '0 0 5px rgba(6, 182, 212, 0.7)'
-        }}
-      />
-    ))}
-    
-    {/* Connection dots */}
-    {[...Array(15)].map((_, i) => (
-      <div 
-        key={`dot-${i}`}
-        className="absolute w-1 h-1 rounded-full bg-cyan-300"
-        style={{
-          left: Math.random() * 90 + 5 + '%',
-          top: Math.random() * 90 + 5 + '%',
-          opacity: Math.random() * 0.8 + 0.2,
-          boxShadow: '0 0 8px rgba(6, 182, 212, 0.9)'
-        }}
-      />
-    ))}
-  </div>
-);
-
-// Hexagon grid component
-const HexagonGrid = () => (
-  <div className="absolute inset-0 overflow-hidden opacity-20">
-    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+// Grid pattern component
+const GridPattern = () => (
+  <div className="absolute inset-0 opacity-20">
+    <svg width="100%" height="100%" className="absolute inset-0">
       <defs>
-        <pattern 
-          id="hexGrid" 
-          width="56" 
-          height="100" 
-          patternUnits="userSpaceOnUse"
-          patternTransform="scale(2)"
-        >
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
           <path 
-            d="M28 66L0 50L0 16L28 0L56 16L56 50L28 66Z" 
+            d="M 40 0 L 0 0 0 40" 
             fill="none" 
-            stroke="rgba(56, 189, 248, 0.5)" 
-            strokeWidth="0.5"
-          />
-          <path 
-            d="M56 50L28 66L0 50" 
-            fill="none" 
-            stroke="rgba(56, 189, 248, 0.8)" 
-            strokeWidth="0.5"
-          />
-          <path 
-            d="M0 16L28 0L56 16" 
-            fill="none" 
-            stroke="rgba(56, 189, 248, 0.8)" 
+            stroke="rgba(24, 204, 14, 0.3)" 
             strokeWidth="0.5"
           />
         </pattern>
       </defs>
-      <rect width="100%" height="100%" fill="url(#hexGrid)" />
+      <rect width="100%" height="100%" fill="url(#grid)" />
     </svg>
   </div>
 );
 
-// Glowing orbs component
-const GlowingOrbs = () => (
+// Circuit network component
+const CircuitNetwork = () => (
   <div className="absolute inset-0 overflow-hidden">
-    {[...Array(8)].map((_, i) => {
-      const size = Math.random() * 6 + 2;
-      const animationDuration = Math.random() * 10 + 20;
-      
-      return (
-        <div 
-          key={`orb-${i}`}
-          className="absolute rounded-full bg-cyan-400"
-          style={{
-            width: `${size}px`,
-            height: `${size}px`,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            opacity: Math.random() * 0.5 + 0.2,
-            boxShadow: `0 0 ${size * 2}px rgba(6, 182, 212, 0.8)`,
-            animation: `float ${animationDuration}s infinite ease-in-out`
-          }}
+    <svg width="100%" height="100%" className="absolute inset-0">
+      {/* Circuit paths */}
+      <g opacity="0.4">
+        {/* Horizontal circuits */}
+        <path 
+          d="M0,200 L300,200 L320,220 L600,220 L620,200 L100%,200" 
+          fill="none" 
+          stroke="url(#circuitGradient)" 
+          strokeWidth="2"
+          className="animate-pulse"
         />
-      );
-    })}
-    
-    <style jsx>{`
-      @keyframes float {
-        0%, 100% { transform: translate(0, 0); }
-        25% { transform: translate(20px, 10px); }
-        50% { transform: translate(10px, 20px); }
-        75% { transform: translate(-10px, 10px); }
-      }
-    `}</style>
-  </div>
-);
-
-// Tech circle component
-const TechCircle = ({ size, position, animationDelay }) => (
-  <div 
-    className="absolute opacity-40"
-    style={{
-      width: `${size}px`,
-      height: `${size}px`,
-      left: position.x,
-      top: position.y,
-      transform: 'translate(-50%, -50%)'
-    }}
-  >
-    {/* Outer circle */}
-    <div 
-      className="absolute inset-0 border border-cyan-400 rounded-full"
-      style={{
-        animation: `pulse 4s infinite ease-in-out ${animationDelay}s`
-      }}
-    />
-    
-    {/* Middle circle */}
-    <div 
-      className="absolute rounded-full border border-cyan-300"
-      style={{
-        top: '15%',
-        left: '15%',
-        right: '15%',
-        bottom: '15%',
-        animation: `rotate 20s infinite linear ${animationDelay}s`
-      }}
-    >
-      {/* Dots around the middle circle */}
-      {[...Array(12)].map((_, i) => {
-        const angle = (i / 12) * Math.PI * 2;
-        const x = Math.cos(angle) * 50 + 50;
-        const y = Math.sin(angle) * 50 + 50;
+        <path 
+          d="M0,400 L200,400 L220,380 L500,380 L520,400 L100%,400" 
+          fill="none" 
+          stroke="url(#circuitGradient)" 
+          strokeWidth="2"
+          style={{ animationDelay: '1s' }}
+          className="animate-pulse"
+        />
+        <path 
+          d="M0,600 L400,600 L420,580 L700,580 L720,600 L100%,600" 
+          fill="none" 
+          stroke="url(#circuitGradient)" 
+          strokeWidth="2"
+          style={{ animationDelay: '2s' }}
+          className="animate-pulse"
+        />
         
-        return (
-          <div 
-            key={`circle-dot-${i}`}
-            className="absolute w-1 h-1 bg-cyan-300 rounded-full"
-            style={{
-              left: `${x}%`,
-              top: `${y}%`,
-              transform: 'translate(-50%, -50%)',
-              boxShadow: '0 0 5px rgba(6, 182, 212, 0.9)'
-            }}
-          />
-        );
-      })}
-    </div>
-    
-    {/* Inner circle */}
-    <div 
-      className="absolute bg-cyan-400 rounded-full"
-      style={{
-        top: '40%',
-        left: '40%',
-        right: '40%',
-        bottom: '40%',
-        opacity: 0.6,
-        boxShadow: '0 0 15px rgba(6, 182, 212, 0.8)',
-        animation: `pulse 3s infinite ease-in-out ${animationDelay + 1}s`
-      }}
-    />
+        {/* Vertical circuits */}
+        <path 
+          d="M300,0 L300,250 L320,270 L320,500 L300,520 L300,100%" 
+          fill="none" 
+          stroke="url(#circuitGradient)" 
+          strokeWidth="2"
+          style={{ animationDelay: '1.5s' }}
+          className="animate-pulse"
+        />
+        <path 
+          d="M600,0 L600,180 L580,200 L580,350 L600,370 L600,100%" 
+          fill="none" 
+          stroke="url(#circuitGradient)" 
+          strokeWidth="2"
+          style={{ animationDelay: '0.5s' }}
+          className="animate-pulse"
+        />
+      </g>
+      
+      {/* Circuit nodes */}
+      <g>
+        {[
+          { x: 300, y: 200 }, { x: 600, y: 220 }, { x: 200, y: 400 },
+          { x: 500, y: 380 }, { x: 400, y: 600 }, { x: 300, y: 270 },
+          { x: 600, y: 200 }, { x: 320, y: 500 }
+        ].map((node, i) => (
+          <g key={i}>
+            <circle 
+              cx={node.x} 
+              cy={node.y} 
+              r="4" 
+              fill="rgba(9, 121, 43, 0.8)"
+              className="animate-pulse"
+              style={{ animationDelay: `${i * 0.3}s` }}
+            />
+            <circle 
+              cx={node.x} 
+              cy={node.y} 
+              r="8" 
+              fill="none" 
+              stroke="rgba(24, 204, 14, 0.4)"
+              strokeWidth="1"
+              className="animate-ping"
+              style={{ animationDelay: `${i * 0.3}s` }}
+            />
+          </g>
+        ))}
+      </g>
+      
+      <defs>
+        <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="rgba(11, 26, 161, 0.1)" />
+          <stop offset="50%" stopColor="rgba(9, 121, 43, 0.8)" />
+          <stop offset="100%" stopColor="rgba(24, 204, 14, 0.1)" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+);
+
+// Scanning lines effect
+const ScanningLines = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    {[...Array(3)].map((_, i) => (
+      <div 
+        key={i}
+        className="absolute w-full h-px bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-60"
+        style={{
+          top: `${20 + i * 30}%`,
+          animation: `scan 8s infinite ease-in-out ${i * 2}s`,
+          boxShadow: '0 0 10px rgba(24, 204, 14, 0.8)'
+        }}
+      />
+    ))}
     
     <style jsx>{`
-      @keyframes pulse {
-        0%, 100% { opacity: 0.4; }
-        50% { opacity: 0.7; }
-      }
-      
-      @keyframes rotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+      @keyframes scan {
+        0%, 100% { transform: translateX(-100%); opacity: 0; }
+        10%, 90% { opacity: 0.6; }
+        50% { transform: translateX(0%); opacity: 1; }
       }
     `}</style>
   </div>
 );
-
-
 
 export default BackgroundPattern;
