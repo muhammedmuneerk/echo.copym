@@ -41,7 +41,7 @@ const BackgroundPattern = () => {
       <CircuitNetwork />
       
       {/* Scanning lines */}
-      <ScanningLines />
+      {/* <ScanningLines /> */}
       
       {/* HUD overlay */}
       <HUDLayer />
@@ -75,19 +75,50 @@ const GridPattern = () => (
 
 // Circuit network component
 const CircuitNetwork = () => {
-  const paths = [
-    // Horizontal
-    "M0,200 L300,200 L320,220 L600,220 L620,200 L100%,200",
-    "M0,400 L200,400 L220,380 L500,380 L520,400 L100%,400",
-    "M0,600 L400,600 L420,580 L700,580 L720,600 L100%,600",
-    // Vertical
-    "M300,0 L300,250 L320,270 L320,500 L300,520 L300,100%",
-    "M600,0 L600,180 L580,200 L580,350 L600,370 L600,100%",
+  // SVG width for mirroring calculations
+  const SVG_WIDTH = 1200;
+
+  // Original horizontal traces (left to right)
+  const horizontalTraces = [
+    "M0,200 L300,200 L320,220 L600,220 L620,200 L1200,200",
+    "M0,400 L200,400 L220,380 L500,380 L520,400 L1200,400",
+    "M0,600 L400,600 L420,580 L700,580 L720,600 L1200,600",
   ];
+
+  // Original vertical traces (top to bottom)
+  const verticalTraces = [
+    "M300,0 L300,250 L320,270 L320,500 L300,520 L300,800",
+    "M600,0 L600,180 L580,200 L580,350 L600,370 L600,800",
+  ];
+
+  // Mirror a path horizontally across the center (SVG_WIDTH)
+  function mirrorPath(path) {
+    // Replace all X values (before commas) with (SVG_WIDTH - X)
+    return path.replace(/(\d+)(?=,)/g, (x) => SVG_WIDTH - parseInt(x, 10));
+  }
+
+  // Mirror nodes
+  const nodes = [
+    { x: 300, y: 200 }, { x: 600, y: 220 }, { x: 200, y: 400 },
+    { x: 500, y: 380 }, { x: 400, y: 600 }, { x: 300, y: 270 },
+    { x: 600, y: 200 }, { x: 320, y: 500 }
+  ];
+  const mirroredNodes = nodes.map(node => ({ x: SVG_WIDTH - node.x, y: node.y }));
+
+  // Combine all traces
+  const allTraces = [
+    ...horizontalTraces,
+    ...horizontalTraces.map(mirrorPath),
+    ...verticalTraces,
+    ...verticalTraces.map(mirrorPath)
+  ];
+
+  // Combine all nodes
+  const allNodes = [...nodes, ...mirroredNodes];
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      <svg width="100%" height="100%" className="absolute inset-0">
+      <svg width="100%" height="100%" viewBox={`0 0 ${SVG_WIDTH} 800`} className="absolute inset-0">
         <defs>
           <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="rgba(11, 26, 161, 0.1)" />
@@ -103,9 +134,9 @@ const CircuitNetwork = () => {
           </filter>
         </defs>
 
-        {/* Circuit paths */}
+        {/* Circuit paths (traces) */}
         <g opacity="0.6" filter="url(#glow)">
-          {paths.map((d, idx) => (
+          {allTraces.map((d, idx) => (
             <motion.path
               key={idx}
               d={d}
@@ -117,18 +148,14 @@ const CircuitNetwork = () => {
               strokeDasharray="8 6"
               initial={{ strokeDashoffset: 14 }}
               animate={{ strokeDashoffset: -14 }}
-              transition={{ duration: 4 + idx * 0.5, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 4 + (idx % 3) * 0.5, repeat: Infinity, ease: "linear" }}
             />
           ))}
         </g>
 
-        {/* Circuit nodes */}
+        {/* Circuit nodes (connection points/components) */}
         <g>
-          {[
-            { x: 300, y: 200 }, { x: 600, y: 220 }, { x: 200, y: 400 },
-            { x: 500, y: 380 }, { x: 400, y: 600 }, { x: 300, y: 270 },
-            { x: 600, y: 200 }, { x: 320, y: 500 }
-          ].map((node, i) => (
+          {allNodes.map((node, i) => (
             <motion.g key={i} initial={{ opacity: 0 }} animate={{ opacity: [0, 1, 0] }} transition={{ duration: 3, delay: i * 0.2, repeat: Infinity }}>
               <circle 
                 cx={node.x} 
