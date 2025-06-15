@@ -142,7 +142,11 @@ const ArtTokenization = () => {
             {/* Art GLB Section Placeholder - Right */}
             <div className="relative w-full md:w-1/2 flex items-start justify-center md:justify-start md:-mt-20">
               <div className="w-[450px] md:w-[600px] h-[450px] md:h-[600px] md:ml-0 flex items-center justify-center">
-                <Palette className="w-48 h-48 text-[#00A86B]/50 animate-pulse" />
+                <img 
+                  src="/assets/sections/art-tokenization-2.png" 
+                  alt="Art Tokenization" 
+                  className="w-[70%] h-[70%] md:w-[80%] md:h-[80%] object-contain"
+                />
               </div>
             </div>
           </div>

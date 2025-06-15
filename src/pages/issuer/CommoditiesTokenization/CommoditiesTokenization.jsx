@@ -157,59 +157,71 @@ const CommoditiesTokenization = () => {
             <div className="absolute bottom-1/4 left-1/3 w-96 h-96 rounded-full bg-emerald-700/10 filter blur-3xl"></div>
           </div>
 
-          {/* Hero content without parallax */}
-          <div className="relative z-10 max-w-3xl transition-all duration-1000">
-            <div className="mb-2 inline-block">
+          {/* Hero content and image side by side */}
+          <div className="relative z-10 w-full flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10">
+            {/* Left: Content */}
+            <div className="w-full md:w-1/2">
+              <Typography
+                variant="h1"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 pb-1 text-center md:text-left"
+              >
+                <Box component="div" className="flex flex-wrap">
+                  {/* Large Screens (1 lines) */}
+                  <Box className="hidden lg:block">
+                    <GradientLetters
+                      text="Commodities"
+                      keyPrefix="lg-line1"
+                    />
+                  </Box>
+                  <Box className="hidden lg:block">
+                    <GradientLetters
+                      text="Tokenization"
+                      keyPrefix="lg-line1"
+                    />
+                  </Box>
+
+                  {/* Small and Medium screens: 2 lines */}
+                  <Box className="block lg:hidden">
+                    <Box component="div" className="flex flex-wrap ">
+                      <GradientLetters text="Commodities" keyPrefix="sm-line1" />
+                    </Box>
+                    <Box component="div" className="flex flex-wrap ">
+                      <GradientLetters text="Tokenization" keyPrefix="sm-line2" />
+                    </Box>
+                  </Box>
+                </Box>
+              </Typography>
+
+              <h3 className="text-1xl md:text-2xl text-gray-300 mb-4 font-light text-center md:text-left">
+                Transforming Physical Assets into{" "}
+                <span className="text-emerald-400">Digital Investments</span>
+              </h3>
+
+              <AnimatedUnderline width="w-32" />
+
+              <p className="text-gray-400 mb-8 max-w-2xl text-lg text-center md:text-left">
+                Unlock new investment opportunities in global commodity markets
+                through advanced blockchain technology and decentralized ownership
+                structures.
+              </p>
+
+              <div className="flex flex-wrap justify-center md:justify-start gap-4">
+                <CustomButton label="Start Investing" />
+                <CustomButton label="Learn More" />
+              </div>
             </div>
 
-            <Typography
-              variant="h1"
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 pb-1 text-center"
-            >
-              <Box component="div" className="flex flex-wrap">
-                {/* Large Screens (1 lines) */}
-                <Box className="hidden lg:block">
-                  <GradientLetters
-                    text="Commodities Tokenization"
-                    keyPrefix="lg-line1"
-                  />
-                </Box>
-
-                {/* Small and Medium screens: 2 lines */}
-                <Box className="block lg:hidden">
-                  <Box component="div" className="flex flex-wrap ">
-                    <GradientLetters text="Commodities" keyPrefix="sm-line1" />
-                  </Box>
-                  <Box component="div" className="flex flex-wrap ">
-                    <GradientLetters text="Tokenization" keyPrefix="sm-line2" />
-                  </Box>
-                </Box>
-              </Box>
-            </Typography>
-
-            <h2 className="text-2xl md:text-3xl text-gray-300 mb-4 font-light">
-              Transforming Physical Assets into{" "}
-              <span className="text-emerald-400">Digital Investments</span>
-            </h2>
-
-            <AnimatedUnderline width="w-32" />
-
-            <p className="text-gray-400 mb-8 max-w-2xl text-lg">
-              Unlock new investment opportunities in global commodity markets
-              through advanced blockchain technology and decentralized ownership
-              structures.
-            </p>
-
-            <div className="flex flex-wrap gap-4">
-              
-              <CustomButton label="Start Tokenizing Commodities" />
-                {/* <ArrowRight className="inline-block ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" /> */}              
-
-              <CustomButton label="Explore Market Insights" />
-             
+            {/* Right: Image */}
+            <div className="relative w-full md:w-1/2 flex items-center justify-center md:justify-start md:-mt-20">
+              <div className="w-[450px] md:w-[600px] h-[450px] md:h-[600px] md:ml-0 flex items-center justify-center md:pt-20">
+                <img 
+                  src="/assets/sections/commodites-tokenization-1.png" 
+                  alt="Commodities Tokenization" 
+                  className="w-[70%] h-[70%] md:w-[90%] md:h-[90%] object-contain"
+                />
+              </div>
             </div>
           </div>
-
         </section>
 
         {/* Redefine Commodity Investment Section */}
