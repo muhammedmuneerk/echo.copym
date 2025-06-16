@@ -22,29 +22,23 @@ const BackgroundPattern = () => {
   return (
     <div className="fixed w-full h-screen overflow-hidden" 
          style={{ 
-           background: 'linear-gradient(90deg, rgba(11, 26, 161, 0.2) 0%, rgba(9, 121, 43, 0.2) 38%, rgba(24, 204, 14, 0.2) 100%)',
+           background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)',
            backgroundColor: '#050505'
          }}>
       {/* Dynamic gradient overlay that follows mouse */}
       <div 
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0 opacity-20"
         style={{
-          background: `radial-gradient(600px circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(24, 204, 14, 0.15), transparent 70%)`,
+          background: `radial-gradient(800px circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(0, 162, 255, 0.1), transparent 60%)`,
           transition: 'background 0.3s ease-out'
         }}
       />
-      
-      {/* Grid pattern overlay */}
-      <GridPattern />
       
       {/* Circuit board patterns */}
       <CircuitNetwork />
       
       {/* Scanning lines */}
-      {/* <ScanningLines /> */}
-      
-      {/* HUD overlay */}
-      <HUDLayer />
+      <ScanningLines />
       
       {/* Content overlay */}
       <div className="relative z-20 w-full h-full pointer-events-none">
@@ -54,191 +48,282 @@ const BackgroundPattern = () => {
   );
 };
 
-// Grid pattern component
-const GridPattern = () => (
-  <div className="absolute inset-0 opacity-20">
-    <svg width="100%" height="100%" className="absolute inset-0">
-      <defs>
-        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path 
-            d="M 40 0 L 0 0 0 40" 
-            fill="none" 
-            stroke="rgba(24, 204, 14, 0.3)" 
-            strokeWidth="0.5"
-          />
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#grid)" />
-    </svg>
-  </div>
-);
-
-// Circuit network component
+// Enhanced Circuit network component with realistic PCB design
 const CircuitNetwork = () => {
-  // SVG width for mirroring calculations
-  const SVG_WIDTH = 1200;
+  // Track width so our mirror transform always uses the current viewport size
+  const [svgWidth, setSvgWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1920);
 
-  // Original horizontal traces (left to right)
+  useEffect(() => {
+    const onResize = () => setSvgWidth(window.innerWidth);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  // More realistic circuit traces with proper connections
   const horizontalTraces = [
-    "M0,200 L300,200 L320,220 L600,220 L620,200 L1200,200",
-    "M0,400 L200,400 L220,380 L500,380 L520,400 L1200,400",
-    "M0,600 L400,600 L420,580 L700,580 L720,600 L1200,600",
+    { path: "M50,150 L200,150 L220,130 L350,130 L370,150 L500,150 L520,170 L650,170 L670,150 L800,150", y: 150 },
+    { path: "M80,220 L180,220 L200,200 L320,200 L340,220 L450,220 L470,240 L580,240 L600,220 L720,220", y: 220 },
+    { path: "M30,290 L150,290 L170,270 L280,270 L300,290 L420,290 L440,310 L550,310 L570,290 L690,290", y: 290 },
+    { path: "M100,360 L220,360 L240,340 L350,340 L370,360 L480,360 L500,380 L620,380 L640,360 L760,360", y: 360 },
+    { path: "M60,430 L190,430 L210,410 L330,410 L350,430 L470,430 L490,450 L600,450 L620,430 L750,430", y: 430 },
+    { path: "M40,500 L160,500 L180,480 L300,480 L320,500 L440,500 L460,520 L570,520 L590,500 L710,500", y: 500 }
   ];
 
-  // Original vertical traces (top to bottom)
   const verticalTraces = [
-    "M300,0 L300,250 L320,270 L320,500 L300,520 L300,800",
-    "M600,0 L600,180 L580,200 L580,350 L600,370 L600,800",
+    { path: "M200,80 L200,130 L220,150 L220,200 L200,220 L200,270 L220,290 L220,340 L200,360 L200,410", x: 200 },
+    { path: "M350,60 L350,130 L370,150 L370,200 L350,220 L350,270 L370,290 L370,340 L350,360 L350,420", x: 350 },
+    { path: "M520,90 L520,170 L500,190 L500,240 L520,260 L520,310 L500,330 L500,380 L520,400 L520,450", x: 520 },
+    { path: "M650,70 L650,170 L670,190 L670,240 L650,260 L650,310 L670,330 L670,380 L650,400 L650,460", x: 650 }
   ];
 
-  // Mirror a path horizontally across the center (SVG_WIDTH)
-  function mirrorPath(path) {
-    // Replace all X values (before commas) with (SVG_WIDTH - X)
-    return path.replace(/(\d+)(?=,)/g, (x) => SVG_WIDTH - parseInt(x, 10));
-  }
-
-  // Mirror nodes
-  const nodes = [
-    { x: 300, y: 200 }, { x: 600, y: 220 }, { x: 200, y: 400 },
-    { x: 500, y: 380 }, { x: 400, y: 600 }, { x: 300, y: 270 },
-    { x: 600, y: 200 }, { x: 320, y: 500 }
+  // Connection points (pads/vias)
+  const connectionPoints = [
+    // Intersections and endpoints
+    { x: 200, y: 150, type: 'via' },
+    { x: 350, y: 130, type: 'pad' },
+    { x: 520, y: 170, type: 'via' },
+    { x: 650, y: 170, type: 'pad' },
+    { x: 180, y: 220, type: 'via' },
+    { x: 320, y: 200, type: 'pad' },
+    { x: 450, y: 220, type: 'via' },
+    { x: 580, y: 240, type: 'pad' },
+    { x: 150, y: 290, type: 'via' },
+    { x: 280, y: 270, type: 'pad' },
+    { x: 420, y: 290, type: 'via' },
+    { x: 550, y: 310, type: 'pad' },
+    { x: 220, y: 360, type: 'via' },
+    { x: 350, y: 340, type: 'pad' },
+    { x: 480, y: 360, type: 'via' },
+    { x: 620, y: 380, type: 'pad' },
+    { x: 190, y: 430, type: 'via' },
+    { x: 330, y: 410, type: 'pad' },
+    { x: 470, y: 430, type: 'via' },
+    { x: 600, y: 450, type: 'pad' },
+    { x: 160, y: 500, type: 'via' },
+    { x: 300, y: 480, type: 'pad' },
+    { x: 440, y: 500, type: 'via' },
+    { x: 570, y: 520, type: 'pad' }
   ];
-  const mirroredNodes = nodes.map(node => ({ x: SVG_WIDTH - node.x, y: node.y }));
 
-  // Combine all traces
-  const allTraces = [
-    ...horizontalTraces,
-    ...horizontalTraces.map(mirrorPath),
-    ...verticalTraces,
-    ...verticalTraces.map(mirrorPath)
+  // Component outlines (IC packages, resistors, capacitors)
+  const components = [
+    { x: 280, y: 180, width: 40, height: 20, type: 'resistor' },
+    { x: 450, y: 250, width: 60, height: 40, type: 'ic' },
+    { x: 120, y: 320, width: 30, height: 15, type: 'capacitor' },
+    { x: 580, y: 390, width: 50, height: 30, type: 'ic' },
+    { x: 350, y: 460, width: 25, height: 12, type: 'resistor' },
+    { x: 680, y: 280, width: 35, height: 35, type: 'ic' }
   ];
-
-  // Combine all nodes
-  const allNodes = [...nodes, ...mirroredNodes];
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
-      <svg width="100%" height="100%" viewBox={`0 0 ${SVG_WIDTH} 800`} className="absolute inset-0">
+    <div className="absolute inset-0 overflow-hidden opacity-80">
+      <svg width="100%" height="100%" className="absolute inset-0">
         <defs>
-          <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(11, 26, 161, 0.1)" />
-            <stop offset="50%" stopColor="rgba(9, 121, 43, 0.8)" />
-            <stop offset="100%" stopColor="rgba(24, 204, 14, 0.1)" />
+          {/* Circuit trace gradient */}
+          <linearGradient id="traceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="rgba(0, 162, 255, 0.1)" />
+            <stop offset="30%" stopColor="rgba(0, 162, 255, 0.8)" />
+            <stop offset="70%" stopColor="rgba(0, 162, 255, 0.8)" />
+            <stop offset="100%" stopColor="rgba(0, 162, 255, 0.1)" />
           </linearGradient>
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          
+          {/* Glow effect */}
+          <filter id="circuitGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
             <feMerge>
               <feMergeNode in="coloredBlur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+          
+          {/* Via pattern */}
+          <radialGradient id="viaGradient">
+            <stop offset="0%" stopColor="rgba(255, 255, 255, 0.3)" />
+            <stop offset="50%" stopColor="rgba(0, 162, 255, 0.6)" />
+            <stop offset="100%" stopColor="rgba(0, 162, 255, 0.9)" />
+          </radialGradient>
+          
+          {/* Pad pattern */}
+          <radialGradient id="padGradient">
+            <stop offset="0%" stopColor="rgba(255, 255, 255, 0.2)" />
+            <stop offset="60%" stopColor="rgba(0, 162, 255, 0.4)" />
+            <stop offset="100%" stopColor="rgba(0, 162, 255, 0.8)" />
+          </radialGradient>
         </defs>
 
-        {/* Circuit paths (traces) */}
-        <g opacity="0.6" filter="url(#glow)">
-          {allTraces.map((d, idx) => (
-            <motion.path
-              key={idx}
-              d={d}
-              fill="none"
-              stroke="url(#circuitGradient)"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeDasharray="8 6"
-              initial={{ strokeDashoffset: 14 }}
-              animate={{ strokeDashoffset: -14 }}
-              transition={{ duration: 4 + (idx % 3) * 0.5, repeat: Infinity, ease: "linear" }}
-            />
-          ))}
-        </g>
+        {/* Render LEFT + RIGHT (mirrored) groups */}
+        {["left", "right"].map((side, idxSide) => {
+          const isMirror = idxSide === 1;
+          const transform = isMirror ? `translate(${svgWidth},0) scale(-1 1)` : undefined;
+          const keyPrefix = isMirror ? "m-" : "";
 
-        {/* Circuit nodes (connection points/components) */}
-        <g>
-          {allNodes.map((node, i) => (
-            <motion.g key={i} initial={{ opacity: 0 }} animate={{ opacity: [0, 1, 0] }} transition={{ duration: 3, delay: i * 0.2, repeat: Infinity }}>
-              <circle 
-                cx={node.x} 
-                cy={node.y} 
-                r="3" 
-                fill="rgba(9, 121, 43, 0.9)"
-              />
-              <motion.circle 
-                cx={node.x} 
-                cy={node.y} 
-                r="6" 
-                fill="none" 
-                stroke="rgba(24, 204, 14, 0.4)"
-                strokeWidth="1"
-                animate={{ r: [6, 10], opacity: [1, 0] }}
-                transition={{ duration: 2.5, delay: i * 0.3, repeat: Infinity, ease: "easeOut" }}
-              />
-            </motion.g>
+          return (
+            <g key={side} transform={transform}>
+              {/* Horizontal traces */}
+              <g filter="url(#circuitGlow)">
+                {horizontalTraces.map((trace, idx) => (
+                  <motion.path
+                    key={`${keyPrefix}h-${idx}`}
+                    d={trace.path}
+                    fill="none"
+                    stroke="url(#traceGradient)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: [0.3, 0.8, 0.3] }}
+                    transition={{
+                      pathLength: { duration: 3, delay: idx * 0.2 },
+                      opacity: { duration: 4, delay: idx * 0.3, repeat: Infinity, repeatType: "reverse" }
+                    }}
+                  />
+                ))}
+              </g>
+
+              {/* Vertical traces */}
+              <g filter="url(#circuitGlow)">
+                {verticalTraces.map((trace, idx) => (
+                  <motion.path
+                    key={`${keyPrefix}v-${idx}`}
+                    d={trace.path}
+                    fill="none"
+                    stroke="url(#traceGradient)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: [0.3, 0.8, 0.3] }}
+                    transition={{
+                      pathLength: { duration: 3, delay: idx * 0.3 + 1 },
+                      opacity: { duration: 5, delay: idx * 0.4, repeat: Infinity, repeatType: "reverse" }
+                    }}
+                  />
+                ))}
+              </g>
+
+              {/* Connection points */}
+              <g>
+                {connectionPoints.map((point, i) => (
+                  <motion.g key={`${keyPrefix}pt-${i}`}>
+                    <circle
+                      cx={point.x}
+                      cy={point.y}
+                      r={point.type === 'via' ? '3' : '4'}
+                      fill={point.type === 'via' ? 'url(#viaGradient)' : 'url(#padGradient)'}
+                      stroke="rgba(0, 162, 255, 0.5)"
+                      strokeWidth="0.5"
+                    />
+                    <motion.circle
+                      cx={point.x}
+                      cy={point.y}
+                      r="8"
+                      fill="none"
+                      stroke="rgba(0, 162, 255, 0.3)"
+                      strokeWidth="1"
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: [0, 1.5, 0], opacity: [0, 0.6, 0] }}
+                      transition={{ duration: 3, delay: i * 0.1, repeat: Infinity, ease: 'easeOut' }}
+                    />
+                  </motion.g>
+                ))}
+              </g>
+
+              {/* Components */}
+              <g stroke="rgba(0, 162, 255, 0.4)" strokeWidth="1" fill="none">
+                {components.map((comp, i) => (
+                  <motion.g key={`${keyPrefix}comp-${i}`}>
+                    <rect
+                      x={comp.x}
+                      y={comp.y}
+                      width={comp.width}
+                      height={comp.height}
+                      rx={comp.type === 'ic' ? '2' : '1'}
+                      fill="rgba(0, 162, 255, 0.05)"
+                      stroke="rgba(0, 162, 255, 0.4)"
+                      strokeWidth="1"
+                    />
+                    {comp.type === 'ic' && (
+                      <g>
+                        {[...Array(Math.floor(comp.width / 10))].map((_, pinIdx) => (
+                          <g key={`${keyPrefix}pin-${i}-${pinIdx}`}>
+                            <rect x={comp.x + 5 + pinIdx * 10} y={comp.y - 2} width="3" height="4" fill="rgba(0, 162, 255, 0.6)" />
+                            <rect x={comp.x + 5 + pinIdx * 10} y={comp.y + comp.height - 2} width="3" height="4" fill="rgba(0, 162, 255, 0.6)" />
+                          </g>
+                        ))}
+                      </g>
+                    )}
+                    <text
+                      x={comp.x + comp.width / 2}
+                      y={comp.y + comp.height / 2 + 3}
+                      textAnchor="middle"
+                      fontSize="8"
+                      fill="rgba(0, 162, 255, 0.6)"
+                      fontFamily="monospace">
+                      {comp.type === 'ic' ? 'IC' : comp.type === 'resistor' ? 'R' : 'C'}
+                    </text>
+                  </motion.g>
+                ))}
+              </g>
+
+              {/* Data-flow animation on first three traces */}
+              <g>
+                {horizontalTraces.slice(0, 3).map((trace, idx) => (
+                  <motion.circle
+                    key={`${keyPrefix}flow-${idx}`}
+                    r="2"
+                    fill="rgba(0, 255, 255, 0.8)"
+                    filter="url(#circuitGlow)"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: [0, 1, 0] }}
+                    transition={{ duration: 2, delay: idx * 0.7, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    <animateMotion dur="4s" repeatCount="indefinite" begin={`${idx * 0.7}s`}>
+                      <mpath href={`#trace-${idx}`} />
+                    </animateMotion>
+                  </motion.circle>
+                ))}
+              </g>
+            </g>
+          );
+        })}
+
+        {/* Hidden paths for animation */}
+        <defs>
+          {horizontalTraces.slice(0, 3).map((trace, idx) => (
+            <path key={`trace-${idx}`} id={`trace-${idx}`} d={trace.path} fill="none" stroke="none" />
           ))}
-        </g>
+        </defs>
       </svg>
     </div>
   );
 };
 
-// Simple HUD overlay with subtle concentric rings and crosshair lines
-const HUDLayer = () => (
-  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    <motion.svg
-      width="100%"
-      height="100%"
-      className="absolute inset-0"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: [0, 0.4, 0.4, 0] }}
-      transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-    >
-      <g stroke="rgba(24, 204, 14, 0.25)" strokeWidth="1" strokeLinecap="round">
-        {/* Outer dashed border */}
-        <rect x="2%" y="2%" width="96%" height="96%" fill="none" strokeDasharray="6 6" />
-        {/* Crosshair */}
-        <line x1="50%" y1="0" x2="50%" y2="100%" opacity="0.3" />
-        <line x1="0" y1="50%" x2="100%" y2="50%" opacity="0.3" />
-        {/* Concentric circles */}
-        <circle cx="50%" cy="50%" r="60" fill="none" opacity="0.25" />
-        <circle cx="50%" cy="50%" r="120" fill="none" opacity="0.15" />
-        <motion.circle
-          cx="50%"
-          cy="50%"
-          r="90"
-          fill="none"
-          opacity="0.2"
-          animate={{ rotate: 360 }}
-          transformOrigin="50% 50%"
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        />
-      </g>
-    </motion.svg>
-  </div>
-);
-
-// Scanning lines effect
+// Enhanced scanning lines effect
 const ScanningLines = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    {[...Array(3)].map((_, i) => (
-      <div 
+    {[...Array(2)].map((_, i) => (
+      <motion.div 
         key={i}
-        className="absolute w-full h-px bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-60"
+        className="absolute w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
         style={{
-          top: `${20 + i * 30}%`,
-          animation: `scan 8s infinite ease-in-out ${i * 2}s`,
-          boxShadow: '0 0 10px rgba(24, 204, 14, 0.8)'
+          top: `${15 + i * 35}%`,
+          boxShadow: '0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.3)'
+        }}
+        initial={{ x: '-100%', opacity: 0 }}
+        animate={{ 
+          x: '100%', 
+          opacity: [0, 0.8, 0.8, 0] 
+        }}
+        transition={{
+          x: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+          opacity: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+          delay: i * 3
         }}
       />
     ))}
-    
-    <style jsx>{`
-      @keyframes scan {
-        0%, 100% { transform: translateX(-100%); opacity: 0; }
-        10%, 90% { opacity: 0.6; }
-        50% { transform: translateX(0%); opacity: 1; }
-      }
-    `}</style>
   </div>
 );
 
 export default BackgroundPattern;
+
+
