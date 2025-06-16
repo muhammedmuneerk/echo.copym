@@ -22,14 +22,14 @@ const BackgroundPattern = () => {
   return (
     <div className="fixed w-full h-screen overflow-hidden" 
          style={{ 
-           background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)',
+           background: 'linear-gradient(90deg, rgba(11, 26, 161, 0.2) 0%, rgba(9, 121, 43, 0.2) 38%, rgba(24, 204, 14, 0.2) 100%)',
            backgroundColor: '#050505'
          }}>
       {/* Dynamic gradient overlay that follows mouse */}
       <div 
         className="absolute inset-0 opacity-20"
         style={{
-          background: `radial-gradient(800px circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(0, 162, 255, 0.1), transparent 60%)`,
+          background: `radial-gradient(800px circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(0, 162, 255, 0.05), transparent 70%)`,
           transition: 'background 0.3s ease-out'
         }}
       />
@@ -116,20 +116,20 @@ const CircuitNetwork = () => {
   ];
 
   return (
-    <div className="absolute inset-0 overflow-hidden opacity-80">
+    <div className="absolute inset-0 overflow-hidden opacity-30">
       <svg width="100%" height="100%" className="absolute inset-0">
         <defs>
           {/* Circuit trace gradient */}
           <linearGradient id="traceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(0, 162, 255, 0.1)" />
-            <stop offset="30%" stopColor="rgba(0, 162, 255, 0.8)" />
-            <stop offset="70%" stopColor="rgba(0, 162, 255, 0.8)" />
-            <stop offset="100%" stopColor="rgba(0, 162, 255, 0.1)" />
+            <stop offset="0%" stopColor="rgba(0, 162, 255, 0.05)" />
+            <stop offset="30%" stopColor="rgba(0, 162, 255, 0.4)" />
+            <stop offset="70%" stopColor="rgba(0, 162, 255, 0.4)" />
+            <stop offset="100%" stopColor="rgba(0, 162, 255, 0.05)" />
           </linearGradient>
           
           {/* Glow effect */}
           <filter id="circuitGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
             <feMerge>
               <feMergeNode in="coloredBlur" />
               <feMergeNode in="SourceGraphic" />
@@ -307,17 +307,17 @@ const ScanningLines = () => (
         className="absolute w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
         style={{
           top: `${15 + i * 35}%`,
-          boxShadow: '0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.3)'
+          boxShadow: '0 0 10px rgba(0, 255, 255, 0.3), 0 0 20px rgba(0, 255, 255, 0.15)'
         }}
         initial={{ x: '-100%', opacity: 0 }}
         animate={{ 
           x: '100%', 
-          opacity: [0, 0.8, 0.8, 0] 
+          opacity: [0, 0.4, 0.4, 0] 
         }}
         transition={{
-          x: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-          opacity: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-          delay: i * 3
+          x: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+          opacity: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+          delay: i * 4
         }}
       />
     ))}
