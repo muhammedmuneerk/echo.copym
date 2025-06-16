@@ -32,6 +32,7 @@ import { div } from "framer-motion/client";
 import ArtMarket from "./pages/investor/ArtMarket/ArtMarket";
 import PrivateEquityMarket from "./pages/investor/PrivateEquityMarket/PrivateEquityMarket";
 import CarbonCreditsMarket from "./pages/investor/CarbonCreditsMarket/CarbonCreditsMarket";
+import BlogSection from "./components/BlogSection";
 
 /**
  * HomePage component - Main landing page layout
@@ -71,6 +72,11 @@ function HomePage() {
         <ScrollAnimationWrapper>
         <section className="metrics-section">
           <Metrics />
+        </section>
+
+        {/* Blog / insights */}
+        <section className="blog-section">
+          <BlogSection />
         </section>
         
         <section className="cta-section">

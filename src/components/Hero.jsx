@@ -6,8 +6,17 @@ import BackgroundGlowEffect from "../ui/BackgroundGlowEffect";
 import GradientLetters from "./GradientLetters";
 import Buttons from "./CustomButton";
 import CustomButton from "./CustomButton";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
+  const navigate = useNavigate();
+
+  // Navigate to the Tokenization page
+  const handleExplore = () => navigate("/tokenization");
+
+  // Placeholder for other actions (kept to avoid reference errors)
+  const handleAction = () => {};
+
   return (
     <Box className="min-h-screen relative overflow-hidden">
       {/* Overlay gradient for better text readability */}
@@ -104,7 +113,7 @@ export default function Hero() {
                     <div className="my-3">
                       <CustomButton
                         label="Explore Asset Tokenization"
-                        onClick={() => handleAction()}
+                        onClick={handleExplore}
                       />
                     </div>
                  
