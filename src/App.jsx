@@ -7,7 +7,7 @@ import Features from "./components/Features";
 import Hero from "./components/Hero";
 import Blockchains from "./components/Blockchains";
 import GlobalMarkets from "./components/GlobalMarkets";
-import Sliders from "./components/Sliders";
+import TokenizationSlider from "./components/TokenizationSlider";
 import Metrics from "./components/Metrics";
 import Footer from "./components/Footer";
 import CTA from "./components/CTA";
@@ -65,8 +65,8 @@ function HomePage() {
           <GlobalMarkets />
         </section> */}
 
-        <section className="sliders-section">
-          <Sliders />
+        <section className="tokenizationslider-section">
+          <TokenizationSlider />
         </section>
         
         <ScrollAnimationWrapper>

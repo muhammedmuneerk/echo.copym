@@ -12,7 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import { keyframes } from "@emotion/react";
 import { styled } from "@mui/material/styles";
 import BackgroundGlowEffect from "../ui/BackgroundGlowEffect";
-import Sliders from "./Sliders";
+import TokenizationSlider from "./TokenizationSlider";
 import AnimatedCard from "../ui/AnimatedCard";
 import AnimatedCounter from "../ui/AnimatedCounter";
 import GradientLetters from "./GradientLetters";
@@ -221,7 +221,7 @@ export default function GlobalMarkets() {
 
           {/* RIGHT: Slider (4 columns) */}
           <Grid item xs={12} md={6}>
-            <Sliders />
+            <TokenizationSlider />
           </Grid>
         </Grid>
       </Container>
