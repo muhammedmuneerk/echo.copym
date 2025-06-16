@@ -177,7 +177,7 @@ export default function Navbar() {
                 <img
                   src="/assets/copym/final-logo.png"
                   alt="COPYM"
-                  className="w-32 h-12 sm:w-40 sm:h-20 md:w-52 md:h-26 "
+                  className="h-12 w-auto sm:h-16 md:h-20 object-contain"
                 />
               </Typography>
             </motion.div>

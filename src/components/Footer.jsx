@@ -25,7 +25,7 @@ export default function Footer() {
                 <img
                   src="/assets/copym/final-logo.png"
                   alt="COPYM"
-                  className="w-32 h-12 sm:w-30 sm:h-15 md:w-36 md:h-16 lg:w-48 lg:h-20 xl:w-40 xl:h-16"
+                  className="h-12 w-auto sm:h-16 md:h-20 object-contain"
                 />
               </Typography>
               <Typography
