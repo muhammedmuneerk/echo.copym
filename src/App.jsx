@@ -33,6 +33,7 @@ import ArtMarket from "./pages/investor/ArtMarket/ArtMarket";
 import PrivateEquityMarket from "./pages/investor/PrivateEquityMarket/PrivateEquityMarket";
 import CarbonCreditsMarket from "./pages/investor/CarbonCreditsMarket/CarbonCreditsMarket";
 import BlogSection from "./components/BlogSection";
+import MarketSlider from "./components/MarketSlider";
 
 /**
  * HomePage component - Main landing page layout
@@ -67,6 +68,11 @@ function HomePage() {
 
         <section className="tokenizationslider-section">
           <TokenizationSlider />
+        </section>
+        
+        {/* Marketplace slider */}
+        <section className="marketslider-section">
+          <MarketSlider />
         </section>
         
         <ScrollAnimationWrapper>
