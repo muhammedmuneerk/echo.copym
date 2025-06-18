@@ -158,7 +158,7 @@ export default function Navbar() {
         }}
       >
         <Container maxWidth="xl">
-          <Box className="flex items-center justify-between py-4">
+          <Box className="flex items-center justify-between py-4 px-4">
             {/* Logo */}
             <motion.div
               variants={logoVariants}
@@ -177,7 +177,7 @@ export default function Navbar() {
                 <img
                   src="/copym/png/Copym-01-1.png"
                   alt="COPYM"
-                  className="h-12 w-auto sm:h-16 md:h-20 object-contain"
+                  className="h-16 w-auto sm:h-16 md:h-20 object-contain"
                 />
               </Typography>
             </motion.div>
