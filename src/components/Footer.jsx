@@ -23,7 +23,7 @@ export default function Footer() {
                 className="font-bold text-2xl tracking-tight flex items-center mb-4"
               >
                 <img
-                  src="/assets/copym/final-logo.png"
+                  src="/copym/png/Copym-01-1.png"
                   alt="COPYM"
                   className="h-12 w-auto sm:h-16 md:h-20 object-contain"
                 />
