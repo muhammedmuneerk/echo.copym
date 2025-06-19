@@ -29,7 +29,7 @@ const BackgroundPattern = () => {
       <div 
         className="absolute inset-0 opacity-20"
         style={{
-          background: `radial-gradient(800px circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(0, 162, 255, 0.05), transparent 70%)`,
+          background: `radial-gradient(800px circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(0, 162, 255, 0.1), transparent 60%)`,
           transition: 'background 0.3s ease-out'
         }}
       />
@@ -39,7 +39,13 @@ const BackgroundPattern = () => {
       
       {/* Scanning lines */}
       <ScanningLines />
-      
+
+      {/* Transparent blurred overlay */}
+      <div
+        className="absolute inset-0 z-10 pointer-events-none backdrop-blur-sm"
+        style={{ backgroundColor: "rgba(255, 255, 255, 0.02)" }}
+      />
+
       {/* Content overlay */}
       <div className="relative z-20 w-full h-full pointer-events-none">
         {/* Content goes here */}
@@ -116,20 +122,20 @@ const CircuitNetwork = () => {
   ];
 
   return (
-    <div className="absolute inset-0 overflow-hidden opacity-30">
+    <div className="absolute inset-0 overflow-hidden opacity-80">
       <svg width="100%" height="100%" className="absolute inset-0">
         <defs>
           {/* Circuit trace gradient */}
           <linearGradient id="traceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(0, 162, 255, 0.05)" />
-            <stop offset="30%" stopColor="rgba(0, 162, 255, 0.4)" />
-            <stop offset="70%" stopColor="rgba(0, 162, 255, 0.4)" />
-            <stop offset="100%" stopColor="rgba(0, 162, 255, 0.05)" />
+            <stop offset="0%" stopColor="rgba(0, 162, 255, 0.1)" />
+            <stop offset="30%" stopColor="rgba(0, 162, 255, 0.8)" />
+            <stop offset="70%" stopColor="rgba(0, 162, 255, 0.8)" />
+            <stop offset="100%" stopColor="rgba(0, 162, 255, 0.1)" />
           </linearGradient>
           
           {/* Glow effect */}
           <filter id="circuitGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
             <feMerge>
               <feMergeNode in="coloredBlur" />
               <feMergeNode in="SourceGraphic" />
@@ -307,17 +313,17 @@ const ScanningLines = () => (
         className="absolute w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
         style={{
           top: `${15 + i * 35}%`,
-          boxShadow: '0 0 10px rgba(0, 255, 255, 0.3), 0 0 20px rgba(0, 255, 255, 0.15)'
+          boxShadow: '0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.3)'
         }}
         initial={{ x: '-100%', opacity: 0 }}
         animate={{ 
           x: '100%', 
-          opacity: [0, 0.4, 0.4, 0] 
+          opacity: [0, 0.8, 0.8, 0] 
         }}
         transition={{
-          x: { duration: 8, repeat: Infinity, ease: "easeInOut" },
-          opacity: { duration: 8, repeat: Infinity, ease: "easeInOut" },
-          delay: i * 4
+          x: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+          opacity: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+          delay: i * 3
         }}
       />
     ))}
@@ -325,5 +331,4 @@ const ScanningLines = () => (
 );
 
 export default BackgroundPattern;
-
 

@@ -139,7 +139,7 @@ export default function Blockchains() {
           width: isTablet ? "70%" : "60%",
           bottom: 0, 
           zIndex: 0, 
-          opacity: 0.5,
+          opacity: 1,
           height: globeStyles.height,
           marginTop: globeStyles.marginTop,
           pointerEvents: "none",
@@ -148,7 +148,7 @@ export default function Blockchains() {
           padding: isTablet ? "40px 20px" : "60px 40px"
         }}>
           <img 
-            src="/assets/sections/blockchain-1.png" 
+            src="/assets/sections/blockchain-4.png" 
             alt="Blockchain" 
             style={{
               width: "90%",
