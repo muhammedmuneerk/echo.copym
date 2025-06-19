@@ -42,7 +42,7 @@ const BackgroundPattern = () => {
 
       {/* Transparent blurred overlay */}
       <div
-        className="absolute inset-0 z-10 pointer-events-none backdrop-blur-sm"
+        className="absolute inset-0 z-10 pointer-events-none backdrop-blur-[3px]"
         style={{ backgroundColor: "rgba(255, 255, 255, 0.02)" }}
       />
 
