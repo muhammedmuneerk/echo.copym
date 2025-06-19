@@ -194,7 +194,7 @@ export default function Marketplace() {
             type: "spring",
             stiffness: 100
           }}
-          className="text-center mb-12 relative z-30"
+          className="text-center mb-12 pt-20 relative z-30"
         >
           <Typography
             variant="h1"
