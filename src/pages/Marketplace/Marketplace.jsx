@@ -182,7 +182,7 @@ export default function Marketplace() {
   };
 
   return (
-    <div className="w-full min-h-screen py-16 text-white">
+    <div className="min-h-screen relative overflow-hidden text-white">
       <BackgroundPattern/>
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header Section */}
@@ -194,7 +194,7 @@ export default function Marketplace() {
             type: "spring",
             stiffness: 100
           }}
-          className="text-center mb-12"
+          className="text-center mb-12 relative z-30"
         >
           <Typography
             variant="h1"
