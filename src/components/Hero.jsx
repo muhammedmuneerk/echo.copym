@@ -81,7 +81,7 @@ export default function Hero() {
                 {/* Mobile Screens: More compact lines */}
                 <Box component="div" className="block sm:hidden">
                   <GradientLetters
-                    text="The Complete Ecosystem"
+                    text="Complete Ecosystem"
                     keyPrefix="line1-sm-1"
                   />
                 </Box>
